@@ -151,9 +151,23 @@ function makeRequest(retryCount = 0) {
         // 检查是否成功或已经签到
         if (result.code === 0) {
           // 签到成功
+          console.log("✓ 签到成功！完整响应数据:");
+          console.log(JSON.stringify(result.data, null, 2));
+
+          // 尝试多种可能的字段名
+          const signDays =
+            result.data?.consecutiveDays ||
+            result.data?.continueSignDays ||
+            result.data?.signDays ||
+            result.data?.continueDays ||
+            result.data?.continuous_days ||
+            0;
+
+          console.log(`检测到的签到天数: ${signDays}`);
+
           const successInfo = [
             `✅ 签到成功`,
-            `连续签到: ${result.data?.consecutiveDays || 0}天`,
+            `连续签到: ${signDays}天`,
             `更新时间: ${new Date().toLocaleString("zh-CN", {
               timeZone: "Asia/Shanghai",
             })}`,
@@ -162,19 +176,48 @@ function makeRequest(retryCount = 0) {
             .join("\n");
 
           $notification.post(cookieName, "🎉 签到成功", successInfo);
-        } else if (result.code === 10014) {
-          // 已经签到
-          const alreadyInfo = [
-            `ℹ️ 今日已签到`,
-            `连续签到: ${result.data?.consecutiveDays || 0}天`,
-            `更新时间: ${new Date().toLocaleString("zh-CN", {
-              timeZone: "Asia/Shanghai",
-            })}`,
-          ]
-            .filter(Boolean)
-            .join("\n");
+        } else if (result.code === 10014 || result.code === 540004) {
+          // 已经签到 (10014是旧版本错误码, 540004是新版本错误码)
+          console.log("ℹ️ 今日已签到！完整响应数据:");
+          console.log(JSON.stringify(result.data, null, 2));
 
-          $notification.post(cookieName, "📅 已签到", alreadyInfo);
+          // 注意: 已签到的情况下,API不返回签到天数等详细信息
+          if (result.data) {
+            const signDays =
+              result.data.consecutiveDays ||
+              result.data.continueSignDays ||
+              result.data.signDays ||
+              result.data.continueDays ||
+              result.data.continuous_days ||
+              0;
+
+            console.log(`检测到的签到天数: ${signDays}`);
+
+            const alreadyInfo = [
+              `ℹ️ 今日已签到`,
+              `连续签到: ${signDays}天`,
+              `更新时间: ${new Date().toLocaleString("zh-CN", {
+                timeZone: "Asia/Shanghai",
+              })}`,
+            ]
+              .filter(Boolean)
+              .join("\n");
+
+            $notification.post(cookieName, "📅 已签到", alreadyInfo);
+          } else {
+            // API未返回详细数据
+            const alreadyInfo = [
+              `ℹ️ 今日已签到`,
+              `提示: 已签到状态下API不返回签到天数`,
+              `更新时间: ${new Date().toLocaleString("zh-CN", {
+                timeZone: "Asia/Shanghai",
+              })}`,
+            ]
+              .filter(Boolean)
+              .join("\n");
+
+            $notification.post(cookieName, "📅 已签到", alreadyInfo);
+          }
         } else if (result.code === 401 || result.code === 403) {
           // 授权失败,需要重新获取Cookie
           console.log("授权失败，需要重新获取Cookie");
