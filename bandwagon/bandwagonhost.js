@@ -1,11 +1,11 @@
 /**
  * Bandwagon 服务器状态查询脚本 - 支持 BoxJS 配置
  * 支持在 Loon/Surge/QuantumultX 中通过 BoxJS 配置 API Key 和 VEID
- * 
+ *
  * BoxJS 配置项:
  * - bandwagon.apiKey: API 密钥
  * - bandwagon.veid: VEID
- * 
+ *
  * 使用方法:
  * 1. 在 Loon 中安装 BoxJS 插件: https://raw.githubusercontent.com/chavyleung/scripts/master/box/rewrite/boxjs.rewrite.loon.plugin
  * 2. 打开 BoxJS (http://boxjs.com) 配置 API Key 和 VEID
@@ -28,7 +28,7 @@ const boxjsConfig = {
       val: "",
       type: "text",
       desc: "Bandwagon API Key",
-      placeholder: "输入你的 API Key"
+      placeholder: "输入你的 API Key",
     },
     {
       id: "bandwagon.veid",
@@ -36,33 +36,52 @@ const boxjsConfig = {
       val: "",
       type: "text",
       desc: "Bandwagon VEID",
-      placeholder: "输入你的 VEID"
-    }
-  ]
+      placeholder: "输入你的 VEID",
+    },
+  ],
 };
 
 // 获取存储的配置
 function getConfig() {
-  const apiKey = $prefs.valueForKey("bandwagon.apiKey") || ""; // BoxJS 保存的 API Key
-  const veid = $prefs.valueForKey("bandwagon.veid") || ""; // BoxJS 保存的 VEID
-  
-  // 如果 BoxJS 中没有配置，使用环境变量或硬编码的默认值
+  // 支持多种存储方式：$persistentStore (Loon/Surge), $prefs (QuanX)
+  let apiKey = "";
+  let veid = "";
+
+  if (typeof $persistentStore !== "undefined") {
+    // Loon/Surge
+    apiKey = $persistentStore.read("bandwagon.apiKey") || "";
+    veid = $persistentStore.read("bandwagon.veid") || "";
+  } else if (typeof $prefs !== "undefined") {
+    // QuantumultX
+    apiKey = $prefs.valueForKey("bandwagon.apiKey") || "";
+    veid = $prefs.valueForKey("bandwagon.veid") || "";
+  }
+
+  console.log("读取配置 - API Key 长度:", apiKey.length, "VEID:", veid);
+
   return {
-    apiKey: apiKey || "private_zHjvZ6xQLGuj2CXUyFfBBdbn", // 替换为您的实际 API 密钥
-    veid: veid || "1063564" // 替换为您的实际 VEID
+    apiKey: apiKey,
+    veid: veid,
   };
 }
 
 // 保存配置到 BoxJS
 function saveConfig(apiKey, veid) {
-  $prefs.setValueForKey(apiKey, "bandwagon.apiKey");
-  $prefs.setValueForKey(veid, "bandwagon.veid");
+  if (typeof $persistentStore !== "undefined") {
+    // Loon/Surge
+    $persistentStore.write(apiKey, "bandwagon.apiKey");
+    $persistentStore.write(veid, "bandwagon.veid");
+  } else if (typeof $prefs !== "undefined") {
+    // QuantumultX
+    $prefs.setValueForKey(apiKey, "bandwagon.apiKey");
+    $prefs.setValueForKey(veid, "bandwagon.veid");
+  }
   console.log("配置已保存到 BoxJS");
 }
 
 function getServiceInfo() {
   const config = getConfig();
-  
+
   // 验证配置
   if (!config.apiKey || !config.veid) {
     $notification.post(
@@ -73,7 +92,7 @@ function getServiceInfo() {
     $done();
     return;
   }
-  
+
   const apiUrl = `https://api.64clouds.com/v1/getServiceInfo?veid=${config.veid}&api_key=${config.apiKey}`;
 
   const request = {
@@ -166,7 +185,10 @@ function getServiceInfo() {
 // 主函数
 function main() {
   // 如果是在配置界面，显示配置选项
-  if (typeof $environment !== "undefined" && $environment.platform === "boxjs") {
+  if (
+    typeof $environment !== "undefined" &&
+    $environment.platform === "boxjs"
+  ) {
     // 在 BoxJS 中显示配置界面
     showBoxJSConfig();
   } else {
@@ -180,12 +202,12 @@ function showBoxJSConfig() {
   const configUI = {
     title: boxjsConfig.title,
     icon: boxjsConfig.icon,
-    items: boxjsConfig.settings.map(item => ({
+    items: boxjsConfig.settings.map((item) => ({
       ...item,
-      val: item.id === "bandwagon.apiKey" ? config.apiKey : config.veid
-    }))
+      val: item.id === "bandwagon.apiKey" ? config.apiKey : config.veid,
+    })),
   };
-  
+
   console.log("显示 BoxJS 配置界面:", JSON.stringify(configUI));
 }
 
