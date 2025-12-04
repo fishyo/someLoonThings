@@ -1,4 +1,4 @@
-# Bandwagon 服务器状态查询 - BoxJS 版本
+# Bandwagon 服务器状态查询
 
 ## 快速开始
 
@@ -27,7 +27,7 @@ https://raw.githubusercontent.com/chavyleung/scripts/master/box/rewrite/boxjs.re
 4. 输入订阅地址：
 
 ```
-https://raw.githubusercontent.com/fishyo/someLoonThings/main/bandwagon/bandwagon.boxjs.json
+https://raw.githubusercontent.com/fishyo/someLoonThings/refs/heads/main/script/bandwagon/bandwagon.boxjs.json
 ```
 
 5. 点击保存
@@ -63,10 +63,10 @@ https://raw.githubusercontent.com/fishyo/someLoonThings/main/bandwagon/bandwagon
 ```ini
 [Script]
 # 手动查询
-bandwagon = type=generic, script-path=https://raw.githubusercontent.com/fishyo/someLoonThings/main/bandwagon/bandwagonhost.js, timeout=10, tag=Bandwagon状态
+bandwagon = type=generic, script-path=https://raw.githubusercontent.com/fishyo/someLoonThings/refs/heads/main/script/bandwagon/bandwagonhost.js, timeout=10, tag=Bandwagon status
 
 # 定时查询（每小时）
-bandwagon-cron = type=cron, cronexp="0 * * * *", script-path=https://raw.githubusercontent.com/fishyo/someLoonThings/main/bandwagon/bandwagonhost.js, timeout=10, tag=Bandwagon定时
+bandwagon-cron = type=cron, cronexp="0 * * * *", script-path=https://raw.githubusercontent.com/fishyo/someLoonThings/refs/heads/main/script/bandwagon/bandwagonhost.js, timeout=10, tag=Bandwagon status
 ```
 
 ### 5️⃣ 运行脚本
@@ -112,13 +112,13 @@ API Key 或 VEID 不正确。请检查：
 ## 订阅地址
 
 ```
-https://raw.githubusercontent.com/fishyo/someLoonThings/main/bandwagon/bandwagon.boxjs.json
+https://raw.githubusercontent.com/fishyo/someLoonThings/refs/heads/main/script/bandwagon/bandwagon.boxjs.json
 ```
 
 ## 脚本地址
 
 ```
-https://raw.githubusercontent.com/fishyo/someLoonThings/main/bandwagon/bandwagonhost.js
+https://raw.githubusercontent.com/fishyo/someLoonThings/refs/heads/main/script/bandwagon/bandwagonhost.js
 ```
 
 ## 相关链接
