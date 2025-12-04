@@ -1,5 +1,5 @@
-const apiKey = "private_zHjvZ6xQLGuj2CXUyFfBBdbn"; // 替换为您的实际 API 密钥
-const veid = "1063564"; // 替换为您的实际 VEID
+const apiKey = ""; // 替换为您的实际 API 密钥
+const veid = ""; // 替换为您的实际 VEID
 const apiUrl = `https://api.64clouds.com/v1/getServiceInfo?veid=${veid}&api_key=${apiKey}`;
 
 function getServiceInfo() {
@@ -50,14 +50,10 @@ function getServiceInfo() {
     ); // 打印当前带宽使用情况
 
     // 计算进度条
-    const usedPercentage = (
-      (dataCounter / planMonthlyData) *
-      100
-    ).toFixed(2);
+    const usedPercentage = ((dataCounter / planMonthlyData) * 100).toFixed(2);
     const progressBarLength = 10; // 进度条长度
     const filledLength = Math.round(
-      progressBarLength *
-        (dataCounter / planMonthlyData)
+      progressBarLength * (dataCounter / planMonthlyData)
     );
     const progressBar =
       "%".repeat(filledLength) + "#".repeat(progressBarLength - filledLength);
