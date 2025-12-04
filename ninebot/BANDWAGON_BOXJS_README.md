@@ -8,7 +8,7 @@
 ✅ 实时查询 Bandwagon 服务器带宽使用情况  
 ✅ 可视化进度条显示带宽使用百分比  
 ✅ 支持定时任务，可定期自动查询  
-✅ 完善的错误处理和提示信息  
+✅ 完善的错误处理和提示信息
 
 ## 安装步骤
 
@@ -52,16 +52,19 @@ bandwagon-cron = type=cron, cronexp="0 * * * *", script-path=bandwagonhost-boxjs
 #### 如何获取 API Key 和 VEID？
 
 **获取 API Key:**
+
 1. 登录 Bandwagon Panel: https://bwh2.net/
 2. 访问 API: https://bwh2.net/clientapi/index/getsysconfig?api_key=YOUR_API_KEY
 3. 或在 Account > API > Generate New Key
 
 **获取 VEID:**
+
 1. 登录 Bandwagon Panel
 2. 在 Services 或 Active Products 中查看
 3. 单个 VPS 页面 URL 中的 `veid` 参数
 
 或者调用 API:
+
 ```
 https://api.64clouds.com/v1/listAllProducts?api_key=YOUR_API_KEY
 ```
@@ -102,10 +105,10 @@ IP: 1.2.3.4
 
 ## 配置项说明
 
-| 项目 | 说明 | 获取方式 |
-|------|------|--------|
+| 项目    | 说明               | 获取方式                        |
+| ------- | ------------------ | ------------------------------- |
 | API Key | Bandwagon API 密钥 | Bandwagon Panel > Account > API |
-| VEID | VPS 产品编号 | 登录面板查看产品列表 |
+| VEID    | VPS 产品编号       | 登录面板查看产品列表            |
 
 ## 故障排除
 
@@ -113,7 +116,8 @@ IP: 1.2.3.4
 
 **原因**: 未在 BoxJS 中配置 API Key 或 VEID
 
-**解决**: 
+**解决**:
+
 1. 打开 http://boxjs.com
 2. 搜索 "Bandwagon"
 3. 填入 API Key 和 VEID
@@ -123,6 +127,7 @@ IP: 1.2.3.4
 **原因**: API Key 或 VEID 不正确
 
 **解决**:
+
 1. 检查 API Key 和 VEID 是否正确
 2. 登录 Bandwagon Panel 重新获取
 3. 确认 API Key 仍然有效（可能已过期）
@@ -132,6 +137,7 @@ IP: 1.2.3.4
 **原因**: 网络问题或被 ISP 阻止
 
 **解决**:
+
 1. 确保代理配置正确
 2. 尝试使用 VPN
 3. 检查是否在中国大陆（可能需要梯子）
@@ -163,6 +169,7 @@ MIT
 ## 更新日志
 
 ### v1.0 (2025-12-04)
+
 - 初始版本
 - 支持 BoxJS 配置
 - 完善的错误处理
