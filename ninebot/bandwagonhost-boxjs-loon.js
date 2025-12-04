@@ -1,12 +1,12 @@
 /**
  * Bandwagon 服务器状态查询脚本 - BoxJS 版本
  * 支持在 Loon 中通过 BoxJS 配置 API Key 和 VEID
- * 
+ *
  * Loon 脚本配置示例:
  * [Script]
  * # Bandwagon 定时查询
  * bandwagon = script-path=https://raw.githubusercontent.com/your/repo/bandwagonhost-boxjs.js, timeout=10, tag=Bandwagon
- * 
+ *
  * 定时执行 (每小时查询一次):
  * bandwagon_cron = cron "0 * * * *" script-path=https://raw.githubusercontent.com/your/repo/bandwagonhost-boxjs.js, timeout=10, tag=Bandwagon_Cron
  */
@@ -15,7 +15,7 @@
 // 通过 BoxJS 读取配置，无需修改脚本即可更换 API Key 和 VEID
 const CONFIG = {
   apiKey: $prefs.valueForKey("bandwagon.apiKey") || "", // 从 BoxJS 读取
-  veid: $prefs.valueForKey("bandwagon.veid") || "" // 从 BoxJS 读取
+  veid: $prefs.valueForKey("bandwagon.veid") || "", // 从 BoxJS 读取
 };
 
 // ======================== 工具函数 ========================
@@ -29,7 +29,7 @@ function getIcon(type = "info") {
     error: "❌",
     warning: "⚠️",
     info: "ℹ️",
-    server: "🖲️"
+    server: "🖲️",
   };
   return icons[type] || "ℹ️";
 }
@@ -43,7 +43,7 @@ function generateProgressBar(used, total, length = 10) {
   const bar = "█".repeat(filled) + "░".repeat(length - filled);
   return {
     bar: bar,
-    percentage: percentage.toFixed(2)
+    percentage: percentage.toFixed(2),
   };
 }
 
@@ -81,7 +81,7 @@ function getServiceInfo() {
   const request = {
     url: apiUrl,
     method: "GET",
-    timeout: 10
+    timeout: 10,
   };
 
   $httpClient.get(request, function (error, response, data) {
@@ -98,7 +98,7 @@ function getServiceInfo() {
 
     try {
       const jsonData = JSON.parse(data);
-      
+
       // 检查 API 是否返回错误
       if (jsonData.error || !jsonData.data_counter !== undefined) {
         showAPIError(jsonData.error || "未知错误");
@@ -108,11 +108,7 @@ function getServiceInfo() {
       displayServiceInfo(jsonData);
     } catch (error) {
       console.error("❌ JSON 解析失败:", error);
-      $notification.post(
-        `${getIcon("error")} 数据解析失败`,
-        "",
-        error.message
-      );
+      $notification.post(`${getIcon("error")} 数据解析失败`, "", error.message);
       $done();
     }
   });
@@ -135,7 +131,7 @@ function displayServiceInfo(data) {
     // 计算带宽
     const usedBandwidthGB = bytesToGB(dataCounter, monthlyDataMultiplier);
     const totalBandwidthGB = bytesToGB(planMonthlyData, monthlyDataMultiplier);
-    
+
     // 生成进度条
     const progress = generateProgressBar(dataCounter, planMonthlyData, 10);
 
@@ -162,11 +158,7 @@ function displayServiceInfo(data) {
     $done();
   } catch (error) {
     console.error("❌ 显示信息时出错:", error);
-    $notification.post(
-      `${getIcon("error")} 显示失败`,
-      "",
-      error.message
-    );
+    $notification.post(`${getIcon("error")} 显示失败`, "", error.message);
     $done();
   }
 }
@@ -194,7 +186,7 @@ function showConfigError() {
     "点击跳转到 BoxJS 配置",
     "请先在 BoxJS 中配置 API Key 和 VEID\n访问: http://boxjs.com",
     {
-      "open-url": "http://boxjs.com"
+      "open-url": "http://boxjs.com",
     }
   );
   $done();
