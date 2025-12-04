@@ -1,6 +1,5 @@
 /**
- * Bandwagon 服务器状态查询脚本 - 支持 BoxJS 配置
- * 支持在 Loon/Surge/QuantumultX 中通过 BoxJS 配置 API Key 和 VEID
+ * Bandwagon 服务器状态查询脚本
  *
  * BoxJS 配置项:
  * - bandwagon.apiKey: API 密钥
