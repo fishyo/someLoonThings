@@ -2,7 +2,7 @@
 #!desc = 自用补充
 #!author = fishyo
 #!homepage = https://github.com/fishyo/someLoonThings
-#!icon = icon/Find_My.png
+#!icon = https://raw.githubusercontent.com/fishyo/someLoonThings/refs/heads/main/icon/Find_My.png
 #!date = 2025-12-04
 
 [Rewrite]
