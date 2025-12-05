@@ -2,27 +2,113 @@
 九号出行 - 签到脚本
 */
 
-const cookieName = "九号出行";
-const cookieKey = "ninebot_cookie_data";
-
-// 配置参数
-const CONFIG = {
-  maxRetries: 5, // 最大重试次数
-  retryDelay: 2000, // 重试延迟(毫秒)
-  timeout: 15000, // 请求超时时间(毫秒)
+const APP = {
+  name: "九号出行",
+  cookieKey: "ninebot_cookie_data",
+  signApi: "https://cn-cbu-gateway.ninebot.com/portal/api/user-sign/v2/sign",
+  statusApi:
+    "https://cn-cbu-gateway.ninebot.com/portal/api/user-sign/v2/status",
 };
 
-console.log("========== 九号出行签到脚本启动 ==========");
+const CONFIG = {
+  maxRetries: 5,
+  retryDelay: 2000,
+  timeout: 15000,
+};
 
-// 从持久化存储中读取Cookie数据
-const cookieDataStr = $persistentStore.read(cookieKey);
+const UA =
+  "Mozilla/5.0 (iPhone; CPU iPhone OS 13_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.5 Mobile/15E148 Safari/604.1";
 
+console.log(`========== ${APP.name}签到脚本启动 ==========`);
+
+// 构建通用请求头
+function getHeaders(withAuth = true) {
+  const headers = {
+    accept: "application/json, text/plain, */*",
+    "accept-language": "zh-CN,zh-Hans;q=0.9",
+    language: "zh",
+    "user-agent": cookieData.userAgent || UA,
+  };
+
+  if (withAuth) {
+    headers.authorization = cookieData.authorization;
+  }
+
+  return headers;
+}
+
+// 查询签到状态
+function querySignStatus(callback) {
+  const finalUrl = `${APP.statusApi}?t=${Date.now()}`;
+  const options = {
+    url: finalUrl,
+    headers: getHeaders(),
+    timeout: CONFIG.timeout,
+  };
+
+  $httpClient.get(options, (error, response, data) => {
+    if (error || response.status !== 200) {
+      console.log("查询签到状态失败");
+      callback(null);
+      return;
+    }
+
+    try {
+      const result = JSON.parse(data);
+      console.log("📊 [状态查询] 响应体:");
+      console.log(JSON.stringify(result, null, 2));
+
+      if (result.code === 0 && result.data) {
+        callback(result.data);
+        return;
+      }
+    } catch (e) {
+      console.log("解析状态数据失败: " + e);
+    }
+    callback(null);
+  });
+} // 格式化通知信息
+function formatNotification(status, days) {
+  const parts = [];
+
+  if (status === "success") {
+    parts.push("✅ 签到成功");
+  } else {
+    parts.push("ℹ️ 今日已签到");
+  }
+
+  parts.push(`连续签到: ${days}天`);
+
+  return parts;
+}
+
+// 添加额外信息
+function addExtraInfo(parts, data) {
+  if (data) {
+    if (data.blindBoxStatus === 1) {
+      parts.push("🎁 有新的盲盒奖励可领取");
+    }
+    if (data.signCardsNum > 0) {
+      parts.push(`💳 剩余签到卡: ${data.signCardsNum}张`);
+    }
+  }
+
+  parts.push(
+    `更新时间: ${new Date().toLocaleString("zh-CN", {
+      timeZone: "Asia/Shanghai",
+    })}`
+  );
+  return parts.join("\n");
+}
+
+// 读取Cookie
+const cookieDataStr = $persistentStore.read(APP.cookieKey);
 if (!cookieDataStr) {
-  console.log("未找到保存的Cookie数据，请先运行获取Cookie脚本");
+  console.log("未找到保存的Cookie数据");
   $notification.post(
-    cookieName,
+    APP.name,
     "❌ 签到失败",
-    "未找到Cookie数据\n请先打开九号出行APP进入签到页面"
+    "未找到Cookie数据\n请先打开APP进入签到页面"
   );
   $done();
   return;
@@ -32,236 +118,116 @@ let cookieData;
 try {
   cookieData = JSON.parse(cookieDataStr);
   console.log("✓ Cookie数据读取成功");
-  // 调试用: console.log("读取到的Cookie数据: " + JSON.stringify(cookieData));
 } catch (e) {
-  console.log("解析Cookie数据失败: " + e);
-  $notification.post(cookieName, "❌ 签到失败", "Cookie数据解析失败");
+  console.log("解析Cookie失败: " + e);
+  $notification.post(APP.name, "❌ 签到失败", "Cookie数据解析失败");
   $done();
   return;
 }
 
-// 检查必要的数据
 if (!cookieData.authorization) {
-  console.log("Cookie数据中缺少authorization");
-  $notification.post(
-    cookieName,
-    "❌ 签到失败",
-    "缺少授权信息\n请重新获取Cookie"
-  );
+  console.log("缺少authorization");
+  $notification.post(APP.name, "❌ 签到失败", "缺少授权信息\n请重新获取Cookie");
   $done();
   return;
 }
 
-// 构建请求参数
-const url = "https://cn-cbu-gateway.ninebot.com/portal/api/user-sign/v2/sign";
-const headers = {
-  "content-type": "application/json",
-  from_platform_1: "1",
-  "sec-fetch-mode": "cors",
-  "sec-fetch-site": "same-site",
-  "user-agent":
-    cookieData.userAgent ||
-    "Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
-  language: "zh",
-  referer: "https://api5-h5-app-bj.ninebot.com/",
-  origin: "https://api5-h5-app-bj.ninebot.com",
-  "sec-fetch-dest": "empty",
-  "accept-language": "zh-CN,zh-Hans;q=0.9",
-  accept: "application/json, text/plain, */*",
-  authorization: cookieData.authorization,
-  "accept-encoding": "gzip, deflate, br",
-};
-
-// 使用保存的deviceId，如果没有则使用默认值
-const deviceId = cookieData.deviceId || "";
-const body = JSON.stringify({
-  deviceId: deviceId,
-});
-
-console.log("请求URL: " + url);
-console.log("设备ID: " + deviceId);
-
-// 重试函数
-function makeRequest(retryCount = 0) {
-  const requestOptions = {
-    url: url,
-    headers: headers,
-    body: body,
+// 签到请求
+function sign(retryCount = 0) {
+  const deviceId = cookieData.deviceId || "";
+  const options = {
+    url: APP.signApi,
+    headers: {
+      "content-type": "application/json",
+      ...getHeaders(),
+    },
+    body: JSON.stringify({ deviceId }),
     timeout: CONFIG.timeout,
   };
 
-  $httpClient.post(requestOptions, (error, response, data) => {
+  $httpClient.post(options, (error, response, data) => {
     if (error) {
-      console.log(`请求失败(第${retryCount + 1}次)：${error}`);
-
-      // 如果还有重试次数,则延迟后重试
+      console.log(`请求失败(${retryCount + 1}): ${error}`);
       if (retryCount < CONFIG.maxRetries) {
-        console.log(`将在${CONFIG.retryDelay / 1000}秒后重试...`);
-        setTimeout(() => {
-          makeRequest(retryCount + 1);
-        }, CONFIG.retryDelay);
+        setTimeout(() => sign(retryCount + 1), CONFIG.retryDelay);
         return;
       }
-
-      // 重试次数用完,报告失败
       $notification.post(
-        cookieName,
+        APP.name,
         "❌ 签到失败",
-        `网络请求失败，已重试${CONFIG.maxRetries}次\n${error}`
+        `网络请求失败，已重试${CONFIG.maxRetries}次`
       );
       $done();
-    } else {
-      console.log("状态码：" + response.status);
+      return;
+    }
 
-      // 检查HTTP状态码
-      if (response.status !== 200) {
-        console.log(`HTTP状态码异常: ${response.status}`);
-
-        // 如果是5xx服务器错误或429限流,可以重试
-        if (
-          (response.status >= 500 || response.status === 429) &&
-          retryCount < CONFIG.maxRetries
-        ) {
-          console.log(
-            `服务器暂时不可用,将在${CONFIG.retryDelay / 1000}秒后重试...`
-          );
-          setTimeout(() => {
-            makeRequest(retryCount + 1);
-          }, CONFIG.retryDelay);
-          return;
-        }
-
-        $notification.post(
-          cookieName,
-          "❌ 签到失败",
-          `服务器返回错误: HTTP ${response.status}`
-        );
-        $done();
+    if (response.status !== 200) {
+      if (
+        (response.status >= 500 || response.status === 429) &&
+        retryCount < CONFIG.maxRetries
+      ) {
+        setTimeout(() => sign(retryCount + 1), CONFIG.retryDelay);
         return;
       }
+      $notification.post(
+        APP.name,
+        "❌ 签到失败",
+        `服务器错误: HTTP ${response.status}`
+      );
+      $done();
+      return;
+    }
 
-      console.log("返回数据：" + data);
+    try {
+      const result = JSON.parse(data);
+      console.log("✓ 数据解析成功, 响应码: " + result.code);
+      console.log("📤 [签到请求] 响应体:");
+      console.log(JSON.stringify(result, null, 2));
 
-      // 解析返回的数据
-      try {
-        const result = JSON.parse(data);
-        console.log("✓ 数据解析成功, 响应码: " + result.code);
-        // 调试用: console.log("解析后的数据:" + JSON.stringify(result));
-
-        // 检查是否成功或已经签到
-        if (result.code === 0) {
-          // 签到成功
-          console.log("✓ 签到成功！完整响应数据:");
-          console.log(JSON.stringify(result.data, null, 2));
-
-          // 尝试多种可能的字段名
-          const signDays =
-            result.data?.consecutiveDays ||
-            result.data?.continueSignDays ||
-            result.data?.signDays ||
-            result.data?.continueDays ||
-            result.data?.continuous_days ||
-            0;
-
-          console.log(`检测到的签到天数: ${signDays}`);
-
-          const successInfo = [
-            `✅ 签到成功`,
-            `连续签到: ${signDays}天`,
-            `更新时间: ${new Date().toLocaleString("zh-CN", {
-              timeZone: "Asia/Shanghai",
-            })}`,
-          ]
-            .filter(Boolean)
-            .join("\n");
-
-          $notification.post(cookieName, "🎉 签到成功", successInfo);
-        } else if (result.code === 10014 || result.code === 540004) {
-          // 已经签到 (10014是旧版本错误码, 540004是新版本错误码)
-          console.log("ℹ️ 今日已签到！完整响应数据:");
-          console.log(JSON.stringify(result.data, null, 2));
-
-          // 注意: 已签到的情况下,API不返回签到天数等详细信息
-          if (result.data) {
-            const signDays =
-              result.data.consecutiveDays ||
-              result.data.continueSignDays ||
-              result.data.signDays ||
-              result.data.continueDays ||
-              result.data.continuous_days ||
-              0;
-
-            console.log(`检测到的签到天数: ${signDays}`);
-
-            const alreadyInfo = [
-              `ℹ️ 今日已签到`,
-              `连续签到: ${signDays}天`,
-              `更新时间: ${new Date().toLocaleString("zh-CN", {
-                timeZone: "Asia/Shanghai",
-              })}`,
-            ]
-              .filter(Boolean)
-              .join("\n");
-
-            $notification.post(cookieName, "📅 已签到", alreadyInfo);
-          } else {
-            // API未返回详细数据
-            const alreadyInfo = [
-              `ℹ️ 今日已签到`,
-              `提示: 已签到状态下API不返回签到天数`,
-              `更新时间: ${new Date().toLocaleString("zh-CN", {
-                timeZone: "Asia/Shanghai",
-              })}`,
-            ]
-              .filter(Boolean)
-              .join("\n");
-
-            $notification.post(cookieName, "📅 已签到", alreadyInfo);
-          }
-        } else if (result.code === 401 || result.code === 403) {
-          // 授权失败,需要重新获取Cookie
-          console.log("授权失败，需要重新获取Cookie");
-          $notification.post(
-            cookieName,
-            "❌ 授权失败",
-            `Cookie已失效，请重新获取\n错误码: ${result.code}`
-          );
-        } else {
-          // 其他错误
-          const errorMsg = result.msg || "未知错误";
-          console.log(
-            "签到失败，错误码: " + result.code + ", 错误信息: " + errorMsg
-          );
-
-          // 某些错误码可以重试
-          if (
-            retryCount < CONFIG.maxRetries &&
-            [500, 502, 503].includes(result.code)
-          ) {
-            console.log(
-              `服务器错误,将在${CONFIG.retryDelay / 1000}秒后重试...`
-            );
-            setTimeout(() => {
-              makeRequest(retryCount + 1);
-            }, CONFIG.retryDelay);
-            return;
-          }
-
-          $notification.post(cookieName, "❌ 签到失败", errorMsg);
-        }
-      } catch (e) {
-        console.log("数据解析错误: " + e);
+      if (result.code === 0) {
+        // 签到成功,查询完整信息
+        const signDays = result.data?.consecutiveDays || 0;
+        querySignStatus((statusData) => {
+          const info = formatNotification("success", signDays);
+          const body = addExtraInfo([...info], statusData);
+          $notification.post(APP.name, "🎉 签到成功", body);
+          $done();
+        });
+      } else if (result.code === 10014 || result.code === 540004) {
+        // 已签到,查询状态获取天数
+        querySignStatus((statusData) => {
+          const days = statusData?.consecutiveDays || 0;
+          const info = formatNotification("already", days);
+          const body = addExtraInfo([...info], statusData);
+          $notification.post(APP.name, "📅 已签到", body);
+          $done();
+        });
+      } else if (result.code === 401 || result.code === 403) {
         $notification.post(
-          cookieName,
-          "❌ 签到失败",
-          "数据解析错误\n" + e.toString()
+          APP.name,
+          "❌ 授权失败",
+          `Cookie已失效\n错误码: ${result.code}`
         );
+        $done();
+      } else {
+        const errorMsg = result.msg || "未知错误";
+        if (
+          retryCount < CONFIG.maxRetries &&
+          [500, 502, 503].includes(result.code)
+        ) {
+          setTimeout(() => sign(retryCount + 1), CONFIG.retryDelay);
+          return;
+        }
+        $notification.post(APP.name, "❌ 签到失败", errorMsg);
+        $done();
       }
-
+    } catch (e) {
+      console.log("数据解析错误: " + e);
+      $notification.post(APP.name, "❌ 签到失败", "数据解析错误");
       $done();
     }
   });
 }
 
-// 启动签到请求
-makeRequest();
+// 启动签到
+sign();
