@@ -25,4 +25,4 @@
 ^https?:\/\/stat\.10jqka\.com\.cn\/q\?ld=mobile&id=ad reject-dict
 
 [MITM]
-hostname = cdnfile.sspai.com, xqimg.imedao.com, api-one-wscn.awtmt.com, m.360buyimg.com, adm.10jqka.com, stat.10jqka.com
+hostname = cdnfile.sspai.com, xqimg.imedao.com, api-one-wscn.awtmt.com, m.360buyimg.com, 10jqka.com.cn
