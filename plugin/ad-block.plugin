@@ -22,7 +22,7 @@
 ^https:\/\/api\.mos\.csvw\.com\/mos\/operation\/home\/api\/v\d\/app\/brand\/queryDataForOperation reject-200
 #同花顺
 ^https?://adm\.10jqka\.com\.cn/interface/ad/recommend reject-200
-^https?://stat\.10jqka\.com\.cn/q\?ld=mobile&id=ad reject-dict
+
 
 [MITM]
-hostname = cdnfile.sspai.com, xqimg.imedao.com, api-one-wscn.awtmt.com, m.360buyimg.com, adm.10jqka.com.cn, stat.10jqka.com.cn
+hostname = cdnfile.sspai.com, xqimg.imedao.com, api-one-wscn.awtmt.com, m.360buyimg.com, adm.10jqka.com.cn
