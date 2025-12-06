@@ -1,0 +1,8 @@
+payload:
+# Supercell
+  - DOMAIN-SUFFIX, clashroyale.com, DIRECT
+  - DOMAIN-SUFFIX, clashroyaleapp.com, DIRECT
+  - DOMAIN-SUFFIX, brawlstars.com, DIRECT
+  - DOMAIN-SUFFIX, supercell.com, DIRECT
+
+
