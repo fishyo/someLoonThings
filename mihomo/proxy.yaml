@@ -1,0 +1,12 @@
+payload:
+# Supercell  
+  - DOMAIN-SUFFIX, id.supercell.com, Custom
+  - DOMAIN-SUFFIX, store.supercell.com, Custom
+  - DOMAIN-SUFFIX, support.supercell.com, Custom
+  - DOMAIN-SUFFIX, make.supercell.com, Custom
+
+# Pinterest
+  - DOMAIN-KEYWORD,pinterest, Custom
+
+# Hysteria
+  - DOMAIN-KEYWORD,hysteria, Custom
