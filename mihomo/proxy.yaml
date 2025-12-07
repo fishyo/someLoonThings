@@ -1,11 +1,10 @@
 payload:
-# pinterest
-  - DOMAIN-KEYWORD,pinterest
 
+#for myself
+  - DOMAIN-SUFFIX,diygod.dev
 # hysteria
   - DOMAIN-KEYWORD,hysteria
 
 # pocketcasts
   - DOMAIN-SUFFIX,pocketcasts.com
   - DOMAIN-SUFFIX,pca.st
-  - 
