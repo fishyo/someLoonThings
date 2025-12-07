@@ -186,8 +186,8 @@ function sign(retryCount = 0) {
 
       if (result.code === 0) {
         // 签到成功,查询完整信息
-        const signDays = result.data?.consecutiveDays || 0;
         querySignStatus((statusData) => {
+          const signDays = statusData?.consecutiveDays || 0;
           const info = formatNotification("success", signDays);
           const body = addExtraInfo([...info], statusData);
           $notification.post(APP.name, "🎉 签到成功", body);
