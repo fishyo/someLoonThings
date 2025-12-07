@@ -1,8 +1,11 @@
 payload:
 # Supercell
-  - DOMAIN-SUFFIX, clashroyale.com, DIRECT
-  - DOMAIN-SUFFIX, clashroyaleapp.com, DIRECT
-  - DOMAIN-SUFFIX, brawlstars.com, DIRECT
-  - DOMAIN-SUFFIX, supercell.com, DIRECT
+  - DOMAIN-KEYWORD, clashroyale.com, DIRECT
+  - DOMAIN-KEYWORD, clashroyaleapp.com, DIRECT
+  - DOMAIN-KEYWORD, brawlstars.com, DIRECT
+  - DOMAIN-KEYWORD, supercell.com, DIRECT
+  - DOMAIN-KEYWORD, brawlstarsgame, DIRECT
+
+  
 
 
