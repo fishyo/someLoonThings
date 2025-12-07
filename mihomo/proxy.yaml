@@ -1,7 +1,11 @@
 payload:
-# Supercell  
-# Pinterest
-  - DOMAIN-KEYWORD,pinterest, Custom
+# pinterest
+  - DOMAIN-KEYWORD,pinterest
 
-# Hysteria
-  - DOMAIN-KEYWORD,hysteria, Custom
+# hysteria
+  - DOMAIN-KEYWORD,hysteria
+
+# pocketcasts
+  - DOMAIN-SUFFIX,pocketcasts.com
+  - DOMAIN-SUFFIX,pca.st
+  - 
