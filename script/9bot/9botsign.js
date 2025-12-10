@@ -77,7 +77,7 @@ function formatNotification(status, days) {
     parts.push("ℹ️ 今日已签到");
   }
 
-  parts.push(`♻️  连续签到: ${days}天`);
+  parts.push(`♻️ 连续签到: ${days}天`);
 
   return parts;
 }
