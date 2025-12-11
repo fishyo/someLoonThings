@@ -2,9 +2,13 @@ payload:
 
 #for myself
   - DOMAIN-SUFFIX,bitwarden
+  - DOMAIN-SUFFIX,pythonhosted.org
 # hysteria
   - DOMAIN-KEYWORD,hysteria
 
 # pocketcasts
   - DOMAIN-SUFFIX,pocketcasts.com
   - DOMAIN-SUFFIX,pca.st
+
+
+
