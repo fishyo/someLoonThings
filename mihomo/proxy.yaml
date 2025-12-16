@@ -10,5 +10,9 @@ payload:
   - DOMAIN-SUFFIX,pocketcasts.com
   - DOMAIN-SUFFIX,pca.st
 
-
+# notion
+  - DOMAIN-KEYWORD,notion.com
+  - DOMAIN-SUFFIX,notionusercontent.com
+  - DOMAIN-SUFFIX,intercom.io
+  - DOMAIN-SUFFIX,segment.io
 
