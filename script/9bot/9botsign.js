@@ -67,22 +67,7 @@ function querySignStatus(callback) {
     }
     callback(null);
   });
-} // 格式化通知信息
-function formatNotification(status, days) {
-  const parts = [];
-
-  if (status === "success") {
-    parts.push("✅ 签到成功");
-  } else {
-    parts.push("ℹ️ 今日已签到");
-  }
-
-  parts.push(`♻️ 连续签到: ${days}天`);
-
-  return parts;
-}
-
-// 添加额外信息
+} // 添加额外信息
 function addExtraInfo(parts, data) {
   if (data) {
     if (data.blindBoxStatus === 1) {
@@ -188,7 +173,7 @@ function sign(retryCount = 0) {
         // 签到成功,查询完整信息
         querySignStatus((statusData) => {
           const signDays = statusData?.consecutiveDays || 0;
-          const info = formatNotification("success", signDays);
+          const info = [`♻️ 连续签到: ${signDays}天`];
           const body = addExtraInfo([...info], statusData);
           $notification.post(APP.name, "🎉 签到成功", body);
           $done();
@@ -197,7 +182,7 @@ function sign(retryCount = 0) {
         // 已签到,查询状态获取天数
         querySignStatus((statusData) => {
           const days = statusData?.consecutiveDays || 0;
-          const info = formatNotification("already", days);
+          const info = [`♻️ 连续签到: ${days}天`];
           const body = addExtraInfo([...info], statusData);
           $notification.post(APP.name, "📅 已签到", body);
           $done();
