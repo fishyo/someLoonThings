@@ -1,18 +1,19 @@
 payload:
-
-#for myself
+  #for myself
   - DOMAIN-SUFFIX,bitwarden
   - DOMAIN-SUFFIX,pythonhosted.org
-# hysteria
+  # hysteria
   - DOMAIN-KEYWORD,hysteria
 
-# pocketcasts
+  # pocketcasts
   - DOMAIN-SUFFIX,pocketcasts.com
   - DOMAIN-SUFFIX,pca.st
 
-# notion
+  # notion
   - DOMAIN-KEYWORD,notion.com
   - DOMAIN-SUFFIX,notionusercontent.com
   - DOMAIN-SUFFIX,intercom.io
   - DOMAIN-SUFFIX,segment.io
 
+  # nxtrace
+  - DOMAIN-SUFFIX,nxtrace.org
