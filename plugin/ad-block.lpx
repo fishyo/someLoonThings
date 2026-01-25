@@ -1,0 +1,32 @@
+#!name = 自用拦截
+#!desc = 自用补充
+#!author = fishyo
+#!homepage = https://github.com/fishyo/someLoonThings
+#!icon = https://raw.githubusercontent.com/fishyo/someLoonThings/refs/heads/main/icons/Find_My.png
+#!date = 2025-12-04
+
+[Rewrite]
+# 少数派RSS全文图片
+^https://cdnfile\.sspai\.com/ header-add Referer sspai.com
+
+# 雪球 - 拦截图片
+^https:\/\/xqimg\.imedao\.com\/ reject-200
+
+# 华尔街见闻
+^https?://api-one-wscn\.awtmt\.com/apiv1/advertising/ads reject-200
+
+
+# 京东 - 拦截移动端开屏CMS
+^https://m\.360buyimg\.com/mobilecms/s1125x2436_jfs/t1/.* reject-200
+
+# 上汽大众 - 拦截开屏广告
+^https:\/\/api\.mos\.csvw\.com\/mos\/operation\/home\/api\/v\d\/app\/brand\/queryDataForOperation reject-200
+
+#同花顺
+^https?:\/\/adm\.10jqka\.com\.cn\/interface\/ad\/recommend reject-200
+^https?:\/\/iphone\.ac\.qq\.com\/.*\/Support\/(getSystemConf|bootScreen) reject
+^https?:\/\/stat\.10jqka\.com\.cn\/q\?ld=mobile&id=ad reject-dict
+
+
+[MITM]
+hostname = cdnfile.sspai.com, xqimg.imedao.com, api-one-wscn.awtmt.com, m.360buyimg.com, adm.10jqka.com.cn, iphone.ac.qq.com, stat.10jqka.com.cn
