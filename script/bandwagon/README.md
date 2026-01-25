@@ -62,16 +62,11 @@ https://raw.githubusercontent.com/fishyo/someLoonThings/refs/heads/main/script/b
 
 ```ini
 [Script]
-# 手动查询
-bandwagon = type=generic, script-path=https://raw.githubusercontent.com/fishyo/someLoonThings/refs/heads/main/script/bandwagon/bandwagonhost.js, timeout=10, tag=Bandwagon status
-
-# 定时查询（每小时）
-bandwagon-cron = type=cron, cronexp="0 * * * *", script-path=https://raw.githubusercontent.com/fishyo/someLoonThings/refs/heads/main/script/bandwagon/bandwagonhost.js, timeout=10, tag=Bandwagon status
+bandwagon-cron = type=cron, cronexp="0 * * * *", script-path=https://raw.githubusercontent.com/fishyo/someLoonThings/refs/heads/main/script/bandwagon/bwg.js, timeout=10, tag=Bandwagon status
 ```
 
 ### 5️⃣ 运行脚本
 
-- **手动运行**: Loon 主界面 > 脚本 > 点击「Bandwagon 状态」
 - **自动运行**: 按 cron 表达式定时执行
 
 ## 显示效果
@@ -118,7 +113,7 @@ https://raw.githubusercontent.com/fishyo/someLoonThings/refs/heads/main/script/b
 ## 脚本地址
 
 ```
-https://raw.githubusercontent.com/fishyo/someLoonThings/refs/heads/main/script/bandwagon/bandwagonhost.js
+https://raw.githubusercontent.com/fishyo/someLoonThings/refs/heads/main/script/bandwagon/bwg.js
 ```
 
 ## 相关链接
