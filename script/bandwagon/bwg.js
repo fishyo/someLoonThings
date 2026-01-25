@@ -1,43 +1,37 @@
-/*
-Bandwagon 服务器状态查询脚本 (Quantumult X Version)
-使用说明：
-1. 将此脚本保存到 Quantumult X 的 Scripts 目录 (例如 bwg.js)
-2. 在 Quantumult X 配置文件中添加以下内容到 [task_local] 部分：
-   0 9 * * * bwg.js, tag=Bandwagon状态, img-url=https://raw.githubusercontent.com/fishyo/quanXthings/main/script/bandwagonStatus/icon.png
 
-3. 在 BoxJS 中配置 API Key 和 VEID，或直接在脚本中设置
-*/
-
-// Quantumult X Compatibility Shim
-if (typeof $task !== 'undefined') {
-  var $persistentStore = {
-    read: key => $prefs.valueForKey(key),
-    write: (val, key) => $prefs.setValueForKey(val, key)
-  };
-  var $notification = {
-    post: (title, sub, body) => $notify(title, sub, body)
-  };
-  var $httpClient = {
-    get: (opts, cb) => {
-      var method = 'GET';
-      if (typeof opts === 'string') opts = { url: opts };
-      opts.method = method;
-      $task.fetch(opts).then(resp => {
-        resp.status = resp.statusCode;
-        cb(null, resp, resp.body);
-      }, err => cb(err, null, null));
-    },
-    post: (opts, cb) => {
-      var method = 'POST';
-      if (typeof opts === 'string') opts = { url: opts };
-      opts.method = method;
-      $task.fetch(opts).then(resp => {
-        resp.status = resp.statusCode;
-        cb(null, resp, resp.body);
-      }, err => cb(err, null, null));
+// 跨平台兼容适配
+const $ = {
+  isLoon: typeof $loon !== "undefined",
+  isQuanX: typeof $task !== "undefined",
+  isSurge: typeof $httpClient !== "undefined" && typeof $loon === "undefined",
+  read: (key) => {
+    if (typeof $persistentStore !== "undefined") return $persistentStore.read(key);
+    if (typeof $prefs !== "undefined") return $prefs.valueForKey(key);
+  },
+  write: (val, key) => {
+    if (typeof $persistentStore !== "undefined") return $persistentStore.write(val, key);
+    if (typeof $prefs !== "undefined") return $prefs.setValueForKey(val, key);
+  },
+  notify: (title, sub, msg) => {
+    if (typeof $notification !== "undefined") $notification.post(title, sub, msg);
+    else if (typeof $notify !== "undefined") $notify(title, sub, msg);
+    else console.log(`${title}\n${sub}\n${msg}`);
+  },
+  get: (opts, cb) => {
+    if (typeof $httpClient !== "undefined") $httpClient.get(opts, cb);
+    else if (typeof $task !== "undefined") {
+      if (typeof opts === "string") opts = { url: opts };
+      opts.method = "GET";
+      $task.fetch(opts).then(
+        (resp) => cb(null, { ...resp, status: resp.statusCode }, resp.body),
+        (err) => cb(err, null, null)
+      );
     }
-  };
-}
+  },
+  done: (obj) => {
+    if (typeof $done !== "undefined") $done(obj);
+  }
+};
 
 // BoxJS 配置模板
 const boxjsConfig = {
