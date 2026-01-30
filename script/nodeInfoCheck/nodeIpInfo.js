@@ -23,10 +23,16 @@ const SETTINGS = {
         "https://v6.ident.me",
         "https://ipv6.icanhazip.com"
     ],
-    latency_urls: [
-        "http://www.gstatic.com/generate_204", 
-        "https://cp.cloudflare.com/generate_204",
-        "http://captive.apple.com/hotspot-detect.html"
+    // TCP 建连速度测试目标（优先使用 HTTP 避免 TLS 开销）
+    latency_targets: [
+        // Google 全球 CDN - HTTP 204 响应
+        { url: "http://www.gstatic.com/generate_204", weight: 1.0 },
+        // Cloudflare CDN - HTTP 204
+        { url: "http://1.1.1.1/__down", weight: 1.0 },
+        // Apple 连通性检测
+        { url: "http://captive.apple.com/hotspot-detect.html", weight: 1.0 },
+        // 阿里云 CDN（国内优化）
+        { url: "http://www.taobao.com/favicon.ico", weight: 0.8 }
     ],
     user_agents: [
         "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1",
@@ -79,11 +85,11 @@ async function queryNodeIP() {
     }
 
     try {
-        // 1. 并行执行：IPv4竞速、IPv6竞速、多点延迟测试
+        // 1. 并行执行：IPv4竞速、IPv6竞速、TCP建连速度测试
         const [ipv4Result, ipv6Result, latencyInfo] = await Promise.all([
             raceIPFetch(SETTINGS.ipv4_apis, nodeName, "IPv4"),
             raceIPFetch(SETTINGS.ipv6_apis, nodeName, "IPv6"),
-            getBestLatency(SETTINGS.latency_urls, nodeName)
+            getTCPLatency(SETTINGS.latency_targets, nodeName)
         ]);
 
         const ipv4 = ipv4Result.success ? ipv4Result.ip : null;
@@ -204,21 +210,40 @@ function promiseAny(promises) {
 }
 
 /**
- * 延迟测试 - 返回最佳延迟
+ * TCP 建连速度测试 - 改进版
+ * 使用轻量级 HTTP 端点,减少 DNS/TLS 开销
+ * 返回详细的延迟统计信息
  */
-async function getBestLatency(urls, nodeName) {
-    const results = await Promise.allSettled(urls.map(url => {
+async function getTCPLatency(targets, nodeName) {
+    const results = await Promise.allSettled(targets.map(target => {
         const start = Date.now();
         return new Promise((resolve, reject) => {
-            $httpClient.head({ 
-                url, 
+            // 使用 GET 而不是 HEAD,某些服务器对 HEAD 响应较慢
+            $httpClient.get({ 
+                url: target.url, 
                 timeout: SETTINGS.timeout, 
-                node: nodeName 
+                node: nodeName,
+                headers: {
+                    "User-Agent": getRandomUA(),
+                    // 禁用缓存,确保每次都建立新连接
+                    "Cache-Control": "no-cache",
+                    "Pragma": "no-cache"
+                }
             }, (err, resp) => {
-                if (!err && (resp.status === 200 || resp.status === 204)) {
-                    resolve(Date.now() - start);
+                const latency = Date.now() - start;
+                
+                // 接受 200, 204, 301, 302 等正常响应
+                if (!err && resp && resp.status >= 200 && resp.status < 400) {
+                    resolve({ 
+                        latency, 
+                        weight: target.weight,
+                        url: target.url 
+                    });
                 } else {
-                    reject(err || `HTTP ${resp?.status || 'unknown'}`);
+                    reject({
+                        error: err || `HTTP ${resp?.status || 'unknown'}`,
+                        url: target.url
+                    });
                 }
             });
         });
@@ -228,9 +253,38 @@ async function getBestLatency(urls, nodeName) {
         .filter(r => r.status === 'fulfilled')
         .map(r => r.value);
     
-    return successfulTests.length > 0 
-        ? { success: true, ms: Math.min(...successfulTests) } 
-        : { success: false, ms: -1 };
+    if (successfulTests.length === 0) {
+        return { 
+            success: false, 
+            ms: -1,
+            min: -1,
+            avg: -1,
+            max: -1,
+            successRate: 0
+        };
+    }
+
+    // 计算加权延迟
+    const latencies = successfulTests.map(t => t.latency);
+    const minLatency = Math.min(...latencies);
+    const maxLatency = Math.max(...latencies);
+    
+    // 加权平均延迟
+    const totalWeight = successfulTests.reduce((sum, t) => sum + t.weight, 0);
+    const weightedSum = successfulTests.reduce((sum, t) => sum + (t.latency * t.weight), 0);
+    const avgLatency = Math.round(weightedSum / totalWeight);
+    
+    const successRate = Math.round((successfulTests.length / targets.length) * 100);
+
+    return { 
+        success: true, 
+        ms: minLatency,        // 主要显示最小延迟
+        min: minLatency,
+        avg: avgLatency,
+        max: maxLatency,
+        successRate,
+        details: `${successfulTests.length}/${targets.length} 成功`
+    };
 }
 
 // ============ 验证与工具函数 ============
