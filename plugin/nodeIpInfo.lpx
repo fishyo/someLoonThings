@@ -1,0 +1,9 @@
+#!name=节点信息
+#!desc=手动触发查询指定节点的外网 IPv4/IPv6 地址、地理位置及运营商信息。双栈竞速查询，支持本地 GeoIP 及在线 API 补充。
+#!author=fishyo
+#!homepage=https://github.com/fishyo/someLoonThings
+#!icon=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Area.png
+#!date=2026-01-30 22:18
+
+[Script]
+generic script-path=https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/nodeInfoCheck/nodeIpInfo.js, tag=节点信息

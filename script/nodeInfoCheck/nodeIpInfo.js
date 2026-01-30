@@ -5,6 +5,12 @@
  * - IPv4/IPv6 双栈竞速查询
  * - 地理位置与运营商信息
  * - 简洁清晰的结果展示
+ * 
+ * 使用说明：
+ * 1. 在 Loon [Script] 部分添加：
+ *    type=generic, script-path=https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/nodeInfoCheck/nodeIpInfo.js, tag=节点信息
+ * 2. 运行方式：
+ *    - 在节点列表长按指定节点 -> 选择“脚本” -> 点击“节点信息”
  */
 
 // ============ 配置常量 ============
@@ -322,7 +328,7 @@ function buildMessage(ipv4, ipv6, geo, ispInfo) {
     }
     
     // 地理位置
-    parts.push(`🌍 归属: ${getFlagEmoji(geo)} ${getCountryName(geo)}`);
+    parts.push(`📍 归属: ${getFlagEmoji(geo)} ${getCountryName(geo)}`);
     
     // 运营商
     parts.push(`🏢 运营商: ${ispInfo}`);
