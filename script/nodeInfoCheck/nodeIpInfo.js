@@ -1,38 +1,30 @@
 /**
- * Loon Generic Script - 节点IP信息查询 
+ * Loon Generic Script - 节点IP信息查询
  * 
  * 功能：
  * - IPv4/IPv6 双栈竞速查询
- * - 多点延迟测试
- * - 结果展示优化 (通知 + 弹窗)
- * - 随机 UA 防屏蔽
- * - 增强的错误处理和验证
+ * - 地理位置与运营商信息
+ * - 简洁清晰的结果展示
  */
 
 // ============ 配置常量 ============
 const SETTINGS = {
-    ipQueryTimeout: 5000,      // IP查询超时时间(毫秒)
-    latencyTimeout: 3000,      // 延迟测试超时时间(毫秒)
-    ipv4_apis: [
-        "https://api.ipify.org?format=json", 
-        "https://api.ip.sb/ip", 
-        "https://v4.ident.me",
-        "https://ipv4.icanhazip.com"
-    ],
-    ipv6_apis: [
-        "https://api64.ipify.org?format=json", 
-        "https://v6.ident.me",
-        "https://ipv6.icanhazip.com"
-    ],
-    // TCP 建连速度测试目标（使用 204 No Content 端点，最快响应）
-    latency_targets: [
-        // Google 全球 CDN - 204 响应，无内容
-        "http://www.gstatic.com/generate_204",
-        // Cloudflare CDN - 204 响应
-        "http://cp.cloudflare.com/generate_204",
-        // Apple 连通性检测 - 快速响应
-        "http://captive.apple.com"
-    ],
+    timeout: 5000,
+    // 使用最稳定快速的 IP 查询 API
+    ipv4_api: "https://api.ipify.org?format=json",  // Cloudflare 支持，全球最快最稳定
+    ipv6_api: "https://api64.ipify.org?format=json", // 同上，IPv6 版本
+    // 备用 API（如果主 API 失败）
+    fallback_apis: {
+        ipv4: [
+            "https://api.ip.sb/ip",
+            "https://v4.ident.me",
+            "https://ipv4.icanhazip.com"
+        ],
+        ipv6: [
+            "https://v6.ident.me",
+            "https://ipv6.icanhazip.com"
+        ]
+    },
     user_agents: [
         "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1",
         "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
@@ -40,29 +32,7 @@ const SETTINGS = {
     ]
 };
 
-// 延迟等级配置
-const LATENCY_LEVELS = {
-    EXCELLENT: { threshold: 80, emoji: "🟢", label: "🚀极速", score: 50 },
-    GOOD: { threshold: 150, emoji: "🟡", label: "⚡高速", score: 40 },
-    FAIR: { threshold: 300, emoji: "🟠", label: "🐢普通", score: 25 },
-    POOR: { threshold: Infinity, emoji: "🔴", label: "🐌缓慢", score: 10 },
-    TIMEOUT: { emoji: "❌", label: "❌超时", score: 0 }
-};
-
-// 评分配置
-const SCORE_CONFIG = {
-    IPV4: 30,
-    IPV6: 20,
-    GRADES: [
-        { min: 90, grade: "SSS" },
-        { min: 80, grade: "S+" },
-        { min: 70, grade: "A" },
-        { min: 50, grade: "B" },
-        { min: 0, grade: "C" }
-    ]
-};
-
-// 国家名称映射 (扩展版)
+// 国家名称映射
 const COUNTRY_NAMES = {
     CN: "中国", HK: "香港", TW: "台湾", MO: "澳门",
     US: "美国", JP: "日本", SG: "新加坡", KR: "韩国",
@@ -84,11 +54,10 @@ async function queryNodeIP() {
     }
 
     try {
-        // 1. 并行执行：IPv4竞速、IPv6竞速、TCP建连速度测试
-        const [ipv4Result, ipv6Result, latencyInfo] = await Promise.all([
-            raceIPFetch(SETTINGS.ipv4_apis, nodeName, "IPv4"),
-            raceIPFetch(SETTINGS.ipv6_apis, nodeName, "IPv6"),
-            getTCPLatency(SETTINGS.latency_targets, nodeName)
+        // 并行查询 IPv4 和 IPv6
+        const [ipv4Result, ipv6Result] = await Promise.all([
+            fetchIP(SETTINGS.ipv4_api, SETTINGS.fallback_apis.ipv4, nodeName, "IPv4"),
+            fetchIP(SETTINGS.ipv6_api, SETTINGS.fallback_apis.ipv6, nodeName, "IPv6")
         ]);
 
         const ipv4 = ipv4Result.success ? ipv4Result.ip : null;
@@ -103,7 +72,7 @@ async function queryNodeIP() {
             throw new Error(`无法获取 IP 地址\n${errorDetails || "请检查节点状态"}`);
         }
 
-        // 2. 提取地理位置与运营商信息
+        // 提取地理位置与运营商信息
         const primaryIP = ipv4 || ipv6;
         const geo = $utils.geoip(primaryIP) || "未知";
         const asn = $utils.ipasn(primaryIP) || "";
@@ -111,17 +80,15 @@ async function queryNodeIP() {
         
         const ispInfo = formatISPInfo(aso, asn);
 
-        // 3. 综合评分计算
-        const quality = calculateQuality(ipv4, ipv6, latencyInfo);
+        // 构建输出
+        const message = buildMessage(ipv4, ipv6, geo, ispInfo);
 
-        // 4. 构建精美输出
-        const message = buildMessage(ipv4, ipv6, geo, ispInfo, latencyInfo, quality);
-
-        // 5. 输出结果
-        showNotification(nodeName, `${quality.grade} 级节点`, message);
+        // 输出结果
+        const title = `${getFlagEmoji(geo)} ${nodeName}`;
+        showNotification(title, getCountryName(geo), message);
 
         $done({
-            title: nodeName,
+            title: title,
             content: message
         });
 
@@ -137,55 +104,65 @@ async function queryNodeIP() {
 
 // ============ IP 获取相关 ============
 /**
- * API竞速 - 返回结果对象包含成功状态、IP和错误信息
+ * 获取 IP 地址 - 主 API + 备用 API 策略
  */
-function raceIPFetch(urls, nodeName, type) {
-    const fetchPromises = urls.map(url => {
-        return new Promise((resolve, reject) => {
-            const ua = getRandomUA();
-            
-            $httpClient.get({ 
-                url, 
-                timeout: SETTINGS.ipQueryTimeout, 
-                node: nodeName,
-                headers: { "User-Agent": ua }
-            }, (err, resp, data) => {
-                if (err) {
-                    return reject({ type: 'network', message: err.message || String(err) });
-                }
-                
-                if (resp.status !== 200) {
-                    return reject({ type: 'http', message: `HTTP ${resp.status}` });
-                }
-                
-                try {
-                    const ip = data.includes('{') ? JSON.parse(data).ip : data.trim();
-                    
-                    if (!isValidIP(ip, type)) {
-                        return reject({ type: 'validation', message: `Invalid ${type}` });
-                    }
-                    
-                    resolve(ip);
-                } catch (e) {
-                    reject({ type: 'parse', message: e.message });
-                }
-            });
-        });
-    });
+async function fetchIP(primaryAPI, fallbackAPIs, nodeName, type) {
+    // 先尝试主 API
+    const primaryResult = await fetchSingleIP(primaryAPI, nodeName, type);
+    if (primaryResult.success) {
+        return primaryResult;
+    }
 
-    return promiseAny(fetchPromises)
-        .then(ip => ({ success: true, ip, error: null }))
-        .catch(errors => {
-            // 提取最有意义的错误信息
-            const errorMsg = errors && errors.length > 0 
-                ? (errors[0].message || "所有 API 请求失败")
-                : "未知错误";
-            return { success: false, ip: null, error: errorMsg };
-        });
+    // 主 API 失败，尝试备用 API 竞速
+    const fallbackPromises = fallbackAPIs.map(url => fetchSingleIP(url, nodeName, type));
+    
+    try {
+        const ip = await promiseAny(fallbackPromises);
+        return { success: true, ip, error: null };
+    } catch (errors) {
+        const errorMsg = primaryResult.error || "所有 API 请求失败";
+        return { success: false, ip: null, error: errorMsg };
+    }
 }
 
 /**
- * Promise.any polyfill - 改进版,返回所有错误
+ * 从单个 API 获取 IP
+ */
+function fetchSingleIP(url, nodeName, type) {
+    return new Promise((resolve, reject) => {
+        const ua = getRandomUA();
+        
+        $httpClient.get({ 
+            url, 
+            timeout: SETTINGS.timeout, 
+            node: nodeName,
+            headers: { "User-Agent": ua }
+        }, (err, resp, data) => {
+            if (err) {
+                return reject({ type: 'network', message: err.message || String(err) });
+            }
+            
+            if (resp.status !== 200) {
+                return reject({ type: 'http', message: `HTTP ${resp.status}` });
+            }
+            
+            try {
+                const ip = data.includes('{') ? JSON.parse(data).ip : data.trim();
+                
+                if (!isValidIP(ip, type)) {
+                    return reject({ type: 'validation', message: `Invalid ${type}` });
+                }
+                
+                resolve({ success: true, ip, error: null });
+            } catch (e) {
+                reject({ type: 'parse', message: e.message });
+            }
+        });
+    });
+}
+
+/**
+ * Promise.any polyfill
  */
 function promiseAny(promises) {
     return new Promise((resolve, reject) => {
@@ -197,7 +174,17 @@ function promiseAny(promises) {
         }
 
         promises.forEach((p, index) => {
-            Promise.resolve(p).then(resolve, err => {
+            Promise.resolve(p).then(result => {
+                if (result.success) {
+                    resolve(result.ip);
+                } else {
+                    errors[index] = result.error;
+                    count--;
+                    if (count === 0) {
+                        reject(errors);
+                    }
+                }
+            }, err => {
                 errors[index] = err;
                 count--;
                 if (count === 0) {
@@ -208,70 +195,9 @@ function promiseAny(promises) {
     });
 }
 
-/**
- * TCP 建连速度测试 - 优化版
- * 使用 HEAD 请求到 204 端点,只测 TCP 握手 + HTTP 头,不下载内容
- * 返回详细的延迟统计信息
- */
-async function getTCPLatency(targets, nodeName) {
-    const results = await Promise.allSettled(targets.map(url => {
-        const start = Date.now();
-        return new Promise((resolve, reject) => {
-            // 使用 HEAD 请求,不下载响应体,只测建连速度
-            $httpClient.head({ 
-                url, 
-                timeout: SETTINGS.latencyTimeout, 
-                node: nodeName
-            }, (err, resp) => {
-                const latency = Date.now() - start;
-                
-                // 接受 200, 204 等正常响应
-                if (!err && resp && (resp.status === 200 || resp.status === 204)) {
-                    resolve(latency);
-                } else {
-                    reject(err || `HTTP ${resp?.status || 'unknown'}`);
-                }
-            });
-        });
-    }));
-
-    const successfulTests = results
-        .filter(r => r.status === 'fulfilled')
-        .map(r => r.value);
-    
-    if (successfulTests.length === 0) {
-        return { 
-            success: false, 
-            ms: -1,
-            min: -1,
-            avg: -1,
-            max: -1,
-            successRate: 0,
-            count: 0
-        };
-    }
-
-    // 计算延迟统计
-    const minLatency = Math.min(...successfulTests);
-    const maxLatency = Math.max(...successfulTests);
-    const avgLatency = Math.round(successfulTests.reduce((a, b) => a + b, 0) / successfulTests.length);
-    const successRate = Math.round((successfulTests.length / targets.length) * 100);
-
-    return { 
-        success: true, 
-        ms: minLatency,        // 主要显示最小延迟
-        min: minLatency,
-        avg: avgLatency,
-        max: maxLatency,
-        successRate,
-        count: successfulTests.length,
-        total: targets.length
-    };
-}
-
 // ============ 验证与工具函数 ============
 /**
- * IP 地址验证 - 增强版
+ * IP 地址验证
  */
 function isValidIP(ip, type) {
     if (!ip || typeof ip !== 'string') return false;
@@ -307,53 +233,6 @@ function getRandomUA() {
 }
 
 /**
- * 获取延迟等级
- */
-function getLatencyLevel(ms) {
-    if (ms < 0) return LATENCY_LEVELS.TIMEOUT;
-    if (ms < LATENCY_LEVELS.EXCELLENT.threshold) return LATENCY_LEVELS.EXCELLENT;
-    if (ms < LATENCY_LEVELS.GOOD.threshold) return LATENCY_LEVELS.GOOD;
-    if (ms < LATENCY_LEVELS.FAIR.threshold) return LATENCY_LEVELS.FAIR;
-    return LATENCY_LEVELS.POOR;
-}
-
-/**
- * 计算节点质量评分
- */
-function calculateQuality(v4, v6, latency) {
-    let score = 0;
-    let tags = [];
-
-    // IPv4 评分
-    if (v4) {
-        score += SCORE_CONFIG.IPV4;
-        tags.push("IPv4");
-    } else {
-        tags.push("NoIPv4");
-    }
-    
-    // IPv6 评分
-    if (v6) {
-        score += SCORE_CONFIG.IPV6;
-        tags.push("IPv6");
-    }
-
-    // 延迟评分
-    const latencyLevel = getLatencyLevel(latency.ms);
-    if (latency.success) {
-        score += latencyLevel.score;
-        tags.push(latencyLevel.label);
-    } else {
-        tags.push(LATENCY_LEVELS.TIMEOUT.label);
-    }
-
-    // 计算等级
-    const grade = SCORE_CONFIG.GRADES.find(g => score >= g.min)?.grade || "C";
-    
-    return { score, grade, details: tags.join(" | ") };
-}
-
-/**
  * 格式化 ISP 信息
  */
 function formatISPInfo(aso, asn) {
@@ -370,43 +249,28 @@ function formatISPInfo(aso, asn) {
 /**
  * 构建输出消息
  */
-function buildMessage(ipv4, ipv6, geo, ispInfo, latencyInfo, quality) {
-    const ipDisplay = [
-        ipv4 || "❌",
-        ipv4 && ipv6 ? "|" : "",
-        ipv6 || ""
-    ].filter(Boolean).join(" ");
-
-    const latencyLevel = getLatencyLevel(latencyInfo.ms);
+function buildMessage(ipv4, ipv6, geo, ispInfo) {
+    const parts = [];
     
-    // 构建延迟显示 - 包含详细统计
-    let latencyDisplay;
-    if (latencyInfo.ms > 0) {
-        const detailParts = [];
-        
-        // 主延迟显示
-        detailParts.push(`${latencyInfo.ms}ms ${latencyLevel.emoji}`);
-        
-        // 如果有平均和最大延迟,显示范围
-        if (latencyInfo.avg && latencyInfo.max && 
-            (latencyInfo.avg !== latencyInfo.ms || latencyInfo.max !== latencyInfo.ms)) {
-            detailParts.push(`(平均${latencyInfo.avg}ms, 最大${latencyInfo.max}ms)`);
-        }
-        
-        latencyDisplay = detailParts.join(" ");
-    } else {
-        latencyDisplay = `超时 ${LATENCY_LEVELS.TIMEOUT.emoji}`;
+    // IP 信息
+    if (ipv4 && ipv6) {
+        parts.push(`📡 IPv4: ${ipv4}`);
+        parts.push(`📡 IPv6: ${ipv6}`);
+    } else if (ipv4) {
+        parts.push(`📡 IP: ${ipv4}`);
+        parts.push(`⚠️ 不支持 IPv6`);
+    } else if (ipv6) {
+        parts.push(`📡 IP: ${ipv6}`);
+        parts.push(`⚠️ 不支持 IPv4`);
     }
-
-    return [
-        `📡 IP:  ${ipDisplay}`,
-        `🌍 归属: ${getFlagEmoji(geo)} ${getCountryName(geo)}`,
-        `🏢 运营商: ${ispInfo}`,
-        `⚡ 建连: ${latencyDisplay}`,
-        `⭐ 综合评分: ${quality.score} [${quality.grade}]`,
-        `━━━━━━━━━━━━━━`,
-        `${quality.details}`
-    ].join('\n');
+    
+    // 地理位置
+    parts.push(`🌍 归属: ${getFlagEmoji(geo)} ${getCountryName(geo)}`);
+    
+    // 运营商
+    parts.push(`🏢 运营商: ${ispInfo}`);
+    
+    return parts.join('\n');
 }
 
 // ============ 显示相关 ============
