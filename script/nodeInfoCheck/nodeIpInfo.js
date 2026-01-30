@@ -57,9 +57,6 @@ async function queryNodeIP() {
       return;
     }
 
-    // 显示开始查询的通知
-    showNotification("正在查询", nodeName, "正在获取节点信息，请稍候...");
-
     // 并行查询 IPv4、IPv6 和延迟
     const [ipv4Result, ipv6Result, latencyResult] = await Promise.all([
       getNodeIP(nodeName, "ipv4"),
