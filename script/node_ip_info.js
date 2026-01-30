@@ -1,11 +1,15 @@
 /**
- * Loon Generic Script - 节点IP信息查询 (Debug 版)
+ * Loon Generic Script - 节点IP信息查询
  * 
- * update: 移除剪贴板功能，增加详细调试日志
+ * 功能：
+ * - IPv4/IPv6 双栈竞速查询
+ * - 多点延迟测试
+ * - 结果展示优化 (通知 + 弹窗)
+ * - 随机 UA 防屏蔽
  */
 
 const SETTINGS = {
-    timeout: 5000, // 超时 (ms)
+    timeout: 5000,
     ipv4_apis: [
         "https://api.ipify.org?format=json", 
         "https://api.ip.sb/ip", 
@@ -17,13 +21,11 @@ const SETTINGS = {
         "https://v6.ident.me",
         "https://ipv6.icanhazip.com"
     ],
-    // 多地区延迟测试点
     latency_urls: [
         "http://www.gstatic.com/generate_204", 
         "https://cp.cloudflare.com/generate_204",
         "http://captive.apple.com/hotspot-detect.html"
     ],
-    // 随机 UA 池
     user_agents: [
         "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1",
         "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
@@ -31,50 +33,40 @@ const SETTINGS = {
 };
 
 async function queryNodeIP() {
-    log("脚本开始执行");
     const nodeName = $environment.params.node;
     
     if (!nodeName) {
-        log("错误：未找到节点名称");
-        showNotification("❌ 错误", "未选择节点", "请在节点列表中选择一个节点运行");
-        return $done({});
+        const msg = "请在节点列表中选择一个节点运行";
+        showNotification("❌ 错误", "未选择节点", msg);
+        return $done({ title: "❌ 错误", content: msg });
     }
 
-    log(`准备检测节点: ${nodeName}`);
+    // console.log(`🚀 开始检测节点: ${nodeName}`);
 
     try {
-        log("开始并行任务：IPv4, IPv6, Latency");
-        
-        // 1. 并行执行
-        const startTime = Date.now();
+        // 1. 并行执行：IPv4竞速、IPv6竞速、多点延迟测试
         const [ipv4, ipv6, latencyInfo] = await Promise.all([
             raceIPFetch(SETTINGS.ipv4_apis, nodeName, "IPv4"),
             raceIPFetch(SETTINGS.ipv6_apis, nodeName, "IPv6"),
             getBestLatency(SETTINGS.latency_urls, nodeName)
         ]);
-        log(`并行任务完成，耗时: ${Date.now() - startTime}ms`);
-        log(`获取结果 - IPv4: ${ipv4}, IPv6: ${ipv6}, Latency: ${JSON.stringify(latencyInfo)}`);
 
         if (!ipv4 && !ipv6) {
-            log("错误：IPv4 和 IPv6 均未获取到");
             throw new Error("无法连接网络或获取 IP，请检查节点状态");
         }
 
         // 2. 提取地理位置与运营商信息
-        log("开始查询 GeoIP 信息");
         const primaryIP = ipv4 || ipv6;
         const geo = $utils.geoip(primaryIP) || "未知";
         const asn = $utils.ipasn(primaryIP) || "";
         const aso = $utils.ipaso(primaryIP) || "";
-        log(`GeoIP 结果: ${geo}, ASN: ${asn}, ASO: ${aso}`);
         
         const ispInfo = aso ? (asn ? `${aso} (${asn})` : aso) : (asn || "未知 ISP");
 
         // 3. 综合评分计算
         const quality = calculateQuality(ipv4, ipv6, latencyInfo);
-        log(`质量评分: ${quality.score}, 等级: ${quality.grade}`);
 
-        // 4. 构建输出
+        // 4. 构建精美输出
         const message = [
             `📡 IP:  ${ipv4 || "❌"} ${ipv4 && ipv6 ? "|" : ""} ${ipv6 || ""}`,
             `🌍 归属: ${getFlagEmoji(geo)} ${getCountryName(geo)}`,
@@ -85,33 +77,29 @@ async function queryNodeIP() {
             `${quality.details}`
         ].join('\n');
 
-        // 5. 输出结果
-        log("发送通知...");
+        // 5. 输出结果 (通知)
         showNotification(nodeName, quality.grade + "级节点", message);
-        log("通知已发送");
+
+        // 6. 结束脚本并返回 UI 内容 (修复弹窗空内容问题)
+        $done({
+            title: nodeName,
+            content: message
+        });
 
     } catch (error) {
-        log(`捕获到异常: ${error.message || error}`);
-        log(`异常堆栈: ${error.stack}`);
-        showNotification("查询失败", nodeName, error.message || String(error));
-    } finally {
-        log("脚本执行完毕，调用 $done({})");
-        $done({});
+        const errMsg = error.message || String(error);
+        showNotification("查询失败", nodeName, errMsg);
+        $done({
+            title: "查询失败",
+            content: errMsg
+        });
     }
-}
-
-/**
- * 包装日志函数，方便调试
- */
-function log(msg) {
-    console.log(`[NodeIP_Debug] ${msg}`);
 }
 
 /**
  * API竞速
  */
 function raceIPFetch(urls, nodeName, type) {
-    log(`开始 ${type} 竞速查询，使用 ${urls.length} 个 API`);
     const fetchPromises = urls.map(url => {
         return new Promise((resolve, reject) => {
             const ua = SETTINGS.user_agents[Math.floor(Math.random() * SETTINGS.user_agents.length)];
@@ -122,39 +110,20 @@ function raceIPFetch(urls, nodeName, type) {
                 node: nodeName,
                 headers: { "User-Agent": ua }
             }, (err, resp, data) => {
-                if (err) {
-                    // log(`[${type}] API 失败: ${url}, Err: ${err}`);
-                    return reject(err);
-                }
-                if (resp.status !== 200) {
-                    // log(`[${type}] API 状态码非200: ${url}, Status: ${resp.status}`);
-                    return reject("Status " + resp.status);
-                }
+                if (err || resp.status !== 200) return reject(err);
                 try {
                     const ip = data.includes('{') ? JSON.parse(data).ip : data.trim();
-                    if (isValidIP(ip)) {
-                        log(`[${type}] API 成功: ${url}, IP: ${ip}`);
-                        resolve(ip);
-                    } else {
-                        // log(`[${type}] IP 格式校验失败: ${url}, Data: ${data}`);
-                        reject("Invalid IP");
-                    }
-                } catch (e) { 
-                    reject(e); 
-                }
+                    if (isValidIP(ip)) resolve(ip);
+                    else reject("Invalid IP");
+                } catch (e) { reject(e); }
             });
         });
     });
 
-    return promiseAny(fetchPromises).catch((e) => {
-        log(`[${type}] 所有 API 均失败: ${e}`);
-        return null;
-    });
+    return promiseAny(fetchPromises).catch(() => null);
 }
 
-/**
- * Hand-written Promise.any
- */
+// Promise.any compatible polyfill
 function promiseAny(promises) {
     return new Promise((resolve, reject) => {
         let errors = [];
@@ -171,11 +140,8 @@ function promiseAny(promises) {
     });
 }
 
-/**
- * Best Latency
- */
+// Best Latency
 async function getBestLatency(urls, nodeName) {
-    log("开始延迟测试...");
     const results = await Promise.allSettled(urls.map(url => {
         const start = Date.now();
         return new Promise((resolve, reject) => {
@@ -183,7 +149,7 @@ async function getBestLatency(urls, nodeName) {
                 if (!err && (resp.status === 200 || resp.status === 204)) {
                     resolve(Date.now() - start);
                 } else {
-                    reject(err || "Status " + resp.status);
+                    reject(err);
                 }
             });
         });
@@ -193,15 +159,9 @@ async function getBestLatency(urls, nodeName) {
         .filter(r => r.status === 'fulfilled')
         .map(r => r.value);
     
-    log(`延迟测试完成，成功数量: ${successfulTests.length}/${urls.length}`);
-    if (successfulTests.length > 0) {
-        const minConfig = Math.min(...successfulTests);
-        log(`最优延迟: ${minConfig}ms`);
-        return { success: true, ms: minConfig };
-    } else {
-        log("所有延迟测试均失败");
-        return { success: false, ms: -1 };
-    }
+    return successfulTests.length > 0 
+        ? { success: true, ms: Math.min(...successfulTests) } 
+        : { success: false, ms: -1 };
 }
 
 function calculateQuality(v4, v6, latency) {
@@ -252,9 +212,7 @@ function getFlagEmoji(code) {
     if (!code || code === '未知') return '🌍';
     try {
         return code.toUpperCase().replace(/./g, char => String.fromCodePoint(char.charCodeAt(0) + 127397));
-    } catch (e) {
-        return '🌍';
-    }
+    } catch (e) { return '🌍'; }
 }
 
 queryNodeIP();
