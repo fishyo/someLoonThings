@@ -1,5 +1,5 @@
 /**
- * Loon Generic Script - 节点IP信息查询 (优化版)
+ * Loon Generic Script - 节点IP信息查询 
  * 
  * 功能：
  * - IPv4/IPv6 双栈竞速查询
