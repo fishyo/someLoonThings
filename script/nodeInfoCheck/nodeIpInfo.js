@@ -1,21 +1,25 @@
 /*
- * Loon Generic Script - 节点IP信息查询
+ * Loon Generic Script - 节点IP信息查询（现代化增强版）
  *
  * 功能说明：
- * - 查询节点的 IPv4 和 IPv6 地址（双栈检测）
- * - 获取IP的地理位置信息（国家/地区）
- * - 获取IP的ASN（自治系统编号）和运营商信息
- * - 测试节点延迟和网络质量
- * - 综合评分（延迟、协议支持等）
+ * - IPv4/IPv6 双栈检测（竞速机制）
+ * - 地理位置、ASN、运营商信息查询
+ * - 多点延迟测试（取最优结果）
+ * - 网络质量综合评分
+ *
+ * 特性：
+ * - 竞速查询：多个 API 并行请求，谁快用谁
+ * - 多点测速：避免单一服务器波动
+ * - 现代化代码：async/await 风格，无递归
+ * - 健壮性：完善的错误处理和空值检查
  *
  * 使用方法：
- * 在Loon配置文件的[Script]部分添加：
  * generic script-path=nodeIpInfo.js, tag=节点IP查询, timeout=15, img-url=network.badge.shield.half.filled.system
- *
- * 然后在Loon应用中选择任意节点，点击运行此脚本即可查询该节点的详细信息
  */
 
-// IPv4 查询API列表
+// ==================== 配置区 ====================
+
+// IPv4 查询 API（竞速）
 const IPV4_APIS = [
   "https://api.ipify.org?format=json",
   "https://api.ip.sb/ip",
@@ -23,7 +27,7 @@ const IPV4_APIS = [
   "https://v4.ident.me",
 ];
 
-// IPv6 查询API列表
+// IPv6 查询 API（竞速）
 const IPV6_APIS = [
   "https://api64.ipify.org?format=json",
   "https://api6.ipify.org?format=json",
@@ -31,174 +35,248 @@ const IPV6_APIS = [
   "https://v6.ident.me",
 ];
 
-// 延迟测试URL列表
+// 延迟测试 URL（多点测试）
 const LATENCY_TEST_URLS = [
   "http://www.gstatic.com/generate_204",
   "http://captive.apple.com/hotspot-detect.html",
   "http://connectivitycheck.platform.hicloud.com/generate_204",
 ];
 
-// 主函数
-async function queryNodeIP() {
+// 超时设置
+const TIMEOUT = {
+  IP_QUERY: 5000,    // IP 查询超时（毫秒）
+  LATENCY_TEST: 5000 // 延迟测试超时（毫秒）
+};
+
+// ==================== 主函数 ====================
+
+async function main() {
   try {
-    // 获取节点信息
-    const nodeInfo = $environment.params.nodeInfo;
-    const nodeName = $environment.params.node;
-
-    console.log(`开始查询节点: ${nodeName}`);
-
+    const nodeName = $environment?.params?.node;
+    
     if (!nodeName) {
-      showNotification(
-        "错误",
-        "未选择节点",
-        "请在节点列表中选择一个节点后运行此脚本",
-      );
+      showNotification("错误", "未选择节点", "请选择一个节点后运行此脚本");
       $done({});
       return;
     }
 
-    // 并行查询 IPv4、IPv6 和延迟
-    const [ipv4Result, ipv6Result, latencyResult] = await Promise.all([
-      getNodeIP(nodeName, "ipv4"),
-      getNodeIP(nodeName, "ipv6"),
-      testLatency(nodeName),
+    console.log(`[开始] 查询节点: ${nodeName}`);
+
+    // 并行执行所有查询（竞速 + 多点测试）
+    const [ipv4, ipv6, latency] = await Promise.all([
+      raceIPQuery(nodeName, IPV4_APIS, "IPv4"),
+      raceIPQuery(nodeName, IPV6_APIS, "IPv6"),
+      raceLatencyTest(nodeName),
     ]);
 
-    console.log(`IPv4: ${ipv4Result || "不支持"}`);
-    console.log(`IPv6: ${ipv6Result || "不支持"}`);
-    console.log(`延迟: ${latencyResult.latency}ms`);
+    console.log(`[结果] IPv4: ${ipv4 || "不支持"}`);
+    console.log(`[结果] IPv6: ${ipv6 || "不支持"}`);
+    console.log(`[结果] 延迟: ${latency.success ? latency.latency + "ms" : "失败"}`);
 
-    // 检查是否至少有一个IP地址
-    if (!ipv4Result && !ipv6Result) {
-      showNotification(
-        "查询失败",
-        nodeName,
-        "无法获取节点IP地址，请检查节点是否正常",
-      );
+    // 验证至少有一个 IP
+    if (!ipv4 && !ipv6) {
+      showNotification("查询失败", nodeName, "无法获取节点 IP 地址\n请检查节点是否正常");
       $done({});
       return;
     }
 
-    // 获取地理位置和ASN信息（优先使用IPv4）
-    const primaryIP = ipv4Result || ipv6Result;
-    const geoInfo = $utils.geoip(primaryIP);
-    const asnInfo = $utils.ipasn(primaryIP);
-    const asoInfo = $utils.ipaso(primaryIP);
+    // 获取地理位置和网络信息
+    const primaryIP = ipv4 || ipv6;
+    const geoInfo = safeGetGeoInfo(primaryIP);
 
-    // 计算网络质量评分
-    const qualityScore = calculateQualityScore({
-      hasIPv4: !!ipv4Result,
-      hasIPv6: !!ipv6Result,
-      latency: latencyResult.latency,
-      latencySuccess: latencyResult.success,
+    // 计算质量评分
+    const quality = calculateQuality({
+      hasIPv4: !!ipv4,
+      hasIPv6: !!ipv6,
+      latency: latency.latency,
+      latencySuccess: latency.success,
     });
 
-    // 构建结果信息
-    let resultMessage = buildResultMessage({
-      ipv4: ipv4Result,
-      ipv6: ipv6Result,
+    // 构建并显示结果
+    const message = buildMessage({
+      ipv4,
+      ipv6,
       geo: geoInfo,
-      asn: asnInfo,
-      aso: asoInfo,
-      latency: latencyResult,
-      quality: qualityScore,
+      latency,
+      quality,
     });
 
-    // 显示结果
-    showNotification("节点信息", nodeName, resultMessage);
+    showNotification("节点信息", nodeName, message);
+    console.log(`[完成] 查询成功\n${message}`);
 
-    console.log("查询完成");
-    console.log(resultMessage);
   } catch (error) {
-    console.log(`查询出错: ${error}`);
-    showNotification("查询出错", "错误", String(error));
+    console.log(`[错误] ${error}`);
+    showNotification("查询出错", "系统错误", String(error));
   }
 
   $done({});
 }
 
-// 获取节点的IP地址（支持IPv4/IPv6）
-function getNodeIP(nodeName, ipVersion = "ipv4") {
-  return new Promise((resolve) => {
-    const apis = ipVersion === "ipv6" ? IPV6_APIS : IPV4_APIS;
-    tryIPAPI(nodeName, apis, 0, resolve);
-  });
-}
+// ==================== IP 查询（竞速机制）====================
 
-// 尝试IP查询API
-function tryIPAPI(nodeName, apis, apiIndex, resolve) {
-  if (apiIndex >= apis.length) {
-    resolve(null); // 所有API都失败，返回null
-    return;
+/**
+ * 竞速查询 IP 地址
+ * 所有 API 并行请求，谁先返回有效结果用谁
+ */
+async function raceIPQuery(nodeName, apis, ipVersion) {
+  console.log(`[竞速] 开始 ${ipVersion} 查询，共 ${apis.length} 个 API`);
+
+  const promises = apis.map((url, index) => 
+    queryIP(nodeName, url, ipVersion, index)
+  );
+
+  try {
+    // Promise.race：谁先完成用谁
+    const result = await Promise.race(promises);
+    console.log(`[竞速] ${ipVersion} 查询成功: ${result}`);
+    return result;
+  } catch (error) {
+    console.log(`[竞速] ${ipVersion} 所有 API 均失败`);
+    return null;
   }
-
-  const apiUrl = apis[apiIndex];
-  console.log(
-    `尝试API[${apiIndex}]: ${apiUrl.substring(0, 30)}...`,
-  );
-
-  $httpClient.get(
-    {
-      url: apiUrl,
-      timeout: 5000,
-      node: nodeName,
-    },
-    function (error, response, data) {
-      if (error || response.status !== 200) {
-        tryIPAPI(nodeName, apis, apiIndex + 1, resolve);
-        return;
-      }
-
-      // 解析IP地址
-      let ip = null;
-      try {
-        const jsonData = JSON.parse(data);
-        ip = jsonData.ip;
-      } catch (e) {
-        ip = data.trim();
-      }
-
-      if (ip && isValidIP(ip)) {
-        resolve(ip);
-      } else {
-        tryIPAPI(nodeName, apis, apiIndex + 1, resolve);
-      }
-    },
-  );
 }
 
-// 测试节点延迟
-function testLatency(nodeName) {
-  return new Promise((resolve) => {
+/**
+ * 单个 IP 查询请求
+ */
+function queryIP(nodeName, url, ipVersion, index) {
+  return new Promise((resolve, reject) => {
     const startTime = Date.now();
-    const testUrl = LATENCY_TEST_URLS[0];
 
-    $httpClient.head(
+    $httpClient.get(
       {
-        url: testUrl,
-        timeout: 5000,
+        url,
+        timeout: TIMEOUT.IP_QUERY,
         node: nodeName,
       },
-      function (error, response) {
-        const latency = Date.now() - startTime;
+      (error, response, data) => {
+        const elapsed = Date.now() - startTime;
 
         if (error) {
-          console.log(`延迟测试失败: ${error}`);
-          resolve({ success: false, latency: -1 });
-        } else {
-          resolve({ success: true, latency });
+          console.log(`[API${index}] ${ipVersion} 失败 (${elapsed}ms): ${error}`);
+          reject(error);
+          return;
         }
-      },
+
+        if (response.status !== 200) {
+          console.log(`[API${index}] ${ipVersion} 状态码 ${response.status}`);
+          reject(new Error(`HTTP ${response.status}`));
+          return;
+        }
+
+        // 解析 IP
+        let ip = null;
+        try {
+          const json = JSON.parse(data);
+          ip = json.ip;
+        } catch {
+          ip = data?.trim();
+        }
+
+        if (ip && isValidIP(ip)) {
+          console.log(`[API${index}] ${ipVersion} 成功 (${elapsed}ms): ${ip}`);
+          resolve(ip);
+        } else {
+          console.log(`[API${index}] ${ipVersion} 无效 IP: ${ip}`);
+          reject(new Error("Invalid IP"));
+        }
+      }
     );
   });
 }
 
-// 计算网络质量评分（满分100分）
-function calculateQualityScore(params) {
+// ==================== 延迟测试（多点竞速）====================
+
+/**
+ * 多点延迟测试
+ * 测试多个服务器，取最快的响应
+ */
+async function raceLatencyTest(nodeName) {
+  console.log(`[延迟] 开始多点测试，共 ${LATENCY_TEST_URLS.length} 个测试点`);
+
+  const promises = LATENCY_TEST_URLS.map((url, index) =>
+    testSingleLatency(nodeName, url, index)
+  );
+
+  try {
+    // 取最快的成功响应
+    const result = await Promise.race(promises);
+    console.log(`[延迟] 测试成功: ${result.latency}ms`);
+    return result;
+  } catch (error) {
+    console.log(`[延迟] 所有测试点均失败`);
+    return { success: false, latency: -1 };
+  }
+}
+
+/**
+ * 单点延迟测试
+ */
+function testSingleLatency(nodeName, url, index) {
+  return new Promise((resolve, reject) => {
+    const startTime = Date.now();
+
+    $httpClient.head(
+      {
+        url,
+        timeout: TIMEOUT.LATENCY_TEST,
+        node: nodeName,
+      },
+      (error, response) => {
+        const latency = Date.now() - startTime;
+
+        if (error) {
+          console.log(`[测试点${index}] 失败 (${latency}ms): ${error}`);
+          reject(error);
+          return;
+        }
+
+        console.log(`[测试点${index}] 成功 (${latency}ms)`);
+        resolve({ success: true, latency });
+      }
+    );
+  });
+}
+
+// ==================== 地理信息查询（健壮性）====================
+
+/**
+ * 安全获取地理信息
+ * 增加空值检查，避免 $utils 返回 undefined
+ */
+function safeGetGeoInfo(ip) {
+  try {
+    const geo = $utils?.geoip?.(ip);
+    const asn = $utils?.ipasn?.(ip);
+    const aso = $utils?.ipaso?.(ip);
+
+    return {
+      country: geo || null,
+      countryName: geo ? getCountryName(geo) : null,
+      asn: asn || null,
+      aso: aso || null,
+    };
+  } catch (error) {
+    console.log(`[地理] 查询失败: ${error}`);
+    return {
+      country: null,
+      countryName: null,
+      asn: null,
+      aso: null,
+    };
+  }
+}
+
+// ==================== 质量评分 ====================
+
+/**
+ * 计算网络质量评分（满分 100）
+ */
+function calculateQuality(params) {
   const { hasIPv4, hasIPv6, latency, latencySuccess } = params;
 
   let score = 0;
-  let details = [];
+  const details = [];
 
   // IPv4 支持（30分）
   if (hasIPv4) {
@@ -208,7 +286,7 @@ function calculateQualityScore(params) {
     details.push("✗ IPv4");
   }
 
-  // IPv6 支持（20分，加分项）
+  // IPv6 支持（20分）
   if (hasIPv6) {
     score += 20;
     details.push("✓ IPv6");
@@ -217,7 +295,7 @@ function calculateQualityScore(params) {
   }
 
   // 延迟评分（50分）
-  if (latencySuccess) {
+  if (latencySuccess && latency >= 0) {
     if (latency < 50) {
       score += 50;
       details.push("✓ 延迟优秀");
@@ -246,143 +324,123 @@ function calculateQualityScore(params) {
   else if (score >= 60) grade = "C";
   else if (score >= 50) grade = "D";
 
-  return {
-    score,
-    grade,
-    details,
-  };
+  return { score, grade, details };
 }
 
-// 构建结果消息
-function buildResultMessage(data) {
-  const { ipv4, ipv6, geo, asn, aso, latency, quality } = data;
+// ==================== 消息构建（视觉优化）====================
 
-  let message = "";
+/**
+ * 构建通知消息
+ * 优化排版，适配手机通知中心
+ */
+function buildMessage(data) {
+  const { ipv4, ipv6, geo, latency, quality } = data;
+  const lines = [];
 
-  // IP地址信息
-  message += "📡 IP地址\n";
-  if (ipv4) {
-    message += `IPv4: ${ipv4}\n`;
-  }
-  if (ipv6) {
-    message += `IPv6: ${ipv6}\n`;
-  }
-  if (!ipv4 && !ipv6) {
-    message += "无法获取IP\n";
-  }
+  // IP 地址（紧凑显示）
+  lines.push("📡 IP 地址");
+  if (ipv4) lines.push(`  IPv4: ${ipv4}`);
+  if (ipv6) lines.push(`  IPv6: ${ipv6}`);
 
   // 地理位置
-  if (geo) {
-    message += `\n🌍 地理位置\n`;
-    message += `${getCountryName(geo)} (${geo})\n`;
+  if (geo.countryName || geo.country) {
+    lines.push("");
+    lines.push("🌍 地理位置");
+    const location = geo.countryName 
+      ? `  ${geo.countryName} (${geo.country})`
+      : `  ${geo.country}`;
+    lines.push(location);
   }
 
-  // ASN信息
-  if (asn || aso) {
-    message += `\n🏢 网络信息\n`;
-    if (asn) {
-      message += `ASN: ${asn}\n`;
-    }
-    if (aso) {
-      message += `运营商: ${aso}\n`;
-    }
+  // 网络信息
+  if (geo.asn || geo.aso) {
+    lines.push("");
+    lines.push("🏢 网络信息");
+    if (geo.asn) lines.push(`  ASN: ${geo.asn}`);
+    if (geo.aso) lines.push(`  运营商: ${geo.aso}`);
   }
 
-  // 延迟信息
-  message += `\n⚡ 性能测试\n`;
+  // 性能测试
+  lines.push("");
+  lines.push("⚡ 性能测试");
   if (latency.success) {
-    const latencyLevel = getLatencyLevel(latency.latency);
-    message += `延迟: ${latency.latency}ms ${latencyLevel}\n`;
+    const emoji = getLatencyEmoji(latency.latency);
+    lines.push(`  延迟: ${latency.latency}ms ${emoji}`);
   } else {
-    message += `延迟: 测试失败\n`;
+    lines.push(`  延迟: 测试失败`);
   }
 
-  // 网络质量评分
-  message += `\n⭐ 质量评分\n`;
-  message += `评分: ${quality.score}/100 (${quality.grade}级)\n`;
-  message += quality.details.join(" | ");
+  // 质量评分
+  lines.push("");
+  lines.push("⭐ 质量评分");
+  lines.push(`  ${quality.score}/100 (${quality.grade}级)`);
+  lines.push(`  ${quality.details.join(" | ")}`);
 
-  return message;
+  return lines.join("\n");
 }
 
-// 获取延迟等级
-function getLatencyLevel(latency) {
+// ==================== 工具函数 ====================
+
+/**
+ * 验证 IP 地址格式
+ */
+function isValidIP(ip) {
+  if (!ip || typeof ip !== "string") return false;
+
+  // IPv4
+  const ipv4Regex = /^(\d{1,3}\.){3}\d{1,3}$/;
+  if (ipv4Regex.test(ip)) {
+    const parts = ip.split(".");
+    return parts.every(part => {
+      const num = parseInt(part, 10);
+      return num >= 0 && num <= 255;
+    });
+  }
+
+  // IPv6（简化版）
+  const ipv6Regex = /^([0-9a-fA-F]{0,4}:){2,7}[0-9a-fA-F]{0,4}$/;
+  return ipv6Regex.test(ip);
+}
+
+/**
+ * 获取延迟等级 emoji
+ */
+function getLatencyEmoji(latency) {
   if (latency < 50) return "🟢";
   if (latency < 100) return "🟡";
   if (latency < 200) return "🟠";
   return "🔴";
 }
 
-// 验证IP地址格式
-function isValidIP(ip) {
-  // IPv4正则
-  const ipv4Regex = /^(\d{1,3}\.){3}\d{1,3}$/;
-  // IPv6正则（简化版）
-  const ipv6Regex = /^([0-9a-fA-F]{0,4}:){2,7}[0-9a-fA-F]{0,4}$/;
-
-  return ipv4Regex.test(ip) || ipv6Regex.test(ip);
-}
-
-// 显示通知
+/**
+ * 显示通知
+ */
 function showNotification(title, subtitle, message) {
   $notification.post(title, subtitle, message);
 }
 
-// 将国家代码转换为中文名称（部分常用国家/地区）
+/**
+ * 国家代码转中文名称
+ */
 function getCountryName(code) {
   const countryMap = {
-    CN: "中国",
-    HK: "香港",
-    TW: "台湾",
-    MO: "澳门",
-    US: "美国",
-    JP: "日本",
-    KR: "韩国",
-    SG: "新加坡",
-    GB: "英国",
-    DE: "德国",
-    FR: "法国",
-    CA: "加拿大",
-    AU: "澳大利亚",
-    RU: "俄罗斯",
-    IN: "印度",
-    BR: "巴西",
-    NL: "荷兰",
-    IT: "意大利",
-    ES: "西班牙",
-    SE: "瑞典",
-    CH: "瑞士",
-    NO: "挪威",
-    FI: "芬兰",
-    DK: "丹麦",
-    PL: "波兰",
-    TR: "土耳其",
-    ID: "印度尼西亚",
-    TH: "泰国",
-    MY: "马来西亚",
-    VN: "越南",
-    PH: "菲律宾",
-    NZ: "新西兰",
-    AR: "阿根廷",
-    MX: "墨西哥",
-    ZA: "南非",
-    AE: "阿联酋",
-    SA: "沙特阿拉伯",
-    IL: "以色列",
-    UA: "乌克兰",
-    IE: "爱尔兰",
-    AT: "奥地利",
-    BE: "比利时",
-    PT: "葡萄牙",
-    GR: "希腊",
-    CZ: "捷克",
-    RO: "罗马尼亚",
-    HU: "匈牙利",
-    BG: "保加利亚",
+    CN: "中国", HK: "香港", TW: "台湾", MO: "澳门",
+    US: "美国", JP: "日本", KR: "韩国", SG: "新加坡",
+    GB: "英国", DE: "德国", FR: "法国", CA: "加拿大",
+    AU: "澳大利亚", RU: "俄罗斯", IN: "印度", BR: "巴西",
+    NL: "荷兰", IT: "意大利", ES: "西班牙", SE: "瑞典",
+    CH: "瑞士", NO: "挪威", FI: "芬兰", DK: "丹麦",
+    PL: "波兰", TR: "土耳其", ID: "印度尼西亚", TH: "泰国",
+    MY: "马来西亚", VN: "越南", PH: "菲律宾", NZ: "新西兰",
+    AR: "阿根廷", MX: "墨西哥", ZA: "南非", AE: "阿联酋",
+    SA: "沙特阿拉伯", IL: "以色列", UA: "乌克兰", IE: "爱尔兰",
+    AT: "奥地利", BE: "比利时", PT: "葡萄牙", GR: "希腊",
+    CZ: "捷克", RO: "罗马尼亚", HU: "匈牙利", BG: "保加利亚",
   };
 
   return countryMap[code] || code;
 }
 
-// 执行主函数
-queryNodeIP();
+// ==================== 执行入口 ====================
+
+main();
