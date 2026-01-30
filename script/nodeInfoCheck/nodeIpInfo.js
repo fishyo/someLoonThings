@@ -78,14 +78,17 @@ async function queryNodeIP() {
         let asn = $utils.ipasn(primaryIP) || "";
         let aso = $utils.ipaso(primaryIP) || "";
         
+        console.log(`[节点IP查询] 本地查询结果 - 国家: ${geo}, ISP: ${aso || '无'}, ASN: ${asn || '无'}`);
+        
         // 如果本地查询不到 ISP 信息，尝试在线查询
         if (!aso && !asn) {
             console.log("[节点IP查询] 本地ISP信息未知，尝试在线查询...");
             const onlineInfo = await fetchIPInfo(primaryIP, nodeName);
             if (onlineInfo) {
                 geo = onlineInfo.countryCode || geo;
-                aso = onlineInfo.isp || aso;
-                asn = onlineInfo.as || asn;
+                aso = onlineInfo.isp || "";
+                asn = onlineInfo.as || "";
+                console.log(`[节点IP查询] 在线查询结果 - 国家: ${geo}, ISP: ${aso}, ASN: ${asn}`);
             }
         }
         
@@ -286,12 +289,16 @@ function getRandomUA() {
  * 格式化 ISP 信息
  */
 function formatISPInfo(aso, asn) {
-    if (aso && asn) {
-        return `${aso} (${asn})`;
-    } else if (aso) {
-        return aso;
-    } else if (asn) {
-        return asn;
+    // 清理空白字符
+    const cleanAso = aso ? aso.trim() : "";
+    const cleanAsn = asn ? asn.trim() : "";
+    
+    if (cleanAso && cleanAsn) {
+        return `${cleanAso} (${cleanAsn})`;
+    } else if (cleanAso) {
+        return cleanAso;
+    } else if (cleanAsn) {
+        return cleanAsn;
     }
     return "未知 ISP";
 }
