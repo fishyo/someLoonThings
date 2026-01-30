@@ -11,7 +11,8 @@
 
 // ============ 配置常量 ============
 const SETTINGS = {
-    timeout: 5000,
+    ipQueryTimeout: 5000,      // IP查询超时时间(毫秒)
+    latencyTimeout: 3000,      // 延迟测试超时时间(毫秒)
     ipv4_apis: [
         "https://api.ipify.org?format=json", 
         "https://api.ip.sb/ip", 
@@ -23,16 +24,14 @@ const SETTINGS = {
         "https://v6.ident.me",
         "https://ipv6.icanhazip.com"
     ],
-    // TCP 建连速度测试目标（优先使用 HTTP 避免 TLS 开销）
+    // TCP 建连速度测试目标（使用 204 No Content 端点，最快响应）
     latency_targets: [
-        // Google 全球 CDN - HTTP 204 响应
-        { url: "http://www.gstatic.com/generate_204", weight: 1.0 },
-        // Cloudflare CDN - HTTP 204
-        { url: "http://1.1.1.1/__down", weight: 1.0 },
-        // Apple 连通性检测
-        { url: "http://captive.apple.com/hotspot-detect.html", weight: 1.0 },
-        // 阿里云 CDN（国内优化）
-        { url: "http://www.taobao.com/favicon.ico", weight: 0.8 }
+        // Google 全球 CDN - 204 响应，无内容
+        "http://www.gstatic.com/generate_204",
+        // Cloudflare CDN - 204 响应
+        "http://cp.cloudflare.com/generate_204",
+        // Apple 连通性检测 - 快速响应
+        "http://captive.apple.com"
     ],
     user_agents: [
         "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1",
@@ -147,7 +146,7 @@ function raceIPFetch(urls, nodeName, type) {
             
             $httpClient.get({ 
                 url, 
-                timeout: SETTINGS.timeout, 
+                timeout: SETTINGS.ipQueryTimeout, 
                 node: nodeName,
                 headers: { "User-Agent": ua }
             }, (err, resp, data) => {
@@ -210,40 +209,27 @@ function promiseAny(promises) {
 }
 
 /**
- * TCP 建连速度测试 - 改进版
- * 使用轻量级 HTTP 端点,减少 DNS/TLS 开销
+ * TCP 建连速度测试 - 优化版
+ * 使用 HEAD 请求到 204 端点,只测 TCP 握手 + HTTP 头,不下载内容
  * 返回详细的延迟统计信息
  */
 async function getTCPLatency(targets, nodeName) {
-    const results = await Promise.allSettled(targets.map(target => {
+    const results = await Promise.allSettled(targets.map(url => {
         const start = Date.now();
         return new Promise((resolve, reject) => {
-            // 使用 GET 而不是 HEAD,某些服务器对 HEAD 响应较慢
-            $httpClient.get({ 
-                url: target.url, 
-                timeout: SETTINGS.timeout, 
-                node: nodeName,
-                headers: {
-                    "User-Agent": getRandomUA(),
-                    // 禁用缓存,确保每次都建立新连接
-                    "Cache-Control": "no-cache",
-                    "Pragma": "no-cache"
-                }
+            // 使用 HEAD 请求,不下载响应体,只测建连速度
+            $httpClient.head({ 
+                url, 
+                timeout: SETTINGS.latencyTimeout, 
+                node: nodeName
             }, (err, resp) => {
                 const latency = Date.now() - start;
                 
-                // 接受 200, 204, 301, 302 等正常响应
-                if (!err && resp && resp.status >= 200 && resp.status < 400) {
-                    resolve({ 
-                        latency, 
-                        weight: target.weight,
-                        url: target.url 
-                    });
+                // 接受 200, 204 等正常响应
+                if (!err && resp && (resp.status === 200 || resp.status === 204)) {
+                    resolve(latency);
                 } else {
-                    reject({
-                        error: err || `HTTP ${resp?.status || 'unknown'}`,
-                        url: target.url
-                    });
+                    reject(err || `HTTP ${resp?.status || 'unknown'}`);
                 }
             });
         });
@@ -260,20 +246,15 @@ async function getTCPLatency(targets, nodeName) {
             min: -1,
             avg: -1,
             max: -1,
-            successRate: 0
+            successRate: 0,
+            count: 0
         };
     }
 
-    // 计算加权延迟
-    const latencies = successfulTests.map(t => t.latency);
-    const minLatency = Math.min(...latencies);
-    const maxLatency = Math.max(...latencies);
-    
-    // 加权平均延迟
-    const totalWeight = successfulTests.reduce((sum, t) => sum + t.weight, 0);
-    const weightedSum = successfulTests.reduce((sum, t) => sum + (t.latency * t.weight), 0);
-    const avgLatency = Math.round(weightedSum / totalWeight);
-    
+    // 计算延迟统计
+    const minLatency = Math.min(...successfulTests);
+    const maxLatency = Math.max(...successfulTests);
+    const avgLatency = Math.round(successfulTests.reduce((a, b) => a + b, 0) / successfulTests.length);
     const successRate = Math.round((successfulTests.length / targets.length) * 100);
 
     return { 
@@ -283,7 +264,8 @@ async function getTCPLatency(targets, nodeName) {
         avg: avgLatency,
         max: maxLatency,
         successRate,
-        details: `${successfulTests.length}/${targets.length} 成功`
+        count: successfulTests.length,
+        total: targets.length
     };
 }
 
@@ -396,15 +378,31 @@ function buildMessage(ipv4, ipv6, geo, ispInfo, latencyInfo, quality) {
     ].filter(Boolean).join(" ");
 
     const latencyLevel = getLatencyLevel(latencyInfo.ms);
-    const latencyDisplay = latencyInfo.ms > 0 
-        ? `${latencyInfo.ms}ms ${latencyLevel.emoji}` 
-        : `超时 ${LATENCY_LEVELS.TIMEOUT.emoji}`;
+    
+    // 构建延迟显示 - 包含详细统计
+    let latencyDisplay;
+    if (latencyInfo.ms > 0) {
+        const detailParts = [];
+        
+        // 主延迟显示
+        detailParts.push(`${latencyInfo.ms}ms ${latencyLevel.emoji}`);
+        
+        // 如果有平均和最大延迟,显示范围
+        if (latencyInfo.avg && latencyInfo.max && 
+            (latencyInfo.avg !== latencyInfo.ms || latencyInfo.max !== latencyInfo.ms)) {
+            detailParts.push(`(平均${latencyInfo.avg}ms, 最大${latencyInfo.max}ms)`);
+        }
+        
+        latencyDisplay = detailParts.join(" ");
+    } else {
+        latencyDisplay = `超时 ${LATENCY_LEVELS.TIMEOUT.emoji}`;
+    }
 
     return [
         `📡 IP:  ${ipDisplay}`,
         `🌍 归属: ${getFlagEmoji(geo)} ${getCountryName(geo)}`,
         `🏢 运营商: ${ispInfo}`,
-        `⚡ 延迟: ${latencyDisplay}`,
+        `⚡ 建连: ${latencyDisplay}`,
         `⭐ 综合评分: ${quality.score} [${quality.grade}]`,
         `━━━━━━━━━━━━━━`,
         `${quality.details}`
