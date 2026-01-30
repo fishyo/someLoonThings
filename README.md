@@ -8,17 +8,17 @@
 
 ### 🔌 插件 (Plugins)
 
-| 资源名称     | 功能描述                             | 一键添加                                                                                                                            | 原始链接 (Raw)                                                                             |
-| :----------- | :----------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------- |
-| **节点信息** | 查询节点 IPv4/IPv6、地理位置及运营商 | [点击添加](loon://import?plugin=https%3A%2F%2Fraw.githubusercontent.com%2Ffishyo%2FsomeLoonThings%2Fmain%2Fplugin%2FnodeIpInfo.lpx) | [复制](https://raw.githubusercontent.com/fishyo/someLoonThings/main/plugin/nodeIpInfo.lpx) |
-| **广告拦截** | 基础广告拦截插件                     | [点击添加](loon://import?plugin=https%3A%2F%2Fraw.githubusercontent.com%2Ffishyo%2FsomeLoonThings%2Fmain%2Fplugin%2Fad-block.lpx)   | [复制](https://raw.githubusercontent.com/fishyo/someLoonThings/main/plugin/ad-block.lpx)   |
+| 资源名称     | 功能描述                             | 一键添加                                                                                                                                       | 原始链接 (Raw)                                                                             |
+| :----------- | :----------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------- |
+| **节点信息** | 查询节点 IPv4/IPv6、地理位置及运营商 | <a href="loon://import?plugin=https%3A%2F%2Fraw.githubusercontent.com%2Ffishyo%2FsomeLoonThings%2Fmain%2Fplugin%2FnodeIpInfo.lpx">点击添加</a> | [复制](https://raw.githubusercontent.com/fishyo/someLoonThings/main/plugin/nodeIpInfo.lpx) |
+| **广告拦截** | 基础广告拦截插件                     | <a href="loon://import?plugin=https%3A%2F%2Fraw.githubusercontent.com%2Ffishyo%2FsomeLoonThings%2Fmain%2Fplugin%2Fad-block.lpx">点击添加</a>   | [复制](https://raw.githubusercontent.com/fishyo/someLoonThings/main/plugin/ad-block.lpx)   |
 
 ### 📜 规则 (Rules)
 
-| 资源名称     | 功能描述         | 一键添加                                                                                                                     | 原始链接 (Raw)                                                                       |
-| :----------- | :--------------- | :--------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------- |
-| **直连规则** | 通用直连规则列表 | [点击添加](loon://import?rules=https%3A%2F%2Fraw.githubusercontent.com%2Ffishyo%2FsomeLoonThings%2Fmain%2Floon%2Fdirect.lsr) | [复制](https://raw.githubusercontent.com/fishyo/someLoonThings/main/loon/direct.lsr) |
-| **代理规则** | 通用代理规则列表 | [点击添加](loon://import?rules=https%3A%2F%2Fraw.githubusercontent.com%2Ffishyo%2FsomeLoonThings%2Fmain%2Floon%2Fproxy.lsr)  | [复制](https://raw.githubusercontent.com/fishyo/someLoonThings/main/loon/proxy.lsr)  |
+| 资源名称     | 功能描述         | 一键添加                                                                                                                                | 原始链接 (Raw)                                                                       |
+| :----------- | :--------------- | :-------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------- |
+| **直连规则** | 通用直连规则列表 | <a href="loon://import?rules=https%3A%2F%2Fraw.githubusercontent.com%2Ffishyo%2FsomeLoonThings%2Fmain%2Floon%2Fdirect.lsr">点击添加</a> | [复制](https://raw.githubusercontent.com/fishyo/someLoonThings/main/loon/direct.lsr) |
+| **代理规则** | 通用代理规则列表 | <a href="loon://import?rules=https%3A%2F%2Fraw.githubusercontent.com%2Ffishyo%2FsomeLoonThings%2Fmain%2Floon%2Fproxy.lsr">点击添加</a>  | [复制](https://raw.githubusercontent.com/fishyo/someLoonThings/main/loon/proxy.lsr)  |
 
 ---
 
