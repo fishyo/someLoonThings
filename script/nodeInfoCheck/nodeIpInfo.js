@@ -74,9 +74,20 @@ async function queryNodeIP() {
 
         // 提取地理位置与运营商信息
         const primaryIP = ipv4 || ipv6;
-        const geo = $utils.geoip(primaryIP) || "未知";
-        const asn = $utils.ipasn(primaryIP) || "";
-        const aso = $utils.ipaso(primaryIP) || "";
+        let geo = $utils.geoip(primaryIP) || "未知";
+        let asn = $utils.ipasn(primaryIP) || "";
+        let aso = $utils.ipaso(primaryIP) || "";
+        
+        // 如果本地查询不到 ISP 信息，尝试在线查询
+        if (!aso && !asn) {
+            console.log("[节点IP查询] 本地ISP信息未知，尝试在线查询...");
+            const onlineInfo = await fetchIPInfo(primaryIP, nodeName);
+            if (onlineInfo) {
+                geo = onlineInfo.countryCode || geo;
+                aso = onlineInfo.isp || aso;
+                asn = onlineInfo.as || asn;
+            }
+        }
         
         const ispInfo = formatISPInfo(aso, asn);
 
@@ -102,6 +113,39 @@ async function queryNodeIP() {
             content: errMsg
         });
     }
+}
+
+/**
+ * 在线查询 IP 详细信息
+ * 使用 ip-api.com 免费 API
+ */
+async function fetchIPInfo(ip, nodeName) {
+    return new Promise((resolve) => {
+        const url = `http://ip-api.com/json/${ip}?fields=status,countryCode,isp,as`;
+        
+        $httpClient.get({
+            url,
+            timeout: 3000,
+            node: nodeName
+        }, (err, resp, data) => {
+            if (err || !resp || resp.status !== 200) {
+                console.log("[节点IP查询] 在线查询失败: " + (err || `HTTP ${resp?.status}`));
+                return resolve(null);
+            }
+            
+            try {
+                const info = JSON.parse(data);
+                if (info.status === 'success') {
+                    console.log("[节点IP查询] 在线查询成功");
+                    return resolve(info);
+                }
+                resolve(null);
+            } catch (e) {
+                console.log("[节点IP查询] 解析在线查询结果失败: " + e.message);
+                resolve(null);
+            }
+        });
+    });
 }
 
 // ============ IP 获取相关 ============
