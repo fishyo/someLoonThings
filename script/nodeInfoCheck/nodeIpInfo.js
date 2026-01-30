@@ -49,7 +49,7 @@ async function queryNodeIP() {
     
     if (!nodeName) {
         const msg = "请在节点列表中选择一个节点运行";
-        showNotification("❌ 错误", "未选择节点", msg);
+        console.log("[节点IP查询] 错误: " + msg);
         return $done({ title: "❌ 错误", content: msg });
     }
 
@@ -82,11 +82,13 @@ async function queryNodeIP() {
 
         // 构建输出
         const message = buildMessage(ipv4, ipv6, geo, ispInfo);
-
-        // 输出结果
         const title = `${getFlagEmoji(geo)} ${nodeName}`;
-        showNotification(title, getCountryName(geo), message);
 
+        // 打印到控制台
+        console.log("[节点IP查询] " + title);
+        console.log(message);
+
+        // 弹窗显示
         $done({
             title: title,
             content: message
@@ -94,9 +96,9 @@ async function queryNodeIP() {
 
     } catch (error) {
         const errMsg = error.message || String(error);
-        showNotification("查询失败", nodeName, errMsg);
+        console.log("[节点IP查询] 查询失败: " + errMsg);
         $done({
-            title: "查询失败",
+            title: "❌ 查询失败",
             content: errMsg
         });
     }
@@ -113,14 +115,15 @@ async function fetchIP(primaryAPI, fallbackAPIs, nodeName, type) {
         return primaryResult;
     }
 
-    // 主 API 失败，尝试备用 API 竞速
+    // 主 API 失败或不支持，尝试备用 API 竞速
     const fallbackPromises = fallbackAPIs.map(url => fetchSingleIP(url, nodeName, type));
     
     try {
         const ip = await promiseAny(fallbackPromises);
         return { success: true, ip, error: null };
     } catch (errors) {
-        const errorMsg = primaryResult.error || "所有 API 请求失败";
+        // 所有 API 都失败，返回不支持
+        const errorMsg = primaryResult.error || `不支持 ${type}`;
         return { success: false, ip: null, error: errorMsg };
     }
 }
@@ -149,13 +152,16 @@ function fetchSingleIP(url, nodeName, type) {
             try {
                 const ip = data.includes('{') ? JSON.parse(data).ip : data.trim();
                 
-                if (!isValidIP(ip, type)) {
-                    return reject({ type: 'validation', message: `Invalid ${type}` });
+                // 如果 IP 无效，可能是节点不支持该协议（如 IPv6）
+                // 返回 success: false 而不是 reject
+                if (!ip || !isValidIP(ip, type)) {
+                    return resolve({ success: false, ip: null, error: `不支持 ${type}` });
                 }
                 
                 resolve({ success: true, ip, error: null });
             } catch (e) {
-                reject({ type: 'parse', message: e.message });
+                // 解析错误也当作不支持
+                resolve({ success: false, ip: null, error: e.message });
             }
         });
     });
@@ -274,13 +280,6 @@ function buildMessage(ipv4, ipv6, geo, ispInfo) {
 }
 
 // ============ 显示相关 ============
-/**
- * 发送通知
- */
-function showNotification(title, subtitle, message) {
-    $notification.post(title, subtitle, message);
-}
-
 /**
  * 获取国家名称
  */
