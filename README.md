@@ -36,18 +36,20 @@
 | --------------- | ---------------------------------- |
 | `bwg.js`        | Bandwagon VPS 状态查询，支持 BoxJS |
 | `nodeIpInfo.js` | 节点 IP 信息查询                   |
-| `9bot`          | 9号出行自动签到                    |
 
 ## 📝 手动导入
 
 ```
 # 插件
 https://raw.githubusercontent.com/fishyo/someLoonThings/main/plugin/ad-block.lpx
+
 https://raw.githubusercontent.com/fishyo/someLoonThings/main/plugin/nodeIpInfo.lpx
 
 # 规则
 https://raw.githubusercontent.com/fishyo/someLoonThings/main/loon/direct.lsr
+
 https://raw.githubusercontent.com/fishyo/someLoonThings/main/loon/proxy.lsr
+
 ```
 
 ## 📄 License
