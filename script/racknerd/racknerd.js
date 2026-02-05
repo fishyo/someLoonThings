@@ -173,36 +173,31 @@ function getServiceInfo() {
         return;
       }
 
-      // 辅助函数：解析 CSV 数据 (Total,Used,Free,Percent)
+      // 辅助函数：解析 CSV 数据 并重新计算百分比
       const parseResource = (str) => {
-          if (!str) return { total: 0, used: 0, free: 0, percent: 0 };
+          if (!str) return { total: 0, used: 0, free: 0, percent: "0.00" };
           
-          // 处理 SolusVM 可能返回的奇怪格式，确保 split 后每一项都去空格
           const parts = str.split(",").map(s => s.trim());
+          let total = 0, used = 0;
           
-          // 如果是 4段: total, used, free, percent
-          if (parts.length >= 4) {
-              return {
-                  total: parseFloat(parts[0]),
-                  used: parseFloat(parts[1]),
-                  free: parseFloat(parts[2]),
-                  percent: parseFloat(parts[3])
-              };
+          if (parts.length >= 2) {
+              total = parseFloat(parts[0]);
+              used = parseFloat(parts[1]);
+          } else {
+              // Fallback
+              used = parseFloat(str) || 0;
           }
-           // 如果是 3段
-           if (parts.length === 3) {
-               const total = parseFloat(parts[0]);
-               const used = parseFloat(parts[1]);
-               return {
-                   total: total,
-                   used: used,
-                   free: parseFloat(parts[2]),
-                   percent: total > 0 ? ((used / total) * 100).toFixed(2) : 0
-               };
-           }
 
-           // Fallback/Legacy
-           return { total: 0, used: parseFloat(str) || 0, free: 0, percent: 0 };
+          let percent = 0;
+          if (total > 0) {
+              percent = (used / total) * 100;
+          }
+
+          return {
+              total: total,
+              used: used,
+              percent: percent.toFixed(2) // 强制保留2位小数
+          };
       };
 
       // 格式化字节
@@ -215,10 +210,10 @@ function getServiceInfo() {
           return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
       };
 
-      // 提取带宽信息 (仅带宽是有效的)
+      // 提取带宽信息
       const bwInfo = parseResource(xmlData.bw);
 
-      // 处理 ipaddress (可能是 CSV)
+      // 处理 ipaddress
       const ipAddress = (xmlData.ipaddress || xmlData.ip_address || "").split(',')[0];
 
       // 状态
@@ -236,25 +231,32 @@ function getServiceInfo() {
 
       // 准备发送通知函数
       const sendNotify = (location) => {
-          let statusMessage = `Host: ${xmlData.hostname || "N/A"}\n`;
+          let statusMessage = ``;
           
+          // 1. IP 地址
           if (ipAddress) {
-              statusMessage += `IP: ${ipAddress}\n`; 
-          }
-          
-          statusMessage += `Status: ${vmStatusIcon} ${vmStatus}\n`;
-          
-          // 如果有 External Location 则显示
-          if (location) {
-              statusMessage += `Location: ${location}\n`;
-          } else if (xmlData.node && xmlData.node !== "N/A" && xmlData.node !== "") {
-              statusMessage += `Location: ${xmlData.node}\n`;
+              statusMessage += `IP 地址: ${ipAddress}\n`; 
           }
 
-          // Bandwidth
+          // 2. 带宽使用 (仿 bwg 格式: 当前使用: x / y)
           if (bwInfo.total > 0) {
-              statusMessage += `\n带宽: ${formatBytes(bwInfo.used)} / ${formatBytes(bwInfo.total)}\n`;
-              statusMessage += `${getProgressBar(bwInfo.percent)} ${bwInfo.percent}%\n`;
+              statusMessage += `当前使用: ${formatBytes(bwInfo.used)} / ${formatBytes(bwInfo.total)}\n`;
+              statusMessage += `使用进度: ${getProgressBar(bwInfo.percent)} ${bwInfo.percent}%\n`;
+          }
+
+          // 3. 节点位置
+          if (location) {
+              statusMessage += `节点位置: ${location}\n`;
+          } else if (xmlData.node && xmlData.node !== "N/A" && xmlData.node !== "") {
+              statusMessage += `节点位置: ${xmlData.node}\n`;
+          }
+
+          // 4. 运行状态 (bwg没有，但RN有)
+          statusMessage += `运行状态: ${vmStatusIcon} ${vmStatus}\n`;
+
+          // 5. 主机名 (可选)
+          if (xmlData.hostname && xmlData.hostname !== "N/A") {
+             statusMessage += `主机名称: ${xmlData.hostname}\n`;
           }
 
           $notification.post("🖥️ RackNerd 服务器状态", "", statusMessage);
