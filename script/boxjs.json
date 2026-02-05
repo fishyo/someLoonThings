@@ -1,0 +1,84 @@
+{
+  "id": "fishyo",
+  "name": "someLoonThings",
+  "author": "@fishyo",
+  "icon": "🖲️",
+  "repo": "https://github.com/fishyo/someLoonThings",
+  "apps": [
+    {
+      "id": "bandwagon",
+      "name": "Bandwagon 服务器状态",
+      "descs_html": [
+        "查询 Bandwagon VPS 服务器状态、带宽使用情况",
+        "支持实时查询带宽使用、IP地址、重置时间等信息"
+      ],
+      "keys": [
+        "bandwagon.apiKey",
+        "bandwagon.veid"
+      ],
+      "settings": [
+        {
+          "id": "bandwagon.apiKey",
+          "name": "API Key",
+          "val": "",
+          "type": "text",
+          "placeholder": "输入你的 Bandwagon API Key",
+          "desc": "从 Bandwagon 面板获取的 API 密钥"
+        },
+        {
+          "id": "bandwagon.veid",
+          "name": "VEID",
+          "val": "",
+          "type": "text",
+          "placeholder": "输入你的 VEID",
+          "desc": "VPS 的唯一标识符"
+        }
+      ],
+      "author": "@fishyo",
+      "repo": "https://github.com/fishyo/someLoonThings",
+      "script": "https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/bandwagon/bwg.js",
+      "icons": [
+        "🖲️",
+        "🖲️"
+      ]
+    },
+    {
+      "id": "racknerd",
+      "name": "RackNerd 服务器状态",
+      "descs_html": [
+        "查询 RackNerd VPS 服务器状态、带宽使用情况",
+        "支持实时查询带宽、内存、硬盘使用、IP地址等信息",
+        "使用 SolusVM API 进行数据获取"
+      ],
+      "keys": [
+        "racknerd.apiKey",
+        "racknerd.apiHash"
+      ],
+      "settings": [
+        {
+          "id": "racknerd.apiKey",
+          "name": "API Key",
+          "val": "",
+          "type": "text",
+          "placeholder": "输入你的 API Key",
+          "desc": "从 RackNerd 控制面板获取的 API Key"
+        },
+        {
+          "id": "racknerd.apiHash",
+          "name": "API Hash",
+          "val": "",
+          "type": "text",
+          "placeholder": "输入你的 API Hash",
+          "desc": "从 RackNerd 控制面板获取的 API Hash"
+        }
+      ],
+      "author": "@fishyo",
+      "repo": "https://github.com/fishyo/someLoonThings",
+      "script": "https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/racknerd/racknerd.js",
+      "icons": [
+        "🖥️",
+        "🖥️"
+      ]
+    }
+  ]
+}

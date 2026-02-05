@@ -17,7 +17,7 @@ RackNerd VPS 状态查询脚本 (基于 SolusVM API)。
    添加订阅 URL:
 
    ```text
-   https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/racknerd/racknerd.boxjs.json
+   https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/boxjs.json
    ```
 
 3. **填写配置**  
