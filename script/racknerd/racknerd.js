@@ -100,10 +100,12 @@ function parseXML(xmlString) {
 }
 
 function getServiceInfo() {
+  console.log("▶️ Starting RackNerd Service Info Query...");
   const config = getConfig();
 
   // 验证配置
   if (!config.apiKey || !config.apiHash) {
+    console.log("❌ Configuration missing");
     $notification.post(
       "⚠️ 配置缺失",
       "",
@@ -123,21 +125,27 @@ function getServiceInfo() {
     }
   };
 
-  console.log("Request API:", apiUrl);
+  // Log masked URL
+  const maskedUrl = apiUrl.replace(/key=([^&]+)/, "key=****").replace(/hash=([^&]+)/, "hash=****");
+  console.log(`Request API: ${maskedUrl}`);
 
   $httpClient.get(request, function (error, response, data) {
     if (error) {
-      console.error("Request Error:", error);
+      console.error("❌ Request Error:", error);
       $notification.post("❌ 查询失败", "", error.message);
       $done();
       return;
     }
 
+    console.log(`✅ Response Status: ${response.status}`);
+    // console.log("Response Body:", data); // Uncomment for debugging
+
     try {
       const xmlData = parseXML(data);
-      console.log("Parsed Data:", JSON.stringify(xmlData));
+      console.log("Parsed Data:", JSON.stringify(xmlData, null, 2));
 
       if (xmlData.status === "error") {
+        console.warn("⚠️ API Returned Error:", xmlData.statusmsg);
         $notification.post("❌ API Error", "", xmlData.statusmsg);
         $done();
         return;
@@ -198,6 +206,8 @@ function getServiceInfo() {
           if (xmlData.hostname && xmlData.hostname !== "N/A") {
              msg += `主机名称: ${xmlData.hostname}\n`;
           }
+          
+          console.log("🔔 Sending Notification...");
           $notification.post("🖥️ RackNerd Status", "", msg);
           $done();
       };
@@ -205,6 +215,7 @@ function getServiceInfo() {
       // IP 位置查询
       if (ipAddress) {
           const ipApiUrl = `http://ip-api.com/json/${ipAddress}?lang=en`;
+          console.log(`Querying IP Location for: ${ipAddress}`);
           $httpClient.get({ url: ipApiUrl }, (err, resp, body) => {
               let location = null;
               if (!err && body) {
@@ -212,10 +223,15 @@ function getServiceInfo() {
                       const ipData = JSON.parse(body);
                       if (ipData && ipData.status === 'success') {
                           location = `${ipData.countryCode} ${ipData.regionName}`; 
+                          console.log(`IP Location Found: ${location}`);
+                      } else {
+                        console.warn("IP Location Query Failed:", ipData);
                       }
                   } catch (e) {
                       console.warn("Location Parse Error:", e);
                   }
+              } else {
+                 console.error("IP Location Request Error:", err);
               }
               sendNotify(location);
           });
@@ -224,7 +240,7 @@ function getServiceInfo() {
       }
 
     } catch (e) {
-      console.error("Parse Error:", e);
+      console.error("❌ Parse Error:", e);
       $notification.post("❌ 解析错误", "", e.message);
       $done();
     }

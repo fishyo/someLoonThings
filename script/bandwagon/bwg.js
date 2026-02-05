@@ -69,7 +69,8 @@ function getConfig() {
     apiKey = $prefs.valueForKey("bandwagon.apiKey") || "";
     veid = $prefs.valueForKey("bandwagon.veid") || "";
   }
-  console.log(`Config Read - Key Len: ${apiKey.length}, VEID: ${veid}`);
+  const maskedVeid = veid ? veid.replace(/^(.{2})(.*)(.{1})$/, "$1****$3") : "N/A";
+  console.log(`Config Read - Key Len: ${apiKey.length}, VEID: ${maskedVeid}`);
   return { apiKey, veid };
 }
 
@@ -85,10 +86,12 @@ function saveConfig(apiKey, veid) {
 }
 
 function getServiceInfo() {
+  console.log("▶️ Starting Bandwagon Service Info Query...");
   const config = getConfig();
 
   // 验证配置
   if (!config.apiKey || !config.veid) {
+    console.log("❌ Configuration missing");
     $notification.post(
       "⚠️ 配置缺失",
       "",
@@ -101,21 +104,27 @@ function getServiceInfo() {
   const apiUrl = `https://api.64clouds.com/v1/getServiceInfo?veid=${config.veid}&api_key=${config.apiKey}`;
   const request = { url: apiUrl, method: "GET" };
 
-  console.log("Request API:", apiUrl);
+  // Log masked URL
+  const maskedUrl = apiUrl.replace(/veid=([^&]+)/, "veid=****").replace(/api_key=([^&]+)/, "api_key=****");
+  console.log(`Request API: ${maskedUrl}`);
 
   $httpClient.get(request, function (error, response, data) {
     if (error) {
-      console.error("Request Error:", error);
+      console.error("❌ Request Error:", error);
       $notification.post("❌ 查询失败", "", error.message);
       $done();
       return;
     }
 
+    console.log(`✅ Response Status: ${response.status}`);
+    // console.log("Response Body:", data); // Uncomment for debugging
+
     try {
       const jsonData = JSON.parse(data);
-      console.log("Parsed Data:", jsonData);
+      console.log("Parsed Data:", JSON.stringify(jsonData, null, 2));
 
       if (jsonData.error) {
+        console.warn("⚠️ API Returned Error:", jsonData.error);
         $notification.post("❌ API Error", "", jsonData.error);
         $done();
         return;
@@ -146,10 +155,11 @@ function getServiceInfo() {
       msg += `节点位置: ${jsonData.node_location}\n`;
       msg += `带宽倍数: ${monthlyDataMultiplier}x\n`;
 
+      console.log("🔔 Sending Notification...");
       $notification.post("🖲️ Bandwagon Status", "", msg);
       $done();
     } catch (e) {
-      console.error("Parse Error:", e);
+      console.error("❌ Parse Error:", e);
       $notification.post("❌ 解析错误", "", e.message);
       $done();
     }
