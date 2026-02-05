@@ -158,7 +158,7 @@ function getServiceInfo() {
     }
 
     try {
-      console.log("收到 API 响应数据(Raw):", data); // 打印原始数据以便调试
+      // console.log("收到 API 响应数据(Raw):", data); 
       const xmlData = parseXML(data);
       console.log("解析后的服务信息:", JSON.stringify(xmlData));
 
@@ -189,11 +189,8 @@ function getServiceInfo() {
                   percent: parseFloat(parts[3])
               };
           }
-           // 如果是 3段 (有时 SolusVM 返回 total,used,free 无 percent? 或者 total,used,percent?)
-           // 假设标准是 total, used, free, percent. 
-           // 如果返回不一样，这里做一个 naive fallback
+           // 如果是 3段
            if (parts.length === 3) {
-               // 猜测: total, used, free
                const total = parseFloat(parts[0]);
                const used = parseFloat(parts[1]);
                return {
@@ -218,50 +215,77 @@ function getServiceInfo() {
           return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
       };
 
-      // 提取信息
-      const memInfo = parseResource(xmlData.mem);
-      const hddInfo = parseResource(xmlData.hdd);
+      // 提取带宽信息 (仅带宽是有效的)
       const bwInfo = parseResource(xmlData.bw);
 
       // 处理 ipaddress (可能是 CSV)
-      const ipAddress = xmlData.ipaddress || xmlData.ip_address || "N/A";
+      const ipAddress = (xmlData.ipaddress || xmlData.ip_address || "").split(',')[0];
 
       // 状态
       const vmStatus = xmlData.vmstat || "Unknown";
       const vmStatusIcon = vmStatus.toLowerCase() === "online" ? "🟢" : "🔴";
-
-      console.log(`Memory: ${JSON.stringify(memInfo)}`);
-      console.log(`HDD: ${JSON.stringify(hddInfo)}`);
-      console.log(`Bandwidth: ${JSON.stringify(bwInfo)}`);
 
       // 计算进度条
       const getProgressBar = (percent) => {
         const progressBarLength = 10;
         const p = parseFloat(percent) || 0;
         const filledLength = Math.round(progressBarLength * (p / 100));
-         // 防止越界
         const validFilled = Math.min(Math.max(filledLength, 0), progressBarLength);
          return "█".repeat(validFilled) + "░".repeat(progressBarLength - validFilled);
       };
 
-      // 构建消息
-      let statusMessage = `Host: ${xmlData.hostname || "N/A"}\n`;
-      statusMessage += `IP: ${ipAddress.split(',')[0]} (Check logs for all)\n`; // 仅显示第一个IP防止过长
-      statusMessage += `Status: ${vmStatusIcon} ${vmStatus}\n`;
-      statusMessage += `Location: ${xmlData.node || "N/A"}\n`; 
-      
-      statusMessage += `\n带宽: ${formatBytes(bwInfo.used)} / ${formatBytes(bwInfo.total)}\n`;
-      statusMessage += `${getProgressBar(bwInfo.percent)} ${bwInfo.percent}%\n`;
+      // 准备发送通知函数
+      const sendNotify = (location) => {
+          let statusMessage = `Host: ${xmlData.hostname || "N/A"}\n`;
+          
+          if (ipAddress) {
+              statusMessage += `IP: ${ipAddress}\n`; 
+          }
+          
+          statusMessage += `Status: ${vmStatusIcon} ${vmStatus}\n`;
+          
+          // 如果有 External Location 则显示
+          if (location) {
+              statusMessage += `Location: ${location}\n`;
+          } else if (xmlData.node && xmlData.node !== "N/A" && xmlData.node !== "") {
+              statusMessage += `Location: ${xmlData.node}\n`;
+          }
 
-      statusMessage += `\n内存: ${formatBytes(memInfo.used)} / ${formatBytes(memInfo.total)}\n`;
-      statusMessage += `${getProgressBar(memInfo.percent)} ${memInfo.percent}%\n`;
+          // Bandwidth
+          if (bwInfo.total > 0) {
+              statusMessage += `\n带宽: ${formatBytes(bwInfo.used)} / ${formatBytes(bwInfo.total)}\n`;
+              statusMessage += `${getProgressBar(bwInfo.percent)} ${bwInfo.percent}%\n`;
+          }
 
-      statusMessage += `\n硬盘: ${formatBytes(hddInfo.used)} / ${formatBytes(hddInfo.total)}\n`;
-      statusMessage += `${getProgressBar(hddInfo.percent)} ${hddInfo.percent}%\n`;
-      
-      $notification.post("🖥️ RackNerd 服务器状态", "", statusMessage);
-      console.log("发送通知:\n", statusMessage);
-      $done();
+          $notification.post("🖥️ RackNerd 服务器状态", "", statusMessage);
+          console.log("发送通知内容:\n" + statusMessage); 
+          $done();
+      };
+
+      // 如果有 IP，尝试查询位置
+      if (ipAddress) {
+          console.log("正在查询 IP 位置:", ipAddress);
+          const ipApiUrl = `http://ip-api.com/json/${ipAddress}?lang=en`;
+          $httpClient.get({ url: ipApiUrl }, (err, resp, body) => {
+              let location = null;
+              if (!err && body) {
+                  try {
+                      const ipData = JSON.parse(body);
+                      if (ipData && ipData.status === 'success') {
+                          // 显示国家代码和州/大区 (例如: US California)
+                          location = `${ipData.countryCode} ${ipData.regionName}`; 
+                          console.log("IP 位置查询成功:", location);
+                      }
+                  } catch (e) {
+                      console.warn("IP 位置解析失败:", e);
+                  }
+              }
+              sendNotify(location);
+          });
+      } else {
+          sendNotify(null);
+      }
+
     } catch (e) {
       console.error("解析响应时出错:", e);
       $notification.post("❌ 解析错误", "", e.message);
