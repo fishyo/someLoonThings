@@ -1,4 +1,4 @@
-// 跨平台兼容适配
+// 跨平台适配
 const $ = {
   isLoon: typeof $loon !== "undefined",
   isQuanX: typeof $task !== "undefined",
@@ -35,15 +35,11 @@ const $ = {
   },
 };
 
-// BoxJS 配置模板
+// BoxJS Config
 const boxjsConfig = {
-  // 应用图标
   icon: "🖥️",
-  // 应用名称
-  title: "RackNerd 服务器状态",
-  // 应用描述
-  desc: "RackNerd VPS 服务器状态查询",
-  // 应用操作
+  title: "RackNerd Status",
+  desc: "RackNerd VPS 状态查询",
   settings: [
     {
       id: "racknerd.apiKey",
@@ -51,7 +47,7 @@ const boxjsConfig = {
       val: "",
       type: "text",
       desc: "RackNerd API Key",
-      placeholder: "输入你的 API Key",
+      placeholder: "输入 API Key",
     },
     {
       id: "racknerd.apiHash",
@@ -59,66 +55,47 @@ const boxjsConfig = {
       val: "",
       type: "text",
       desc: "RackNerd API Hash",
-      placeholder: "输入你的 API Hash",
+      placeholder: "输入 API Hash",
     },
   ],
 };
 
-// 获取存储的配置
+// 获取配置
 function getConfig() {
-  // 支持多种存储方式：$persistentStore (Loon/Surge), $prefs (QuanX)
   let apiKey = "";
   let apiHash = "";
 
   if (typeof $persistentStore !== "undefined") {
-    // Loon/Surge
     apiKey = $persistentStore.read("racknerd.apiKey") || "";
     apiHash = $persistentStore.read("racknerd.apiHash") || "";
   } else if (typeof $prefs !== "undefined") {
-    // QuantumultX
     apiKey = $prefs.valueForKey("racknerd.apiKey") || "";
     apiHash = $prefs.valueForKey("racknerd.apiHash") || "";
   }
 
-  console.log(
-    "读取配置 - API Key 长度:",
-    apiKey.length,
-    "API Hash 长度:",
-    apiHash.length,
-  );
-
-  return {
-    apiKey: apiKey,
-    apiHash: apiHash,
-  };
+  console.log(`Config Read - Key Len: ${apiKey.length}, Hash Len: ${apiHash.length}`);
+  return { apiKey, apiHash };
 }
 
-// 保存配置到 BoxJS
+// 保存配置
 function saveConfig(apiKey, apiHash) {
   if (typeof $persistentStore !== "undefined") {
-    // Loon/Surge
     $persistentStore.write(apiKey, "racknerd.apiKey");
     $persistentStore.write(apiHash, "racknerd.apiHash");
   } else if (typeof $prefs !== "undefined") {
-    // QuantumultX
     $prefs.setValueForKey(apiKey, "racknerd.apiKey");
     $prefs.setValueForKey(apiHash, "racknerd.apiHash");
   }
-  console.log("配置已保存到 BoxJS");
 }
 
-// 解析 XML 响应
+// 解析 XML
 function parseXML(xmlString) {
   const result = {};
-  
-  // 匹配所有标签 (支持跨行和奇怪的格式)
   const regex = /<(\w+)>(.*?)<\/\1>/gs;
   let match;
   while ((match = regex.exec(xmlString)) !== null) {
-      // 去除首尾空白
     result[match[1]] = match[2].trim();
   }
-
   return result;
 }
 
@@ -128,17 +105,16 @@ function getServiceInfo() {
   // 验证配置
   if (!config.apiKey || !config.apiHash) {
     $notification.post(
-      "⚠️ 配置不完整",
+      "⚠️ 配置缺失",
       "",
-      "请在 BoxJS 中配置 API Key 和 API Hash\n访问: http://boxjs.com",
+      "请在 BoxJS 中配置 RackNerd API Key 和 Hash"
     );
     $done();
     return;
   }
 
-  // 构建 SolusVM API URL
+  // SolusVM API
   const apiUrl = `https://nerdvm.racknerd.com/api/client/command.php?action=info&key=${config.apiKey}&hash=${config.apiHash}&ipaddr=true&hdd=true&mem=true&bw=true&status=true`;
-
   const request = {
     url: apiUrl,
     method: "GET",
@@ -147,126 +123,87 @@ function getServiceInfo() {
     }
   };
 
-  console.log("发送请求到 API:", apiUrl);
+  console.log("Request API:", apiUrl);
 
   $httpClient.get(request, function (error, response, data) {
     if (error) {
-      console.error("获取服务信息时出错:", error);
-      $notification.post("❌ 服务信息查询失败", "", error.message);
+      console.error("Request Error:", error);
+      $notification.post("❌ 查询失败", "", error.message);
       $done();
       return;
     }
 
     try {
-      // console.log("收到 API 响应数据(Raw):", data); 
       const xmlData = parseXML(data);
-      console.log("解析后的服务信息:", JSON.stringify(xmlData));
+      console.log("Parsed Data:", JSON.stringify(xmlData));
 
-      // 检查 API 响应是否有错误
       if (xmlData.status === "error") {
-        $notification.post(
-          "❌ API 错误",
-          "",
-          xmlData.statusmsg + "\n请检查 API Key 和 Hash 是否正确",
-        );
+        $notification.post("❌ API Error", "", xmlData.statusmsg);
         $done();
         return;
       }
 
-      // 辅助函数：解析 CSV 数据 并重新计算百分比
+      // 资源计算
       const parseResource = (str) => {
           if (!str) return { total: 0, used: 0, free: 0, percent: "0.00" };
-          
           const parts = str.split(",").map(s => s.trim());
           let total = 0, used = 0;
-          
           if (parts.length >= 2) {
               total = parseFloat(parts[0]);
               used = parseFloat(parts[1]);
           } else {
-              // Fallback
               used = parseFloat(str) || 0;
           }
-
-          let percent = 0;
-          if (total > 0) {
-              percent = (used / total) * 100;
-          }
-
-          return {
-              total: total,
-              used: used,
-              percent: percent.toFixed(2) // 强制保留2位小数
-          };
+          let percent = total > 0 ? (used / total) * 100 : 0;
+          return { total: total, used: used, percent: percent.toFixed(2) };
       };
 
-      // 格式化字节
+      // 格式化
       const formatBytes = (bytes, decimals = 2) => {
           if (bytes === 0 || isNaN(bytes)) return '0 B';
           const k = 1024;
-          const dm = decimals < 0 ? 0 : decimals;
-          const sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
           const i = Math.floor(Math.log(bytes) / Math.log(k));
-          return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+          const sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+          return parseFloat((bytes / Math.pow(k, i)).toFixed(Math.max(0, decimals))) + ' ' + sizes[i];
       };
 
-      // 提取带宽信息
       const bwInfo = parseResource(xmlData.bw);
-
-      // 处理 ipaddress
       const ipAddress = (xmlData.ipaddress || xmlData.ip_address || "").split(',')[0];
-
-      // 状态
       const vmStatus = xmlData.vmstat || "Unknown";
       const vmStatusIcon = vmStatus.toLowerCase() === "online" ? "🟢" : "🔴";
 
-      // 计算进度条
+      // 进度条
       const getProgressBar = (percent) => {
-        const progressBarLength = 10;
+        const len = 10;
         const p = parseFloat(percent) || 0;
-        const filledLength = Math.round(progressBarLength * (p / 100));
-        const validFilled = Math.min(Math.max(filledLength, 0), progressBarLength);
-         return "█".repeat(validFilled) + "░".repeat(progressBarLength - validFilled);
+        const filled = Math.round(len * (p / 100));
+        const valid = Math.min(Math.max(filled, 0), len);
+        return "█".repeat(valid) + "░".repeat(len - valid);
       };
 
-      // 准备发送通知函数
+      // 发送通知
       const sendNotify = (location) => {
-          let statusMessage = ``;
-          
-          // 1. IP 地址
-          if (ipAddress) {
-              statusMessage += `IP 地址: ${ipAddress}\n`; 
-          }
-
-          // 2. 带宽使用 (仿 bwg 格式: 当前使用: x / y)
+          let msg = ``;
+          if (ipAddress) msg += `IP 地址: ${ipAddress}\n`; 
           if (bwInfo.total > 0) {
-              statusMessage += `当前使用: ${formatBytes(bwInfo.used)} / ${formatBytes(bwInfo.total)}\n`;
-              statusMessage += `使用进度: ${getProgressBar(bwInfo.percent)} ${bwInfo.percent}%\n`;
+              msg += `当前使用: ${formatBytes(bwInfo.used)} / ${formatBytes(bwInfo.total)}\n`;
+              msg += `使用进度: ${getProgressBar(bwInfo.percent)} ${bwInfo.percent}%\n`;
           }
-
-          // 3. 节点位置
           if (location) {
-              statusMessage += `节点位置: ${location}\n`;
+              msg += `节点位置: ${location}\n`;
           } else if (xmlData.node && xmlData.node !== "N/A" && xmlData.node !== "") {
-              statusMessage += `节点位置: ${xmlData.node}\n`;
+              msg += `节点位置: ${xmlData.node}\n`;
           }
-
-          // 4. 运行状态 (bwg没有，但RN有)
-          statusMessage += `运行状态: ${vmStatusIcon} ${vmStatus}\n`;
-
-          // 5. 主机名 (可选)
+          msg += `运行状态: ${vmStatusIcon} ${vmStatus}\n`;
           if (xmlData.hostname && xmlData.hostname !== "N/A") {
-             statusMessage += `主机名称: ${xmlData.hostname}\n`;
+             msg += `主机名称: ${xmlData.hostname}\n`;
           }
-
-          $notification.post("🖥️ RackNerd 服务器状态", "", statusMessage);
-          console.log("发送通知内容:\n" + statusMessage); 
+          $notification.post("🖥️ RackNerd Status", "", msg);
           $done();
       };
 
-      // 如果有 IP，尝试查询位置
+      // IP 位置查询
       if (ipAddress) {
-          console.log("正在查询 IP 位置:", ipAddress);
           const ipApiUrl = `http://ip-api.com/json/${ipAddress}?lang=en`;
           $httpClient.get({ url: ipApiUrl }, (err, resp, body) => {
               let location = null;
@@ -274,12 +211,10 @@ function getServiceInfo() {
                   try {
                       const ipData = JSON.parse(body);
                       if (ipData && ipData.status === 'success') {
-                          // 显示国家代码和州/大区 (例如: US California)
                           location = `${ipData.countryCode} ${ipData.regionName}`; 
-                          console.log("IP 位置查询成功:", location);
                       }
                   } catch (e) {
-                      console.warn("IP 位置解析失败:", e);
+                      console.warn("Location Parse Error:", e);
                   }
               }
               sendNotify(location);
@@ -289,42 +224,27 @@ function getServiceInfo() {
       }
 
     } catch (e) {
-      console.error("解析响应时出错:", e);
+      console.error("Parse Error:", e);
       $notification.post("❌ 解析错误", "", e.message);
       $done();
     }
   });
 }
 
-// 主函数
 function main() {
-  // 如果是在配置界面，显示配置选项
-  if (
-    typeof $environment !== "undefined" &&
-    $environment.platform === "boxjs"
-  ) {
-    // 在 BoxJS 中显示配置界面
-    showBoxJSConfig();
+  if (typeof $environment !== "undefined" && $environment.platform === "boxjs") {
+    const config = getConfig();
+    $done({
+        title: boxjsConfig.title,
+        icon: boxjsConfig.icon,
+        items: boxjsConfig.settings.map((item) => ({
+        ...item,
+        val: item.id === "racknerd.apiKey" ? config.apiKey : config.apiHash,
+        })),
+    });
   } else {
-    // 运行脚本
     getServiceInfo();
   }
 }
 
-function showBoxJSConfig() {
-  const config = getConfig();
-  const configUI = {
-    title: boxjsConfig.title,
-    icon: boxjsConfig.icon,
-    items: boxjsConfig.settings.map((item) => ({
-      ...item,
-      val: item.id === "racknerd.apiKey" ? config.apiKey : config.apiHash,
-    })),
-  };
-
-  console.log("显示 BoxJS 配置界面:", JSON.stringify(configUI));
-  $done();
-}
-
-// 执行主函数
 main();

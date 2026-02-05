@@ -25,10 +25,13 @@
 
 ## 📜 脚本说明
 
-| 脚本            | 说明                               | 链接                                                                                      |
-| --------------- | ---------------------------------- | ----------------------------------------------------------------------------------------- |
-| `bwg.js`        | Bandwagon VPS 状态查询，支持 BoxJS | [复制](https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/bwg.js)        |
-| `nodeIpInfo.js` | 节点 IP 信息查询                   | [复制](https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/nodeIpInfo.js) |
+**BoxJS 订阅**: `https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/boxjs.json`
+
+| 脚本            | 说明                               | 链接                                                                                                    |
+| --------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `bwg.js`        | Bandwagon VPS 状态查询，支持 BoxJS | [复制](https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/bandwagon/bwg.js)            |
+| `racknerd.js`   | RackNerd VPS 状态查询，支持 BoxJS  | [复制](https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/racknerd/racknerd.js)        |
+| `nodeIpInfo.js` | 节点 IP 信息查询                   | [复制](https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/nodeInfoCheck/nodeIpInfo.js) |
 
 ## 📄 License
 
