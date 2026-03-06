@@ -17,3 +17,11 @@ payload:
 
   # nxtrace
   - DOMAIN-SUFFIX,nxtrace.org
+
+  # paypal
+  - DOMAIN-SUFFIX,paypal.com
+  - DOMAIN-SUFFIX,paypalobjects.com
+  - DOMAIN-SUFFIX,paypalcorp.com
+  - DOMAIN-KEYWORD,paypal
+
+
