@@ -1,0 +1,13 @@
+#!name=AI服务访问检测
+#!desc=检测当前节点对主流 AI 服务 (ChatGPT, Claude, Gemini, Copilot) 的访问能力。
+#!author=Antigravity
+#!icon=https://raw.githubusercontent.com/fishyo/someLoonThings/main/icons/ai.png
+#!date=2024-03-12 14:10
+
+[Script]
+# 面板脚本，每60秒自动更新或点击手动更新
+generic-ai-check = type=generic,script-path=https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/aiCheck/ai_check.js,tag=AI服务检测,img-url=brain.head.profile,enabled=true
+
+[Panel]
+# 首页卡片显示
+AI检测 = script-path=https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/aiCheck/ai_check.js,tag=AI服务状态,content=正在检测...,update-interval=60
