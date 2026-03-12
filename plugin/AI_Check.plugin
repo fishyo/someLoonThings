@@ -1,9 +1,0 @@
-#!name = AI服务检测
-#!desc = 检测当前节点对 ChatGPT, Claude, Gemini, Copilot 的访问能力。运行后在通知中心查看结果。
-#!author = Antigravity
-#!icon = https://raw.githubusercontent.com/fishyo/someLoonThings/main/icons/ai.png
-#!date = 2024-03-12 14:27
-
-[Script]
-# 添加为通用脚本，在 Loon 插件列表或脚本列表中手动点击运行
-AI_Check = type=generic,script-path=https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/aiCheck/ai_check.js,tag=AI服务检测,img-url=https://raw.githubusercontent.com/fishyo/someLoonThings/main/icons/ai.png,enabled=true

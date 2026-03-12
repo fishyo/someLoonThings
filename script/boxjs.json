@@ -79,34 +79,6 @@
         "🖥️",
         "🖥️"
       ]
-    },
-    {
-      "id": "aiCheck",
-      "name": "AI 服务可用性检测",
-      "descs_html": [
-        "检测当前节点对主流 AI 服务的访问能力",
-        "支持 ChatGPT, Claude, Gemini, Copilot"
-      ],
-      "keys": [
-        "aiCheck.timeout"
-      ],
-      "settings": [
-        {
-          "id": "aiCheck.timeout",
-          "name": "检测超时 (ms)",
-          "val": "5000",
-          "type": "number",
-          "placeholder": "5000",
-          "desc": "网络请求的超时时间，单位毫秒"
-        }
-      ],
-      "author": "@fishyo",
-      "repo": "https://github.com/fishyo/someLoonThings",
-      "script": "https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/aiCheck/ai_check.js",
-      "icons": [
-        "https://raw.githubusercontent.com/fishyo/someLoonThings/main/icons/ai.png",
-        "https://raw.githubusercontent.com/fishyo/someLoonThings/main/icons/ai.png"
-      ]
     }
   ]
 }
