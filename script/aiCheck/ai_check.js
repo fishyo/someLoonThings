@@ -69,7 +69,9 @@ async function checkGemini() {
         $httpClient.get(options, (error, response, data) => {
             if (error) {
                 resolve({ name: "Gemini", status: "❌ Error", color: "#FF3B30" });
-            } else if (response.status === 200 && !data.includes("isn't available")) {
+            } else if (data && (data.includes("isn't available") || data.includes("unsupported_country_blocked"))) {
+                resolve({ name: "Gemini", status: "🚫 Region Block", color: "#FF9500" });
+            } else if (response.status === 200) {
                 resolve({ name: "Gemini", status: "✅ Available", color: "#34C759" });
             } else {
                 resolve({ name: "Gemini", status: "🚫 Unavailable", color: "#FF9500" });
@@ -127,20 +129,19 @@ async function main() {
         checkCopilot()
     ]);
 
+    const title = `AI 服务连通性检测`;
+    const subtitle = `节点地区: ${ipInfo.loc} (${ipInfo.ip})`;
     const content = [
-        `📍 Node Region: ${ipInfo.loc} (${ipInfo.ip})`,
         `🤖 ${openai.name}: ${openai.status}`,
         `🎭 ${claude.name}: ${claude.status}`,
         `✨ ${gemini.name}: ${gemini.status}`,
         `💻 ${copilot.name}: ${copilot.status}`
     ].join('\n');
 
-    $done({
-        title: "AI Service Availability",
-        content: content,
-        icon: "brain.head.profile",
-        "icon-color": "#5AC8FA"
-    });
+    // 使用 Loon 标准通知输出结果
+    $notification.post(title, subtitle, content);
+    
+    $done();
 }
 
 main();
