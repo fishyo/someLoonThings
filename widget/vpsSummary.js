@@ -8,7 +8,6 @@
  */
 
 export default async function (ctx) {
-  const TIMEOUT = 10000;
 
   // 从 BoxJS persistentStore 读取（降级兜底）
   const store = (key) => {
@@ -26,15 +25,15 @@ export default async function (ctx) {
 
     try {
       const url = `https://api.64clouds.com/v1/getServiceInfo?veid=${veid}&api_key=${apiKey}`;
-      const resp = await ctx.http.get({ url, timeout: TIMEOUT });
-      const d = typeof resp.body === "string" ? JSON.parse(resp.body) : resp.body;
+      // 按 Egern 文档示例：只传 URL 字符串，用 resp.json() 解析
+      const resp = await ctx.http.get(url);
+      const d = await resp.json();
 
       if (d.error) return { label: "Bandwagon", err: String(d.error) };
 
       const counter = d.data_counter || 0;
       const plan = d.plan_monthly_data || 1;
       const mult = d.monthly_data_multiplier || 1;
-      // 实际使用字节 = counter * mult；计划总量 = plan * mult
       const usedBytes = counter * mult;
       const totalBytes = plan * mult;
       const pct = Math.min((usedBytes / totalBytes) * 100, 100);
@@ -50,7 +49,8 @@ export default async function (ctx) {
         reset: resetDate,
       };
     } catch (e) {
-      return { label: "Bandwagon", err: "请求失败" };
+      // 透传真实错误，方便排查
+      return { label: "Bandwagon", err: String(e.message || e) };
     }
   };
 
@@ -62,15 +62,9 @@ export default async function (ctx) {
 
     try {
       const url = `https://nerdvm.racknerd.com/api/client/command.php?action=info&key=${apiKey}&hash=${apiHash}&bw=true`;
-      const resp = await ctx.http.get({
-        url,
-        timeout: TIMEOUT,
-        headers: {
-          "User-Agent":
-            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36",
-        },
-      });
-      const xml = typeof resp.body === "string" ? resp.body : String(resp.body);
+      // 只传 URL 字符串，用 resp.text() 读取 XML 响应
+      const resp = await ctx.http.get(url);
+      const xml = await resp.text();
 
       const tag = (t) => {
         const m = xml.match(new RegExp(`<${t}>(.*?)</${t}>`, "s"));
@@ -93,10 +87,10 @@ export default async function (ctx) {
         pct: pct.toFixed(1),
         usedGB: (used / 1073741824).toFixed(1),
         totalGB: (total / 1073741824).toFixed(1),
-        reset: null, // SolusVM 不直接提供重置日期
+        reset: null,
       };
     } catch (e) {
-      return { label: "RackNerd", err: "请求失败" };
+      return { label: "RackNerd", err: String(e.message || e) };
     }
   };
 
