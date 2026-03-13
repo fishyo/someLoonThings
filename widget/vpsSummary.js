@@ -8,7 +8,6 @@
  */
 
 export default async function (ctx) {
-  // 入口日志：确认脚本被成功调用
   console.log("[VPS Widget] started, widgetFamily:", ctx.widgetFamily);
 
   // 凭据读取：优先 ctx.env，其次降级读取 BoxJS $persistentStore

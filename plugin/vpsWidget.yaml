@@ -6,25 +6,25 @@ homepage: "https://github.com/fishyo/someLoonThings"
 icon: "sf-symbol:server.rack.fill"
 
 # 凭据说明：
-# 环境变量 key 与 bwg.js / racknerd.js 脚本保持统一，无需重复配置。
-# 若不在 env 中填写，脚本会自动降级读取 BoxJS ($persistentStore) 中对应的 key：
+# 脚本自动从 BoxJS ($persistentStore) 读取以下 key（由 bwg.js / racknerd.js 写入）：
 #   bandwagon.apiKey / bandwagon.veid
 #   racknerd.apiKey  / racknerd.apiHash
+# 也可在下方 widgets.env 中直接填写覆盖（优先级更高）
 
 scriptings:
   - generic:
       name: "vps-summary-widget"
       script_url: "https://raw.githubusercontent.com/fishyo/someLoonThings/main/widget/vpsSummary.js"
       timeout: 30
-      env:
-        # 搬瓦工 (Bandwagon/BWG) —— 在 https://bwh81.net 帐户 -> API 页面获取
-        BWG_API_KEY: ""
-        BWG_VEID: ""
-        # RackNerd —— 在 SolusVM 控制面板 -> Settings -> API Access 获取
-        RACKNERD_API_KEY: ""
-        RACKNERD_API_HASH: ""
+      update_interval: 0    # 0 = 每次运行都重新拉取最新脚本文件
 
 widgets:
   - name: "VPS 流量"
     script_name: "vps-summary-widget"
-    update_interval: 3600   # 每小时自动刷新一次（单位：秒）
+    update_interval: 3600   # widget 数据刷新间隔（秒）
+    # 可在此覆盖 env（留空则自动读 BoxJS）：
+    # env:
+    #   BWG_API_KEY: "your_key"
+    #   BWG_VEID: "your_veid"
+    #   RACKNERD_API_KEY: "your_key"
+    #   RACKNERD_API_HASH: "your_hash"
