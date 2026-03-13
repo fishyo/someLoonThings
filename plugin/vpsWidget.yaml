@@ -1,30 +1,18 @@
 ---
 name: "VPS 流量监控"
-description: "在桌面/锁屏显示搬瓦工 (Bandwagon) 和 RackNerd 的月度流量使用情况"
+description: "在主屏幕/锁屏显示搬瓦工和 RackNerd 的月度流量使用情况"
 author: "fishyo"
 homepage: "https://github.com/fishyo/someLoonThings"
 icon: "sf-symbol:server.rack.fill"
 
-# 凭据说明：
-# 脚本自动从 BoxJS ($persistentStore) 读取以下 key（由 bwg.js / racknerd.js 写入）：
-#   bandwagon.apiKey / bandwagon.veid
-#   racknerd.apiKey  / racknerd.apiHash
-# 也可在下方 widgets.env 中直接填写覆盖（优先级更高）
+# API Key 由 bwg.js / racknerd.js 运行后自动存入 BoxJS，Widget 直接读取，无需重复配置
 
 scriptings:
   - generic:
-      name: "vps-summary-widget"
+      name: "vps-summary"
       script_url: "https://raw.githubusercontent.com/fishyo/someLoonThings/main/widget/vpsSummary.js"
       timeout: 30
-      update_interval: 0    # 0 = 每次运行都重新拉取最新脚本文件
 
 widgets:
-  - name: "VPS 流量"
-    script_name: "vps-summary-widget"
-    update_interval: 3600   # widget 数据刷新间隔（秒）
-    # 可在此覆盖 env（留空则自动读 BoxJS）：
-    # env:
-    #   BWG_API_KEY: "your_key"
-    #   BWG_VEID: "your_veid"
-    #   RACKNERD_API_KEY: "your_key"
-    #   RACKNERD_API_HASH: "your_hash"
+  - name: "vps-summary"
+    update_interval: 3600
