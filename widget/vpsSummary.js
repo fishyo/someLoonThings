@@ -2,26 +2,25 @@
  * Egern VPS 流量监控小组件
  * 功能：合并展示搬瓦工 (Bandwagon/BWG) 和 RackNerd 的月度流量使用情况
  *
- * 凭据读取优先级：ctx.env (yaml env 注入) > BoxJS ($persistentStore key)
- *   BWG:       BWG_API_KEY, BWG_VEID       / bandwagon.apiKey, bandwagon.veid
- *   RackNerd:  RACKNERD_API_KEY, RACKNERD_API_HASH / racknerd.apiKey, racknerd.apiHash
+ * 凭据通过 ctx.env 注入（在 Egern 模块/主配置的 env 字段中配置）：
+ *   BWG_API_KEY, BWG_VEID
+ *   RACKNERD_API_KEY, RACKNERD_API_HASH
+ *
+ * 注意：Egern Widget 运行环境不支持 $persistentStore (BoxJS)，
+ *       请在 Egern App 的模块 env 设置中填写凭据。
  */
 
 export default async function (ctx) {
-
-  // 从 BoxJS persistentStore 读取（降级兜底）
-  const store = (key) => {
-    try {
-      if (typeof $persistentStore !== "undefined") return $persistentStore.read(key) || "";
-    } catch (_) {}
-    return "";
-  };
+  // 入口日志：确认脚本被成功调用
+  console.log("[VPS Widget] started, widgetFamily:", ctx.widgetFamily);
+  console.log("[VPS Widget] env keys present - BWG_API_KEY:", !!ctx.env.BWG_API_KEY, "BWG_VEID:", !!ctx.env.BWG_VEID, "RN_KEY:", !!ctx.env.RACKNERD_API_KEY, "RN_HASH:", !!ctx.env.RACKNERD_API_HASH);
 
   // ── 1. 拉取搬瓦工数据 ──────────────────────────────────────────────────────
   const getBWG = async () => {
-    const apiKey = (ctx.env.BWG_API_KEY || store("bandwagon.apiKey")).trim();
-    const veid = (ctx.env.BWG_VEID || store("bandwagon.veid")).trim();
-    if (!apiKey || !veid) return { label: "Bandwagon", err: "未配置凭据" };
+    const apiKey = (ctx.env.BWG_API_KEY || "").trim();
+    const veid   = (ctx.env.BWG_VEID    || "").trim();
+    console.log("[BWG] apiKey len:", apiKey.length, "veid len:", veid.length);
+    if (!apiKey || !veid) return { label: "Bandwagon", err: "未配置凭据(env)" };
 
     try {
       const url = `https://api.64clouds.com/v1/getServiceInfo?veid=${veid}&api_key=${apiKey}`;
@@ -56,9 +55,10 @@ export default async function (ctx) {
 
   // ── 2. 拉取 RackNerd 数据 ──────────────────────────────────────────────────
   const getRN = async () => {
-    const apiKey = (ctx.env.RACKNERD_API_KEY || store("racknerd.apiKey")).trim();
-    const apiHash = (ctx.env.RACKNERD_API_HASH || store("racknerd.apiHash")).trim();
-    if (!apiKey || !apiHash) return { label: "RackNerd", err: "未配置凭据" };
+    const apiKey  = (ctx.env.RACKNERD_API_KEY  || "").trim();
+    const apiHash = (ctx.env.RACKNERD_API_HASH || "").trim();
+    console.log("[RN] apiKey len:", apiKey.length, "apiHash len:", apiHash.length);
+    if (!apiKey || !apiHash) return { label: "RackNerd", err: "未配置凭据(env)" };
 
     try {
       const url = `https://nerdvm.racknerd.com/api/client/command.php?action=info&key=${apiKey}&hash=${apiHash}&bw=true`;
