@@ -9,7 +9,7 @@ scriptings:
   - generic:
       name: "vps-summary-script"
       script_url: "https://raw.githubusercontent.com/fishyo/someLoonThings/main/widget/vpsSummary.js"
-      timeout: 15
+      timeout: 30
       env:
         BWG_API_KEY: "在此输入搬瓦工API_KEY"
         BWG_VEID: "在此输入搬瓦工VEID"

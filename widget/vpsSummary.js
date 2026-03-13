@@ -5,7 +5,7 @@
  */
 
 export default async function(ctx) {
-    const timeout = 10000;
+    const timeout = 8000; // 降低内部超时时间到 8 秒，确保在系统强制终止前能返回 UI
 
     // 统一配置获取函数
     const readStore = (key) => {
