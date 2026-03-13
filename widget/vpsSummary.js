@@ -35,9 +35,10 @@ export default async function (ctx) {
         : null;
 
       const nodeLocation = d.node_location || d.node_aliases || "Los Angeles, US";
+      const cleanNode = nodeLocation.split(" ")[0].toLowerCase().replace(/[^a-z0-9]/g, "");
 
       return {
-        label: "bwg-" + nodeLocation.split(" ")[0].toLowerCase(), flag: "🇺🇸",
+        label: "bwg-" + cleanNode, flag: "🇺🇸",
         pct: pct.toFixed(1),
         usedGB: (used / 1073741824).toFixed(2),
         totalGB: (total / 1073741824).toFixed(1),
@@ -192,7 +193,7 @@ export default async function (ctx) {
               { type: "text", text: item.label, font: { size: 13, weight: "bold" }, textColor: "#e6e6e6" },
               { type: "spacer" },
               { type: "text", text: `${item.pct}%`, font: { size: 13, weight: "bold" }, textColor: isRed ? "#ff4a4a" : "#cccccc" },
-              { type: "text", text: bar(item.pct, 8), font: { size: 8, family: "Menlo" }, textColor: c },
+              { type: "text", text: bar(item.pct, 10), font: { size: 11, family: "Menlo" }, textColor: c },
             ]
           },
 
@@ -225,8 +226,8 @@ export default async function (ctx) {
       padding: 12, gap: 6,
       children: [
         {
-          type: "stack", direction: "row", alignItems: "center", gap: 4, children: [
-            { type: "stack", padding: [2, 4, 2, 4], backgroundColor: "#3a4a9c", borderRadius: 4, children: [{ type: "text", text: "vpsUsage", font: { size: 8, weight: "bold" }, textColor: "#ffffff" }] },
+          type: "stack", direction: "row", alignItems: "center", gap: 4, padding: [2, 6, 0, 6], children: [
+            { type: "stack", padding: [2, 5, 2, 5], backgroundColor: "#3a4a9c", borderRadius: 4, children: [{ type: "text", text: "vpsUsage", font: { size: 9, weight: "bold" }, textColor: "#ffffff" }] },
             { type: "spacer" },
             updatedAt,
           ]
