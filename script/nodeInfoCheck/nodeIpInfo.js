@@ -6,11 +6,20 @@
  * - 地理位置与运营商信息
  * - 简洁清晰的结果展示
  * 
- * 使用说明：
+ * [Loon 使用说明]
  * 1. 在 Loon [Script] 部分添加：
  *    type=generic, script-path=https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/nodeInfoCheck/nodeIpInfo.js, tag=节点信息
  * 2. 运行方式：
  *    - 在节点列表长按指定节点 -> 选择“脚本” -> 点击“节点信息”
+ * 
+ * [Egern 配置示例]
+ * 作为通用脚本 (小组件关联) 或网络变化脚本:
+ * scriptings:
+ *  - generic:
+ *      name: "节点信息"
+ *      script_url: "https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/nodeInfoCheck/nodeIpInfo.js"
+ *      env:
+ *        NODE_NAME: "Proxy" # 可选，指定要测试的策略组或节点名称，默认为 Direct/当前网络
  */
 
 // ============ 配置常量 ============
@@ -51,12 +60,20 @@ const COUNTRY_NAMES = {
 
 // ============ 主函数 ============
 async function queryNodeIP() {
-    const nodeName = $environment.params.node;
+    let nodeName = "";
+    if (typeof $environment !== "undefined" && $environment.params && $environment.params.node) {
+        nodeName = $environment.params.node;
+    } else if (typeof ctx !== "undefined" && ctx.env && ctx.env.NODE_NAME) {
+        nodeName = ctx.env.NODE_NAME;
+    }
     
     if (!nodeName) {
-        const msg = "请在节点列表中选择一个节点运行";
-        console.log("[节点IP查询] 错误: " + msg);
-        return $done({ title: "❌ 错误", content: msg });
+        if (typeof $environment !== "undefined" && $environment.params) {
+            const msg = "请在节点列表中选择一个节点运行";
+            console.log("[节点IP查询] 错误: " + msg);
+            return $done({ title: "❌ 错误", content: msg });
+        }
+        nodeName = ""; // 若非 Loon 且未指定节点，则使用默认网络
     }
 
     try {

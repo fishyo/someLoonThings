@@ -1,3 +1,16 @@
+/*
+ * Bandwagon VPS 状态查询
+ * 
+ * [Egern 配置示例]
+ * 1. 作为通用脚本 (小组件关联):
+ * scriptings:
+ *  - generic:
+ *      name: "Bandwagon Status"
+ *      script_url: "https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/bandwagon/bwg.js"
+ *      env:
+ *        BWG_API_KEY: "your_api_key"
+ *        BWG_VEID: "your_veid"
+ */
 // 跨平台适配
 const $ = {
   isLoon: typeof $loon !== "undefined",
@@ -62,12 +75,19 @@ function getConfig() {
   let apiKey = "";
   let veid = "";
 
-  if (typeof $persistentStore !== "undefined") {
-    apiKey = $persistentStore.read("bandwagon.apiKey") || "";
-    veid = $persistentStore.read("bandwagon.veid") || "";
-  } else if (typeof $prefs !== "undefined") {
-    apiKey = $prefs.valueForKey("bandwagon.apiKey") || "";
-    veid = $prefs.valueForKey("bandwagon.veid") || "";
+  if (typeof ctx !== "undefined" && ctx.env) {
+    if (ctx.env.BWG_API_KEY) apiKey = ctx.env.BWG_API_KEY;
+    if (ctx.env.BWG_VEID) veid = ctx.env.BWG_VEID;
+  }
+
+  if (!apiKey || !veid) {
+    if (typeof $persistentStore !== "undefined") {
+      apiKey = apiKey || $persistentStore.read("bandwagon.apiKey") || "";
+      veid = veid || $persistentStore.read("bandwagon.veid") || "";
+    } else if (typeof $prefs !== "undefined") {
+      apiKey = apiKey || $prefs.valueForKey("bandwagon.apiKey") || "";
+      veid = veid || $prefs.valueForKey("bandwagon.veid") || "";
+    }
   }
   const maskedVeid = veid ? veid.replace(/^(.{2})(.*)(.{1})$/, "$1****$3") : "N/A";
   console.log(`Config Read - Key Len: ${apiKey.length}, VEID: ${maskedVeid}`);

@@ -1,3 +1,16 @@
+/*
+ * RackNerd VPS 状态查询
+ * 
+ * [Egern 配置示例]
+ * 1. 作为通用脚本 (小组件关联):
+ * scriptings:
+ *  - generic:
+ *      name: "RackNerd Status"
+ *      script_url: "https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/racknerd/racknerd.js"
+ *      env:
+ *        RACKNERD_API_KEY: "your_api_key"
+ *        RACKNERD_API_HASH: "your_api_hash"
+ */
 // 跨平台适配
 const $ = {
   isLoon: typeof $loon !== "undefined",
@@ -65,12 +78,19 @@ function getConfig() {
   let apiKey = "";
   let apiHash = "";
 
-  if (typeof $persistentStore !== "undefined") {
-    apiKey = $persistentStore.read("racknerd.apiKey") || "";
-    apiHash = $persistentStore.read("racknerd.apiHash") || "";
-  } else if (typeof $prefs !== "undefined") {
-    apiKey = $prefs.valueForKey("racknerd.apiKey") || "";
-    apiHash = $prefs.valueForKey("racknerd.apiHash") || "";
+  if (typeof ctx !== "undefined" && ctx.env) {
+    if (ctx.env.RACKNERD_API_KEY) apiKey = ctx.env.RACKNERD_API_KEY;
+    if (ctx.env.RACKNERD_API_HASH) apiHash = ctx.env.RACKNERD_API_HASH;
+  }
+
+  if (!apiKey || !apiHash) {
+    if (typeof $persistentStore !== "undefined") {
+      apiKey = apiKey || $persistentStore.read("racknerd.apiKey") || "";
+      apiHash = apiHash || $persistentStore.read("racknerd.apiHash") || "";
+    } else if (typeof $prefs !== "undefined") {
+      apiKey = apiKey || $prefs.valueForKey("racknerd.apiKey") || "";
+      apiHash = apiHash || $prefs.valueForKey("racknerd.apiHash") || "";
+    }
   }
 
   console.log(`Config Read - Key Len: ${apiKey.length}, Hash Len: ${apiHash.length}`);

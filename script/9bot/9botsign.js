@@ -1,5 +1,13 @@
 /*
 九号出行 - 签到脚本
+
+[Egern 配置]
+在 Egern 配置文件中添加：
+scriptings:
+  - schedule:
+      name: "九号出行签到"
+      cron: "0 8 * * *"
+      script_url: "https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/9bot/9botsign.js"
 */
 
 const APP = {
