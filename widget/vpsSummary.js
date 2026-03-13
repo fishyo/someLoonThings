@@ -13,6 +13,9 @@ export default async function (ctx) {
   const rnKey = $persistentStore.read("racknerd.apiKey") || "";
   const rnHash = $persistentStore.read("racknerd.apiHash") || "";
 
+  console.log(`[VPS Widget] Started. Family: ${ctx.widgetFamily}`);
+  console.log(`[VPS Widget] BoxJS Keys -> BWG: ${!!bwgKey}, RN: ${!!rnKey}`);
+
   // 记录数据拉取时间（用于 widget 显示"X 分钟前"）
   const fetchTime = new Date().toISOString();
 
@@ -20,6 +23,7 @@ export default async function (ctx) {
   const getBWG = async () => {
     if (!bwgKey || !bwgVeid) return { label: "Bandwagon", flag: "🇺🇸", err: "未配置凭据" };
     try {
+      console.log(`[BWG] Fetching data for VEID: ${bwgVeid}`);
       const resp = await ctx.http.get(
         `https://api.64clouds.com/v1/getServiceInfo?veid=${bwgVeid}&api_key=${bwgKey}`
       );
@@ -37,6 +41,7 @@ export default async function (ctx) {
       const nodeLocation = d.node_location || d.node_aliases || "Los Angeles, US";
       const cleanNode = nodeLocation.split(" ")[0].toLowerCase().replace(/[^a-z0-9]/g, "");
 
+      console.log(`[BWG] Success. Used: ${(used / 1073741824).toFixed(2)}GB, Total: ${(total / 1073741824).toFixed(1)}GB`);
       return {
         label: "bwg-" + cleanNode, flag: "🇺🇸",
         pct: pct.toFixed(1),
@@ -44,12 +49,16 @@ export default async function (ctx) {
         totalGB: (total / 1073741824).toFixed(1),
         reset,
       };
-    } catch (e) { return { label: "Bandwagon", flag: "🇺🇸", err: String(e.message || e) }; }
+    } catch (e) {
+      console.log(`[BWG] Error: ${String(e.message || e)}`);
+      return { label: "Bandwagon", flag: "🇺🇸", err: String(e.message || e) };
+    }
   };
 
   const getRN = async () => {
     if (!rnKey || !rnHash) return { label: "RackNerd", flag: "🇺🇸", err: "未配置凭据" };
     try {
+      console.log(`[RN] Fetching data...`);
       const resp = await ctx.http.get(
         `https://nerdvm.racknerd.com/api/client/command.php?action=info&key=${rnKey}&hash=${rnHash}&bw=true`
       );
@@ -88,6 +97,7 @@ export default async function (ctx) {
           nodeLabel = nodeLabel.includes("CA") ? "rn-la" : nodeLabel;
       }
 
+      console.log(`[RN] Success. Node: ${nodeLabel}, Used: ${(used / 1073741824).toFixed(2)}GB`);
       return {
         label: nodeLabel, flag,
         pct: pct.toFixed(1),
@@ -95,7 +105,10 @@ export default async function (ctx) {
         totalGB: (total / 1073741824).toFixed(1),
         reset: null,
       };
-    } catch (e) { return { label: "RackNerd", flag: "🇺🇸", err: String(e.message || e) }; }
+    } catch (e) {
+      console.log(`[RN] Error: ${String(e.message || e)}`);
+      return { label: "RackNerd", flag: "🇺🇸", err: String(e.message || e) };
+    }
   };
 
   const [bwg, rn] = await Promise.all([getBWG(), getRN()]);
