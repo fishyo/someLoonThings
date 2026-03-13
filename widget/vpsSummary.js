@@ -65,10 +65,31 @@ export default async function (ctx) {
       const used = parseFloat(usedStr) || 0;
       const pct = total > 0 ? Math.min((used / total) * 100, 100) : 0;
 
-      const node = tag("node") || "RN";
+      let nodeLabel = tag("node") || "RN";
+      let flag = "🇺🇸"; // 默认国旗
+
+      // 尝试通过 IP 获取真实机房位置
+      try {
+        const ip = (tag("ipaddress") || tag("ip_address") || "").split(",")[0].trim();
+        if (ip) {
+          const ipResp = await ctx.http.get(`http://ip-api.com/json/${ip}?lang=en`);
+          const ipData = await ipResp.json();
+          if (ipData && ipData.status === "success") {
+            const city = (ipData.city || ipData.regionName || "unk").split(" ")[0].toLowerCase().replace(/[^a-z0-9]/g, "");
+            if (city) nodeLabel = "rn-" + city;
+          }
+        }
+      } catch (e) {
+        console.log("[RN] IP Location Error:", String(e.message || e));
+      }
+
+      //  fallback
+      if (!nodeLabel.startsWith("rn-")) {
+          nodeLabel = nodeLabel.includes("CA") ? "rn-la" : nodeLabel;
+      }
 
       return {
-        label: node.includes("CA") ? "RN-LA" : node, flag: "🇺🇸",
+        label: nodeLabel, flag,
         pct: pct.toFixed(1),
         usedGB: (used / 1073741824).toFixed(2),
         totalGB: (total / 1073741824).toFixed(1),
