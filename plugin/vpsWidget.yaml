@@ -1,0 +1,22 @@
+---
+name: "VPS 流量监控"
+description: "在桌面显示搬瓦工和 RackNerd 的流量使用百分比及剩余用量"
+author: "fishyo"
+homepage: "https://github.com/fishyo/someLoonThings"
+icon: "sf-symbol:server.rack.fill"
+
+scriptings:
+  - generic:
+      name: "vps-summary-script"
+      script_url: "https://raw.githubusercontent.com/fishyo/someLoonThings/main/widget/vpsSummary.js"
+      timeout: 15
+      env:
+        BWG_API_KEY: "在此输入搬瓦工API_KEY"
+        BWG_VEID: "在此输入搬瓦工VEID"
+        RACKNERD_API_KEY: "在此输入RackNerd_API_KEY"
+        RACKNERD_API_HASH: "在此输入RackNerd_API_HASH"
+
+widgets:
+  - name: "VPS 状态"
+    script_name: "vps-summary-script"
+    update_interval: 3600
