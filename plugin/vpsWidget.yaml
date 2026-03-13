@@ -1,22 +1,30 @@
 ---
 name: "VPS 流量监控"
-description: "在桌面显示搬瓦工和 RackNerd 的流量使用百分比及剩余用量"
+description: "在桌面/锁屏显示搬瓦工 (Bandwagon) 和 RackNerd 的月度流量使用情况"
 author: "fishyo"
 homepage: "https://github.com/fishyo/someLoonThings"
 icon: "sf-symbol:server.rack.fill"
 
+# 凭据说明：
+# 环境变量 key 与 bwg.js / racknerd.js 脚本保持统一，无需重复配置。
+# 若不在 env 中填写，脚本会自动降级读取 BoxJS ($persistentStore) 中对应的 key：
+#   bandwagon.apiKey / bandwagon.veid
+#   racknerd.apiKey  / racknerd.apiHash
+
 scriptings:
   - generic:
-      name: "vps-summary-script"
+      name: "vps-summary-widget"
       script_url: "https://raw.githubusercontent.com/fishyo/someLoonThings/main/widget/vpsSummary.js"
       timeout: 30
       env:
-        BWG_API_KEY: "在此输入搬瓦工API_KEY"
-        BWG_VEID: "在此输入搬瓦工VEID"
-        RACKNERD_API_KEY: "在此输入RackNerd_API_KEY"
-        RACKNERD_API_HASH: "在此输入RackNerd_API_HASH"
+        # 搬瓦工 (Bandwagon/BWG) —— 在 https://bwh81.net 帐户 -> API 页面获取
+        BWG_API_KEY: ""
+        BWG_VEID: ""
+        # RackNerd —— 在 SolusVM 控制面板 -> Settings -> API Access 获取
+        RACKNERD_API_KEY: ""
+        RACKNERD_API_HASH: ""
 
 widgets:
-  - name: "VPS 状态"
-    script_name: "vps-summary-script"
-    update_interval: 3600
+  - name: "VPS 流量"
+    script_name: "vps-summary-widget"
+    update_interval: 3600   # 每小时自动刷新一次（单位：秒）
