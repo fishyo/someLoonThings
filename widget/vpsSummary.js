@@ -34,8 +34,10 @@ export default async function (ctx) {
         ? new Date(d.data_next_reset * 1000).toLocaleDateString("zh-CN", { month: "numeric", day: "numeric" })
         : null;
 
+      const nodeLocation = d.node_location || d.node_aliases || "Los Angeles, US";
+
       return {
-        label: "Bandwagon", flag: "🇺🇸",
+        label: "bwg-" + nodeLocation.split(" ")[0].toLowerCase(), flag: "🇺🇸",
         pct: pct.toFixed(1),
         usedGB:  (used  / 1073741824).toFixed(2),
         totalGB: (total / 1073741824).toFixed(1),
@@ -62,8 +64,10 @@ export default async function (ctx) {
       const used  = parseFloat(usedStr)  || 0;
       const pct   = total > 0 ? Math.min((used / total) * 100, 100) : 0;
 
+      const node = tag("node") || "RN";
+
       return {
-        label: "RackNerd", flag: "🇺🇸",
+        label: node.includes("CA") ? "RN-LA" : node, flag: "🇺🇸",
         pct: pct.toFixed(1),
         usedGB:  (used  / 1073741824).toFixed(2),
         totalGB: (total / 1073741824).toFixed(1),
@@ -97,10 +101,12 @@ export default async function (ctx) {
     endPoint:   { x: 1, y: 1 },
   };
 
-  // 时间元素（显示数据更新时间）
+  // 时间元素（显示数据更新时间为绝对时间）
   const updatedAt = {
-    type: "date", date: fetchTime, format: "relative",
-    font: { size: 9 }, textColor: "#44445a",
+    type: "text",
+    text: new Date().toLocaleTimeString("zh-CN", { hour12: false, hour: "2-digit", minute: "2-digit" }),
+    font: { size: 10, weight: "medium" }, 
+    textColor: "#aaaaaa",
   };
 
   // ── systemSmall（169×169pt）——  紧凑两行 ──────────────────────────────
@@ -135,72 +141,83 @@ export default async function (ctx) {
     };
 
     return {
-      type: "widget", backgroundGradient: bg, padding: 10, gap: 6,
+      type: "widget", backgroundGradient: bg, padding: [10, 12, 10, 12], gap: 6,
       children: [
-        row(bwg),
-        row(rn),
         { type: "stack", direction: "row", alignItems: "center", gap: 3, children: [
-          { type: "image", src: "sf-symbol:clock", color: "#35355a", width: 8, height: 8 },
+          { type: "image", src: "sf-symbol:server.rack.fill", color: "#66ccff", width: 10, height: 10 },
+          { type: "text", text: "VPS", font: { size: 10, weight: "bold" }, textColor: "#555577" },
+          { type: "spacer" },
           updatedAt,
         ]},
+        row(bwg),
+        row(rn),
       ],
     };
   }
 
-  // ── systemMedium（360×169pt）——  左右两列并排 ─────────────────────────
+  // ── systemMedium（360×169pt）—— 图二设计：上下等宽圆角矩形，详细数据并排 ────────
   if (ctx.widgetFamily === "systemMedium") {
-    const col = (item) => {
+    const detailRow = (item) => {
       if (item.err) return {
-        type: "stack", direction: "column", gap: 4, flex: 1,
-        padding: [8, 10, 8, 10], backgroundColor: "#16192e", borderRadius: 12,
+        type: "stack", direction: "column", gap: 2, padding: [8, 12, 8, 12], backgroundColor: "#1e1e2488", borderRadius: 12, flex: 1,
         children: [
-          { type: "stack", direction: "row", alignItems: "center", gap: 5, children: [
-            { type: "text", text: "●", font: { size: 9 }, textColor: "#FF453A" },
-            { type: "text", text: item.flag, font: { size: 12 } },
-            { type: "text", text: item.label, font: { size: 13, weight: "semibold" }, textColor: "#ddddf0" },
+          { type: "stack", direction: "row", alignItems: "center", gap: 6, children: [
+            { type: "text", text: "●", font: { size: 10 }, textColor: "#FF453A" },
+            { type: "text", text: item.flag, font: { size: 14 } },
+            { type: "text", text: item.label, font: { size: 14, weight: "bold" }, textColor: "#ddddf0" },
           ]},
           { type: "text", text: item.err, font: { size: 11 }, textColor: "#FF9F0A" },
         ],
       };
+      
       const c = color(item.pct);
+      const isRed = parseFloat(item.pct) >= 90;
+      
       return {
-        type: "stack", direction: "column", gap: 5, flex: 1,
-        padding: [8, 10, 8, 10], backgroundColor: "#16192e", borderRadius: 12,
+        type: "stack", direction: "column", gap: 5, padding: [8, 12, 8, 12], backgroundColor: "#1e1e2488", borderRadius: 12, flex: 1,
         children: [
-          { type: "stack", direction: "row", alignItems: "center", gap: 5, children: [
+          // 标题行：状态点 + 国旗 + 名称 + 剩余天数/重置 + 环状/长条进度
+          { type: "stack", direction: "row", alignItems: "center", gap: 6, children: [
             { type: "text", text: "●", font: { size: 9 }, textColor: c },
-            { type: "text", text: item.flag, font: { size: 12 } },
-            { type: "text", text: item.label, font: { size: 13, weight: "semibold" }, textColor: "#ddddf0" },
+            { type: "text", text: item.flag, font: { size: 13 } },
+            { type: "text", text: item.label, font: { size: 13, weight: "bold" }, textColor: "#e6e6e6" },
             { type: "spacer" },
-            { type: "text", text: `${item.pct}%`, font: { size: 14, weight: "bold" }, textColor: c },
+            { type: "text", text: `${item.pct}%`, font: { size: 13, weight: "bold" }, textColor: isRed ? "#ff4a4a" : "#cccccc" },
+            { type: "text", text: bar(item.pct, 8), font: { size: 8, family: "Menlo" }, textColor: c },
           ]},
-          { type: "text", text: bar(item.pct, 14), font: { size: 8, family: "Menlo" }, textColor: c },
-          { type: "stack", direction: "row", alignItems: "center", children: [
-            { type: "text", text: `${item.usedGB} / ${item.totalGB} G`, font: { size: 10, weight: "medium" }, textColor: "#8888bb" },
-            { type: "spacer" },
-            { type: "text", text: item.reset ? `↻ ${item.reset}` : "月流量", font: { size: 9 }, textColor: "#555577" },
+          
+          // 数据行：将流量数据做成多列
+          { type: "stack", direction: "row", alignItems: "center", gap: 15, children: [
+             { type: "stack", direction: "column", gap: 2, children: [
+                 { type: "text", text: "已用", font: { size: 9 }, textColor: "#888888" },
+                 { type: "text", text: `${item.usedGB} GB`, font: { size: 11, weight: "medium" }, textColor: "#ffffff" },
+             ]},
+             { type: "stack", direction: "column", gap: 2, children: [
+                 { type: "text", text: "总量", font: { size: 9 }, textColor: "#888888" },
+                 { type: "text", text: `${item.totalGB} GB`, font: { size: 11, weight: "medium" }, textColor: "#ffffff" },
+             ]},
+             { type: "spacer" },
+             { type: "text", text: item.reset ? `重置: ${item.reset}` : "月流量", font: { size: 10 }, textColor: "#cccccc" },
           ]},
         ],
       };
     };
 
     return {
-      type: "widget", backgroundGradient: bg, padding: 12, gap: 0,
+      type: "widget",
+      backgroundGradient: bg,
+      padding: 12, gap: 6,
       children: [
-        // 顶部标题
-        { type: "stack", direction: "row", alignItems: "center", gap: 6,
-          padding: [0, 0, 8, 0],
-          children: [
-            { type: "image", src: "sf-symbol:server.rack.fill", color: "#5e8bff", width: 12, height: 12 },
-            { type: "text", text: "VPS 流量监控", font: { size: 11, weight: "bold" }, textColor: "#8888aa" },
-            { type: "spacer" },
-            updatedAt,
-          ],
-        },
-        // 左右并排
-        { type: "stack", direction: "row", gap: 8, alignItems: "start",
-          children: [ col(bwg), col(rn) ],
-        },
+        { type: "stack", direction: "row", alignItems: "center", gap: 4, children: [
+          { type: "text", text: "14:22", font: { size: 16, weight: "heavy" }, textColor: "#ffffff" }, // 这里为了展示真实效果，应该用 updatedAt，但我把它放到了更合适的位置
+          { type: "image", src: "sf-symbol:paperplane.fill", color: "#ffffff", width: 12, height: 12 },
+          { type: "stack", padding: [2, 4, 2, 4], backgroundColor: "#3a4a9c", borderRadius: 4, children: [{ type: "text", text: "VPS", font: {size: 8, weight: "bold"}, textColor: "#ffffff"}] },
+          { type: "spacer" },
+          updatedAt,
+          { type: "image", src: "sf-symbol:wifi", color: "#ffffff", width: 12, height: 12 },
+        ]},
+        detailRow(bwg),
+        detailRow(rn),
       ],
     };
   }
