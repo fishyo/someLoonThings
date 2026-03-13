@@ -1,0 +1,17 @@
+---
+name: "节点信息小组件"
+description: "在 iOS 桌面显示当前的 IPv4/IPv6 及地理位置信息"
+author: "fishyo"
+homepage: "https://github.com/fishyo/someLoonThings"
+icon: "sf-symbol:network"
+
+scriptings:
+  - generic:
+      name: "node-info-widget-script"
+      script_url: "https://raw.githubusercontent.com/fishyo/someLoonThings/main/widget/nodeInfo.js"
+      timeout: 10
+
+widgets:
+  - name: "节点信息"
+    script_name: "node-info-widget-script"
+    update_interval: 3600 # 每小时自动刷新一次
