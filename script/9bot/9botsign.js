@@ -10,6 +10,8 @@ scriptings:
       script_url: "https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/9bot/9botsign.js"
 */
 
+// 包装在一个立即执行函数中，避免顶层 return 在严格的 JS 引擎（如 Egern）中报语法错误
+;(function() {
 const APP = {
   name: "九号出行",
   cookieKey: "ninebot_cookie_data",
@@ -28,6 +30,8 @@ const UA =
   "Mozilla/5.0 (iPhone; CPU iPhone OS 13_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.5 Mobile/15E148 Safari/604.1";
 
 console.log(`========== ${APP.name}签到脚本启动 ==========`);
+
+let cookieData;
 
 // 构建通用请求头
 function getHeaders(withAuth = true) {
@@ -75,7 +79,9 @@ function querySignStatus(callback) {
     }
     callback(null);
   });
-} // 添加额外信息
+} 
+
+// 添加额外信息
 function addExtraInfo(parts, data) {
   if (data) {
     if (data.blindBoxStatus === 1) {
@@ -107,7 +113,6 @@ if (!cookieDataStr) {
   return;
 }
 
-let cookieData;
 try {
   cookieData = JSON.parse(cookieDataStr);
   console.log("✓ Cookie数据读取成功");
@@ -224,3 +229,4 @@ function sign(retryCount = 0) {
 
 // 启动签到
 sign();
+})();
