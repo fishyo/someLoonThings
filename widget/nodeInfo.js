@@ -1,28 +1,47 @@
 /**
  * Egern Node Info Widget
  * 显示当前网络的 IPv4/IPv6 以及归属地信息
+ * 优化增强版：增加了对不同响应格式的兼容和超时处理
  */
 
 export default async function(ctx) {
-    const timeout = 5000;
+    const timeout = 10000; // 增加到 10 秒超时
     
     // 获取数据的异步函数
     const fetchData = async (url) => {
         try {
             const resp = await ctx.http.get({ url, timeout });
-            return await resp.json();
+            // 兼容性解决：如果返回的是字符串，尝试解析；如果已经是对象，直接返回
+            let data = resp.body;
+            if (typeof data === 'string') {
+                try {
+                    return JSON.parse(data);
+                } catch (e) {
+                    return data; // 返回原始文本以供解析
+                }
+            }
+            return data;
         } catch (e) {
             return null;
         }
     };
 
     // 并行获取 IPv4 和 IPv6
+    // IPv4 使用更稳定的 Cloudflare Trace，IPv6 使用 ipify
     const [ip4Data, ip6Data] = await Promise.all([
-        fetchData("https://api.ipify.org?format=json"),
+        fetchData("https://1.1.1.1/cdn-cgi/trace"),
         fetchData("https://api64.ipify.org?format=json")
     ]);
 
-    const ipv4 = ip4Data?.ip || "N/A";
+    // 解析 IPv4 (Cloudflare 格式为键值对文本)
+    let ipv4 = "N/A";
+    if (typeof ip4Data === 'string') {
+        const match = ip4Data.match(/ip=(.*)\n/);
+        ipv4 = match ? match[1] : "N/A";
+    } else if (ip4Data?.ip) {
+        ipv4 = ip4Data.ip;
+    }
+
     const ipv6 = ip6Data?.ip || "N/A";
     
     // 查询详细地理位置 (使用 ip-api.com)
