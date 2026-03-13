@@ -1,3 +1,4 @@
+---
 name: "自用拦截"
 description: "自用补充"
 author: "fishyo"
@@ -15,34 +16,31 @@ mitm:
     - "stat.10jqka.com.cn"
 
 header_rewrites:
-  # 少数派RSS全文图片
-  - match: "^https://cdnfile\\.sspai\\.com/"
-    type: request
-    action: add
-    name: "Referer"
-    value: "sspai.com"
+  - add:
+      match: "^https://cdnfile\\.sspai\\.com/"
+      name: "Referer"
+      value: "sspai.com"
+      type: request
 
 rules:
-  # 雪球 - 拦截图片
-  - url_regex: "^https:\\/\\/xqimg\\.imedao\\.com\\/"
-    policy: REJECT
-  
-  # 华尔街见闻
-  - url_regex: "^https?:\\/\\/api-one-wscn\\.awtmt\\.com\\/apiv1\\/advertising\\/ads"
-    policy: REJECT
-
-  # 京东 - 拦截移动端开屏CMS
-  - url_regex: "^https:\\/\\/m\\.360buyimg\\.com\\/mobilecms\\/s1125x2436_jfs\\/t1\\/.*"
-    policy: REJECT
-
-  # 上汽大众 - 拦截开屏广告
-  - url_regex: "^https:\\/\\/api\\.mos\\.csvw\\.com\\/mos\\/operation\\/home\\/api\\/v\\d\\/app\\/brand\\/queryDataForOperation"
-    policy: REJECT
-
-  # 同花顺
-  - url_regex: "^https?:\\/\\/adm\\.10jqka\\.com\\.cn\\/interface\\/ad\\/recommend"
-    policy: REJECT
-  - url_regex: "^https?:\\/\\/iphone\\.ac\\.qq\\.com\\/.*\\/Support\\/(getSystemConf|bootScreen)"
-    policy: REJECT
-  - url_regex: "^https?:\\/\\/stat\\.10jqka\\.com\\.cn\\/q\\?ld=mobile&id=ad"
-    policy: REJECT
+  - url_regex:
+      match: "^https:\\/\\/xqimg\\.imedao\\.com\\/"
+      policy: REJECT
+  - url_regex:
+      match: "^https?:\\/\\/api-one-wscn\\.awtmt\\.com\\/apiv1\\/advertising\\/ads"
+      policy: REJECT
+  - url_regex:
+      match: "^https:\\/\\/m\\.360buyimg\\.com\\/mobilecms\\/s1125x2436_jfs\\/t1\\/.*"
+      policy: REJECT
+  - url_regex:
+      match: "^https:\\/\\/api\\.mos\\.csvw\\.com\\/mos\\/operation\\/home\\/api\\/v\\d\\/app\\/brand\\/queryDataForOperation"
+      policy: REJECT
+  - url_regex:
+      match: "^https?:\\/\\/adm\\.10jqka\\.com\\.cn\\/interface\\/ad\\/recommend"
+      policy: REJECT
+  - url_regex:
+      match: "^https?:\\/\\/iphone\\.ac\\.qq\\.com\\/.*\\/Support\\/(getSystemConf|bootScreen)"
+      policy: REJECT
+  - url_regex:
+      match: "^https?:\\/\\/stat\\.10jqka\\.com\\.cn\\/q\\?ld=mobile&id=ad"
+      policy: REJECT
