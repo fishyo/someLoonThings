@@ -1,9 +1,17 @@
 # Egern 局域网/保留地址规则集
 # 包含常见的内网 IP 段，用于优化 DIRECT 直连性能
 
-- ip_cidr: 192.168.0.0/16
-- ip_cidr: 10.0.0.0/8
-- ip_cidr: 127.0.0.0/8
-- ip_cidr: 172.16.0.0/12
-- ip_cidr: 192.128.0.0/16
-- ip_cidr: 224.0.0.0/24
+- domain_suffix_set:
+    match: local
+- ip_cidr:
+    match: 192.168.0.0/16
+- ip_cidr:
+    match: 10.0.0.0/8
+- ip_cidr:
+    match: 127.0.0.0/8
+- ip_cidr:
+    match: 172.16.0.0/12
+- ip_cidr:
+    match: 192.128.0.0/16
+- ip_cidr:
+    match: 224.0.0.0/24
