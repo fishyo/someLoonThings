@@ -9,8 +9,6 @@
 # 少数派RSS全文图片
 ^https://cdnfile\.sspai\.com/ header-add Referer sspai.com
 
-# 雪球 - 拦截图片
-^https:\/\/xqimg\.imedao\.com\/ reject-200
 
 # 华尔街见闻
 ^https?://api-one-wscn\.awtmt\.com/apiv1/advertising/ads reject-200
@@ -29,4 +27,4 @@
 
 
 [MITM]
-hostname = cdnfile.sspai.com, xqimg.imedao.com, api-one-wscn.awtmt.com, m.360buyimg.com, adm.10jqka.com.cn, iphone.ac.qq.com, stat.10jqka.com.cn
+hostname = cdnfile.sspai.com, api-one-wscn.awtmt.com, m.360buyimg.com, adm.10jqka.com.cn, iphone.ac.qq.com, stat.10jqka.com.cn
