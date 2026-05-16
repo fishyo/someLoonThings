@@ -8,7 +8,7 @@
 | -------- | --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
 | 自用拦截 | 广告拦截与 Rewrite 规则           | [导入](https://www.nsloon.com/openloon/import?plugin=https://raw.githubusercontent.com/fishyo/someLoonThings/main/plugin/ad-block.lpx)   | [复制](https://raw.githubusercontent.com/fishyo/someLoonThings/main/plugin/ad-block.lpx)   |
 | 节点信息 | 查询节点外网 IP、地理位置及运营商 | [导入](https://www.nsloon.com/openloon/import?plugin=https://raw.githubusercontent.com/fishyo/someLoonThings/main/plugin/nodeIpInfo.lpx) | [复制](https://raw.githubusercontent.com/fishyo/someLoonThings/main/plugin/nodeIpInfo.lpx) |
-| 直连规则 | Supercell 游戏等直连域名          | [导入](https://www.nsloon.com/openloon/import?rules=https://raw.githubusercontent.com/fishyo/someLoonThings/main/loon/direct.lsr)        | [复制](https://raw.githubusercontent.com/fishyo/someLoonThings/main/loon/direct.lsr)       |
+| 直连规则 | Supercell 游戏等直连域名          | [导入](https://www.nsloon.com/openloon/import?rules=https://raw.githubusercontent.com/fishyo/someLoonThings/main/loon/supercell.lsr)        | [复制](https://raw.githubusercontent.com/fishyo/someLoonThings/main/loon/direct.lsr)       |
 | 代理规则 | 需要代理的域名集合                | [导入](https://www.nsloon.com/openloon/import?rules=https://raw.githubusercontent.com/fishyo/someLoonThings/main/loon/proxy.lsr)         | [复制](https://raw.githubusercontent.com/fishyo/someLoonThings/main/loon/proxy.lsr)        |
 
 
