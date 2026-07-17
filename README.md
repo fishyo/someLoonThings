@@ -33,11 +33,15 @@
 
 ## 平台兼容性
 
-| 功能 | Loon | Quantumult X | Egern |
+以下按钮加载当前测试分支，Bandwagon 与 RackNerd 共用同一个 VPS 工具模块。测试完成并合并到 `main` 前，请勿将这些地址当作稳定订阅。
+
+| 功能 | Loon 一键添加 | Quantumult X 一键添加 | Egern 一键添加 |
 | --- | --- | --- | --- |
-| Bandwagon 查询 | [`plugin/vps-tools.lpx`](plugin/vps-tools.lpx) | [`quantumultx/vps-tools.snippet`](quantumultx/vps-tools.snippet) | [`egern/vps-tools.yaml`](egern/vps-tools.yaml) |
-| RackNerd 查询 | [`plugin/vps-tools.lpx`](plugin/vps-tools.lpx) | [`quantumultx/vps-tools.snippet`](quantumultx/vps-tools.snippet) | [`egern/vps-tools.yaml`](egern/vps-tools.yaml) |
-| 九号凭据与签到 | [`plugin/ninebot.lpx`](plugin/ninebot.lpx) | [`quantumultx/ninebot.snippet`](quantumultx/ninebot.snippet) | [`egern/ninebot.yaml`](egern/ninebot.yaml) |
+| Bandwagon 查询 | [添加 VPS 工具](https://www.nsloon.com/openloon/import?plugin=https://raw.githubusercontent.com/fishyo/someLoonThings/refs/heads/refactor/cross-platform-scripts/plugin/vps-tools.lpx) | [添加 VPS 工具](https://quantumult.app/x/open-app/add-resource?remote-resource=%7B%22rewrite_remote%22%3A%5B%22https%3A%2F%2Fraw.githubusercontent.com%2Ffishyo%2FsomeLoonThings%2Frefs%2Fheads%2Frefactor%2Fcross-platform-scripts%2Fquantumultx%2Fvps-tools.snippet%2C%20tag%3DVPS%20%E6%9F%A5%E8%AF%A2%E5%B7%A5%E5%85%B7%22%5D%7D) | [添加 VPS 工具](egern:/modules/new?name=VPS%20%E6%9F%A5%E8%AF%A2%E5%B7%A5%E5%85%B7&url=https%3A%2F%2Fraw.githubusercontent.com%2Ffishyo%2FsomeLoonThings%2Frefs%2Fheads%2Frefactor%2Fcross-platform-scripts%2Fegern%2Fvps-tools.yaml) |
+| RackNerd 查询 | [添加 VPS 工具](https://www.nsloon.com/openloon/import?plugin=https://raw.githubusercontent.com/fishyo/someLoonThings/refs/heads/refactor/cross-platform-scripts/plugin/vps-tools.lpx) | [添加 VPS 工具](https://quantumult.app/x/open-app/add-resource?remote-resource=%7B%22rewrite_remote%22%3A%5B%22https%3A%2F%2Fraw.githubusercontent.com%2Ffishyo%2FsomeLoonThings%2Frefs%2Fheads%2Frefactor%2Fcross-platform-scripts%2Fquantumultx%2Fvps-tools.snippet%2C%20tag%3DVPS%20%E6%9F%A5%E8%AF%A2%E5%B7%A5%E5%85%B7%22%5D%7D) | [添加 VPS 工具](egern:/modules/new?name=VPS%20%E6%9F%A5%E8%AF%A2%E5%B7%A5%E5%85%B7&url=https%3A%2F%2Fraw.githubusercontent.com%2Ffishyo%2FsomeLoonThings%2Frefs%2Fheads%2Frefactor%2Fcross-platform-scripts%2Fegern%2Fvps-tools.yaml) |
+| 九号凭据与签到 | [添加九号签到](https://www.nsloon.com/openloon/import?plugin=https://raw.githubusercontent.com/fishyo/someLoonThings/refs/heads/refactor/cross-platform-scripts/plugin/ninebot.lpx) | [添加九号签到](https://quantumult.app/x/open-app/add-resource?remote-resource=%7B%22rewrite_remote%22%3A%5B%22https%3A%2F%2Fraw.githubusercontent.com%2Ffishyo%2FsomeLoonThings%2Frefs%2Fheads%2Frefactor%2Fcross-platform-scripts%2Fquantumultx%2Fninebot.snippet%2C%20tag%3D%E4%B9%9D%E5%8F%B7%E5%87%BA%E8%A1%8C%E7%AD%BE%E5%88%B0%22%5D%7D) | [添加九号签到](egern:/modules/new?name=%E4%B9%9D%E5%8F%B7%E5%87%BA%E8%A1%8C%E7%AD%BE%E5%88%B0&url=https%3A%2F%2Fraw.githubusercontent.com%2Ffishyo%2FsomeLoonThings%2Frefs%2Fheads%2Frefactor%2Fcross-platform-scripts%2Fegern%2Fninebot.yaml) |
+
+如果 App 没有响应一键链接，可使用对应源文件手动添加：[Loon VPS](plugin/vps-tools.lpx)、[Loon 九号](plugin/ninebot.lpx)、[Quantumult X VPS](quantumultx/vps-tools.snippet)、[Quantumult X 九号](quantumultx/ninebot.snippet)、[Egern VPS](egern/vps-tools.yaml)、[Egern 九号](egern/ninebot.yaml)。
 
 Loon 与 Quantumult X 共用经典脚本入口；Egern 使用 `script/egern/` 下的 ES Module 入口。Mihomo 目录只维护规则，不包含脚本。
 

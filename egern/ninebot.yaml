@@ -12,11 +12,11 @@ scriptings:
   - http_request:
       name: "ninebot-cookie"
       match: "^https://cn-cbu-gateway\\.ninebot\\.com/portal/api/user-sign/v(1|2)/sign"
-      script_url: "https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/egern/ninebot-cookie.js"
+      script_url: "https://raw.githubusercontent.com/fishyo/someLoonThings/refs/heads/refactor/cross-platform-scripts/script/egern/ninebot-cookie.js"
       body_required: true
       timeout: 10
   - schedule:
       name: "ninebot-sign"
       cron: "0 8 * * *"
-      script_url: "https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/egern/ninebot-sign.js"
+      script_url: "https://raw.githubusercontent.com/fishyo/someLoonThings/refs/heads/refactor/cross-platform-scripts/script/egern/ninebot-sign.js"
       timeout: 60
