@@ -1,0 +1,22 @@
+---
+name: "九号出行签到"
+description: "获取九号出行授权信息并执行每日签到"
+author: "fishyo"
+homepage: "https://github.com/fishyo/someLoonThings"
+
+mitm:
+  hostnames:
+    - "cn-cbu-gateway.ninebot.com"
+
+scriptings:
+  - http_request:
+      name: "ninebot-cookie"
+      match: "^https://cn-cbu-gateway\\.ninebot\\.com/portal/api/user-sign/v(1|2)/sign"
+      script_url: "https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/egern/ninebot-cookie.js"
+      body_required: true
+      timeout: 10
+  - schedule:
+      name: "ninebot-sign"
+      cron: "0 8 * * *"
+      script_url: "https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/egern/ninebot-sign.js"
+      timeout: 60

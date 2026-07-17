@@ -9,6 +9,8 @@
 | 名称 | 说明 | 一键导入 | 原始文件 |
 | --- | --- | --- | --- |
 | 自用拦截 | 广告拦截与 Rewrite 规则 | [导入](https://www.nsloon.com/openloon/import?plugin=https://raw.githubusercontent.com/fishyo/someLoonThings/main/plugin/ad-block.lpx) | [查看](https://raw.githubusercontent.com/fishyo/someLoonThings/main/plugin/ad-block.lpx) |
+| VPS 查询 | Bandwagon 与 RackNerd 状态通知 | [导入](https://www.nsloon.com/openloon/import?plugin=https://raw.githubusercontent.com/fishyo/someLoonThings/main/plugin/vps-tools.lpx) | [查看](https://raw.githubusercontent.com/fishyo/someLoonThings/main/plugin/vps-tools.lpx) |
+| 九号签到 | 获取凭据并每日自动签到 | [导入](https://www.nsloon.com/openloon/import?plugin=https://raw.githubusercontent.com/fishyo/someLoonThings/main/plugin/ninebot.lpx) | [查看](https://raw.githubusercontent.com/fishyo/someLoonThings/main/plugin/ninebot.lpx) |
 | Supercell 直连 | Supercell 游戏相关直连域名 | [导入](https://www.nsloon.com/openloon/import?rules=https://raw.githubusercontent.com/fishyo/someLoonThings/main/loon/supercell.lsr) | [查看](https://raw.githubusercontent.com/fishyo/someLoonThings/main/loon/supercell.lsr) |
 | 代理规则 | 需要代理的域名集合 | [导入](https://www.nsloon.com/openloon/import?rules=https://raw.githubusercontent.com/fishyo/someLoonThings/main/loon/proxy.lsr) | [查看](https://raw.githubusercontent.com/fishyo/someLoonThings/main/loon/proxy.lsr) |
 
@@ -26,6 +28,18 @@
 | --- | --- | --- |
 | [`plugin/ad-block.lpx`](plugin/ad-block.lpx) | Loon | 广告拦截与 Rewrite 规则 |
 | [`plugin/ad-block.yaml`](plugin/ad-block.yaml) | Egern | 广告拦截规则 |
+| [`plugin/vps-tools.lpx`](plugin/vps-tools.lpx) | Loon | Bandwagon 与 RackNerd 定时查询 |
+| [`plugin/ninebot.lpx`](plugin/ninebot.lpx) | Loon | 九号出行凭据获取与签到 |
+
+## 平台兼容性
+
+| 功能 | Loon | Quantumult X | Egern |
+| --- | --- | --- | --- |
+| Bandwagon 查询 | [`plugin/vps-tools.lpx`](plugin/vps-tools.lpx) | [`quantumultx/vps-tools.snippet`](quantumultx/vps-tools.snippet) | [`egern/vps-tools.yaml`](egern/vps-tools.yaml) |
+| RackNerd 查询 | [`plugin/vps-tools.lpx`](plugin/vps-tools.lpx) | [`quantumultx/vps-tools.snippet`](quantumultx/vps-tools.snippet) | [`egern/vps-tools.yaml`](egern/vps-tools.yaml) |
+| 九号凭据与签到 | [`plugin/ninebot.lpx`](plugin/ninebot.lpx) | [`quantumultx/ninebot.snippet`](quantumultx/ninebot.snippet) | [`egern/ninebot.yaml`](egern/ninebot.yaml) |
+
+Loon 与 Quantumult X 共用经典脚本入口；Egern 使用 `script/egern/` 下的 ES Module 入口。Mihomo 目录只维护规则，不包含脚本。
 
 ## 脚本
 
@@ -46,12 +60,12 @@ https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/boxjs.json
 
 ```text
 .
-├─ egern/       # Egern 规则集
+├─ egern/       # Egern 规则与模块
 ├─ icons/       # 插件图标
 ├─ loon/        # Loon 规则集
 ├─ mihomo/      # Mihomo rule-provider
 ├─ plugin/      # Loon 与 Egern 插件配置
-├─ script/      # 定时任务、BoxJS 配置和工具脚本
+├─ quantumultx/ # Quantumult X 配置片段
 └─ script/      # 定时任务、BoxJS 配置和工具脚本
 ```
 
