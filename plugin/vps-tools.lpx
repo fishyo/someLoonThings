@@ -1,8 +1,0 @@
-#!name = VPS 查询工具
-#!desc = Bandwagon 与 RackNerd 状态查询
-#!author = fishyo
-#!homepage = https://github.com/fishyo/someLoonThings
-
-[Script]
-cron "0 9 * * *" script-path=https://raw.githubusercontent.com/fishyo/someLoonThings/refs/heads/refactor/cross-platform-scripts/script/bandwagon/bwg.js, timeout=30, tag=Bandwagon 状态
-cron "5 9 * * *" script-path=https://raw.githubusercontent.com/fishyo/someLoonThings/refs/heads/refactor/cross-platform-scripts/script/racknerd/racknerd.js, timeout=30, tag=RackNerd 状态

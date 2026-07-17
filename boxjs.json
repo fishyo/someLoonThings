@@ -36,7 +36,7 @@
       ],
       "author": "@fishyo",
       "repo": "https://github.com/fishyo/someLoonThings",
-      "script": "https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/bandwagon/bwg.js",
+      "script": "https://raw.githubusercontent.com/fishyo/someLoonThings/main/scripts/bandwagon.js",
       "icons": [
         "🖲️",
         "🖲️"
@@ -74,7 +74,7 @@
       ],
       "author": "@fishyo",
       "repo": "https://github.com/fishyo/someLoonThings",
-      "script": "https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/racknerd/racknerd.js",
+      "script": "https://raw.githubusercontent.com/fishyo/someLoonThings/main/scripts/racknerd.js",
       "icons": [
         "🖥️",
         "🖥️"

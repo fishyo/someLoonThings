@@ -1,0 +1,31 @@
+---
+name: "VPS 查询工具"
+description: "Bandwagon 与 RackNerd 状态查询"
+author: "fishyo"
+homepage: "https://github.com/fishyo/someLoonThings"
+
+env_schema:
+  BWG_API_KEY:
+    name: "Bandwagon API Key"
+    description: "KiwiVM 控制面板生成的 API Key"
+  BWG_VEID:
+    name: "Bandwagon VEID"
+    description: "KiwiVM 控制面板中的 VPS VEID"
+  RACKNERD_API_KEY:
+    name: "RackNerd API Key"
+    description: "SolusVM 控制面板生成的 API Key"
+  RACKNERD_API_HASH:
+    name: "RackNerd API Hash"
+    description: "SolusVM 控制面板生成的 API Hash"
+
+scriptings:
+  - schedule:
+      name: "bandwagon-status"
+      cron: "0 9 * * *"
+      script_url: "https://raw.githubusercontent.com/fishyo/someLoonThings/refs/heads/refactor/cross-platform-scripts/egern/scripts/bandwagon.js"
+      timeout: 30
+  - schedule:
+      name: "racknerd-status"
+      cron: "5 9 * * *"
+      script_url: "https://raw.githubusercontent.com/fishyo/someLoonThings/refs/heads/refactor/cross-platform-scripts/egern/scripts/racknerd.js"
+      timeout: 30
