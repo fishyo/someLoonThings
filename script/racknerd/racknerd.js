@@ -45,16 +45,19 @@ async function main() {
   const [total, used] = (xmlValue(response.body, "bw") || "0,0").split(",").map(Number);
   const ratio = total > 0 ? used / total : 0;
   const ip = (xmlValue(response.body, "ipaddress") || xmlValue(response.body, "ip_address")).split(",")[0];
+  const status = xmlValue(response.body, "vmstat") || "未知";
+  const online = status.toLowerCase() === "online";
   const message = [
-    `IP 地址: ${ip || "未知"}`,
-    `流量: ${formatBytes(used)} / ${formatBytes(total)}`,
-    `进度: ${progress(ratio)}`,
-    `运行状态: ${xmlValue(response.body, "vmstat") || "未知"}`,
-    `节点: ${xmlValue(response.body, "node") || "未知"}`,
+    `${online ? "🟢" : "🔴"} 状态: ${status}`,
+    `🌐 IP: ${ip || "未知"}`,
+    `📊 流量: ${formatBytes(used)} / ${formatBytes(total)}`,
+    `📈 使用率: ${progress(ratio)}`,
+    `📍 节点: ${xmlValue(response.body, "node") || "未知"}`,
+    "🗓 重置: 未提供",
   ].join("\n");
-  Runtime.notify("RackNerd Status", Runtime.platform, message);
+  Runtime.notify("🖥️ VPS 状态", `RackNerd · ${Runtime.platform}`, message);
 }
 
 main()
-  .catch((error) => Runtime.notify("RackNerd 查询失败", Runtime.platform, error.message || String(error)))
+  .catch((error) => Runtime.notify("🖥️ VPS 状态", `RackNerd · ${Runtime.platform}`, `🔴 查询失败\n${error.message || String(error)}`))
   .finally(Runtime.done);

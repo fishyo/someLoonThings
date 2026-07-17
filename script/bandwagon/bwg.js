@@ -45,15 +45,16 @@ async function main() {
     : "未知";
   const ips = Array.isArray(data.ip_addresses) ? data.ip_addresses.join(", ") : "未知";
   const message = [
-    `IP 地址: ${ips}`,
-    `流量: ${bytesToGB(used)} / ${bytesToGB(total)} GB`,
-    `进度: ${progress(ratio)}`,
-    `重置时间: ${reset}`,
-    `节点位置: ${data.node_location || "未知"}`,
+    "🟢 状态: Online",
+    `🌐 IP: ${ips}`,
+    `📊 流量: ${bytesToGB(used)} / ${bytesToGB(total)} GB`,
+    `📈 使用率: ${progress(ratio)}`,
+    `📍 节点: ${data.node_location || "未知"}`,
+    `🗓 重置: ${reset}`,
   ].join("\n");
-  Runtime.notify("Bandwagon Status", Runtime.platform, message);
+  Runtime.notify("🖥️ VPS 状态", `Bandwagon · ${Runtime.platform}`, message);
 }
 
 main()
-  .catch((error) => Runtime.notify("Bandwagon 查询失败", Runtime.platform, error.message || String(error)))
+  .catch((error) => Runtime.notify("🖥️ VPS 状态", `Bandwagon · ${Runtime.platform}`, `🔴 查询失败\n${error.message || String(error)}`))
   .finally(Runtime.done);
