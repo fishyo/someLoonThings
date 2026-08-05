@@ -32,3 +32,6 @@ payload:
 
   # cider
   - DOMAIN-SUFFIX,cider.sh
+  
+  # longbridge
+  - DOMAIN-SUFFIX,longbridge.com
