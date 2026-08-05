@@ -1,7 +1,10 @@
 payload:
-  #for myself
-  - DOMAIN-KEYWORD,bitwarden
+  #
   - DOMAIN-SUFFIX,pythonhosted.org
+  
+  # bitwarden
+  - DOMAIN-KEYWORD,bitwarden
+  
   # hysteria
   - DOMAIN-KEYWORD,hysteria
 
@@ -24,4 +27,8 @@ payload:
   - DOMAIN-SUFFIX,paypalcorp.com
   - DOMAIN-KEYWORD,paypal
 
+  # Mozilla
+  - DOMAIN-SUFFIX,cdn.mozilla.net
 
+  # cider
+  - DOMAIN-SUFFIX,cider.sh
