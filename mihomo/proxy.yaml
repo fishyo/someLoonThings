@@ -35,3 +35,6 @@ payload:
   
   # longbridge
   - DOMAIN-SUFFIX,longbridge.com
+  
+  # royaleapi
+  - DOMAIN-SUFFIX,royaleapi.com
