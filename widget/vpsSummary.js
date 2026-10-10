@@ -60,13 +60,26 @@ export default async function (ctx) {
     try {
       console.log(`[RN] Fetching data...`);
       const resp = await ctx.http.get(
-        `https://nerdvm.racknerd.com/api/client/command.php?action=info&key=${rnKey}&hash=${rnHash}&bw=true`
+        `https://ctrl.racknerd.com/api/client/command.php?action=info&key=${encodeURIComponent(rnKey)}&hash=${encodeURIComponent(rnHash)}&bw=1&ipaddr=1&status=1&rdtype=json`
       );
-      const xml = await resp.text();
-      const tag = (t) => { const m = xml.match(new RegExp(`<${t}>(.*?)</${t}>`, "s")); return m ? m[1].trim() : null; };
+      const text = await resp.text();
+      let d;
+      try {
+        d = JSON.parse(text);
+      } catch (_) {
+        const tag = (t) => { const m = text.match(new RegExp(`<${t}>(.*?)</${t}>`, "s")); return m ? m[1].trim() : null; };
+        d = {
+          status: tag("status"),
+          statusmsg: tag("statusmsg"),
+          bw: tag("bw"),
+          node: tag("node"),
+          ipaddress: tag("ipaddress") || tag("ip_address"),
+          ipaddr: tag("ipaddr"),
+        };
+      }
 
-      if (tag("status") === "error") return { label: "RackNerd", flag: "🇺🇸", err: tag("statusmsg") || "API 错误" };
-      const bwRaw = tag("bw");
+      if (d.status === "error") return { label: "RackNerd", flag: "🇺🇸", err: d.statusmsg || "API 错误" };
+      const bwRaw = d.bw;
       if (!bwRaw) return { label: "RackNerd", flag: "🇺🇸", err: "无流量数据" };
 
       const [totalStr, usedStr] = bwRaw.split(",");
@@ -74,12 +87,12 @@ export default async function (ctx) {
       const used = parseFloat(usedStr) || 0;
       const pct = total > 0 ? Math.min((used / total) * 100, 100) : 0;
 
-      let nodeLabel = tag("node") || "RN";
+      let nodeLabel = d.node || "RN";
       let flag = "🇺🇸"; // 默认国旗
 
       // 尝试通过 IP 获取真实机房位置
       try {
-        const ip = (tag("ipaddress") || tag("ip_address") || "").split(",")[0].trim();
+        const ip = (d.ipaddress || d.ipaddr || "").split(",")[0].trim();
         if (ip) {
           const ipResp = await ctx.http.get(`http://ip-api.com/json/${ip}?lang=en`);
           const ipData = await ipResp.json();

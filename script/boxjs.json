@@ -48,7 +48,7 @@
       "descs_html": [
         "查询 RackNerd VPS 服务器状态、带宽使用情况",
         "支持实时查询带宽、内存、硬盘使用、IP地址等信息",
-        "使用 SolusVM API 进行数据获取"
+        "使用 RackNerd API 进行数据获取"
       ],
       "keys": [
         "racknerd.apiKey",

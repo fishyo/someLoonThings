@@ -126,17 +126,17 @@ function getServiceInfo() {
   // 验证配置
   if (!config.apiKey || !config.apiHash) {
     console.log("❌ Configuration missing");
-    $notification.post(
+    $.notify(
       "⚠️ 配置缺失",
       "",
       "请在 BoxJS 中配置 RackNerd API Key 和 Hash"
     );
-    $done();
+    $.done();
     return;
   }
 
-  // SolusVM API
-  const apiUrl = `https://nerdvm.racknerd.com/api/client/command.php?action=info&key=${config.apiKey}&hash=${config.apiHash}&ipaddr=true&hdd=true&mem=true&bw=true&status=true`;
+  // RackNerd Client API (New Endpoint)
+  const apiUrl = `https://ctrl.racknerd.com/api/client/command.php?action=info&key=${encodeURIComponent(config.apiKey)}&hash=${encodeURIComponent(config.apiHash)}&ipaddr=1&hdd=1&mem=1&bw=1&status=1&rdtype=json`;
   const request = {
     url: apiUrl,
     method: "GET",
@@ -149,11 +149,11 @@ function getServiceInfo() {
   const maskedUrl = apiUrl.replace(/key=([^&]+)/, "key=****").replace(/hash=([^&]+)/, "hash=****");
   console.log(`Request API: ${maskedUrl}`);
 
-  $httpClient.get(request, function (error, response, data) {
+  $.get(request, function (error, response, data) {
     if (error) {
       console.error("❌ Request Error:", error);
-      $notification.post("❌ 查询失败", "", error.message);
-      $done();
+      $.notify("❌ 查询失败", "", error.message || String(error));
+      $.done();
       return;
     }
 
@@ -161,29 +161,40 @@ function getServiceInfo() {
     // console.log("Response Body:", data); // Uncomment for debugging
 
     try {
-      const xmlData = parseXML(data);
-      console.log("Parsed Data:", JSON.stringify(xmlData, null, 2));
+      let resData;
+      try {
+        resData = typeof data === "object" ? data : JSON.parse(data);
+      } catch (_) {
+        resData = parseXML(data);
+      }
+      console.log("Parsed Data:", JSON.stringify(resData, null, 2));
 
-      if (xmlData.status === "error") {
-        console.warn("⚠️ API Returned Error:", xmlData.statusmsg);
-        $notification.post("❌ API Error", "", xmlData.statusmsg);
-        $done();
+      if (resData.status === "error") {
+        console.warn("⚠️ API Returned Error:", resData.statusmsg);
+        $.notify("❌ API Error", "", resData.statusmsg || "未知错误");
+        $.done();
         return;
       }
 
-      // 资源计算
+      // 资源计算: total_bytes,used_bytes,free_bytes,percent_used
       const parseResource = (str) => {
           if (!str) return { total: 0, used: 0, free: 0, percent: "0.00" };
           const parts = str.split(",").map(s => s.trim());
-          let total = 0, used = 0;
-          if (parts.length >= 2) {
-              total = parseFloat(parts[0]);
-              used = parseFloat(parts[1]);
+          let total = 0, used = 0, free = 0;
+          let percent = "0.00";
+          if (parts.length >= 4) {
+              total = parseFloat(parts[0]) || 0;
+              used = parseFloat(parts[1]) || 0;
+              free = parseFloat(parts[2]) || 0;
+              percent = parseFloat(parts[3]).toFixed(2);
+          } else if (parts.length >= 2) {
+              total = parseFloat(parts[0]) || 0;
+              used = parseFloat(parts[1]) || 0;
+              percent = total > 0 ? ((used / total) * 100).toFixed(2) : "0.00";
           } else {
               used = parseFloat(str) || 0;
           }
-          let percent = total > 0 ? (used / total) * 100 : 0;
-          return { total: total, used: used, percent: percent.toFixed(2) };
+          return { total, used, free, percent };
       };
 
       // 格式化
@@ -195,9 +206,11 @@ function getServiceInfo() {
           return parseFloat((bytes / Math.pow(k, i)).toFixed(Math.max(0, decimals))) + ' ' + sizes[i];
       };
 
-      const bwInfo = parseResource(xmlData.bw);
-      const ipAddress = (xmlData.ipaddress || xmlData.ip_address || "").split(',')[0];
-      const vmStatus = xmlData.vmstat || "Unknown";
+      const bwInfo = parseResource(resData.bw);
+      const memInfo = parseResource(resData.mem);
+      const hddInfo = parseResource(resData.hdd);
+      const ipAddress = (resData.ipaddress || resData.ipaddr || resData.ip_address || "").split(',')[0].trim();
+      const vmStatus = resData.vmstat || resData.statusmsg || "Unknown";
       const vmStatusIcon = vmStatus.toLowerCase() === "online" ? "🟢" : "🔴";
 
       // 进度条
@@ -214,33 +227,39 @@ function getServiceInfo() {
           let msg = ``;
           if (ipAddress) msg += `IP 地址: ${ipAddress}\n`; 
           if (bwInfo.total > 0) {
-              msg += `当前使用: ${formatBytes(bwInfo.used)} / ${formatBytes(bwInfo.total)}\n`;
-              msg += `使用进度: ${getProgressBar(bwInfo.percent)} ${bwInfo.percent}%\n`;
+              msg += `流量使用: ${formatBytes(bwInfo.used)} / ${formatBytes(bwInfo.total)}\n`;
+              msg += `流量进度: ${getProgressBar(bwInfo.percent)} ${bwInfo.percent}%\n`;
+          }
+          if (memInfo.total > 0) {
+              msg += `内存使用: ${formatBytes(memInfo.used)} / ${formatBytes(memInfo.total)} (${memInfo.percent}%)\n`;
+          }
+          if (hddInfo.total > 0) {
+              msg += `硬盘使用: ${formatBytes(hddInfo.used)} / ${formatBytes(hddInfo.total)} (${hddInfo.percent}%)\n`;
           }
           if (location) {
               msg += `节点位置: ${location}\n`;
-          } else if (xmlData.node && xmlData.node !== "N/A" && xmlData.node !== "") {
-              msg += `节点位置: ${xmlData.node}\n`;
+          } else if (resData.node && resData.node !== "N/A" && resData.node !== "") {
+              msg += `节点位置: ${resData.node}\n`;
           }
           msg += `运行状态: ${vmStatusIcon} ${vmStatus}\n`;
-          if (xmlData.hostname && xmlData.hostname !== "N/A") {
-             msg += `主机名称: ${xmlData.hostname}\n`;
+          if (resData.hostname && resData.hostname !== "N/A") {
+             msg += `主机名称: ${resData.hostname}\n`;
           }
           
           console.log("🔔 Sending Notification...");
-          $notification.post("🖥️ RackNerd Status", "", msg);
-          $done();
+          $.notify("🖥️ RackNerd Status", "", msg);
+          $.done();
       };
 
       // IP 位置查询
       if (ipAddress) {
           const ipApiUrl = `http://ip-api.com/json/${ipAddress}?lang=en`;
           console.log(`Querying IP Location for: ${ipAddress}`);
-          $httpClient.get({ url: ipApiUrl }, (err, resp, body) => {
+          $.get({ url: ipApiUrl }, (err, resp, body) => {
               let location = null;
               if (!err && body) {
                   try {
-                      const ipData = JSON.parse(body);
+                      const ipData = typeof body === "object" ? body : JSON.parse(body);
                       if (ipData && ipData.status === 'success') {
                           location = `${ipData.countryCode} ${ipData.regionName}`; 
                           console.log(`IP Location Found: ${location}`);
@@ -261,8 +280,8 @@ function getServiceInfo() {
 
     } catch (e) {
       console.error("❌ Parse Error:", e);
-      $notification.post("❌ 解析错误", "", e.message);
-      $done();
+      $.notify("❌ 解析错误", "", e.message || String(e));
+      $.done();
     }
   });
 }
@@ -270,7 +289,7 @@ function getServiceInfo() {
 function main() {
   if (typeof $environment !== "undefined" && $environment.platform === "boxjs") {
     const config = getConfig();
-    $done({
+    $.done({
         title: boxjsConfig.title,
         icon: boxjsConfig.icon,
         items: boxjsConfig.settings.map((item) => ({
