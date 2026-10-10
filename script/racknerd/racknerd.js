@@ -16,6 +16,7 @@ const $ = {
   isLoon: typeof $loon !== "undefined",
   isQuanX: typeof $task !== "undefined",
   isSurge: typeof $httpClient !== "undefined" && typeof $loon === "undefined",
+  isEgern: typeof ctx !== "undefined",
   read: (key) => {
     if (typeof $persistentStore !== "undefined")
       return $persistentStore.read(key);
@@ -33,15 +34,54 @@ const $ = {
     else console.log(`${title}\n${sub}\n${msg}`);
   },
   get: (opts, cb) => {
-    if (typeof $httpClient !== "undefined") $httpClient.get(opts, cb);
-    else if (typeof $task !== "undefined") {
+    const url = typeof opts === "string" ? opts : (opts.url || opts);
+    // 优先支持 Egern ctx.http 原生请求，避免兼容层中访问 e.body 报错
+    if (typeof ctx !== "undefined" && ctx.http) {
+      const httpOpts = typeof opts === "object" ? opts : {};
+      ctx.http.get(url, httpOpts).then(
+        async (resp) => {
+          if (!resp) {
+            cb(new Error("Empty response"), null, null);
+            return;
+          }
+          let data = "";
+          try {
+            data = await resp.text();
+          } catch (_) {
+            data = (resp && resp.body) || "";
+          }
+          cb(null, { status: resp.status || 200, statusCode: resp.status || 200 }, data);
+        },
+        (err) => cb(err, null, null)
+      ).catch((err) => cb(err, null, null));
+      return;
+    }
+    if (typeof $httpClient !== "undefined") {
+      $httpClient.get(opts, (err, resp, data) => {
+        let body = data;
+        if (body === undefined && resp && resp.body !== undefined) {
+          body = resp.body;
+        }
+        cb(err, resp, body);
+      });
+      return;
+    }
+    if (typeof $task !== "undefined") {
       if (typeof opts === "string") opts = { url: opts };
       opts.method = "GET";
       $task.fetch(opts).then(
-        (resp) => cb(null, { ...resp, status: resp.statusCode }, resp.body),
-        (err) => cb(err, null, null),
-      );
+        (resp) => {
+          if (!resp) {
+            cb(new Error("Empty response"), null, null);
+            return;
+          }
+          cb(null, { ...resp, status: resp.statusCode || 200 }, resp.body || "");
+        },
+        (err) => cb(err, null, null)
+      ).catch((err) => cb(err, null, null));
+      return;
     }
+    cb(new Error("No supported HTTP client found"), null, null);
   },
   done: (obj) => {
     if (typeof $done !== "undefined") $done(obj);
@@ -111,7 +151,9 @@ function saveConfig(apiKey, apiHash) {
 // 解析 XML
 function parseXML(xmlString) {
   const result = {};
-  const regex = /<(\w+)>(.*?)<\/\1>/gs;
+  if (!xmlString || typeof xmlString !== "string") return result;
+  // 匹配所有标签及其内部值，兼容 <ctrl> 根节点及包含错误信息的 XML
+  const regex = /<([a-zA-Z0-9_]+)>([^<]+)<\/\1>/g;
   let match;
   while ((match = regex.exec(xmlString)) !== null) {
     result[match[1]] = match[2].trim();
@@ -157,19 +199,31 @@ function getServiceInfo() {
       return;
     }
 
-    console.log(`✅ Response Status: ${response.status}`);
+    if (!data) {
+      console.error("❌ Empty Response Data");
+      $.notify("❌ 查询失败", "", "服务器未返回数据");
+      $.done();
+      return;
+    }
+
+    console.log(`✅ Response Status: ${response ? (response.status || response.statusCode) : "OK"}`);
     // console.log("Response Body:", data); // Uncomment for debugging
 
     try {
-      let resData;
-      try {
-        resData = typeof data === "object" ? data : JSON.parse(data);
-      } catch (_) {
-        resData = parseXML(data);
+      let resData = null;
+      if (typeof data === "object" && data !== null) {
+        resData = data;
+      } else {
+        try {
+          resData = JSON.parse(data);
+        } catch (_) {
+          resData = parseXML(data);
+        }
       }
+      if (!resData) resData = {};
       console.log("Parsed Data:", JSON.stringify(resData, null, 2));
 
-      if (resData.status === "error") {
+      if (resData.status === "error" || (resData.statusmsg && resData.status !== "success")) {
         console.warn("⚠️ API Returned Error:", resData.statusmsg);
         $.notify("❌ API Error", "", resData.statusmsg || "未知错误");
         $.done();
