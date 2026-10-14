@@ -38,3 +38,6 @@ payload:
   
   # royaleapi
   - DOMAIN-SUFFIX,royaleapi.com
+  
+  # everia
+  - DOMAIN-SUFFIX,everia.club
