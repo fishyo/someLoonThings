@@ -44,3 +44,13 @@ payload:
   
   # reiobox
   - DOMAIN-SUFFIX,reiobox.top
+  
+  # cloudflare
+  - DOMAIN-KEYWORD,cloudflare
+  - DOMAIN-SUFFIX,pages.dev
+  - DOMAIN-SUFFIX,workers.dev
+  - DOMAIN-SUFFIX,warp.plus
+  - DOMAIN-SUFFIX,cf-ipfs.com
+  - DOMAIN-SUFFIX,videodelivery.net
+  - DOMAIN-SUFFIX,one.one.one
+
