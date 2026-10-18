@@ -53,4 +53,8 @@ payload:
   - DOMAIN-SUFFIX,cf-ipfs.com
   - DOMAIN-SUFFIX,videodelivery.net
   - DOMAIN-SUFFIX,one.one.one
+  
+  # uindex
+  - DOMAIN-SUFFIX,uindex.org
+
 
