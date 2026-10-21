@@ -17,4 +17,4 @@ veid = input, "", type=string, tag=VEID, desc=KiwiVM 面板中的 VEID（留空�
 apiKey = input, "", type=string, tag=API Key, desc=KiwiVM 面板中的 API KEY（留空读取 BoxJS）
 
 [Script]
-cron ${cronExp} then script("https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/bandwagon/bwg.js", {veid: "${veid}", apiKey: "${apiKey}"}) with enable=${enable}, tag="搬瓦工VPS", timeout=60
+cron ${cronExp} then script("https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/bandwagon/bwg.js", {${veid}, ${apiKey}}) with enable=${enable}, tag="搬瓦工VPS", timeout=60
