@@ -39,6 +39,9 @@ payload:
   # royaleapi
   - DOMAIN-SUFFIX,royaleapi.com
   
+  # giphy
+  - DOMAIN-SUFFIX,giphy.com
+
   # everia
   - DOMAIN-SUFFIX,everia.club
   
@@ -56,5 +59,3 @@ payload:
   
   # uindex
   - DOMAIN-SUFFIX,uindex.org
-
-

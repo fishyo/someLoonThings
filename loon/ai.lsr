@@ -1,0 +1,91 @@
+# ==============================================================================
+# AI Services Ruleset (Loon Format)
+# Maintainer: fishyo
+# Homepage: https://github.com/fishyo/someLoonThings
+# Description: 整合主流 AI 服务（OpenAI, Claude, Gemini, Grok, Perplexity, Copilot 等）
+# ==============================================================================
+
+# ----------------- Google Gemini & AI Studio -----------------
+# 针对 Gemini 及其后端接口特别优化（确保不报地区错误）
+DOMAIN-SUFFIX,gemini.google.com
+DOMAIN-SUFFIX,bard.google.com
+DOMAIN-SUFFIX,aistudio.google.com
+DOMAIN-SUFFIX,makersuite.google.com
+DOMAIN-SUFFIX,generativeai.google
+DOMAIN-SUFFIX,generativelanguage.googleapis.com
+DOMAIN-SUFFIX,alkalimakersuite-pa.googleapis.com
+DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com
+DOMAIN-SUFFIX,geller-pa.googleapis.com
+DOMAIN-SUFFIX,odin-pa.googleapis.com
+DOMAIN-SUFFIX,aiplatform.googleapis.com
+DOMAIN-SUFFIX,notebooklm.google
+DOMAIN-SUFFIX,notebooklm.google.com
+DOMAIN-SUFFIX,deepmind.google
+DOMAIN-SUFFIX,deepmind.com
+DOMAIN-SUFFIX,ai.google.dev
+DOMAIN,waa-pa.clients6.google.com
+DOMAIN,alkali-pa.clients6.google.com
+# Google APIs 通用域名（Gemini 依赖此域名且对代理地区极其敏感，放入 AI 组保证可用）
+DOMAIN-SUFFIX,googleapis.com
+
+# ----------------- OpenAI (ChatGPT & Sora) -----------------
+DOMAIN-SUFFIX,chatgpt.com
+DOMAIN-SUFFIX,openai.com
+DOMAIN-SUFFIX,oaistatic.com
+DOMAIN-SUFFIX,oaiusercontent.com
+DOMAIN-SUFFIX,sora.com
+DOMAIN-SUFFIX,openaiapi-site.azureedge.net
+DOMAIN-SUFFIX,openaicomproductionae4b.blob.core.windows.net
+DOMAIN-SUFFIX,openaicom.imgix.net
+# Statsig 特性标记服务（OpenAI 灰度控制必须走代理）
+DOMAIN-SUFFIX,featuregates.org
+
+# ----------------- Anthropic Claude -----------------
+DOMAIN-SUFFIX,anthropic.com
+DOMAIN-SUFFIX,claude.ai
+DOMAIN-SUFFIX,claudeusercontent.com
+
+# ----------------- xAI (Grok) -----------------
+DOMAIN-SUFFIX,x.ai
+DOMAIN-SUFFIX,grok.com
+
+# ----------------- Perplexity AI -----------------
+DOMAIN-SUFFIX,perplexity.ai
+DOMAIN-SUFFIX,pplx.ai
+
+# ----------------- Microsoft Copilot -----------------
+DOMAIN-SUFFIX,copilot.microsoft.com
+DOMAIN-SUFFIX,sydney.bing.com
+DOMAIN,edgeservices.bing.com
+
+# ----------------- Midjourney -----------------
+DOMAIN-SUFFIX,midjourney.com
+DOMAIN-SUFFIX,cdn.midjourney.com
+
+# ----------------- 开发者与热门 AI 工具 (Cursor, Groq, Poe, Suno等) -----------------
+# Cursor 辅助编程
+DOMAIN-SUFFIX,cursor.com
+DOMAIN-SUFFIX,cursor.sh
+DOMAIN-SUFFIX,tavily.com
+# Groq 极速推理
+DOMAIN-SUFFIX,groq.com
+# Poe
+DOMAIN-SUFFIX,poe.com
+DOMAIN-SUFFIX,poecdn.net
+# 音乐/语音 AI (Suno, Udio, ElevenLabs)
+DOMAIN-SUFFIX,suno.com
+DOMAIN-SUFFIX,suno.ai
+DOMAIN-SUFFIX,udio.com
+DOMAIN-SUFFIX,elevenlabs.io
+# 开源与推理平台 (Mistral, Cohere, Together, Replicate, Fal, v0)
+DOMAIN-SUFFIX,mistral.ai
+DOMAIN-SUFFIX,cohere.com
+DOMAIN-SUFFIX,cohere.ai
+DOMAIN-SUFFIX,together.ai
+DOMAIN-SUFFIX,together.xyz
+DOMAIN-SUFFIX,replicate.com
+DOMAIN-SUFFIX,replicate.delivery
+DOMAIN-SUFFIX,fal.ai
+DOMAIN-SUFFIX,v0.dev
+DOMAIN-SUFFIX,huggingface.co
+DOMAIN-SUFFIX,hf.space

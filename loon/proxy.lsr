@@ -1,4 +1,3 @@
-
 #for myself
 DOMAIN-SUFFIX,bitwarden
 DOMAIN-SUFFIX,pythonhosted.org
@@ -33,4 +32,8 @@ DOMAIN-SUFFIX,one.one.one
 # uindex
 DOMAIN-SUFFIX,uindex.org
 
+# royaleapi
+DOMAIN-SUFFIX,royaleapi.com
 
+# giphy
+DOMAIN-SUFFIX,giphy.com

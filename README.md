@@ -1,42 +1,72 @@
 # Some Loon Things
 
-自用 Loon 脚本、规则和插件仓库，支持一键导入。
+自用 Loon / Mihomo 插件、规则和跨平台脚本仓库，支持一键导入与参数化配置。
 
-## 🚀 快速导入
+---
 
-| 名称     | 描述                              | 一键导入                                                                                                                                 | 链接                                                                                       |
-| -------- | --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| 自用拦截 | 广告拦截与 Rewrite 规则           | [导入](https://www.nsloon.com/openloon/import?plugin=https://raw.githubusercontent.com/fishyo/someLoonThings/main/plugin/ad-block.lpx)   | [复制](https://raw.githubusercontent.com/fishyo/someLoonThings/main/plugin/ad-block.lpx)   |
-| 九号出行 | 九号电动车自动签到与 Cookie 获取  | [导入](https://www.nsloon.com/openloon/import?plugin=https://raw.githubusercontent.com/fishyo/someLoonThings/main/plugin/ninebot.plugin) | [复制](https://raw.githubusercontent.com/fishyo/someLoonThings/main/plugin/ninebot.plugin) |
-| 搬瓦工状态 | Bandwagon VPS 状态与流量定时查询 | [导入](https://www.nsloon.com/openloon/import?plugin=https://raw.githubusercontent.com/fishyo/someLoonThings/main/plugin/bandwagon.plugin) | [复制](https://raw.githubusercontent.com/fishyo/someLoonThings/main/plugin/bandwagon.plugin) |
-| RackNerd状态 | RackNerd VPS 状态与流量定时查询 | [导入](https://www.nsloon.com/openloon/import?plugin=https://raw.githubusercontent.com/fishyo/someLoonThings/main/plugin/racknerd.plugin) | [复制](https://raw.githubusercontent.com/fishyo/someLoonThings/main/plugin/racknerd.plugin) |
-| 节点信息 | 查询节点外网 IP、地理位置及运营商 | [导入](https://www.nsloon.com/openloon/import?plugin=https://raw.githubusercontent.com/fishyo/someLoonThings/main/plugin/nodeIpInfo.lpx) | [复制](https://raw.githubusercontent.com/fishyo/someLoonThings/main/plugin/nodeIpInfo.lpx) |
-| 直连规则 | Supercell 游戏等直连域名          | [导入](https://www.nsloon.com/openloon/import?rules=https://raw.githubusercontent.com/fishyo/someLoonThings/main/loon/supercell.lsr)        | [复制](https://raw.githubusercontent.com/fishyo/someLoonThings/main/loon/direct.lsr)       |
-| 代理规则 | 需要代理的域名集合                | [导入](https://www.nsloon.com/openloon/import?rules=https://raw.githubusercontent.com/fishyo/someLoonThings/main/loon/proxy.lsr)         | [复制](https://raw.githubusercontent.com/fishyo/someLoonThings/main/loon/proxy.lsr)        |
+## 🚀 插件一键导入 (Loon Plugins)
 
+| 插件名称 | 说明 | 一键导入 | 直链 / 源码 |
+| :--- | :--- | :---: | :---: |
+| **九号出行** | 九号电动车自动签到与 Cookie 捕获，支持自定义时间与独立开关 | [导入 Loon](https://www.nsloon.com/openloon/import?plugin=https://raw.githubusercontent.com/fishyo/someLoonThings/main/plugin/ninebot.plugin) | [查看](https://raw.githubusercontent.com/fishyo/someLoonThings/main/plugin/ninebot.plugin) |
+| **搬瓦工状态** | BandwagonHost VPS 流量与运行状态定时查询，免 BoxJS 直接在 UI 配置 | [导入 Loon](https://www.nsloon.com/openloon/import?plugin=https://raw.githubusercontent.com/fishyo/someLoonThings/main/plugin/bandwagon.plugin) | [查看](https://raw.githubusercontent.com/fishyo/someLoonThings/main/plugin/bandwagon.plugin) |
+| **RackNerd状态** | RackNerd VPS 流量、内存与运行状态定时查询，免 BoxJS 直接在 UI 配置 | [导入 Loon](https://www.nsloon.com/openloon/import?plugin=https://raw.githubusercontent.com/fishyo/someLoonThings/main/plugin/racknerd.plugin) | [查看](https://raw.githubusercontent.com/fishyo/someLoonThings/main/plugin/racknerd.plugin) |
+| **自用拦截** | 广告拦截与 Header 重写（少数派、华尔街见闻、京东开屏等） | [导入 Loon](https://www.nsloon.com/openloon/import?plugin=https://raw.githubusercontent.com/fishyo/someLoonThings/main/plugin/ad-block.lpx) | [查看](https://raw.githubusercontent.com/fishyo/someLoonThings/main/plugin/ad-block.lpx) |
 
-## 📋 插件详情
+---
 
-### 自用拦截
+## 🌐 分流规则集 (Rule-Sets)
 
-广告拦截、Rewrite 规则。
+| 规则名称 | 平台 | 说明 | 一键导入 / 链接 |
+| :--- | :---: | :--- | :---: |
+| **AI 服务分流** | Loon | 聚合全网主流 AI 服务（Gemini, OpenAI, Claude, Grok 等） | [导入 Loon](https://www.nsloon.com/openloon/import?rules=https://raw.githubusercontent.com/fishyo/someLoonThings/main/loon/ai.lsr) / [查看](https://raw.githubusercontent.com/fishyo/someLoonThings/main/loon/ai.lsr) |
+| **Supercell 直连** | Loon | 皇室战争、荒野乱斗等官方直连域名列表 | [导入 Loon](https://www.nsloon.com/openloon/import?rules=https://raw.githubusercontent.com/fishyo/someLoonThings/main/loon/supercell.lsr) / [查看](https://raw.githubusercontent.com/fishyo/someLoonThings/main/loon/supercell.lsr) |
+| **自用代理域名** | Loon | 个人常用代理域名集合（Cloudflare, Bitwarden 等） | [导入 Loon](https://www.nsloon.com/openloon/import?rules=https://raw.githubusercontent.com/fishyo/someLoonThings/main/loon/proxy.lsr) / [查看](https://raw.githubusercontent.com/fishyo/someLoonThings/main/loon/proxy.lsr) |
+| **AI 服务分流** | Mihomo | Clash / Mihomo 兼容规则集 (`rule-providers`) | [查看](https://raw.githubusercontent.com/fishyo/someLoonThings/main/mihomo/ai.yaml) |
+| **Supercell 直连** | Mihomo | Clash / Mihomo 兼容规则集 (`rule-providers`) | [查看](https://raw.githubusercontent.com/fishyo/someLoonThings/main/mihomo/direct.yaml) |
+| **自用代理规则** | Mihomo | Clash / Mihomo 兼容规则集 (`rule-providers`) | [查看](https://raw.githubusercontent.com/fishyo/someLoonThings/main/mihomo/proxy.yaml) |
 
-### 节点信息
+---
 
-查询节点 IP、地理位置、运营商信息。支持 IPv4/IPv6 双栈查询。
+## 📋 插件详细特性
 
-**使用方法**: 节点列表长按 → 脚本 → 节点信息
+### 1. 🛵 九号出行 (`ninebot.plugin`)
+- **双开关控制**：
+  - `启用签到`：可随时一键关闭自动签到，不弹窗不打扰；
+  - `获取Cookie`：捕获成功后关闭，Cookie 失效时一键打开，进入九号 App 自动抓取更新。
+- **自定义时间**：支持在 Loon 插件设置中直接修改 Cron 表达式，默认每天 `06:20` 执行。
+- **内置 MitM**：自动按需加载 `cn-cbu-gateway.ninebot.com` 解密，主配置无需手动维护。
 
-## 📜 脚本说明
+### 2. 🖲️ 搬瓦工 VPS 状态 (`bandwagon.plugin`)
+- **原生 UI 输入**：支持直接在 Loon 插件设置内填写 `VEID` 和 `API Key`，完全告别 BoxJS。
+- **兼容性**：若插件参数留空，自动向后兼容读取 BoxJS 持久化数据。
+- **自定义执行**：默认每天 `06:02` 执行，支持在插件设置中修改 Cron 时间与独立开关。
+
+### 3. 🖥️ RackNerd VPS 状态 (`racknerd.plugin`)
+- **原生 UI 输入**：支持直接在 Loon 插件设置内填写 `API Key` 和 `API Hash`。
+- **兼容性**：若插件参数留空，自动向后兼容读取 BoxJS 持久化数据。
+- **自定义执行**：默认每天 `06:01` 执行，支持在插件设置中修改 Cron 时间与独立开关。
+
+### 4. 🛡️ 自用拦截 (`ad-block.lpx`)
+- 包含少数派 RSS 图片防盗链 Header 修正；
+- 拦截华尔街见闻、京东开屏 CMS、上汽大众、同花顺等应用广告。
+
+---
+
+## 📜 跨平台脚本说明 (Egern / Surge / Quantumult X)
+
+所有脚本均具备跨平台兼容能力，支持通过 BoxJS 或环境变量配置参数：
 
 **BoxJS 订阅**: `https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/boxjs.json`
 
-| 脚本            | 说明                               | 链接                                                                                                    |
-| --------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| `bwg.js`        | Bandwagon VPS 状态查询，支持 BoxJS | [复制](https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/bandwagon/bwg.js)            |
-| `racknerd.js`   | RackNerd VPS 状态查询，支持 BoxJS  | [复制](https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/racknerd/racknerd.js)        |
-| `nodeIpInfo.js` | 节点 IP 信息查询                   | [复制](https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/nodeInfoCheck/nodeIpInfo.js) |
+| 脚本文件 | 适用平台 | 描述 | 直链 |
+| :--- | :--- | :--- | :---: |
+| `bwg.js` | Loon / Surge / QX / Egern | Bandwagon VPS 状态查询 | [查看脚本](https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/bandwagon/bwg.js) |
+| `racknerd.js` | Loon / Surge / QX / Egern | RackNerd VPS 状态查询 | [查看脚本](https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/racknerd/racknerd.js) |
+| `9botsign.js` | Loon / Surge / QX / Egern | 九号出行每日签到任务 | [查看脚本](https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/9bot/9botsign.js) |
+| `9bot_cookie.js`| Loon / Egern | 九号出行 Token / Cookie 抓取 | [查看脚本](https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/9bot/9bot_cookie.js) |
 
+---
 
 ## 📄 License
 

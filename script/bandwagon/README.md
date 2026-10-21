@@ -1,40 +1,49 @@
 # Bandwagon Status
 
-BandwagonHost VPS 状态查询脚本 (基于 Kiwivm API)。
+BandwagonHost VPS 状态查询脚本 (基于 KiwiVM API)。
 
 ## ✨ 功能
 
-- 📊 流量监控：已用流量/剩余流量/进度条
-- ℹ️ 基本信息：IP、节点位置、流量重置日期
-- ⚙️ BoxJS 管理：支持配置 API Key & VEID
+- 📊 流量监控：已用流量 / 剩余流量 / 进度条
+- ℹ️ 基本信息：IP 地址、节点位置、流量重置日期、带宽倍数
+- ⚙️ 双配置支持：支持 Loon 插件原生 UI 参数填写，亦兼容 BoxJS / Egern 环境变量
 
-## ⚙️ 配置指南
+---
 
-1. **获取凭证**  
-   登录 [KiwiVM Control Panel](https://kiwivm.64clouds.com/) -> `API` -> `Generate New API Key`.
-   (VEID 可在 URL 或面板首页查看)
+## 🚀 使用方式
 
-2. **BoxJS 订阅**  
-   添加订阅 URL:
+### 方式一：Loon 插件（推荐，最简便）
 
+直接导入 Loon 插件，支持在手机设置页原生输入 API Key、VEID 及自定义查询时间，无需借助 BoxJS：
+
+- **一键导入**: [点击导入 Loon](https://www.nsloon.com/openloon/import?plugin=https://raw.githubusercontent.com/fishyo/someLoonThings/main/plugin/bandwagon.plugin)
+- **插件地址**:
+  ```text
+  https://raw.githubusercontent.com/fishyo/someLoonThings/main/plugin/bandwagon.plugin
+  ```
+
+---
+
+### 方式二：传统定时脚本 + BoxJS / 环境变量
+
+1. **获取 API 凭证**  
+   登录 [KiwiVM Control Panel](https://kiwivm.64clouds.com/) -> `API` -> `Generate New API Key`。  
+   (VEID 可在面板顶部 URL 或首页概览中查看)。
+
+2. **配置方式**  
+   - **BoxJS 订阅**:
+     ```text
+     https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/boxjs.json
+     ```
+     在 BoxJS 应用列表选择 `Bandwagon 服务器状态`，填入 `API Key` 和 `VEID`。
+   - **Egern 环境变量**:
+     ```yaml
+     env:
+       BWG_API_KEY: "your_api_key"
+       BWG_VEID: "your_veid"
+     ```
+
+3. **脚本地址**:
    ```text
-   https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/boxjs.json
+   https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/bandwagon/bwg.js
    ```
-
-3. **填写配置**  
-   在 BoxJS 应用列表中选择 `Bandwagon 服务器状态`，填入 `API Key` 和 `VEID`。
-
-## 🚀 安装链接
-
-**脚本地址**:
-
-```text
-https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/bandwagon/bwg.js
-```
-
-**Loon 示例**:
-
-```ini
-[Script]
-cron "0 9 * * *" script-path=https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/bandwagon/bwg.js, timeout=10, tag=Bandwagon
-```
