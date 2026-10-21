@@ -1,0 +1,20 @@
+#!name = RackNerd VPS 状态
+#!desc = RackNerd VPS 运行状态与流量定时查询。支持在插件配置页直接填写 API 信息及修改执行时间，留空则自动读取 BoxJS。
+#!author = fishyo
+#!homepage = https://github.com/fishyo/someLoonThings
+#!icon = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Server.png
+#!date = 2026-10-21
+
+[Argument]
+# 1. 查询任务总开关
+enable = switch, true, type=boolean, tag=启用查询, desc=是否自动查询并推送状态
+
+# 2. 定时查询时间
+cronExp = input, "1 6 * * *", type=string, tag=查询时间, desc=标准 Cron 表达式（分 时 日 月 周），默认每天 06:01
+
+# 3. API 配置（留空自动读取 BoxJS）
+apiKey = input, "", type=string, tag=API Key, desc=RackNerd API Key（留空读取 BoxJS）
+apiHash = input, "", type=string, tag=API Hash, desc=RackNerd API Hash（留空读取 BoxJS）
+
+[Script]
+cron ${cronExp} then script("https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/racknerd/racknerd.js", {apiKey: "${apiKey}", apiHash: "${apiHash}"}) with enable=${enable}, tag="RackNerd", timeout=60

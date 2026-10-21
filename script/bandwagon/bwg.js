@@ -70,16 +70,44 @@ const boxjsConfig = {
   ],
 };
 
+// 解析 $argument 插件参数
+function parseArgument() {
+  if (typeof $argument === "undefined" || !$argument) return {};
+  if (typeof $argument === "object") return $argument;
+  if (typeof $argument === "string") {
+    try {
+      return JSON.parse($argument);
+    } catch (e) {
+      const res = {};
+      $argument.split("&").forEach((pair) => {
+        const idx = pair.indexOf("=");
+        if (idx > -1) {
+          res[pair.substring(0, idx).trim()] = pair.substring(idx + 1).trim();
+        }
+      });
+      return res;
+    }
+  }
+  return {};
+}
+
 // 获取配置
 function getConfig() {
   let apiKey = "";
   let veid = "";
 
+  // 0. 支持 Loon 插件参数 ($argument)
+  const arg = parseArgument();
+  if (arg.apiKey && String(arg.apiKey).trim()) apiKey = String(arg.apiKey).trim();
+  if (arg.veid && String(arg.veid).trim()) veid = String(arg.veid).trim();
+
+  // 1. Egern 环境变量
   if (typeof ctx !== "undefined" && ctx.env) {
-    if (ctx.env.BWG_API_KEY) apiKey = ctx.env.BWG_API_KEY;
-    if (ctx.env.BWG_VEID) veid = ctx.env.BWG_VEID;
+    if (ctx.env.BWG_API_KEY) apiKey = apiKey || ctx.env.BWG_API_KEY;
+    if (ctx.env.BWG_VEID) veid = veid || ctx.env.BWG_VEID;
   }
 
+  // 2. BoxJS / 持久化存储 (回退机制)
   if (!apiKey || !veid) {
     if (typeof $persistentStore !== "undefined") {
       apiKey = apiKey || $persistentStore.read("bandwagon.apiKey") || "";
@@ -115,7 +143,7 @@ function getServiceInfo() {
     $notification.post(
       "⚠️ 配置缺失",
       "",
-      "请在 BoxJS 中配置 API Key 和 VEID"
+      "请在 Loon 插件设置或 BoxJS 中配置 API Key 和 VEID"
     );
     $done();
     return;
