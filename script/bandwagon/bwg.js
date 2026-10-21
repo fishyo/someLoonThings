@@ -117,8 +117,8 @@ function getServiceInfo() {
   if (!config.apiKey || !config.veid) {
     console.log("❌ Configuration missing");
     $.notify(
+      "BandwagonHost Status",
       "⚠️ 配置缺失",
-      "",
       "请在 Loon 插件设置或 BoxJS 中配置 API Key 和 VEID"
     );
     $.done({});
@@ -134,13 +134,14 @@ function getServiceInfo() {
   $.get(request, function (error, response, data) {
     if (error) {
       console.error("❌ Request Error:", error);
-      $.notify("❌ 查询失败", "", error.message || String(error));
+      $.notify("BandwagonHost Status", "❌ 查询失败", error.message || String(error));
       $.done({});
       return;
     }
 
     console.log(`✅ Response Status: ${response ? response.status : "OK"}`);
 
+    let notifySub = "";
     let notifyMsg = "";
     let isSuccess = false;
 
@@ -150,7 +151,7 @@ function getServiceInfo() {
 
       if (jsonData.error) {
         console.warn("⚠️ API Returned Error:", jsonData.error);
-        $.notify("❌ API Error", "", jsonData.error);
+        $.notify("BandwagonHost Status", "❌ API 错误", jsonData.error);
         $.done({});
         return;
       }
@@ -161,6 +162,7 @@ function getServiceInfo() {
       const monthlyDataMultiplier = jsonData.monthly_data_multiplier;
       const dataNextReset = new Date(jsonData.data_next_reset * 1000).toLocaleDateString();
       const ipAddresses = (jsonData.ip_addresses || []).join(", ");
+      const location = jsonData.node_location || "";
 
       // 带宽与进度条计算
       const usedBandwidthGB = ((dataCounter * monthlyDataMultiplier) / (1024 * 1024 * 1024)).toFixed(2);
@@ -168,29 +170,27 @@ function getServiceInfo() {
       const usedPercentage = ((dataCounter / planMonthlyData) * 100).toFixed(2);
 
       const barLen = 10;
-      const filled = Math.min(Math.round(barLen * (dataCounter / planMonthlyData)), barLen);
-      const progressBar = "█".repeat(filled) + "░".repeat(Math.max(0, barLen - filled));
+      const filled = Math.min(Math.max(Math.round(barLen * (dataCounter / planMonthlyData)), 0), barLen);
+      const progressBar = "█".repeat(filled) + "░".repeat(barLen - filled);
 
-      let msg = "";
-      if (ipAddresses) msg += `IP 地址: ${ipAddresses}\n`;
-      msg += `当前使用: ${usedBandwidthGB} / ${totalBandwidthGB} GB\n`;
-      msg += `使用进度: ${progressBar} ${usedPercentage}%\n`;
-      msg += `重置时间: ${dataNextReset}\n`;
-      if (jsonData.node_location) msg += `节点位置: ${jsonData.node_location}\n`;
-      msg += `带宽倍数: ${monthlyDataMultiplier}x\n`;
+      const subTitle = [ipAddresses, location].filter(Boolean).join(" · ");
+      let body = `[${progressBar}] ${usedPercentage}%\n`;
+      body += `• 流量: ${usedBandwidthGB} GB / ${totalBandwidthGB} GB (${monthlyDataMultiplier}x)\n`;
+      body += `• 状态: 正常运行 · 重置日 ${dataNextReset}`;
 
-      notifyMsg = msg;
+      notifySub = subTitle;
+      notifyMsg = body;
       isSuccess = true;
     } catch (e) {
       console.error("❌ Parse Error:", e);
-      $.notify("❌ 解析错误", "", e.message || String(e));
+      $.notify("BandwagonHost Status", "❌ 解析错误", e.message || String(e));
       $.done({});
       return;
     }
 
     if (isSuccess) {
       console.log("🔔 Sending Notification...");
-      $.notify("🖲️ Bandwagon Status", "", notifyMsg);
+      $.notify("BandwagonHost Status", notifySub, notifyMsg);
       $.done({});
     }
   });

@@ -133,8 +133,8 @@ function getServiceInfo() {
   if (!config.apiKey || !config.apiHash) {
     console.log("❌ Configuration missing");
     $.notify(
+      "RackNerd Status",
       "⚠️ 配置缺失",
-      "",
       "请在 Loon 插件设置或 BoxJS 中配置 RackNerd API Key 和 Hash"
     );
     $.done({});
@@ -158,20 +158,21 @@ function getServiceInfo() {
   httpGet(request, function (error, response, data) {
     if (error) {
       console.error("❌ Request Error:", error);
-      $.notify("❌ 查询失败", "", error.message || String(error));
+      $.notify("RackNerd Status", "❌ 查询失败", error.message || String(error));
       $.done({});
       return;
     }
 
     if (!data) {
       console.error("❌ Empty Response Data");
-      $.notify("❌ 查询失败", "", "服务器未返回数据");
+      $.notify("RackNerd Status", "❌ 查询失败", "服务器未返回数据");
       $.done({});
       return;
     }
 
     console.log(`✅ Response Status: ${response ? (response.status || response.statusCode) : "OK"}`);
 
+    let notifySub = "";
     let notifyMsg = "";
     let isSuccess = false;
 
@@ -191,7 +192,7 @@ function getServiceInfo() {
 
       if (resData.status === "error" || (resData.statusmsg && resData.status !== "success")) {
         console.warn("⚠️ API Returned Error:", resData.statusmsg);
-        $.notify("❌ API Error", "", resData.statusmsg || "未知错误");
+        $.notify("RackNerd Status", "❌ API 错误", resData.statusmsg || "未知错误");
         $.done({});
         return;
       }
@@ -231,8 +232,9 @@ function getServiceInfo() {
       const memInfo = parseResource(resData.mem);
       const hddInfo = parseResource(resData.hdd);
       const ipAddress = (resData.ipaddress || resData.ipaddr || resData.ip_address || "").split(",")[0].trim();
+      const nodeLocation = resData.node || resData.nodename || "";
       const vmStatus = resData.vmstat || resData.statusmsg || "Unknown";
-      const vmStatusIcon = String(vmStatus).toLowerCase() === "online" ? "🟢" : "🔴";
+      const statusText = String(vmStatus).toLowerCase() === "online" ? "正常运行" : vmStatus;
 
       // 进度条渲染
       const getProgressBar = (percent) => {
@@ -242,39 +244,32 @@ function getServiceInfo() {
         return "█".repeat(filled) + "░".repeat(len - filled);
       };
 
-      let msg = "";
-      if (ipAddress) msg += `IP 地址: ${ipAddress}\n`;
-      if (bwInfo.total > 0) {
-        msg += `流量使用: ${formatBytes(bwInfo.used)} / ${formatBytes(bwInfo.total)}\n`;
-        msg += `流量进度: ${getProgressBar(bwInfo.percent)} ${bwInfo.percent}%\n`;
-      }
-      if (memInfo.total > 0) {
-        msg += `内存使用: ${formatBytes(memInfo.used)} / ${formatBytes(memInfo.total)} (${memInfo.percent}%)\n`;
-      }
-      if (hddInfo.total > 0) {
-        msg += `硬盘使用: ${formatBytes(hddInfo.used)} / ${formatBytes(hddInfo.total)} (${hddInfo.percent}%)\n`;
-      }
-      const nodeLocation = resData.node || resData.nodename || "";
-      if (nodeLocation && nodeLocation !== "N/A") {
-        msg += `节点位置: ${nodeLocation}\n`;
-      }
-      msg += `运行状态: ${vmStatusIcon} ${vmStatus}\n`;
-      if (resData.hostname && resData.hostname !== "N/A") {
-        msg += `主机名称: ${resData.hostname}\n`;
-      }
+      const location = (nodeLocation && nodeLocation !== "N/A") ? nodeLocation : "";
+      const subTitle = [ipAddress, location].filter(Boolean).join(" · ");
 
-      notifyMsg = msg;
+      let body = "";
+      if (bwInfo.total > 0) {
+        body += `[${getProgressBar(bwInfo.percent)}] ${bwInfo.percent}%\n`;
+        body += `• 流量: ${formatBytes(bwInfo.used)} / ${formatBytes(bwInfo.total)}\n`;
+      }
+      let statusLine = `• 状态: ${statusText}`;
+      if (memInfo.total > 0) statusLine += ` · RAM ${memInfo.percent}%`;
+      if (hddInfo.total > 0) statusLine += ` · Disk ${hddInfo.percent}%`;
+      body += statusLine;
+
+      notifySub = subTitle;
+      notifyMsg = body;
       isSuccess = true;
     } catch (e) {
       console.error("❌ Parse Error:", e);
-      $.notify("❌ 解析错误", "", e.message || String(e));
+      $.notify("RackNerd Status", "❌ 解析错误", e.message || String(e));
       $.done({});
       return;
     }
 
     if (isSuccess) {
       console.log("🔔 Sending Notification...");
-      $.notify("🖥️ RackNerd Status", "", notifyMsg);
+      $.notify("RackNerd Status", notifySub, notifyMsg);
       $.done({});
     }
   });
