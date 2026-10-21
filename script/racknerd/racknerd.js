@@ -231,7 +231,17 @@ function getServiceInfo() {
       const bwInfo = parseResource(resData.bw);
       const memInfo = parseResource(resData.mem);
       const hddInfo = parseResource(resData.hdd);
-      const ipAddress = (resData.ipaddress || resData.ipaddr || resData.ip_address || "").split(",")[0].trim();
+
+      // 提取并分类 IPv4 / IPv6
+      const rawIpStr = resData.ipaddress || resData.ipaddr || resData.ip_address || "";
+      const rawIps = String(rawIpStr).split(",").map((s) => s.trim()).filter(Boolean);
+      const ipv4List = [];
+      const ipv6List = [];
+      rawIps.forEach((ip) => {
+        if (ip.includes(":")) ipv6List.push(ip);
+        else if (ip.includes(".")) ipv4List.push(ip);
+      });
+
       const nodeLocation = resData.node || resData.nodename || "";
       const vmStatus = resData.vmstat || resData.statusmsg || "Unknown";
       const statusText = String(vmStatus).toLowerCase() === "online" ? "正常运行" : vmStatus;
@@ -245,11 +255,16 @@ function getServiceInfo() {
       };
 
       const location = (nodeLocation && nodeLocation !== "N/A") ? nodeLocation : "";
-      const subTitle = [ipAddress, location].filter(Boolean).join(" · ");
+      const subTitle = location || (ipv4List[0] ? `IP: ${ipv4List[0]}` : "正常运行");
 
       let body = "";
       if (bwInfo.total > 0) {
         body += `[${getProgressBar(bwInfo.percent)}] ${bwInfo.percent}%\n`;
+      }
+      if (ipv4List.length > 0) body += `• IPv4: ${ipv4List.join(", ")}\n`;
+      if (ipv6List.length > 0) body += `• IPv6: ${ipv6List.join(", ")}\n`;
+      else if (ipv4List.length === 0 && rawIps.length > 0) body += `• IP: ${rawIps.join(", ")}\n`;
+      if (bwInfo.total > 0) {
         body += `• 流量: ${formatBytes(bwInfo.used)} / ${formatBytes(bwInfo.total)}\n`;
       }
       let statusLine = `• 状态: ${statusText}`;

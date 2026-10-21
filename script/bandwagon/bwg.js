@@ -161,8 +161,20 @@ function getServiceInfo() {
       const planMonthlyData = jsonData.plan_monthly_data;
       const monthlyDataMultiplier = jsonData.monthly_data_multiplier;
       const dataNextReset = new Date(jsonData.data_next_reset * 1000).toLocaleDateString();
-      const ipAddresses = (jsonData.ip_addresses || []).join(", ");
       const location = jsonData.node_location || "";
+
+      // 提取并分类 IPv4 / IPv6
+      const rawIps = Array.isArray(jsonData.ip_addresses)
+        ? jsonData.ip_addresses
+        : (jsonData.ip_addresses ? String(jsonData.ip_addresses).split(",") : []);
+      const ipv4List = [];
+      const ipv6List = [];
+      rawIps.forEach((ip) => {
+        const trimmed = String(ip).trim();
+        if (!trimmed) return;
+        if (trimmed.includes(":")) ipv6List.push(trimmed);
+        else if (trimmed.includes(".")) ipv4List.push(trimmed);
+      });
 
       // 带宽与进度条计算
       const usedBandwidthGB = ((dataCounter * monthlyDataMultiplier) / (1024 * 1024 * 1024)).toFixed(2);
@@ -173,8 +185,11 @@ function getServiceInfo() {
       const filled = Math.min(Math.max(Math.round(barLen * (dataCounter / planMonthlyData)), 0), barLen);
       const progressBar = "█".repeat(filled) + "░".repeat(barLen - filled);
 
-      const subTitle = [ipAddresses, location].filter(Boolean).join(" · ");
+      const subTitle = location || (ipv4List[0] ? `IP: ${ipv4List[0]}` : "正常运行");
       let body = `[${progressBar}] ${usedPercentage}%\n`;
+      if (ipv4List.length > 0) body += `• IPv4: ${ipv4List.join(", ")}\n`;
+      if (ipv6List.length > 0) body += `• IPv6: ${ipv6List.join(", ")}\n`;
+      else if (ipv4List.length === 0 && rawIps.length > 0) body += `• IP: ${rawIps.join(", ")}\n`;
       body += `• 流量: ${usedBandwidthGB} GB / ${totalBandwidthGB} GB (${monthlyDataMultiplier}x)\n`;
       body += `• 状态: 正常运行 · 重置日 ${dataNextReset}`;
 
