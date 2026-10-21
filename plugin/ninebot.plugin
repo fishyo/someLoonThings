@@ -1,16 +1,19 @@
 #!name = 九号出行
-#!desc = 九号电动车自动签到与 Cookie 获取。首次使用或 Cookie 失效时，在插件详情中开启【九号获取Cookie】脚本，打开九号出行 App 签到页面即可自动捕获；捕获成功后建议关闭该脚本。
+#!desc = 九号电动车自动签到与 Cookie 获取。首次使用或 Cookie 失效时，在插件详情页开启【获取Cookie】开关，打开九号出行 App 签到页面即可自动捕获；获取成功后关闭开关即可。
 #!author = fishyo
 #!homepage = https://github.com/fishyo/someLoonThings
 #!icon = https://raw.githubusercontent.com/fishyo/someLoonThings/refs/heads/main/icons/Find_My.png
 #!date = 2026-10-21
 
-[Script]
-# 获取 Cookie（捕获成功后建议禁用，避免重复触发）
-http-request ^https:\/\/cn-cbu-gateway\.ninebot\.com\/portal\/api\/user-sign\/v(1|2)\/sign script-path = https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/9bot/9bot_cookie.js, requires-body = true, tag = 九号获取Cookie, enable = false
+[Argument]
+capture_cookie = switch, false, type=boolean, tag=获取Cookie, desc=捕获Cookie开关。获取成功后请关闭，避免频繁唤醒脚本。
 
-# 定时签到（每天 06:20 执行）
-cron "20 6 * * *" script-path = https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/9bot/9botsign.js, tag = 🛵ninebot, timeout = 60
+[Script]
+# 获取 Cookie：由 [Argument] 的 capture_cookie 开关控制
+request if ${url} ~= /^https:\/\/cn-cbu-gateway\.ninebot\.com\/portal\/api\/user-sign\/v(1|2)\/sign/i then script("https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/9bot/9bot_cookie.js") with enable=${capture_cookie}, requires_body=true, tag="九号获取Cookie"
+
+# 定时签到：每天 06:20 运行
+cron "20 6 * * *" then script("https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/9bot/9botsign.js") with tag="🛵ninebot", timeout=60
 
 [Mitm]
 hostname = cn-cbu-gateway.ninebot.com
