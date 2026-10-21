@@ -40,7 +40,7 @@ const $ = {
       );
     }
   },
-  done: (obj) => {
+  done: (obj = {}) => {
     if (typeof $done !== "undefined") $done(obj);
   }
 };
@@ -160,12 +160,15 @@ function getServiceInfo() {
     if (error) {
       console.error("❌ Request Error:", error);
       $notification.post("❌ 查询失败", "", error.message);
-      $done();
+      $done({});
       return;
     }
 
     console.log(`✅ Response Status: ${response.status}`);
     // console.log("Response Body:", data); // Uncomment for debugging
+
+    let notifyMsg = "";
+    let isSuccess = false;
 
     try {
       const jsonData = JSON.parse(data);
@@ -174,7 +177,7 @@ function getServiceInfo() {
       if (jsonData.error) {
         console.warn("⚠️ API Returned Error:", jsonData.error);
         $notification.post("❌ API Error", "", jsonData.error);
-        $done();
+        $done({});
         return;
       }
 
@@ -183,7 +186,7 @@ function getServiceInfo() {
       const planMonthlyData = jsonData.plan_monthly_data;
       const monthlyDataMultiplier = jsonData.monthly_data_multiplier;
       const dataNextReset = new Date(jsonData.data_next_reset * 1000).toLocaleDateString();
-      const ipAddresses = jsonData.ip_addresses.join(", "); 
+      const ipAddresses = (jsonData.ip_addresses || []).join(", "); 
 
       // 带宽计算 (GB)
       const usedBandwidthGB = ((dataCounter * monthlyDataMultiplier) / (1024 * 1024 * 1024)).toFixed(2);
@@ -203,13 +206,19 @@ function getServiceInfo() {
       msg += `节点位置: ${jsonData.node_location}\n`;
       msg += `带宽倍数: ${monthlyDataMultiplier}x\n`;
 
-      console.log("🔔 Sending Notification...");
-      $notification.post("🖲️ Bandwagon Status", "", msg);
-      $done();
+      notifyMsg = msg;
+      isSuccess = true;
     } catch (e) {
       console.error("❌ Parse Error:", e);
-      $notification.post("❌ 解析错误", "", e.message);
-      $done();
+      $notification.post("❌ 解析错误", "", e.message || String(e));
+      $done({});
+      return;
+    }
+
+    if (isSuccess) {
+      console.log("🔔 Sending Notification...");
+      $notification.post("🖲️ Bandwagon Status", "", notifyMsg);
+      $done({});
     }
   });
 }
