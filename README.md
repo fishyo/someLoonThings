@@ -68,6 +68,18 @@
 
 ---
 
+## 🎨 节点与插件图标 (Icons)
+
+精配 512x512 高清 iOS 风格 Squircle 节点与插件图标，支持在 Loon 节点、策略组 (`img-url`) 或插件 (`#!icon`) 中直接引用：
+
+| 预览 | 名称 | 直链引用地址 |
+| :---: | :--- | :--- |
+| <img src="icons/bandwagon.png" width="40" height="40" /> | **BandwagonHost (搬瓦工)** | `https://raw.githubusercontent.com/fishyo/someLoonThings/main/icons/bandwagon.png` |
+| <img src="icons/racknerd.png" width="40" height="40" /> | **RackNerd** | `https://raw.githubusercontent.com/fishyo/someLoonThings/main/icons/racknerd.png` |
+| <img src="icons/ninebot.png" width="40" height="40" /> | **九号出行** | `https://raw.githubusercontent.com/fishyo/someLoonThings/main/icons/ninebot.png` |
+
+---
+
 ## 📄 License
 
 MIT

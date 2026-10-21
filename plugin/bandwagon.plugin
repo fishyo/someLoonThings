@@ -2,7 +2,7 @@
 #!desc = 搬瓦工 (BandwagonHost) VPS 状态与流量定时查询。支持在插件配置页直接填写 API 信息及修改执行时间，留空则自动读取 BoxJS。
 #!author = fishyo
 #!homepage = https://github.com/fishyo/someLoonThings
-#!icon = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Server.png
+#!icon = https://raw.githubusercontent.com/fishyo/someLoonThings/refs/heads/main/icons/bandwagon.png
 #!date = 2026-10-21
 
 [Argument]

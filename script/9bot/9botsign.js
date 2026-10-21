@@ -1,23 +1,16 @@
-/*
-九号出行 - 签到脚本
+/**
+ * 九号出行 - 每日自动签到
+ * 
+ * 依赖 9bot_cookie.js 获取的持久化 Cookie 数据。
+ * 支持在 Loon / Egern / Surge 中定时执行。
+ */
 
-[Egern 配置]
-在 Egern 配置文件中添加：
-scriptings:
-  - schedule:
-      name: "九号出行签到"
-      cron: "0 8 * * *"
-      script_url: "https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/9bot/9botsign.js"
-*/
-
-// 包装在一个立即执行函数中，避免顶层 return 在严格的 JS 引擎（如 Egern）中报语法错误
 ;(function() {
 const APP = {
   name: "九号出行",
   cookieKey: "ninebot_cookie_data",
   signApi: "https://cn-cbu-gateway.ninebot.com/portal/api/user-sign/v2/sign",
-  statusApi:
-    "https://cn-cbu-gateway.ninebot.com/portal/api/user-sign/v2/status",
+  statusApi: "https://cn-cbu-gateway.ninebot.com/portal/api/user-sign/v2/status",
 };
 
 const CONFIG = {
@@ -26,8 +19,7 @@ const CONFIG = {
   timeout: 15000,
 };
 
-const UA =
-  "Mozilla/5.0 (iPhone; CPU iPhone OS 13_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.5 Mobile/15E148 Safari/604.1";
+const UA = "Mozilla/5.0 (iPhone; CPU iPhone OS 13_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.5 Mobile/15E148 Safari/604.1";
 
 console.log(`========== ${APP.name}签到脚本启动 ==========`);
 
@@ -81,7 +73,7 @@ function querySignStatus(callback) {
   });
 } 
 
-// 添加额外信息
+// 拼接通知附带信息
 function addExtraInfo(parts, data) {
   if (data) {
     if (data.blindBoxStatus === 1) {
@@ -100,7 +92,7 @@ function addExtraInfo(parts, data) {
   return parts.join("\n");
 }
 
-// 读取Cookie
+// 读取持久化存储的 Cookie
 const cookieDataStr = $persistentStore.read(APP.cookieKey);
 if (!cookieDataStr) {
   console.log("未找到保存的Cookie数据");
@@ -109,7 +101,7 @@ if (!cookieDataStr) {
     "❌ 签到失败",
     "未找到Cookie数据\n请先打开APP进入签到页面"
   );
-  $done();
+  $done({});
   return;
 }
 
@@ -119,18 +111,18 @@ try {
 } catch (e) {
   console.log("解析Cookie失败: " + e);
   $notification.post(APP.name, "❌ 签到失败", "Cookie数据解析失败");
-  $done();
+  $done({});
   return;
 }
 
 if (!cookieData.authorization) {
   console.log("缺少authorization");
   $notification.post(APP.name, "❌ 签到失败", "缺少授权信息\n请重新获取Cookie");
-  $done();
+  $done({});
   return;
 }
 
-// 签到请求
+// 执行签到请求
 function sign(retryCount = 0) {
   const deviceId = cookieData.deviceId || "";
   const options = {
@@ -155,7 +147,7 @@ function sign(retryCount = 0) {
         "❌ 签到失败",
         `网络请求失败，已重试${CONFIG.maxRetries}次`
       );
-      $done();
+      $done({});
       return;
     }
 
@@ -172,7 +164,7 @@ function sign(retryCount = 0) {
         "❌ 签到失败",
         `服务器错误: HTTP ${response.status}`
       );
-      $done();
+      $done({});
       return;
     }
 
@@ -183,22 +175,22 @@ function sign(retryCount = 0) {
       console.log(JSON.stringify(result, null, 2));
 
       if (result.code === 0) {
-        // 签到成功,查询完整信息
+        // 签到成功
         querySignStatus((statusData) => {
           const signDays = statusData?.consecutiveDays || 0;
           const info = [`♻️ 连续签到: ${signDays}天`];
           const body = addExtraInfo([...info], statusData);
           $notification.post(APP.name, "🎉 签到成功", body);
-          $done();
+          $done({});
         });
       } else if (result.code === 10014 || result.code === 540004) {
-        // 已签到,查询状态获取天数
+        // 今日已签到
         querySignStatus((statusData) => {
           const days = statusData?.consecutiveDays || 0;
           const info = [`♻️ 连续签到: ${days}天`];
           const body = addExtraInfo([...info], statusData);
           $notification.post(APP.name, "📅 已签到", body);
-          $done();
+          $done({});
         });
       } else if (result.code === 401 || result.code === 403) {
         $notification.post(
@@ -206,7 +198,7 @@ function sign(retryCount = 0) {
           "❌ 授权失败",
           `Cookie已失效\n错误码: ${result.code}`
         );
-        $done();
+        $done({});
       } else {
         const errorMsg = result.msg || "未知错误";
         if (
@@ -217,12 +209,12 @@ function sign(retryCount = 0) {
           return;
         }
         $notification.post(APP.name, "❌ 签到失败", errorMsg);
-        $done();
+        $done({});
       }
     } catch (e) {
       console.log("数据解析错误: " + e);
       $notification.post(APP.name, "❌ 签到失败", "数据解析错误");
-      $done();
+      $done({});
     }
   });
 }

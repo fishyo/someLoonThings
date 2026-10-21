@@ -1,34 +1,24 @@
-/*
- * RackNerd VPS 状态查询
+/**
+ * RackNerd VPS 运行状态与流量查询
  * 
- * [Egern 配置示例]
- * 1. 作为通用脚本 (小组件关联):
- * scriptings:
- *  - generic:
- *      name: "RackNerd Status"
- *      script_url: "https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/racknerd/racknerd.js"
- *      env:
- *        RACKNERD_API_KEY: "your_api_key"
- *        RACKNERD_API_HASH: "your_api_hash"
+ * 配置优先级:
+ * 1. Loon 插件参数 ($argument: apiKey & apiHash)
+ * 2. Egern 环境变量 (RACKNERD_API_KEY & RACKNERD_API_HASH)
+ * 3. BoxJS / 持久化存储 (racknerd.apiKey & racknerd.apiHash)
  */
-// 跨平台适配
+
+// 跨平台环境适配
 const $ = {
-  isLoon: typeof $loon !== "undefined",
-  isQuanX: typeof $task !== "undefined",
-  isSurge: typeof $httpClient !== "undefined" && typeof $loon === "undefined",
   read: (key) => {
-    if (typeof $persistentStore !== "undefined")
-      return $persistentStore.read(key);
+    if (typeof $persistentStore !== "undefined") return $persistentStore.read(key);
     if (typeof $prefs !== "undefined") return $prefs.valueForKey(key);
   },
   write: (val, key) => {
-    if (typeof $persistentStore !== "undefined")
-      return $persistentStore.write(val, key);
+    if (typeof $persistentStore !== "undefined") return $persistentStore.write(val, key);
     if (typeof $prefs !== "undefined") return $prefs.setValueForKey(val, key);
   },
   notify: (title, sub, msg) => {
-    if (typeof $notification !== "undefined")
-      $notification.post(title, sub, msg);
+    if (typeof $notification !== "undefined") $notification.post(title, sub, msg);
     else if (typeof $notify !== "undefined") $notify(title, sub, msg);
     else console.log(`${title}\n${sub}\n${msg}`);
   },
@@ -53,9 +43,9 @@ const $ = {
   },
 };
 
-// BoxJS Config
+// BoxJS 应用配置
 const boxjsConfig = {
-  icon: "🖥️",
+  icon: "https://raw.githubusercontent.com/fishyo/someLoonThings/main/icons/racknerd.png",
   title: "RackNerd Status",
   desc: "RackNerd VPS 状态查询",
   settings: [
@@ -78,7 +68,7 @@ const boxjsConfig = {
   ],
 };
 
-// 解析 $argument 插件参数
+// 解析插件参数 ($argument)
 function parseArgument() {
   if (typeof $argument === "undefined" || !$argument) return {};
   if (typeof $argument === "object") return $argument;
@@ -99,23 +89,23 @@ function parseArgument() {
   return {};
 }
 
-// 获取配置
+// 获取配置信息
 function getConfig() {
   let apiKey = "";
   let apiHash = "";
 
-  // 0. 支持 Loon 插件参数 ($argument)
+  // 1. Loon 插件参数
   const arg = parseArgument();
   if (arg.apiKey && String(arg.apiKey).trim()) apiKey = String(arg.apiKey).trim();
   if (arg.apiHash && String(arg.apiHash).trim()) apiHash = String(arg.apiHash).trim();
 
-  // 1. Egern 环境变量
+  // 2. Egern 环境变量
   if (typeof ctx !== "undefined" && ctx.env) {
     if (ctx.env.RACKNERD_API_KEY) apiKey = apiKey || ctx.env.RACKNERD_API_KEY;
     if (ctx.env.RACKNERD_API_HASH) apiHash = apiHash || ctx.env.RACKNERD_API_HASH;
   }
 
-  // 2. BoxJS / 持久化存储 (回退机制)
+  // 3. BoxJS / 持久化存储 (回退机制)
   if (!apiKey || !apiHash) {
     if (typeof $persistentStore !== "undefined") {
       apiKey = apiKey || $persistentStore.read("racknerd.apiKey") || "";
@@ -130,22 +120,10 @@ function getConfig() {
   return { apiKey, apiHash };
 }
 
-// 保存配置
-function saveConfig(apiKey, apiHash) {
-  if (typeof $persistentStore !== "undefined") {
-    $persistentStore.write(apiKey, "racknerd.apiKey");
-    $persistentStore.write(apiHash, "racknerd.apiHash");
-  } else if (typeof $prefs !== "undefined") {
-    $prefs.setValueForKey(apiKey, "racknerd.apiKey");
-    $prefs.setValueForKey(apiHash, "racknerd.apiHash");
-  }
-}
-
-// 解析 XML
+// 解析 XML 备用解析器
 function parseXML(xmlString) {
   const result = {};
   if (!xmlString || typeof xmlString !== "string") return result;
-  // 匹配所有标签及其内部值，兼容 <ctrl> 根节点及包含错误信息的 XML
   const regex = /<([a-zA-Z0-9_]+)>([^<]+)<\/\1>/g;
   let match;
   while ((match = regex.exec(xmlString)) !== null) {
@@ -154,11 +132,11 @@ function parseXML(xmlString) {
   return result;
 }
 
+// 查询 VPS 服务状态
 function getServiceInfo() {
   console.log("▶️ Starting RackNerd Service Info Query...");
   const config = getConfig();
 
-  // 验证配置
   if (!config.apiKey || !config.apiHash) {
     console.log("❌ Configuration missing");
     $.notify(
@@ -170,17 +148,15 @@ function getServiceInfo() {
     return;
   }
 
-  // RackNerd Client API (New Endpoint)
   const apiUrl = `https://ctrl.racknerd.com/api/client/command.php?action=info&key=${encodeURIComponent(config.apiKey)}&hash=${encodeURIComponent(config.apiHash)}&ipaddr=1&hdd=1&mem=1&bw=1&status=1&rdtype=json`;
   const request = {
     url: apiUrl,
     method: "GET",
     headers: {
-        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36"
+      "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36"
     }
   };
 
-  // Log masked URL
   const maskedUrl = apiUrl.replace(/key=([^&]+)/, "key=****").replace(/hash=([^&]+)/, "hash=****");
   console.log(`Request API: ${maskedUrl}`);
 
@@ -202,7 +178,6 @@ function getServiceInfo() {
     }
 
     console.log(`✅ Response Status: ${response ? (response.status || response.statusCode) : "OK"}`);
-    // console.log("Response Body:", data); // Uncomment for debugging
 
     let notifyMsg = "";
     let isSuccess = false;
@@ -228,73 +203,71 @@ function getServiceInfo() {
         return;
       }
 
-      // 资源计算: total_bytes,used_bytes,free_bytes,percent_used
+      // 资源指标解析 (total, used, free, percent)
       const parseResource = (str) => {
-          if (!str) return { total: 0, used: 0, free: 0, percent: "0.00" };
-          const parts = str.split(",").map(s => s.trim());
-          let total = 0, used = 0, free = 0;
-          let percent = "0.00";
-          if (parts.length >= 4) {
-              total = parseFloat(parts[0]) || 0;
-              used = parseFloat(parts[1]) || 0;
-              free = parseFloat(parts[2]) || 0;
-              percent = parseFloat(parts[3]).toFixed(2);
-          } else if (parts.length >= 2) {
-              total = parseFloat(parts[0]) || 0;
-              used = parseFloat(parts[1]) || 0;
-              percent = total > 0 ? ((used / total) * 100).toFixed(2) : "0.00";
-          } else {
-              used = parseFloat(str) || 0;
-          }
-          return { total, used, free, percent };
+        if (!str) return { total: 0, used: 0, free: 0, percent: "0.00" };
+        const parts = str.split(",").map(s => s.trim());
+        let total = 0, used = 0, free = 0;
+        let percent = "0.00";
+        if (parts.length >= 4) {
+          total = parseFloat(parts[0]) || 0;
+          used = parseFloat(parts[1]) || 0;
+          free = parseFloat(parts[2]) || 0;
+          percent = parseFloat(parts[3]).toFixed(2);
+        } else if (parts.length >= 2) {
+          total = parseFloat(parts[0]) || 0;
+          used = parseFloat(parts[1]) || 0;
+          percent = total > 0 ? ((used / total) * 100).toFixed(2) : "0.00";
+        } else {
+          used = parseFloat(str) || 0;
+        }
+        return { total, used, free, percent };
       };
 
-      // 格式化
+      // 字节单位格式化
       const formatBytes = (bytes, decimals = 2) => {
-          if (!bytes || bytes <= 0 || isNaN(bytes)) return '0 B';
-          const k = 1024;
-          const i = Math.floor(Math.log(bytes) / Math.log(k));
-          const sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-          if (i < 0 || i >= sizes.length) return '0 B';
-          return parseFloat((bytes / Math.pow(k, i)).toFixed(Math.max(0, decimals))) + ' ' + sizes[i];
+        if (!bytes || bytes <= 0 || isNaN(bytes)) return "0 B";
+        const k = 1024;
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        const sizes = ["B", "KB", "MB", "GB", "TB", "PB", "EB"];
+        if (i < 0 || i >= sizes.length) return "0 B";
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(Math.max(0, decimals))) + " " + sizes[i];
       };
 
       const bwInfo = parseResource(resData.bw);
       const memInfo = parseResource(resData.mem);
       const hddInfo = parseResource(resData.hdd);
-      const ipAddress = (resData.ipaddress || resData.ipaddr || resData.ip_address || "").split(',')[0].trim();
+      const ipAddress = (resData.ipaddress || resData.ipaddr || resData.ip_address || "").split(",")[0].trim();
       const vmStatus = resData.vmstat || resData.statusmsg || "Unknown";
       const vmStatusIcon = String(vmStatus).toLowerCase() === "online" ? "🟢" : "🔴";
 
-      // 进度条
+      // 进度条渲染
       const getProgressBar = (percent) => {
         const len = 10;
         const p = parseFloat(percent) || 0;
-        const filled = Math.round(len * (p / 100));
-        const valid = Math.min(Math.max(filled, 0), len);
-        return "█".repeat(valid) + "░".repeat(len - valid);
+        const filled = Math.min(Math.max(Math.round(len * (p / 100)), 0), len);
+        return "█".repeat(filled) + "░".repeat(len - filled);
       };
 
-      // 发送通知
-      let msg = ``;
-      if (ipAddress) msg += `IP 地址: ${ipAddress}\n`; 
+      let msg = "";
+      if (ipAddress) msg += `IP 地址: ${ipAddress}\n`;
       if (bwInfo.total > 0) {
-          msg += `流量使用: ${formatBytes(bwInfo.used)} / ${formatBytes(bwInfo.total)}\n`;
-          msg += `流量进度: ${getProgressBar(bwInfo.percent)} ${bwInfo.percent}%\n`;
+        msg += `流量使用: ${formatBytes(bwInfo.used)} / ${formatBytes(bwInfo.total)}\n`;
+        msg += `流量进度: ${getProgressBar(bwInfo.percent)} ${bwInfo.percent}%\n`;
       }
       if (memInfo.total > 0) {
-          msg += `内存使用: ${formatBytes(memInfo.used)} / ${formatBytes(memInfo.total)} (${memInfo.percent}%)\n`;
+        msg += `内存使用: ${formatBytes(memInfo.used)} / ${formatBytes(memInfo.total)} (${memInfo.percent}%)\n`;
       }
       if (hddInfo.total > 0) {
-          msg += `硬盘使用: ${formatBytes(hddInfo.used)} / ${formatBytes(hddInfo.total)} (${hddInfo.percent}%)\n`;
+        msg += `硬盘使用: ${formatBytes(hddInfo.used)} / ${formatBytes(hddInfo.total)} (${hddInfo.percent}%)\n`;
       }
       const nodeLocation = resData.node || resData.nodename || "";
       if (nodeLocation && nodeLocation !== "N/A") {
-          msg += `节点位置: ${nodeLocation}\n`;
+        msg += `节点位置: ${nodeLocation}\n`;
       }
       msg += `运行状态: ${vmStatusIcon} ${vmStatus}\n`;
       if (resData.hostname && resData.hostname !== "N/A") {
-         msg += `主机名称: ${resData.hostname}\n`;
+        msg += `主机名称: ${resData.hostname}\n`;
       }
 
       notifyMsg = msg;
@@ -318,12 +291,12 @@ function main() {
   if (typeof $environment !== "undefined" && $environment.platform === "boxjs") {
     const config = getConfig();
     $.done({
-        title: boxjsConfig.title,
-        icon: boxjsConfig.icon,
-        items: boxjsConfig.settings.map((item) => ({
+      title: boxjsConfig.title,
+      icon: boxjsConfig.icon,
+      items: boxjsConfig.settings.map((item) => ({
         ...item,
         val: item.id === "racknerd.apiKey" ? config.apiKey : config.apiHash,
-        })),
+      })),
     });
   } else {
     getServiceInfo();

@@ -1,21 +1,14 @@
-/*
- * Bandwagon VPS 状态查询
+/**
+ * 搬瓦工 (BandwagonHost) VPS 状态与流量查询
  * 
- * [Egern 配置示例]
- * 1. 作为通用脚本 (小组件关联):
- * scriptings:
- *  - generic:
- *      name: "Bandwagon Status"
- *      script_url: "https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/bandwagon/bwg.js"
- *      env:
- *        BWG_API_KEY: "your_api_key"
- *        BWG_VEID: "your_veid"
+ * 配置优先级:
+ * 1. Loon 插件参数 ($argument: veid & apiKey)
+ * 2. Egern 环境变量 (BWG_VEID & BWG_API_KEY)
+ * 3. BoxJS / 持久化存储 (bandwagon.veid & bandwagon.apiKey)
  */
-// 跨平台适配
+
+// 跨平台环境适配
 const $ = {
-  isLoon: typeof $loon !== "undefined",
-  isQuanX: typeof $task !== "undefined",
-  isSurge: typeof $httpClient !== "undefined" && typeof $loon === "undefined",
   read: (key) => {
     if (typeof $persistentStore !== "undefined") return $persistentStore.read(key);
     if (typeof $prefs !== "undefined") return $prefs.valueForKey(key);
@@ -45,9 +38,9 @@ const $ = {
   }
 };
 
-// BoxJS Config
+// BoxJS 应用配置
 const boxjsConfig = {
-  icon: "🖲️",
+  icon: "https://raw.githubusercontent.com/fishyo/someLoonThings/main/icons/bandwagon.png",
   title: "Bandwagon Status",
   desc: "Bandwagon VPS 状态查询",
   settings: [
@@ -70,7 +63,7 @@ const boxjsConfig = {
   ],
 };
 
-// 解析 $argument 插件参数
+// 解析插件参数 ($argument)
 function parseArgument() {
   if (typeof $argument === "undefined" || !$argument) return {};
   if (typeof $argument === "object") return $argument;
@@ -91,23 +84,23 @@ function parseArgument() {
   return {};
 }
 
-// 获取配置
+// 获取配置信息
 function getConfig() {
   let apiKey = "";
   let veid = "";
 
-  // 0. 支持 Loon 插件参数 ($argument)
+  // 1. Loon 插件参数
   const arg = parseArgument();
   if (arg.apiKey && String(arg.apiKey).trim()) apiKey = String(arg.apiKey).trim();
   if (arg.veid && String(arg.veid).trim()) veid = String(arg.veid).trim();
 
-  // 1. Egern 环境变量
+  // 2. Egern 环境变量
   if (typeof ctx !== "undefined" && ctx.env) {
     if (ctx.env.BWG_API_KEY) apiKey = apiKey || ctx.env.BWG_API_KEY;
     if (ctx.env.BWG_VEID) veid = veid || ctx.env.BWG_VEID;
   }
 
-  // 2. BoxJS / 持久化存储 (回退机制)
+  // 3. BoxJS / 持久化存储 (回退机制)
   if (!apiKey || !veid) {
     if (typeof $persistentStore !== "undefined") {
       apiKey = apiKey || $persistentStore.read("bandwagon.apiKey") || "";
@@ -117,55 +110,43 @@ function getConfig() {
       veid = veid || $prefs.valueForKey("bandwagon.veid") || "";
     }
   }
+
   const maskedVeid = veid ? veid.replace(/^(.{2})(.*)(.{1})$/, "$1****$3") : "N/A";
   console.log(`Config Read - Key Len: ${apiKey.length}, VEID: ${maskedVeid}`);
   return { apiKey, veid };
 }
 
-// 保存配置
-function saveConfig(apiKey, veid) {
-  if (typeof $persistentStore !== "undefined") {
-    $persistentStore.write(apiKey, "bandwagon.apiKey");
-    $persistentStore.write(veid, "bandwagon.veid");
-  } else if (typeof $prefs !== "undefined") {
-    $prefs.setValueForKey(apiKey, "bandwagon.apiKey");
-    $prefs.setValueForKey(veid, "bandwagon.veid");
-  }
-}
-
+// 查询 VPS 服务状态
 function getServiceInfo() {
   console.log("▶️ Starting Bandwagon Service Info Query...");
   const config = getConfig();
 
-  // 验证配置
   if (!config.apiKey || !config.veid) {
     console.log("❌ Configuration missing");
-    $notification.post(
+    $.notify(
       "⚠️ 配置缺失",
       "",
       "请在 Loon 插件设置或 BoxJS 中配置 API Key 和 VEID"
     );
-    $done();
+    $.done({});
     return;
   }
 
   const apiUrl = `https://api.64clouds.com/v1/getServiceInfo?veid=${config.veid}&api_key=${config.apiKey}`;
   const request = { url: apiUrl, method: "GET" };
 
-  // Log masked URL
   const maskedUrl = apiUrl.replace(/veid=([^&]+)/, "veid=****").replace(/api_key=([^&]+)/, "api_key=****");
   console.log(`Request API: ${maskedUrl}`);
 
-  $httpClient.get(request, function (error, response, data) {
+  $.get(request, function (error, response, data) {
     if (error) {
       console.error("❌ Request Error:", error);
-      $notification.post("❌ 查询失败", "", error.message);
-      $done({});
+      $.notify("❌ 查询失败", "", error.message || String(error));
+      $.done({});
       return;
     }
 
-    console.log(`✅ Response Status: ${response.status}`);
-    // console.log("Response Body:", data); // Uncomment for debugging
+    console.log(`✅ Response Status: ${response ? response.status : "OK"}`);
 
     let notifyMsg = "";
     let isSuccess = false;
@@ -176,49 +157,48 @@ function getServiceInfo() {
 
       if (jsonData.error) {
         console.warn("⚠️ API Returned Error:", jsonData.error);
-        $notification.post("❌ API Error", "", jsonData.error);
-        $done({});
+        $.notify("❌ API Error", "", jsonData.error);
+        $.done({});
         return;
       }
 
-      // 数据提取
+      // 提取用量与状态
       const dataCounter = jsonData.data_counter;
       const planMonthlyData = jsonData.plan_monthly_data;
       const monthlyDataMultiplier = jsonData.monthly_data_multiplier;
       const dataNextReset = new Date(jsonData.data_next_reset * 1000).toLocaleDateString();
-      const ipAddresses = (jsonData.ip_addresses || []).join(", "); 
+      const ipAddresses = (jsonData.ip_addresses || []).join(", ");
 
-      // 带宽计算 (GB)
+      // 带宽与进度条计算
       const usedBandwidthGB = ((dataCounter * monthlyDataMultiplier) / (1024 * 1024 * 1024)).toFixed(2);
       const totalBandwidthGB = ((planMonthlyData * monthlyDataMultiplier) / (1024 * 1024 * 1024)).toFixed(2);
-
-      // 进度条
       const usedPercentage = ((dataCounter / planMonthlyData) * 100).toFixed(2);
-      const progressBarLength = 10;
-      const filledLength = Math.round(progressBarLength * (dataCounter / planMonthlyData));
-      const progressBar = "█".repeat(Math.min(filledLength, progressBarLength)) + "░".repeat(Math.max(0, progressBarLength - filledLength));
 
-      let msg = ``;
-      msg += `IP 地址: ${ipAddresses}\n`;
+      const barLen = 10;
+      const filled = Math.min(Math.round(barLen * (dataCounter / planMonthlyData)), barLen);
+      const progressBar = "█".repeat(filled) + "░".repeat(Math.max(0, barLen - filled));
+
+      let msg = "";
+      if (ipAddresses) msg += `IP 地址: ${ipAddresses}\n`;
       msg += `当前使用: ${usedBandwidthGB} / ${totalBandwidthGB} GB\n`;
       msg += `使用进度: ${progressBar} ${usedPercentage}%\n`;
       msg += `重置时间: ${dataNextReset}\n`;
-      msg += `节点位置: ${jsonData.node_location}\n`;
+      if (jsonData.node_location) msg += `节点位置: ${jsonData.node_location}\n`;
       msg += `带宽倍数: ${monthlyDataMultiplier}x\n`;
 
       notifyMsg = msg;
       isSuccess = true;
     } catch (e) {
       console.error("❌ Parse Error:", e);
-      $notification.post("❌ 解析错误", "", e.message || String(e));
-      $done({});
+      $.notify("❌ 解析错误", "", e.message || String(e));
+      $.done({});
       return;
     }
 
     if (isSuccess) {
       console.log("🔔 Sending Notification...");
-      $notification.post("🖲️ Bandwagon Status", "", notifyMsg);
-      $done({});
+      $.notify("🖲️ Bandwagon Status", "", notifyMsg);
+      $.done({});
     }
   });
 }
@@ -226,13 +206,13 @@ function getServiceInfo() {
 function main() {
   if (typeof $environment !== "undefined" && $environment.platform === "boxjs") {
     const config = getConfig();
-    $done({
-        title: boxjsConfig.title,
-        icon: boxjsConfig.icon,
-        items: boxjsConfig.settings.map((item) => ({
+    $.done({
+      title: boxjsConfig.title,
+      icon: boxjsConfig.icon,
+      items: boxjsConfig.settings.map((item) => ({
         ...item,
         val: item.id === "bandwagon.apiKey" ? config.apiKey : config.veid,
-        })),
+      })),
     });
   } else {
     getServiceInfo();
