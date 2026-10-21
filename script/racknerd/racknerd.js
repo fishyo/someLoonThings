@@ -281,10 +281,11 @@ function getServiceInfo() {
 
       // 格式化
       const formatBytes = (bytes, decimals = 2) => {
-          if (bytes === 0 || isNaN(bytes)) return '0 B';
+          if (!bytes || bytes <= 0 || isNaN(bytes)) return '0 B';
           const k = 1024;
           const i = Math.floor(Math.log(bytes) / Math.log(k));
           const sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+          if (i < 0 || i >= sizes.length) return '0 B';
           return parseFloat((bytes / Math.pow(k, i)).toFixed(Math.max(0, decimals))) + ' ' + sizes[i];
       };
 
@@ -293,7 +294,7 @@ function getServiceInfo() {
       const hddInfo = parseResource(resData.hdd);
       const ipAddress = (resData.ipaddress || resData.ipaddr || resData.ip_address || "").split(',')[0].trim();
       const vmStatus = resData.vmstat || resData.statusmsg || "Unknown";
-      const vmStatusIcon = vmStatus.toLowerCase() === "online" ? "🟢" : "🔴";
+      const vmStatusIcon = String(vmStatus).toLowerCase() === "online" ? "🟢" : "🔴";
 
       // 进度条
       const getProgressBar = (percent) => {
@@ -305,60 +306,30 @@ function getServiceInfo() {
       };
 
       // 发送通知
-      const sendNotify = (location) => {
-          let msg = ``;
-          if (ipAddress) msg += `IP 地址: ${ipAddress}\n`; 
-          if (bwInfo.total > 0) {
-              msg += `流量使用: ${formatBytes(bwInfo.used)} / ${formatBytes(bwInfo.total)}\n`;
-              msg += `流量进度: ${getProgressBar(bwInfo.percent)} ${bwInfo.percent}%\n`;
-          }
-          if (memInfo.total > 0) {
-              msg += `内存使用: ${formatBytes(memInfo.used)} / ${formatBytes(memInfo.total)} (${memInfo.percent}%)\n`;
-          }
-          if (hddInfo.total > 0) {
-              msg += `硬盘使用: ${formatBytes(hddInfo.used)} / ${formatBytes(hddInfo.total)} (${hddInfo.percent}%)\n`;
-          }
-          if (location) {
-              msg += `节点位置: ${location}\n`;
-          } else if (resData.node && resData.node !== "N/A" && resData.node !== "") {
-              msg += `节点位置: ${resData.node}\n`;
-          }
-          msg += `运行状态: ${vmStatusIcon} ${vmStatus}\n`;
-          if (resData.hostname && resData.hostname !== "N/A") {
-             msg += `主机名称: ${resData.hostname}\n`;
-          }
-          
-          console.log("🔔 Sending Notification...");
-          $.notify("🖥️ RackNerd Status", "", msg);
-          $.done();
-      };
-
-      // IP 位置查询
-      if (ipAddress) {
-          const ipApiUrl = `http://ip-api.com/json/${ipAddress}?lang=en`;
-          console.log(`Querying IP Location for: ${ipAddress}`);
-          $.get({ url: ipApiUrl }, (err, resp, body) => {
-              let location = null;
-              if (!err && body) {
-                  try {
-                      const ipData = typeof body === "object" ? body : JSON.parse(body);
-                      if (ipData && ipData.status === 'success') {
-                          location = `${ipData.countryCode} ${ipData.regionName}`; 
-                          console.log(`IP Location Found: ${location}`);
-                      } else {
-                        console.warn("IP Location Query Failed:", ipData);
-                      }
-                  } catch (e) {
-                      console.warn("Location Parse Error:", e);
-                  }
-              } else {
-                 console.error("IP Location Request Error:", err);
-              }
-              sendNotify(location);
-          });
-      } else {
-          sendNotify(null);
+      let msg = ``;
+      if (ipAddress) msg += `IP 地址: ${ipAddress}\n`; 
+      if (bwInfo.total > 0) {
+          msg += `流量使用: ${formatBytes(bwInfo.used)} / ${formatBytes(bwInfo.total)}\n`;
+          msg += `流量进度: ${getProgressBar(bwInfo.percent)} ${bwInfo.percent}%\n`;
       }
+      if (memInfo.total > 0) {
+          msg += `内存使用: ${formatBytes(memInfo.used)} / ${formatBytes(memInfo.total)} (${memInfo.percent}%)\n`;
+      }
+      if (hddInfo.total > 0) {
+          msg += `硬盘使用: ${formatBytes(hddInfo.used)} / ${formatBytes(hddInfo.total)} (${hddInfo.percent}%)\n`;
+      }
+      const nodeLocation = resData.node || resData.nodename || "";
+      if (nodeLocation && nodeLocation !== "N/A") {
+          msg += `节点位置: ${nodeLocation}\n`;
+      }
+      msg += `运行状态: ${vmStatusIcon} ${vmStatus}\n`;
+      if (resData.hostname && resData.hostname !== "N/A") {
+         msg += `主机名称: ${resData.hostname}\n`;
+      }
+      
+      console.log("🔔 Sending Notification...");
+      $.notify("🖥️ RackNerd Status", "", msg);
+      $.done();
 
     } catch (e) {
       console.error("❌ Parse Error:", e);
