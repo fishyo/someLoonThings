@@ -6,7 +6,7 @@ BandwagonHost VPS 状态查询脚本 (基于 KiwiVM API)。
 
 - 📊 流量监控：已用流量 / 剩余流量 / 进度条
 - ℹ️ 基本信息：IP 地址、节点位置、流量重置日期、带宽倍数
-- ⚙️ 双配置支持：支持 Loon 插件原生 UI 参数填写，亦兼容 BoxJS / Egern 环境变量
+- ⚙️ 双配置支持：支持 Loon 插件原生 UI 参数填写，亦兼容 BoxJS 存储配置
 
 ---
 
@@ -24,7 +24,7 @@ BandwagonHost VPS 状态查询脚本 (基于 KiwiVM API)。
 
 ---
 
-### 方式二：传统定时脚本 + BoxJS / 环境变量
+### 方式二：传统定时脚本 + BoxJS
 
 1. **获取 API 凭证**  
    登录 [KiwiVM Control Panel](https://kiwivm.64clouds.com/) -> `API` -> `Generate New API Key`。  
@@ -36,12 +36,6 @@ BandwagonHost VPS 状态查询脚本 (基于 KiwiVM API)。
      https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/boxjs.json
      ```
      在 BoxJS 应用列表选择 `Bandwagon 服务器状态`，填入 `API Key` 和 `VEID`。
-   - **Egern 环境变量**:
-     ```yaml
-     env:
-       BWG_API_KEY: "your_api_key"
-       BWG_VEID: "your_veid"
-     ```
 
 3. **脚本地址**:
    ```text

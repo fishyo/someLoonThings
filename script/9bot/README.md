@@ -1,10 +1,10 @@
-# 九号出行 (Ninebot)
+# 9bot
 
-九号电动车每日自动签到与 Cookie 抓取脚本。
+9bot 每日自动签到与 Cookie 抓取脚本。
 
 ## ✨ 功能
 
-- 🛵 自动签到：获取每日 N 币、签到卡及盲盒奖励
+- 🛵 自动签到：获取每日积分、签到卡及盲盒奖励
 - 📊 状态通知：推送签到天数、盲盒奖励提示及剩余签到卡
 - ⚙️ 双模块协同：支持通过 HTTP 请求拦截自动抓取更新 Authorization，并持久化存储
 
@@ -24,7 +24,7 @@
 
 ---
 
-### 方式二：跨平台配置 (Loon / Egern)
+### 方式二：传统定时脚本配置 (Surge / Quantumult X 等)
 
 1. **抓取 Cookie 脚本**:
    - 匹配路径: `^https:\/\/cn-cbu-gateway\.ninebot\.com\/portal\/api\/user-sign\/v(1|2)\/sign`

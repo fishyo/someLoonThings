@@ -3,8 +3,7 @@
  * 
  * 配置优先级:
  * 1. Loon 插件参数 ($argument: apiKey & apiHash)
- * 2. Egern 环境变量 (RACKNERD_API_KEY & RACKNERD_API_HASH)
- * 3. BoxJS / 持久化存储 (racknerd.apiKey & racknerd.apiHash)
+ * 2. BoxJS / 持久化存储 (racknerd.apiKey & racknerd.apiHash)
  */
 
 // 跨平台环境适配
@@ -99,13 +98,7 @@ function getConfig() {
   if (arg.apiKey && String(arg.apiKey).trim()) apiKey = String(arg.apiKey).trim();
   if (arg.apiHash && String(arg.apiHash).trim()) apiHash = String(arg.apiHash).trim();
 
-  // 2. Egern 环境变量
-  if (typeof ctx !== "undefined" && ctx.env) {
-    if (ctx.env.RACKNERD_API_KEY) apiKey = apiKey || ctx.env.RACKNERD_API_KEY;
-    if (ctx.env.RACKNERD_API_HASH) apiHash = apiHash || ctx.env.RACKNERD_API_HASH;
-  }
-
-  // 3. BoxJS / 持久化存储 (回退机制)
+  // 2. BoxJS / 持久化存储 (回退机制)
   if (!apiKey || !apiHash) {
     if (typeof $persistentStore !== "undefined") {
       apiKey = apiKey || $persistentStore.read("racknerd.apiKey") || "";

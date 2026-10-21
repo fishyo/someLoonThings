@@ -1,10 +1,11 @@
 /**
- * 九号出行 - Token / Cookie 捕获脚本
+ * 9bot - Token / Cookie 捕获脚本
  * 
- * 配合 ninebot.plugin 插件使用：开启【获取Cookie】开关后，打开九号出行 App 签到页即可自动捕获。
+ * 配合 ninebot.plugin 插件使用：开启【获取Cookie】开关后，打开 App 签到页即可自动捕获。
  */
 
-const cookieKey = "ninebot_cookie_data";
+const cookieKey = "9bot_cookie_data";
+const legacyCookieKey = "ninebot_cookie_data";
 
 // 仅在签到接口请求时进行捕获
 if ($request.url.indexOf("user-sign") > -1 && $request.url.indexOf("sign") > -1) {
@@ -29,15 +30,15 @@ if ($request.url.indexOf("user-sign") > -1 && $request.url.indexOf("sign") > -1)
       url: $request.url,
     });
 
-    const oldData = $persistentStore.read(cookieKey);
+    const oldData = $persistentStore.read(cookieKey) || $persistentStore.read(legacyCookieKey);
 
     if (oldData !== cookieData) {
-      if ($persistentStore.write(cookieData, cookieKey)) {
-        $notification.post("九号出行", "🎉 Cookie 获取成功", "授权信息已更新，可在插件配置中关闭获取开关");
-        console.log("九号出行 Cookie 已更新并保存");
-      }
+      $persistentStore.write(cookieData, cookieKey);
+      $persistentStore.write(cookieData, legacyCookieKey);
+      $notification.post("9bot", "🎉 Cookie 获取成功", "授权信息已更新，可在插件配置中关闭获取开关");
+      console.log("9bot Cookie 已更新并保存");
     } else {
-      console.log("九号出行 Cookie 未变化，静默跳过");
+      console.log("9bot Cookie 未变化，静默跳过");
     }
   }
 }

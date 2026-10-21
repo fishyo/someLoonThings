@@ -3,8 +3,7 @@
  * 
  * 配置优先级:
  * 1. Loon 插件参数 ($argument: veid & apiKey)
- * 2. Egern 环境变量 (BWG_VEID & BWG_API_KEY)
- * 3. BoxJS / 持久化存储 (bandwagon.veid & bandwagon.apiKey)
+ * 2. BoxJS / 持久化存储 (bandwagon.veid & bandwagon.apiKey)
  */
 
 // 跨平台环境适配
@@ -94,13 +93,7 @@ function getConfig() {
   if (arg.apiKey && String(arg.apiKey).trim()) apiKey = String(arg.apiKey).trim();
   if (arg.veid && String(arg.veid).trim()) veid = String(arg.veid).trim();
 
-  // 2. Egern 环境变量
-  if (typeof ctx !== "undefined" && ctx.env) {
-    if (ctx.env.BWG_API_KEY) apiKey = apiKey || ctx.env.BWG_API_KEY;
-    if (ctx.env.BWG_VEID) veid = veid || ctx.env.BWG_VEID;
-  }
-
-  // 3. BoxJS / 持久化存储 (回退机制)
+  // 2. BoxJS / 持久化存储 (回退机制)
   if (!apiKey || !veid) {
     if (typeof $persistentStore !== "undefined") {
       apiKey = apiKey || $persistentStore.read("bandwagon.apiKey") || "";

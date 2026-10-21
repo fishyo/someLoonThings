@@ -1,14 +1,15 @@
 /**
- * 九号出行 - 每日自动签到
+ * 9bot - 每日自动签到
  * 
  * 依赖 9bot_cookie.js 获取的持久化 Cookie 数据。
- * 支持在 Loon / Egern / Surge 中定时执行。
+ * 支持在 Loon / Surge / Quantumult X 中定时执行。
  */
 
 ;(function() {
 const APP = {
-  name: "九号出行",
-  cookieKey: "ninebot_cookie_data",
+  name: "9bot",
+  cookieKey: "9bot_cookie_data",
+  legacyCookieKey: "ninebot_cookie_data",
   signApi: "https://cn-cbu-gateway.ninebot.com/portal/api/user-sign/v2/sign",
   statusApi: "https://cn-cbu-gateway.ninebot.com/portal/api/user-sign/v2/status",
 };
@@ -92,8 +93,8 @@ function addExtraInfo(parts, data) {
   return parts.join("\n");
 }
 
-// 读取持久化存储的 Cookie
-const cookieDataStr = $persistentStore.read(APP.cookieKey);
+// 读取持久化存储的 Cookie（支持向后兼容）
+const cookieDataStr = $persistentStore.read(APP.cookieKey) || $persistentStore.read(APP.legacyCookieKey);
 if (!cookieDataStr) {
   console.log("未找到保存的Cookie数据");
   $notification.post(

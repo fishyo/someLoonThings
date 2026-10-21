@@ -1,5 +1,5 @@
-#!name = 九号出行
-#!desc = 九号电动车自动签到与 Cookie 获取。可在插件配置页开启/关闭签到任务及自定义签到时间；首次使用或 Cookie 失效时开启【获取Cookie】开关，打开九号出行 App 签到页面即可自动捕获。
+#!name = 9bot
+#!desc = 9bot 自动签到与 Cookie 获取。可在插件配置页开启/关闭签到任务及自定义签到时间；首次使用或 Cookie 失效时开启【获取Cookie】开关，打开 App 签到页面即可自动捕获。
 #!author = fishyo
 #!homepage = https://github.com/fishyo/someLoonThings
 #!icon = https://raw.githubusercontent.com/fishyo/someLoonThings/refs/heads/main/icons/ninebot.png
@@ -17,10 +17,10 @@ capture_cookie = switch, false, type=boolean, tag=获取Cookie, desc=捕获Cooki
 
 [Script]
 # 获取 Cookie：与 Argument 的 capture_cookie 开关实时联动
-request if ${url} ~= /^https:\/\/cn-cbu-gateway\.ninebot\.com\/portal\/api\/user-sign\/v(1|2)\/sign/i then script("https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/9bot/9bot_cookie.js") with enable=${capture_cookie}, requires_body=true, tag="九号获取Cookie"
+request if ${url} ~= /^https:\/\/cn-cbu-gateway\.ninebot\.com\/portal\/api\/user-sign\/v(1|2)\/sign/i then script("https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/9bot/9bot_cookie.js") with enable=${capture_cookie}, requires_body=true, tag="9bot获取Cookie"
 
 # 定时签到：通过 ${cronExpression} 动态控制执行时间，并通过 ${enable_sign} 控制启用状态
-cron ${cronExpression} then script("https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/9bot/9botsign.js") with enable=${enable_sign}, tag="🛵ninebot", timeout=60
+cron ${cronExpression} then script("https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/9bot/9botsign.js") with enable=${enable_sign}, tag="🛵9bot", timeout=60
 
 [Mitm]
 hostname = cn-cbu-gateway.ninebot.com
