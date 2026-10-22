@@ -4,8 +4,8 @@
 # Homepage: https://github.com/fishyo/someLoonThings
 # ==============================================================================
 
-host-suffix, clashroyale.com
-host-suffix, clashroyaleapp.com
-host-suffix, brawlstars.com
-host-suffix, supercell.com
-host-suffix, brawlstarsgame.com
+host-suffix, clashroyale.com, direct
+host-suffix, clashroyaleapp.com, direct
+host-suffix, brawlstars.com, direct
+host-suffix, supercell.com, direct
+host-suffix, brawlstarsgame.com, direct

@@ -155,10 +155,13 @@ if (fs.existsSync(qxDir)) {
         const line = rawLine.trim();
         if (!line || line.startsWith('#') || line.startsWith(';')) continue;
         const cleanLine = line.replace(/^\{#[^#]+#\}\s*/, ''); // 兼容 QX Build 950+ 前置备注
-        const parts = cleanLine.split(',');
-        const type = parts[0].trim().toUpperCase();
+        const parts = cleanLine.split(',').map(s => s.trim());
+        const type = parts[0].toUpperCase();
         if (!validRuleTypesQX.has(type)) {
           logFail(`quanX/rules/${file} (第 ${lineIdx} 行): 非法或不支持的 QX 分流规则类型 [${type}]`);
+          fileValid = false;
+        } else if (type !== 'FINAL' && parts.length < 3) {
+          logFail(`quanX/rules/${file} (第 ${lineIdx} 行): QX 分流规则缺少策略字段，必须形如 [${type}, target, policy]`);
           fileValid = false;
         }
       }

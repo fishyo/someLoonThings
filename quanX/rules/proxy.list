@@ -5,42 +5,42 @@
 # ==============================================================================
 
 # for myself
-host-suffix, bitwarden
-host-suffix, pythonhosted.org
+host-suffix, bitwarden, proxy
+host-suffix, pythonhosted.org, proxy
 
 # hysteria
-host-keyword, hysteria
+host-keyword, hysteria, proxy
 
 # pocketcasts
-host-suffix, pocketcasts.com
-host-suffix, pca.st
+host-suffix, pocketcasts.com, proxy
+host-suffix, pca.st, proxy
 
 # nxtrace
-host-suffix, nxtrace.org
+host-suffix, nxtrace.org, proxy
 
 # fireside podcast
-host-keyword, fireside
+host-keyword, fireside, proxy
 
 # everia
-host-suffix, everia.club
+host-suffix, everia.club, proxy
 
 # reiobox
-host-suffix, reiobox.top
+host-suffix, reiobox.top, proxy
 
 # cloudflare
-host-keyword, cloudflare
-host-suffix, pages.dev
-host-suffix, workers.dev
-host-suffix, warp.plus
-host-suffix, cf-ipfs.com
-host-suffix, videodelivery.net
-host-suffix, one.one.one
+host-keyword, cloudflare, proxy
+host-suffix, pages.dev, proxy
+host-suffix, workers.dev, proxy
+host-suffix, warp.plus, proxy
+host-suffix, cf-ipfs.com, proxy
+host-suffix, videodelivery.net, proxy
+host-suffix, one.one.one, proxy
 
 # uindex
-host-suffix, uindex.org
+host-suffix, uindex.org, proxy
 
 # royaleapi
-host-suffix, royaleapi.com
+host-suffix, royaleapi.com, proxy
 
 # giphy
-host-suffix, giphy.com
+host-suffix, giphy.com, proxy

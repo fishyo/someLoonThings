@@ -6,78 +6,78 @@
 # ==============================================================================
 
 # ----------------- Google Gemini & AI Studio -----------------
-host-suffix, gemini.google.com
-host-suffix, bard.google.com
-host-suffix, aistudio.google.com
-host-suffix, makersuite.google.com
-host-suffix, generativeai.google
-host-suffix, generativelanguage.googleapis.com
-host-suffix, alkalimakersuite-pa.googleapis.com
-host-suffix, proactivebackend-pa.googleapis.com
-host-suffix, geller-pa.googleapis.com
-host-suffix, odin-pa.googleapis.com
-host-suffix, aiplatform.googleapis.com
-host-suffix, notebooklm.google
-host-suffix, notebooklm.google.com
-host-suffix, deepmind.google
-host-suffix, deepmind.com
-host-suffix, ai.google.dev
-host, waa-pa.clients6.google.com
-host, alkali-pa.clients6.google.com
-host-suffix, googleapis.com
+host-suffix, gemini.google.com, proxy
+host-suffix, bard.google.com, proxy
+host-suffix, aistudio.google.com, proxy
+host-suffix, makersuite.google.com, proxy
+host-suffix, generativeai.google, proxy
+host-suffix, generativelanguage.googleapis.com, proxy
+host-suffix, alkalimakersuite-pa.googleapis.com, proxy
+host-suffix, proactivebackend-pa.googleapis.com, proxy
+host-suffix, geller-pa.googleapis.com, proxy
+host-suffix, odin-pa.googleapis.com, proxy
+host-suffix, aiplatform.googleapis.com, proxy
+host-suffix, notebooklm.google, proxy
+host-suffix, notebooklm.google.com, proxy
+host-suffix, deepmind.google, proxy
+host-suffix, deepmind.com, proxy
+host-suffix, ai.google.dev, proxy
+host, waa-pa.clients6.google.com, proxy
+host, alkali-pa.clients6.google.com, proxy
+host-suffix, googleapis.com, proxy
 
 # ----------------- OpenAI (ChatGPT & Sora) -----------------
-host-suffix, chatgpt.com
-host-suffix, openai.com
-host-suffix, oaistatic.com
-host-suffix, oaiusercontent.com
-host-suffix, sora.com
-host-suffix, openaiapi-site.azureedge.net
-host-suffix, openaicomproductionae4b.blob.core.windows.net
-host-suffix, openaicom.imgix.net
-host-suffix, featuregates.org
+host-suffix, chatgpt.com, proxy
+host-suffix, openai.com, proxy
+host-suffix, oaistatic.com, proxy
+host-suffix, oaiusercontent.com, proxy
+host-suffix, sora.com, proxy
+host-suffix, openaiapi-site.azureedge.net, proxy
+host-suffix, openaicomproductionae4b.blob.core.windows.net, proxy
+host-suffix, openaicom.imgix.net, proxy
+host-suffix, featuregates.org, proxy
 
 # ----------------- Anthropic Claude -----------------
-host-suffix, anthropic.com
-host-suffix, claude.ai
-host-suffix, claudeusercontent.com
+host-suffix, anthropic.com, proxy
+host-suffix, claude.ai, proxy
+host-suffix, claudeusercontent.com, proxy
 
 # ----------------- xAI (Grok) -----------------
-host-suffix, x.ai
-host-suffix, grok.com
+host-suffix, x.ai, proxy
+host-suffix, grok.com, proxy
 
 # ----------------- Perplexity AI -----------------
-host-suffix, perplexity.ai
-host-suffix, pplx.ai
+host-suffix, perplexity.ai, proxy
+host-suffix, pplx.ai, proxy
 
 # ----------------- Microsoft Copilot -----------------
-host-suffix, copilot.microsoft.com
-host-suffix, sydney.bing.com
-host, edgeservices.bing.com
+host-suffix, copilot.microsoft.com, proxy
+host-suffix, sydney.bing.com, proxy
+host, edgeservices.bing.com, proxy
 
 # ----------------- Midjourney -----------------
-host-suffix, midjourney.com
-host-suffix, cdn.midjourney.com
+host-suffix, midjourney.com, proxy
+host-suffix, cdn.midjourney.com, proxy
 
 # ----------------- 开发者与热门 AI 工具 -----------------
-host-suffix, cursor.com
-host-suffix, cursor.sh
-host-suffix, tavily.com
-host-suffix, groq.com
-host-suffix, poe.com
-host-suffix, poecdn.net
-host-suffix, suno.com
-host-suffix, suno.ai
-host-suffix, udio.com
-host-suffix, elevenlabs.io
-host-suffix, mistral.ai
-host-suffix, cohere.com
-host-suffix, cohere.ai
-host-suffix, together.ai
-host-suffix, together.xyz
-host-suffix, replicate.com
-host-suffix, replicate.delivery
-host-suffix, fal.ai
-host-suffix, v0.dev
-host-suffix, huggingface.co
-host-suffix, hf.space
+host-suffix, cursor.com, proxy
+host-suffix, cursor.sh, proxy
+host-suffix, tavily.com, proxy
+host-suffix, groq.com, proxy
+host-suffix, poe.com, proxy
+host-suffix, poecdn.net, proxy
+host-suffix, suno.com, proxy
+host-suffix, suno.ai, proxy
+host-suffix, udio.com, proxy
+host-suffix, elevenlabs.io, proxy
+host-suffix, mistral.ai, proxy
+host-suffix, cohere.com, proxy
+host-suffix, cohere.ai, proxy
+host-suffix, together.ai, proxy
+host-suffix, together.xyz, proxy
+host-suffix, replicate.com, proxy
+host-suffix, replicate.delivery, proxy
+host-suffix, fal.ai, proxy
+host-suffix, v0.dev, proxy
+host-suffix, huggingface.co, proxy
+host-suffix, hf.space, proxy
