@@ -16,9 +16,21 @@
 
 ### 1.2 Quantumult X 专属开发
 - 严格遵循 [Quantumult X 官方仓库规范与 TestFlight 最新特性](https://github.com/crossutility/Quantumult-X)。
-- 规则与复写采用模块化 `.snippet` 或 `.conf`，支持前置备注语法 `{# 备注 #}`（Build 950+）。
-- 脚本使用 QX 原生 API：`$task.fetch`（Promise 模式，注意 Build 934+ 默认关闭 cookie，需传 `opts: { 'auto-cookie': true }`）、`$prefs.valueForKey/setValueForKey`、`$notify`、`$configuration`、`$iCloud`。
-- 严禁在 QX 片段或脚本中出现 Loon 的 `#!name` 插件指令或 `$persistentStore` 等 API。
+- **远程复写片段规范 (`.snippet`)**：
+  - 供 `[rewrite_remote]` 订阅的 `.snippet` 文件**绝对严禁包含 `[rewrite_local]`、`[task_local]` 或 `[mitm]` 等分节标签**，否则 QX 解析器会因识别为非法规则直接抛出 `invalid line [rewrite_local]`。
+  - 片段内部直接声明 `hostname = ...` 与复写规则（支持 Build 844+ 混入 filter 规则与 Build 950+ 前置备注 `{# 备注 #}`）。
+- **远程分流规则集规范 (`.list`)**：
+  - 每行规则必须具备完整的**三元结构**：`<规则类型>, <匹配目标>, <策略名称>`（如 `host-suffix, domain.com, proxy`）。
+  - 即便通过 `force-policy` 覆盖策略，规则本体亦**不得省略第三个策略字段**，否则 QX 解析器直接抛出 `Invalid Line <type>, <target>`。
+- **任务与画廊规范 (Task Gallery)**：
+  - QX 原生 `rewrite_remote` 不支持定时任务；定时任务必须独立归入 `[task_local]`，或通过官方标准 **Task Gallery (`gallery.json`)** 提供一键批量导入。
+  - `gallery.json` 支持 `addons` 字段自动联动 Cookie 捕获等配套复写片段。
+- **图标与静态资源规范 (`img-url`)**：
+  - `img-url` 严禁使用国内不可达的 `raw.githubusercontent.com`，必须统一使用全球加速 CDN（如 `https://fastly.jsdelivr.net/gh/...`）。
+  - 图标必须是合规标准的真彩 PNG 格式（Magic Header: `89 50 4E 47`），严禁使用被直接重命名为 `.png` 的 JPEG（JFIF）图片。
+- **脚本 API 规范**：
+  - 脚本使用 QX 原生 API：`$task.fetch`（Promise 模式，注意 Build 934+ 默认关闭 cookie，需传 `opts: { 'auto-cookie': true }`）、`$prefs.valueForKey/setValueForKey`、`$notify`、`$configuration`、`$iCloud`。
+  - 严禁在 QX 片段或脚本中出现 Loon 的 `#!name` 插件指令或 `$persistentStore` 等 API。
 
 ---
 
@@ -32,9 +44,10 @@
   - 通过 `typeof $httpClient !== "undefined"` 检测 Loon；
   - 避免引入体积庞大的冗余框架，优先内嵌轻量封装函数。
 - **核心 API 抹平规范**：
-  1. **持久化存储**：
+  1. **持久化存储与参数配置**：
      - 读取：优先映射 Loon 的 `$persistentStore.read(key)` 与 QX 的 `$prefs.valueForKey(key)`。
      - 写入：统一映射 Loon 的 `$persistentStore.write(val, key)` 与 QX 的 `$prefs.setValueForKey(val, key)`。
+     - **参数管理**：由于 QX 不具备 Loon 的 `[Argument]` 文本表单，通用脚本必须优先支持 **BoxJS** 变量集中管理；若从 Task URL Hash (`#key=val`) 读取到参数，应自动调用 `$.write()` 持久化回写到本地 `$prefs`，实现一次配置永久生效。
   2. **网络请求**：
      - 将 Loon 的 `$httpClient` 回调模型与 QX 的 `$task.fetch` Promise 模型统一抽象为统一 Promise 或 Callback 接口，并确保正确传递 headers、body 及 cookie 参数。
   3. **通知交互**：
