@@ -17,7 +17,20 @@
 
 ## ⚡ Quantumult X 片段与任务 (QuanX Snippets & Tasks)
 
-### 1. 远程复写与 MitM 片段 (Rewrite Remote)
+### 1. 🎨 任务画廊 / 任务仓库 (Task Gallery) - 推荐一键批量添加
+支持通过 Quantumult X 官方**任务画廊 (Task Gallery)** 一键批量订阅所有定时脚本，自带高清图标、Cron 定时时间及配套 Cookie 捕获依赖：
+
+* **一键导入画廊**：[点击一键添加任务画廊](https://quantumult.app/x/open-app/ui?module=gallery&type=task&action=add&content=%5B%22https%3A%2F%2Fraw.githubusercontent.com%2Ffishyo%2FsomeLoonThings%2Fmain%2FquanX%2Fgallery.json%22%5D) （或 [备用 Scheme 链接](quantumult-x:///ui?module=gallery&type=task&action=add&content=%5B%22https%3A%2F%2Fraw.githubusercontent.com%2Ffishyo%2FsomeLoonThings%2Fmain%2FquanX%2Fgallery.json%22%5D)）
+* **画廊订阅地址**（支持在“构造请求”页面顶部画廊图标中手动粘贴）：
+  ```text
+  https://raw.githubusercontent.com/fishyo/someLoonThings/main/quanX/gallery.json
+  ```
+* **画廊包含的任务列表**：
+  * **9bot 每日签到**（每天 06:20，自动联动 Cookie 捕获 Rewrite）
+  * **搬瓦工 VPS 状态**（每天 06:02，流量与运行状态监控）
+  * **RackNerd VPS 状态**（每天 06:01，流量、内存与状态监控）
+
+### 2. 远程复写与 MitM 片段 (Rewrite Remote)
 在 iOS 设备 Safari 浏览器中点击“导入 QuanX”，直接调起 Quantumult X 添加远程复写引用：
 
 | 模块名称 | 说明 | 一键导入 | 原始文件 |
@@ -25,8 +38,8 @@
 | **9bot Cookie 捕获** | 抓取 9bot 登录凭据，捕获后自动保存至本地 `$prefs` | [导入 QuanX](https://quantumult.app/x/open-app/add-resource?remote-resource=%7B%22rewrite_remote%22%3A%5B%22https%3A%2F%2Fraw.githubusercontent.com%2Ffishyo%2FsomeLoonThings%2Fmain%2FquanX%2Fninebot.snippet%2C%20tag%3D9bot%20Cookie%20%E6%8D%95%E8%8E%B7%22%5D%7D) | [查看](https://raw.githubusercontent.com/fishyo/someLoonThings/main/quanX/ninebot.snippet) |
 | **自用拦截** | 少数派 RSS 防盗链、华尔街见闻、京东开屏、同花顺等广告拦截 | [导入 QuanX](https://quantumult.app/x/open-app/add-resource?remote-resource=%7B%22rewrite_remote%22%3A%5B%22https%3A%2F%2Fraw.githubusercontent.com%2Ffishyo%2FsomeLoonThings%2Fmain%2FquanX%2Fad-block.snippet%2C%20tag%3D%E8%87%AA%E7%94%A8%E5%B9%BF%E5%91%8A%E6%8B%A6%E6%88%AA%22%5D%7D) | [查看](https://raw.githubusercontent.com/fishyo/someLoonThings/main/quanX/ad-block.snippet) |
 
-### 2. 定时任务 (Task Local)
-在 Quantumult X 配置文件中的 `[task_local]` 区块添加，或在 App 界面“定时任务”中直接点击“+”添加：
+### 3. 本地单行配置 (Task Local)
+如果你更倾向直接在 Quantumult X 配置文件中的 `[task_local]` 区块手动粘贴，也可直接复制以下内容：
 
 ```ini
 [task_local]

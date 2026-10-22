@@ -167,6 +167,26 @@ if (fs.existsSync(qxDir)) {
       }
     }
   }
+
+  // 3.3 验证 gallery.json (Quantumult X 任务画廊)
+  const galleryPath = path.join(qxDir, 'gallery.json');
+  if (fs.existsSync(galleryPath)) {
+    try {
+      const gallery = JSON.parse(fs.readFileSync(galleryPath, 'utf8'));
+      if (!gallery.name || !Array.isArray(gallery.task)) {
+        logFail('quanX/gallery.json: 缺少必需字段 (name 或 task 数组)');
+      } else {
+        for (const t of gallery.task) {
+          if (!t.config || typeof t.config !== 'string') {
+            logFail('quanX/gallery.json: task 列表中的项目缺少有效的 config 字段');
+          }
+        }
+        logPass(`quanX/gallery.json: Quantumult X 任务画廊规范校验通过 (${gallery.task.length} 个任务)`);
+      }
+    } catch (err) {
+      logFail('quanX/gallery.json: JSON 语法错误', err.message);
+    }
+  }
 }
 
 // ==========================================
