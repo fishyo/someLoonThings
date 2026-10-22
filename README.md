@@ -44,13 +44,13 @@
 ```ini
 [task_local]
 # 9bot 每日签到（每天 06:20 执行）
-20 6 * * * https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/9bot/9botsign.js, tag=9bot 签到, img-url=https://raw.githubusercontent.com/fishyo/someLoonThings/main/icons/ninebot.png, enabled=true
+20 6 * * * https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/9bot/9botsign.js, tag=9bot 签到, img-url=https://fastly.jsdelivr.net/gh/fishyo/someLoonThings@main/icons/ninebot.png, enabled=true
 
 # 搬瓦工 VPS 状态查询（每天 06:02 执行，由 BoxJS 配置参数）
-2 6 * * * https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/bandwagon/bwg.js, tag=Bandwagon VPS 状态, img-url=https://raw.githubusercontent.com/fishyo/someLoonThings/main/icons/bandwagon.png, enabled=true
+2 6 * * * https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/bandwagon/bwg.js, tag=Bandwagon VPS 状态, img-url=https://fastly.jsdelivr.net/gh/fishyo/someLoonThings@main/icons/bandwagon.png, enabled=true
 
 # RackNerd VPS 状态查询（每天 06:01 执行，由 BoxJS 配置参数）
-1 6 * * * https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/racknerd/racknerd.js, tag=RackNerd VPS 状态, img-url=https://raw.githubusercontent.com/fishyo/someLoonThings/main/icons/racknerd.png, enabled=true
+1 6 * * * https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/racknerd/racknerd.js, tag=RackNerd VPS 状态, img-url=https://fastly.jsdelivr.net/gh/fishyo/someLoonThings@main/icons/racknerd.png, enabled=true
 ```
 
 ---

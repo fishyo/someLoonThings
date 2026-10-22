@@ -3,14 +3,14 @@
   "description": "Bandwagon / RackNerd VPS 运行状态监控与 9bot 每日自动签到定时任务",
   "task": [
     {
-      "config": "20 6 * * * https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/9bot/9botsign.js, tag=9bot 签到, img-url=https://raw.githubusercontent.com/fishyo/someLoonThings/main/icons/ninebot.png, enabled=true",
+      "config": "20 6 * * * https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/9bot/9botsign.js, tag=9bot 签到, img-url=https://fastly.jsdelivr.net/gh/fishyo/someLoonThings@main/icons/ninebot.png, enabled=true",
       "addons": "https://raw.githubusercontent.com/fishyo/someLoonThings/main/quanX/ninebot.snippet"
     },
     {
-      "config": "2 6 * * * https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/bandwagon/bwg.js, tag=Bandwagon VPS 状态, img-url=https://raw.githubusercontent.com/fishyo/someLoonThings/main/icons/bandwagon.png, enabled=true"
+      "config": "2 6 * * * https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/bandwagon/bwg.js, tag=Bandwagon VPS 状态, img-url=https://fastly.jsdelivr.net/gh/fishyo/someLoonThings@main/icons/bandwagon.png, enabled=true"
     },
     {
-      "config": "1 6 * * * https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/racknerd/racknerd.js, tag=RackNerd VPS 状态, img-url=https://raw.githubusercontent.com/fishyo/someLoonThings/main/icons/racknerd.png, enabled=true"
+      "config": "1 6 * * * https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/racknerd/racknerd.js, tag=RackNerd VPS 状态, img-url=https://fastly.jsdelivr.net/gh/fishyo/someLoonThings@main/icons/racknerd.png, enabled=true"
     }
   ]
 }
