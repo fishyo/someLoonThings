@@ -1,0 +1,83 @@
+# ==============================================================================
+# AI Services Ruleset (Quantumult X Format)
+# Maintainer: fishyo
+# Homepage: https://github.com/fishyo/someLoonThings
+# Description: 整合主流 AI 服务（OpenAI, Claude, Gemini, Grok, Perplexity, Copilot 等）
+# ==============================================================================
+
+# ----------------- Google Gemini & AI Studio -----------------
+host-suffix, gemini.google.com
+host-suffix, bard.google.com
+host-suffix, aistudio.google.com
+host-suffix, makersuite.google.com
+host-suffix, generativeai.google
+host-suffix, generativelanguage.googleapis.com
+host-suffix, alkalimakersuite-pa.googleapis.com
+host-suffix, proactivebackend-pa.googleapis.com
+host-suffix, geller-pa.googleapis.com
+host-suffix, odin-pa.googleapis.com
+host-suffix, aiplatform.googleapis.com
+host-suffix, notebooklm.google
+host-suffix, notebooklm.google.com
+host-suffix, deepmind.google
+host-suffix, deepmind.com
+host-suffix, ai.google.dev
+host, waa-pa.clients6.google.com
+host, alkali-pa.clients6.google.com
+host-suffix, googleapis.com
+
+# ----------------- OpenAI (ChatGPT & Sora) -----------------
+host-suffix, chatgpt.com
+host-suffix, openai.com
+host-suffix, oaistatic.com
+host-suffix, oaiusercontent.com
+host-suffix, sora.com
+host-suffix, openaiapi-site.azureedge.net
+host-suffix, openaicomproductionae4b.blob.core.windows.net
+host-suffix, openaicom.imgix.net
+host-suffix, featuregates.org
+
+# ----------------- Anthropic Claude -----------------
+host-suffix, anthropic.com
+host-suffix, claude.ai
+host-suffix, claudeusercontent.com
+
+# ----------------- xAI (Grok) -----------------
+host-suffix, x.ai
+host-suffix, grok.com
+
+# ----------------- Perplexity AI -----------------
+host-suffix, perplexity.ai
+host-suffix, pplx.ai
+
+# ----------------- Microsoft Copilot -----------------
+host-suffix, copilot.microsoft.com
+host-suffix, sydney.bing.com
+host, edgeservices.bing.com
+
+# ----------------- Midjourney -----------------
+host-suffix, midjourney.com
+host-suffix, cdn.midjourney.com
+
+# ----------------- 开发者与热门 AI 工具 -----------------
+host-suffix, cursor.com
+host-suffix, cursor.sh
+host-suffix, tavily.com
+host-suffix, groq.com
+host-suffix, poe.com
+host-suffix, poecdn.net
+host-suffix, suno.com
+host-suffix, suno.ai
+host-suffix, udio.com
+host-suffix, elevenlabs.io
+host-suffix, mistral.ai
+host-suffix, cohere.com
+host-suffix, cohere.ai
+host-suffix, together.ai
+host-suffix, together.xyz
+host-suffix, replicate.com
+host-suffix, replicate.delivery
+host-suffix, fal.ai
+host-suffix, v0.dev
+host-suffix, huggingface.co
+host-suffix, hf.space

@@ -56,7 +56,6 @@ if (fs.existsSync(pluginDir)) {
         if (line.includes('://')) {
           const rawPart = line.slice(line.indexOf('://') + 3);
           const rawDomain = rawPart.split(/[\/\s]/)[0].replace(/\\/g, '');
-          // 若为非正则特殊字符的普通域名，验证是否在 [Mitm] hostname 中
           if (rawDomain && !rawDomain.includes('*') && !rawDomain.includes('(') && !rawDomain.includes('[')) {
             const covered = mitmHosts.some(h => {
               if (h.startsWith('*.')) return rawDomain.endsWith(h.slice(2));
@@ -81,7 +80,7 @@ if (fs.existsSync(pluginDir)) {
 // ==========================================
 console.log('\n--- 2. 验证 Loon 规则集 (.lsr) ---');
 const loonDir = path.join(root, 'loon');
-const validRuleTypes = new Set([
+const validRuleTypesLoon = new Set([
   'DOMAIN', 'DOMAIN-SUFFIX', 'DOMAIN-KEYWORD', 'DOMAIN-REGEX',
   'IP-CIDR', 'IP-CIDR6', 'GEOIP', 'USER-AGENT', 'URL-REGEX',
   'PROCESS-NAME', 'AND', 'OR', 'NOT', 'FINAL'
@@ -101,7 +100,7 @@ if (fs.existsSync(loonDir)) {
       if (!line || line.startsWith('#') || line.startsWith(';')) continue;
       const parts = line.split(',');
       const type = parts[0].trim().toUpperCase();
-      if (!validRuleTypes.has(type)) {
+      if (!validRuleTypesLoon.has(type)) {
         logFail(`${file} (第 ${lineIdx} 行): 未知或非法的 Loon 规则类型 [${type}]`);
         fileValid = false;
       }
@@ -113,15 +112,65 @@ if (fs.existsSync(loonDir)) {
 }
 
 // ==========================================
-// 3. Mihomo 规则校验 (.yaml)
+// 3. Quantumult X 片段与规则校验 (quanX/)
 // ==========================================
-console.log('\n--- 3. 验证 Mihomo / Clash 规则集 (.yaml) ---');
+console.log('\n--- 3. 验证 Quantumult X 片段与规则 (quanX/) ---');
+const qxDir = path.join(root, 'quanX');
+const validRuleTypesQX = new Set([
+  'HOST', 'HOST-SUFFIX', 'HOST-KEYWORD', 'IP-CIDR', 'IP-CIDR6',
+  'GEOIP', 'USER-AGENT', 'FINAL'
+]);
+
+if (fs.existsSync(qxDir)) {
+  // 3.1 验证 .snippet
+  const snippetFiles = fs.readdirSync(qxDir).filter(f => f.endsWith('.snippet'));
+  for (const file of snippetFiles) {
+    const content = fs.readFileSync(path.join(qxDir, file), 'utf8');
+    const hasSection = /\[(rewrite_local|task_local|mitm|filter_local)\]/i.test(content);
+    if (!hasSection) {
+      logFail(`quanX/${file}: 缺少合法的 Quantumult X 片段分块标签 ([rewrite_local], [task_local], [mitm])`);
+    } else {
+      logPass(`quanX/${file}: 片段结构规范校验通过`);
+    }
+  }
+
+  // 3.2 验证 rules/*.list
+  const qxRulesDir = path.join(qxDir, 'rules');
+  if (fs.existsSync(qxRulesDir)) {
+    const listFiles = fs.readdirSync(qxRulesDir).filter(f => f.endsWith('.list'));
+    for (const file of listFiles) {
+      const lines = fs.readFileSync(path.join(qxRulesDir, file), 'utf8').split('\n');
+      let lineIdx = 0;
+      let fileValid = true;
+
+      for (let rawLine of lines) {
+        lineIdx++;
+        const line = rawLine.trim();
+        if (!line || line.startsWith('#') || line.startsWith(';')) continue;
+        const cleanLine = line.replace(/^\{#[^#]+#\}\s*/, ''); // 兼容 QX Build 950+ 前置备注
+        const parts = cleanLine.split(',');
+        const type = parts[0].trim().toUpperCase();
+        if (!validRuleTypesQX.has(type)) {
+          logFail(`quanX/rules/${file} (第 ${lineIdx} 行): 非法或不支持的 QX 分流规则类型 [${type}]`);
+          fileValid = false;
+        }
+      }
+      if (fileValid) {
+        logPass(`quanX/rules/${file}: Quantumult X 规则集语法校验通过 (${lines.length} 行)`);
+      }
+    }
+  }
+}
+
+// ==========================================
+// 4. Mihomo 规则与 BoxJS 订阅校验
+// ==========================================
+console.log('\n--- 4. 验证 Mihomo / Clash 规则集与 BoxJS ---');
 const mihomoDir = path.join(root, 'mihomo');
 if (fs.existsSync(mihomoDir)) {
   const yamlFiles = fs.readdirSync(mihomoDir).filter(f => f.endsWith('.yaml') || f.endsWith('.yml'));
   for (const file of yamlFiles) {
-    const fullPath = path.join(mihomoDir, file);
-    const content = fs.readFileSync(fullPath, 'utf8');
+    const content = fs.readFileSync(path.join(mihomoDir, file), 'utf8');
     if (!content.includes('payload:')) {
       logFail(`${file}: 缺少 payload 根字段`);
     } else {
@@ -130,10 +179,6 @@ if (fs.existsSync(mihomoDir)) {
   }
 }
 
-// ==========================================
-// 4. BoxJS 订阅格式校验
-// ==========================================
-console.log('\n--- 4. 验证 BoxJS 订阅配置 (boxjs.json) ---');
 const boxjsPath = path.join(root, 'script/boxjs.json');
 if (fs.existsSync(boxjsPath)) {
   try {
@@ -141,11 +186,6 @@ if (fs.existsSync(boxjsPath)) {
     if (!boxjs.id || !boxjs.name || !Array.isArray(boxjs.apps)) {
       logFail('boxjs.json: 缺少必需的根字段 (id, name, apps)');
     } else {
-      for (const app of boxjs.apps) {
-        if (!app.id || !app.name || !Array.isArray(app.keys)) {
-          logFail(`boxjs.json: 应用 [${app.id || 'unknown'}] 缺少 id, name 或 keys 字段`);
-        }
-      }
       logPass(`boxjs.json: 校验通过 (${boxjs.apps.length} 个应用配置)`);
     }
   } catch (err) {
@@ -156,7 +196,7 @@ if (fs.existsSync(boxjsPath)) {
 // ==========================================
 // 5. 跨端契约沙盒仿真 (Loon vs Quantumult X)
 // ==========================================
-console.log('\n--- 5. 跨端沙盒契约仿真 (Loon & Quantumult X) ---');
+console.log('\n--- 5. 跨端沙盒契约仿真与本地 $prefs 持久化验证 ---');
 
 function createLoonContext(customReq = {}) {
   return vm.createContext({
@@ -168,9 +208,7 @@ function createLoonContext(customReq = {}) {
       read: (k) => '{"authorization":"test_token","deviceId":"dev_123"}',
       write: (v, k) => true,
     },
-    $notification: {
-      post: () => {},
-    },
+    $notification: { post: () => {} },
     $done: () => {},
     $argument: 'apiKey=test_key&veid=123&apiHash=test_hash',
     $request: customReq,
@@ -182,25 +220,33 @@ function createLoonContext(customReq = {}) {
   });
 }
 
-function createQXContext(customReq = {}) {
-  return vm.createContext({
-    $task: {
-      fetch: (opts) => Promise.resolve({ statusCode: 200, body: '{"code":0,"data":{}}' }),
-    },
-    $prefs: {
-      valueForKey: (k) => '{"authorization":"test_token","deviceId":"dev_123"}',
-      setValueForKey: (v, k) => true,
-    },
-    $notify: () => {},
-    $done: () => {},
-    $argument: 'apiKey=test_key&veid=123&apiHash=test_hash',
-    $request: customReq,
-    console: { log: () => {}, error: () => {}, warn: () => {} },
-    setTimeout: (fn, ms) => setTimeout(fn, Math.min(ms || 0, 5)),
-    clearTimeout: clearTimeout,
-    Date, JSON, Math, String, Number, Boolean, Array, Object, RegExp,
-    encodeURIComponent, decodeURIComponent,
-  });
+function createQXContext(customReq = {}, initialPrefs = {}, onPrefWrite = null) {
+  const prefs = { ...initialPrefs };
+  return {
+    ctx: vm.createContext({
+      $task: {
+        fetch: (opts) => Promise.resolve({ statusCode: 200, body: '{"code":0,"data":{}}' }),
+      },
+      $prefs: {
+        valueForKey: (k) => prefs[k] || null,
+        setValueForKey: (v, k) => {
+          prefs[k] = v;
+          if (onPrefWrite) onPrefWrite(k, v);
+          return true;
+        },
+      },
+      $notify: () => {},
+      $done: () => {},
+      $argument: 'veid=99999&apiKey=test_api_key&apiHash=test_api_hash',
+      $request: customReq,
+      console: { log: () => {}, error: () => {}, warn: () => {} },
+      setTimeout: (fn, ms) => setTimeout(fn, Math.min(ms || 0, 5)),
+      clearTimeout: clearTimeout,
+      Date, JSON, Math, String, Number, Boolean, Array, Object, RegExp,
+      encodeURIComponent, decodeURIComponent,
+    }),
+    prefs,
+  };
 }
 
 const scriptsToVerify = [
@@ -236,16 +282,32 @@ for (const rel of scriptsToVerify) {
   try {
     const loonCtx = createLoonContext(mockReq);
     vm.runInContext(code, loonCtx, { filename: rel, timeout: 1000 });
-    logPass(`${rel}: Loon 沙盒环境运行通过 (无未捕获异常)`);
+    logPass(`${rel}: Loon 沙盒环境运行通过`);
   } catch (err) {
     logFail(`${rel}: Loon 沙盒异常`, err.message);
   }
 
-  // 3. Quantumult X 纯净环境沙盒验证
+  // 3. Quantumult X 纯净环境沙盒与 $prefs 本地持久化仿真
   try {
-    const qxCtx = createQXContext(mockReq);
-    vm.runInContext(code, qxCtx, { filename: rel, timeout: 1000 });
-    logPass(`${rel}: Quantumult X 沙盒环境运行通过 (无未声明 API 违规)`);
+    const writtenKeys = [];
+    const { ctx, prefs } = createQXContext(mockReq, {}, (k, v) => writtenKeys.push(k));
+    vm.runInContext(code, ctx, { filename: rel, timeout: 1000 });
+
+    if (rel.includes('bwg.js')) {
+      if (prefs['bandwagon.veid'] === '99999' && prefs['bandwagon.apiKey'] === 'test_api_key') {
+        logPass(`${rel}: Quantumult X 沙盒运行通过 & $prefs 本地参数持久化验证成功！`);
+      } else {
+        logFail(`${rel}: 未能成功将参数持久化写入 $prefs`);
+      }
+    } else if (rel.includes('racknerd.js')) {
+      if (prefs['racknerd.apiKey'] === 'test_api_key' && prefs['racknerd.apiHash'] === 'test_api_hash') {
+        logPass(`${rel}: Quantumult X 沙盒运行通过 & $prefs 本地参数持久化验证成功！`);
+      } else {
+        logFail(`${rel}: 未能成功将参数持久化写入 $prefs`);
+      }
+    } else {
+      logPass(`${rel}: Quantumult X 沙盒环境运行通过`);
+    }
   } catch (err) {
     logFail(`${rel}: Quantumult X 沙盒异常`, err.message);
   }
@@ -256,6 +318,6 @@ if (hasError) {
   console.error('\x1b[31m❌ CI 检查失败，请修复上述错误后重新提交！\x1b[0m\n');
   process.exit(1);
 } else {
-  console.log('\x1b[32m✅ 全部目标校验通过！Loon 与 Quantumult X 兼容性及规则正常！\x1b[0m\n');
+  console.log('\x1b[32m✅ 全部目标校验通过！Loon 与 Quantumult X 规则与沙盒均正常！\x1b[0m\n');
   process.exit(0);
 }

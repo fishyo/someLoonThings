@@ -1,0 +1,46 @@
+# ==============================================================================
+# Custom Proxy Ruleset (Quantumult X Format)
+# Maintainer: fishyo
+# Homepage: https://github.com/fishyo/someLoonThings
+# ==============================================================================
+
+# for myself
+host-suffix, bitwarden
+host-suffix, pythonhosted.org
+
+# hysteria
+host-keyword, hysteria
+
+# pocketcasts
+host-suffix, pocketcasts.com
+host-suffix, pca.st
+
+# nxtrace
+host-suffix, nxtrace.org
+
+# fireside podcast
+host-keyword, fireside
+
+# everia
+host-suffix, everia.club
+
+# reiobox
+host-suffix, reiobox.top
+
+# cloudflare
+host-keyword, cloudflare
+host-suffix, pages.dev
+host-suffix, workers.dev
+host-suffix, warp.plus
+host-suffix, cf-ipfs.com
+host-suffix, videodelivery.net
+host-suffix, one.one.one
+
+# uindex
+host-suffix, uindex.org
+
+# royaleapi
+host-suffix, royaleapi.com
+
+# giphy
+host-suffix, giphy.com

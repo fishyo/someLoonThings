@@ -2,8 +2,8 @@
  * 搬瓦工 (BandwagonHost) VPS 状态与流量查询
  * 
  * 配置优先级:
- * 1. Loon 插件参数 ($argument: veid & apiKey)
- * 2. BoxJS / 持久化存储 (bandwagon.veid & bandwagon.apiKey)
+ * 1. Loon 插件参数 / QuanX URL Hash ($argument: veid & apiKey)
+ * 2. BoxJS / 本地持久化存储 $prefs (bandwagon.veid & bandwagon.apiKey)
  */
 
 // 跨平台环境适配
@@ -62,7 +62,7 @@ const boxjsConfig = {
   ],
 };
 
-// 解析插件参数 ($argument)
+// 解析插件参数 ($argument / URL Hash)
 function parseArgument() {
   if (typeof $argument === "undefined" || !$argument) return {};
   if (typeof $argument === "object") return $argument;
@@ -88,20 +88,21 @@ function getConfig() {
   let apiKey = "";
   let veid = "";
 
-  // 1. Loon 插件参数
+  // 1. Loon 插件参数 / QuanX URL Hash
   const arg = parseArgument();
   if (arg.apiKey && String(arg.apiKey).trim()) apiKey = String(arg.apiKey).trim();
   if (arg.veid && String(arg.veid).trim()) veid = String(arg.veid).trim();
 
-  // 2. BoxJS / 持久化存储 (回退机制)
+  // 2. BoxJS / 持久化存储 $prefs (回退机制)
   if (!apiKey || !veid) {
-    if (typeof $persistentStore !== "undefined") {
-      apiKey = apiKey || $persistentStore.read("bandwagon.apiKey") || "";
-      veid = veid || $persistentStore.read("bandwagon.veid") || "";
-    } else if (typeof $prefs !== "undefined") {
-      apiKey = apiKey || $prefs.valueForKey("bandwagon.apiKey") || "";
-      veid = veid || $prefs.valueForKey("bandwagon.veid") || "";
-    }
+    apiKey = apiKey || $.read("bandwagon.apiKey") || "";
+    veid = veid || $.read("bandwagon.veid") || "";
+  }
+
+  // 3. 自动同步持久化（若从 URL Hash 首次传入，自动写入 $prefs 供后续复用）
+  if (apiKey && veid) {
+    if (arg.apiKey && String(arg.apiKey).trim()) $.write(apiKey, "bandwagon.apiKey");
+    if (arg.veid && String(arg.veid).trim()) $.write(veid, "bandwagon.veid");
   }
 
   const maskedVeid = veid ? veid.replace(/^(.{2})(.*)(.{1})$/, "$1****$3") : "N/A";
@@ -119,7 +120,7 @@ function getServiceInfo() {
     $.notify(
       "BandwagonHost Status",
       "⚠️ 配置缺失",
-      "请在 Loon 插件设置或 BoxJS 中配置 API Key 和 VEID"
+      "请在 Task URL 末尾追加 #veid=xxx&apiKey=yyy 或在 BoxJS 中设置"
     );
     $.done({});
     return;

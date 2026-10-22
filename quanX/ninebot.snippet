@@ -1,0 +1,22 @@
+# ==============================================================================
+# 9bot 自动签到与 Cookie 捕获 (Quantumult X Snippet)
+# Author: fishyo
+# Homepage: https://github.com/fishyo/someLoonThings
+# Icon: https://raw.githubusercontent.com/fishyo/someLoonThings/main/icons/ninebot.png
+#
+# 【使用说明】：
+# 1. 导入片段后，打开 9bot App 进入“我的 - 签到”页面，系统将自动捕获 Cookie 并弹出成功通知；
+# 2. 捕获成功后，Token 将自动保存在 Quantumult X 本地 $prefs 存储中；
+# 3. 每天 06:20 自动定时执行签到任务。
+# ==============================================================================
+
+[rewrite_local]
+# 捕获 Cookie（获取成功后可在此行首加 # 注释掉以避免重复唤醒脚本）
+^https:\/\/cn-cbu-gateway\.ninebot\.com\/portal\/api\/user-sign\/v(1|2)\/sign url script-request-body https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/9bot/9bot_cookie.js
+
+[task_local]
+# 定时签到（每天 06:20）
+20 6 * * * https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/9bot/9botsign.js, tag=9bot 签到, img-url=https://raw.githubusercontent.com/fishyo/someLoonThings/main/icons/ninebot.png, enabled=true
+
+[mitm]
+hostname = cn-cbu-gateway.ninebot.com
