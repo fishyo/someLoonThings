@@ -5,7 +5,8 @@
 # Icon: https://raw.githubusercontent.com/fishyo/someLoonThings/main/icons/Find_My.png
 # ==============================================================================
 
-[rewrite_local]
+hostname = cdnfile.sspai.com, api-one-wscn.awtmt.com, m.360buyimg.com, adm.10jqka.com.cn, iphone.ac.qq.com, stat.10jqka.com.cn
+
 # 少数派 RSS 全文图片防盗链 Header 注入
 ^https:\/\/cdnfile\.sspai\.com url request-header ^ request-header Referer: sspai.com\r\n
 
@@ -19,6 +20,3 @@
 ^https?:\/\/adm\.10jqka\.com\.cn\/interface\/ad\/recommend url reject-200
 ^https?:\/\/iphone\.ac\.qq\.com\/.*\/Support\/(getSystemConf|bootScreen) url reject
 ^https?:\/\/stat\.10jqka\.com\.cn\/q\?ld=mobile&id=ad url reject-dict
-
-[mitm]
-hostname = cdnfile.sspai.com, api-one-wscn.awtmt.com, m.360buyimg.com, adm.10jqka.com.cn, iphone.ac.qq.com, stat.10jqka.com.cn

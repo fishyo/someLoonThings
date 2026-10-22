@@ -15,16 +15,30 @@
 
 ---
 
-## ⚡ Quantumult X 片段一键导入 (QuanX Snippets)
+## ⚡ Quantumult X 片段与任务 (QuanX Snippets & Tasks)
 
-在 iOS 设备 Safari 浏览器中点击“导入 QuanX”按钮，即可直接调起 Quantumult X 添加远程片段引用（Rewrite / Task / MitM 一站式导入）：
+### 1. 远程复写与 MitM 片段 (Rewrite Remote)
+在 iOS 设备 Safari 浏览器中点击“导入 QuanX”，直接调起 Quantumult X 添加远程复写引用：
 
-| 功能模块 | 说明 | 一键导入 | 原始文件 |
+| 模块名称 | 说明 | 一键导入 | 原始文件 |
 | :--- | :--- | :---: | :---: |
-| **9bot** | 自动签到任务与 Cookie 捕获，Token 自动存入本地 `$prefs` | [导入 QuanX](https://quantumult.app/x/open-app/add-resource?remote-resource=%7B%22rewrite_remote%22%3A%5B%22https%3A%2F%2Fraw.githubusercontent.com%2Ffishyo%2FsomeLoonThings%2Fmain%2FquanX%2Fninebot.snippet%2C%20tag%3D9bot%20%E7%AD%BE%E5%88%B0%22%5D%7D) | [查看](https://raw.githubusercontent.com/fishyo/someLoonThings/main/quanX/ninebot.snippet) |
-| **搬瓦工状态** | 每天 06:02 查询 Bandwagon VPS 流量与状态（由 BoxJS 配置） | [导入 QuanX](https://quantumult.app/x/open-app/add-resource?remote-resource=%7B%22rewrite_remote%22%3A%5B%22https%3A%2F%2Fraw.githubusercontent.com%2Ffishyo%2FsomeLoonThings%2Fmain%2FquanX%2Fbandwagon.snippet%2C%20tag%3DBandwagon%20VPS%20%E7%8A%B6%E6%80%81%22%5D%7D) | [查看](https://raw.githubusercontent.com/fishyo/someLoonThings/main/quanX/bandwagon.snippet) |
-| **RackNerd状态** | 每天 06:01 查询 RackNerd VPS 流量与运行状态（由 BoxJS 配置） | [导入 QuanX](https://quantumult.app/x/open-app/add-resource?remote-resource=%7B%22rewrite_remote%22%3A%5B%22https%3A%2F%2Fraw.githubusercontent.com%2Ffishyo%2FsomeLoonThings%2Fmain%2FquanX%2Fracknerd.snippet%2C%20tag%3DRackNerd%20VPS%20%E7%8A%B6%E6%80%81%22%5D%7D) | [查看](https://raw.githubusercontent.com/fishyo/someLoonThings/main/quanX/racknerd.snippet) |
-| **自用拦截** | 少数派 RSS 防盗链、华尔街见闻、京东开屏、同花顺等去广告 | [导入 QuanX](https://quantumult.app/x/open-app/add-resource?remote-resource=%7B%22rewrite_remote%22%3A%5B%22https%3A%2F%2Fraw.githubusercontent.com%2Ffishyo%2FsomeLoonThings%2Fmain%2FquanX%2Fad-block.snippet%2C%20tag%3D%E8%87%AA%E7%94%A8%E5%B9%BF%E5%91%8A%E6%8B%A6%E6%88%AA%22%5D%7D) | [查看](https://raw.githubusercontent.com/fishyo/someLoonThings/main/quanX/ad-block.snippet) |
+| **9bot Cookie 捕获** | 抓取 9bot 登录凭据，捕获后自动保存至本地 `$prefs` | [导入 QuanX](https://quantumult.app/x/open-app/add-resource?remote-resource=%7B%22rewrite_remote%22%3A%5B%22https%3A%2F%2Fraw.githubusercontent.com%2Ffishyo%2FsomeLoonThings%2Fmain%2FquanX%2Fninebot.snippet%2C%20tag%3D9bot%20Cookie%20%E6%8D%95%E8%8E%B7%22%5D%7D) | [查看](https://raw.githubusercontent.com/fishyo/someLoonThings/main/quanX/ninebot.snippet) |
+| **自用拦截** | 少数派 RSS 防盗链、华尔街见闻、京东开屏、同花顺等广告拦截 | [导入 QuanX](https://quantumult.app/x/open-app/add-resource?remote-resource=%7B%22rewrite_remote%22%3A%5B%22https%3A%2F%2Fraw.githubusercontent.com%2Ffishyo%2FsomeLoonThings%2Fmain%2FquanX%2Fad-block.snippet%2C%20tag%3D%E8%87%AA%E7%94%A8%E5%B9%BF%E5%91%8A%E6%8B%A6%E6%88%AA%22%5D%7D) | [查看](https://raw.githubusercontent.com/fishyo/someLoonThings/main/quanX/ad-block.snippet) |
+
+### 2. 定时任务 (Task Local)
+在 Quantumult X 配置文件中的 `[task_local]` 区块添加，或在 App 界面“定时任务”中直接点击“+”添加：
+
+```ini
+[task_local]
+# 9bot 每日签到（每天 06:20 执行）
+20 6 * * * https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/9bot/9botsign.js, tag=9bot 签到, img-url=https://raw.githubusercontent.com/fishyo/someLoonThings/main/icons/ninebot.png, enabled=true
+
+# 搬瓦工 VPS 状态查询（每天 06:02 执行，由 BoxJS 配置参数）
+2 6 * * * https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/bandwagon/bwg.js, tag=Bandwagon VPS 状态, img-url=https://raw.githubusercontent.com/fishyo/someLoonThings/main/icons/bandwagon.png, enabled=true
+
+# RackNerd VPS 状态查询（每天 06:01 执行，由 BoxJS 配置参数）
+1 6 * * * https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/racknerd/racknerd.js, tag=RackNerd VPS 状态, img-url=https://raw.githubusercontent.com/fishyo/someLoonThings/main/icons/racknerd.png, enabled=true
+```
 
 ---
 

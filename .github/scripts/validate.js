@@ -122,15 +122,22 @@ const validRuleTypesQX = new Set([
 ]);
 
 if (fs.existsSync(qxDir)) {
-  // 3.1 验证 .snippet
+  // 3.1 验证 .snippet（Quantumult X 原生远程复写片段规范）
   const snippetFiles = fs.readdirSync(qxDir).filter(f => f.endsWith('.snippet'));
   for (const file of snippetFiles) {
-    const content = fs.readFileSync(path.join(qxDir, file), 'utf8');
-    const hasSection = /\[(rewrite_local|task_local|mitm|filter_local)\]/i.test(content);
-    if (!hasSection) {
-      logFail(`quanX/${file}: 缺少合法的 Quantumult X 片段分块标签 ([rewrite_local], [task_local], [mitm])`);
-    } else {
-      logPass(`quanX/${file}: 片段结构规范校验通过`);
+    const lines = fs.readFileSync(path.join(qxDir, file), 'utf8').split('\n');
+    let hasInvalidSection = false;
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i].trim();
+      if (!line || line.startsWith('#') || line.startsWith(';')) continue;
+      // QX rewrite_remote 片段不能包含 [rewrite_local] 或 [mitm]，否则 QX 会报 invalid line
+      if (/^\[(rewrite_local|mitm)\]/i.test(line)) {
+        logFail(`quanX/${file} (第 ${i + 1} 行): 包含违规的分节符 [${line}]，QX 远程片段中不能包含此标签，必须直接编写规则或 hostname`);
+        hasInvalidSection = true;
+      }
+    }
+    if (!hasInvalidSection) {
+      logPass(`quanX/${file}: Quantumult X 原生片段结构规范校验通过 (无违规分节符)`);
     }
   }
 
