@@ -3,7 +3,7 @@
 #!author = fishyo
 #!homepage = https://github.com/fishyo/someLoonThings
 #!icon = https://raw.githubusercontent.com/fishyo/someLoonThings/refs/heads/main/icons/Find_My.png
-#!date = 2025-12-04
+#!date = 2026-10-22
 
 [Rewrite]
 # 少数派RSS全文图片
@@ -14,9 +14,6 @@
 
 # 京东 - 拦截移动端开屏CMS
 ^https://m\.360buyimg\.com/mobilecms/s1125x2436_jfs/t1/.* reject-200
-
-# 上汽大众 - 拦截开屏广告
-^https:\/\/api\.mos\.csvw\.com\/mos\/operation\/home\/api\/v\d\/app\/brand\/queryDataForOperation reject-200
 
 #同花顺
 ^https?:\/\/adm\.10jqka\.com\.cn\/interface\/ad\/recommend reject-200
