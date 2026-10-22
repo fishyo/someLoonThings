@@ -2,8 +2,8 @@
  * RackNerd VPS 运行状态与流量查询
  * 
  * 配置优先级:
- * 1. Loon 插件参数 / QuanX URL Hash ($argument: apiKey & apiHash)
- * 2. BoxJS / 本地持久化存储 $prefs (racknerd.apiKey & racknerd.apiHash)
+ * 1. BoxJS / 本地持久化存储 (racknerd.apiKey & racknerd.apiHash)
+ * 2. Loon 插件参数 ($argument)
  */
 
 // 跨平台环境适配
@@ -67,7 +67,7 @@ const boxjsConfig = {
   ],
 };
 
-// 解析插件参数 ($argument / URL Hash)
+// 解析插件参数 ($argument)
 function parseArgument() {
   if (typeof $argument === "undefined" || !$argument) return {};
   if (typeof $argument === "object") return $argument;
@@ -88,26 +88,20 @@ function parseArgument() {
   return {};
 }
 
-// 获取配置信息
+// 获取配置信息 (优先 BoxJS)
 function getConfig() {
   let apiKey = "";
   let apiHash = "";
 
-  // 1. Loon 插件参数 / QuanX URL Hash
-  const arg = parseArgument();
-  if (arg.apiKey && String(arg.apiKey).trim()) apiKey = String(arg.apiKey).trim();
-  if (arg.apiHash && String(arg.apiHash).trim()) apiHash = String(arg.apiHash).trim();
+  // 1. 优先读取 BoxJS / 本地持久化存储 ($persistentStore / $prefs)
+  apiKey = $.read("racknerd.apiKey") || "";
+  apiHash = $.read("racknerd.apiHash") || "";
 
-  // 2. BoxJS / 持久化存储 $prefs (回退机制)
+  // 2. 回退读取 Loon 插件参数 ($argument)
   if (!apiKey || !apiHash) {
-    apiKey = apiKey || $.read("racknerd.apiKey") || "";
-    apiHash = apiHash || $.read("racknerd.apiHash") || "";
-  }
-
-  // 3. 自动同步持久化（若从 URL Hash 首次传入，自动写入 $prefs 供后续复用）
-  if (apiKey && apiHash) {
-    if (arg.apiKey && String(arg.apiKey).trim()) $.write(apiKey, "racknerd.apiKey");
-    if (arg.apiHash && String(arg.apiHash).trim()) $.write(apiHash, "racknerd.apiHash");
+    const arg = parseArgument();
+    if (!apiKey && arg.apiKey && String(arg.apiKey).trim()) apiKey = String(arg.apiKey).trim();
+    if (!apiHash && arg.apiHash && String(arg.apiHash).trim()) apiHash = String(arg.apiHash).trim();
   }
 
   console.log(`Config Read - Key Len: ${apiKey.length}, Hash Len: ${apiHash.length}`);
@@ -136,7 +130,7 @@ function getServiceInfo() {
     $.notify(
       "RackNerd Status",
       "⚠️ 配置缺失",
-      "请在 Task URL 末尾追加 #apiKey=xxx&apiHash=yyy 或在 BoxJS 中设置"
+      "请在 BoxJS 中配置 API Key 和 Hash"
     );
     $.done({});
     return;

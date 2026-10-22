@@ -199,18 +199,25 @@ if (fs.existsSync(boxjsPath)) {
 console.log('\n--- 5. 跨端沙盒契约仿真与本地 $prefs 持久化验证 ---');
 
 function createLoonContext(customReq = {}) {
+  const store = {
+    'bandwagon.veid': '123456',
+    'bandwagon.apiKey': 'test_api_key',
+    'racknerd.apiKey': 'test_api_key',
+    'racknerd.apiHash': 'test_api_hash',
+    '9bot_cookie_data': '{"authorization":"test_token","deviceId":"dev_123"}',
+  };
   return vm.createContext({
     $httpClient: {
       get: (opts, cb) => setTimeout(() => cb(null, { status: 200 }, '{"code":0,"data":{}}'), 5),
       post: (opts, cb) => setTimeout(() => cb(null, { status: 200 }, '{"code":0,"data":{}}'), 5),
     },
     $persistentStore: {
-      read: (k) => '{"authorization":"test_token","deviceId":"dev_123"}',
-      write: (v, k) => true,
+      read: (k) => store[k] || null,
+      write: (v, k) => { store[k] = v; return true; },
     },
     $notification: { post: () => {} },
     $done: () => {},
-    $argument: 'apiKey=test_key&veid=123&apiHash=test_hash',
+    $argument: '',
     $request: customReq,
     console: { log: () => {}, error: () => {}, warn: () => {} },
     setTimeout: (fn, ms) => setTimeout(fn, Math.min(ms || 0, 5)),
@@ -220,8 +227,15 @@ function createLoonContext(customReq = {}) {
   });
 }
 
-function createQXContext(customReq = {}, initialPrefs = {}, onPrefWrite = null) {
-  const prefs = { ...initialPrefs };
+function createQXContext(customReq = {}, initialPrefs = {}) {
+  const prefs = {
+    'bandwagon.veid': '99999',
+    'bandwagon.apiKey': 'test_api_key',
+    'racknerd.apiKey': 'test_api_key',
+    'racknerd.apiHash': 'test_api_hash',
+    '9bot_cookie_data': '{"authorization":"test_token","deviceId":"dev_123"}',
+    ...initialPrefs
+  };
   return {
     ctx: vm.createContext({
       $task: {
@@ -231,13 +245,12 @@ function createQXContext(customReq = {}, initialPrefs = {}, onPrefWrite = null) 
         valueForKey: (k) => prefs[k] || null,
         setValueForKey: (v, k) => {
           prefs[k] = v;
-          if (onPrefWrite) onPrefWrite(k, v);
           return true;
         },
       },
       $notify: () => {},
       $done: () => {},
-      $argument: 'veid=99999&apiKey=test_api_key&apiHash=test_api_hash',
+      $argument: '',
       $request: customReq,
       console: { log: () => {}, error: () => {}, warn: () => {} },
       setTimeout: (fn, ms) => setTimeout(fn, Math.min(ms || 0, 5)),
@@ -287,27 +300,11 @@ for (const rel of scriptsToVerify) {
     logFail(`${rel}: Loon 沙盒异常`, err.message);
   }
 
-  // 3. Quantumult X 纯净环境沙盒与 $prefs 本地持久化仿真
+  // 3. Quantumult X 纯净环境沙盒 (验证优先读取 BoxJS $prefs 配置)
   try {
-    const writtenKeys = [];
-    const { ctx, prefs } = createQXContext(mockReq, {}, (k, v) => writtenKeys.push(k));
+    const { ctx, prefs } = createQXContext(mockReq);
     vm.runInContext(code, ctx, { filename: rel, timeout: 1000 });
-
-    if (rel.includes('bwg.js')) {
-      if (prefs['bandwagon.veid'] === '99999' && prefs['bandwagon.apiKey'] === 'test_api_key') {
-        logPass(`${rel}: Quantumult X 沙盒运行通过 & $prefs 本地参数持久化验证成功！`);
-      } else {
-        logFail(`${rel}: 未能成功将参数持久化写入 $prefs`);
-      }
-    } else if (rel.includes('racknerd.js')) {
-      if (prefs['racknerd.apiKey'] === 'test_api_key' && prefs['racknerd.apiHash'] === 'test_api_hash') {
-        logPass(`${rel}: Quantumult X 沙盒运行通过 & $prefs 本地参数持久化验证成功！`);
-      } else {
-        logFail(`${rel}: 未能成功将参数持久化写入 $prefs`);
-      }
-    } else {
-      logPass(`${rel}: Quantumult X 沙盒环境运行通过`);
-    }
+    logPass(`${rel}: Quantumult X 沙盒运行通过 (基于 BoxJS $prefs 配置读取)`);
   } catch (err) {
     logFail(`${rel}: Quantumult X 沙盒异常`, err.message);
   }

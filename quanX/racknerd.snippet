@@ -4,12 +4,12 @@
 # Homepage: https://github.com/fishyo/someLoonThings
 # Icon: https://raw.githubusercontent.com/fishyo/someLoonThings/main/icons/racknerd.png
 #
-# 【参数配置说明 - 支持两种方式】：
-# 方式 1（推荐，最简便）：直接在下方 task 任务 URL 后追加 #apiKey=你的APIKey&apiHash=你的APIHash
-#        脚本在首次执行后会自动持久化写入 Quantumult X 的本地 $prefs 存储中，长久有效！
-# 方式 2：使用 BoxJS 订阅并配置（应用 ID: racknerd）。
+# 【参数配置说明】：
+# 本脚本完全依托 BoxJS 进行参数管理与配置：
+# 1. 订阅 BoxJS 地址：https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/boxjs.json
+# 2. 在 BoxJS 应用列表中找到“RackNerd 状态”，填入 API Key 与 API Hash 即可。
 # ==============================================================================
 
 [task_local]
-# 每天 06:01 定时查询 RackNerd VPS 流量与运行状态（请将下方的 your_api_key 和 your_api_hash 替换为你的真实配置）
-1 6 * * * https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/racknerd/racknerd.js#apiKey=your_api_key&apiHash=your_api_hash, tag=RackNerd VPS 状态, img-url=https://raw.githubusercontent.com/fishyo/someLoonThings/main/icons/racknerd.png, enabled=true
+# 每天 06:01 定时查询 RackNerd VPS 流量与运行状态
+1 6 * * * https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/racknerd/racknerd.js, tag=RackNerd VPS 状态, img-url=https://raw.githubusercontent.com/fishyo/someLoonThings/main/icons/racknerd.png, enabled=true
