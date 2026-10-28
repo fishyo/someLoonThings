@@ -3,7 +3,7 @@ payload:
   - DOMAIN-SUFFIX,pythonhosted.org
   
   # bitwarden
-  - DOMAIN-KEYWORD,bitwarden
+  - DOMAIN-SUFFIX,bitwarden.com
   
   # hysteria
   - DOMAIN-KEYWORD,hysteria

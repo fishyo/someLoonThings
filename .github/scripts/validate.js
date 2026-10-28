@@ -103,6 +103,9 @@ if (fs.existsSync(loonDir)) {
       if (!validRuleTypesLoon.has(type)) {
         logFail(`${file} (第 ${lineIdx} 行): 未知或非法的 Loon 规则类型 [${type}]`);
         fileValid = false;
+      } else if (type === 'DOMAIN-SUFFIX' && parts[1] && !parts[1].trim().includes('.')) {
+        logFail(`${file} (第 ${lineIdx} 行): DOMAIN-SUFFIX 规则缺少点号，必须是有效域名后缀 [${rawLine.trim()}]`);
+        fileValid = false;
       }
     }
     if (fileValid) {
@@ -130,8 +133,8 @@ if (fs.existsSync(qxDir)) {
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i].trim();
       if (!line || line.startsWith('#') || line.startsWith(';')) continue;
-      // QX rewrite_remote 片段不能包含 [rewrite_local] 或 [mitm]，否则 QX 会报 invalid line
-      if (/^\[(rewrite_local|mitm)\]/i.test(line)) {
+      // QX rewrite_remote 片段不能包含 [rewrite_local]、[task_local] 或 [mitm]，否则 QX 会报 invalid line
+      if (/^\[(rewrite_local|task_local|mitm)\]/i.test(line)) {
         logFail(`quanX/${file} (第 ${i + 1} 行): 包含违规的分节符 [${line}]，QX 远程片段中不能包含此标签，必须直接编写规则或 hostname`);
         hasInvalidSection = true;
       }
@@ -162,6 +165,9 @@ if (fs.existsSync(qxDir)) {
           fileValid = false;
         } else if (type !== 'FINAL' && parts.length < 3) {
           logFail(`quanX/rules/${file} (第 ${lineIdx} 行): QX 分流规则缺少策略字段，必须形如 [${type}, target, policy]`);
+          fileValid = false;
+        } else if (type === 'HOST-SUFFIX' && parts[1] && !parts[1].includes('.')) {
+          logFail(`quanX/rules/${file} (第 ${lineIdx} 行): host-suffix 规则缺少点号，必须是有效域名后缀 [${rawLine.trim()}]`);
           fileValid = false;
         }
       }

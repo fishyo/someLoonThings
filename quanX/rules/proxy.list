@@ -5,7 +5,7 @@
 # ==============================================================================
 
 # for myself
-host-suffix, bitwarden, proxy
+host-suffix, bitwarden.com, proxy
 host-suffix, pythonhosted.org, proxy
 
 # hysteria
