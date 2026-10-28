@@ -14,6 +14,8 @@
 | **9bot** | 每日签到与 Cookie 抓取 | [导入插件](https://www.nsloon.com/openloon/import?plugin=https://raw.githubusercontent.com/fishyo/someLoonThings/main/plugin/ninebot.plugin) |
 | **搬瓦工** | VPS 流量与运行状态查询 | [导入插件](https://www.nsloon.com/openloon/import?plugin=https://raw.githubusercontent.com/fishyo/someLoonThings/main/plugin/bandwagon.plugin) |
 | **RackNerd** | VPS 流量、内存与状态查询 | [导入插件](https://www.nsloon.com/openloon/import?plugin=https://raw.githubusercontent.com/fishyo/someLoonThings/main/plugin/racknerd.plugin) |
+| **Cloudflare** | Workers 每日免费请求配额 (10万次/天) 与用量监控 | [导入插件](https://www.nsloon.com/openloon/import?plugin=https://raw.githubusercontent.com/fishyo/someLoonThings/main/plugin/cloudflare.plugin) |
+| **Vercel** | Hobby 免费计划 30天周期调用量 (100万次) 与流量监控 | [导入插件](https://www.nsloon.com/openloon/import?plugin=https://raw.githubusercontent.com/fishyo/someLoonThings/main/plugin/vercel.plugin) |
 | **自用拦截** | 少数派防盗链、开屏去广告 | [导入插件](https://www.nsloon.com/openloon/import?plugin=https://raw.githubusercontent.com/fishyo/someLoonThings/main/plugin/ad-block.lpx) |
 
 ### 2. Quantumult X *(⚠️ 未严格测试)*

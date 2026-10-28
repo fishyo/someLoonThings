@@ -1,0 +1,23 @@
+#!name = Cloudflare Workers 额度监控
+#!desc = 定时查询 Cloudflare Workers 每日免费请求配额 (100,000次/天) 使用情况、剩余可用量与子请求统计。支持在插件配置页直接填写 API 凭证及自定义执行时间，留空则自动读取 BoxJS。
+#!author = fishyo
+#!homepage = https://github.com/fishyo/someLoonThings
+#!icon = https://raw.githubusercontent.com/fishyo/someLoonThings/refs/heads/main/icons/cloudflare.png
+#!date = 2026-10-28
+
+[Argument]
+# 1. 查询任务总开关
+enable = switch, true, type=boolean, tag=启用查询, desc=是否自动查询并推送额度用量
+
+# 2. 定时查询时间
+cronExp = input, "0 8 * * *", type=string, tag=查询时间, desc=标准 Cron 表达式（分 时 日 月 周），默认每天 08:00 推送（刚好对应 UTC 00:00 重置）
+
+# 3. 告警阈值
+alertThreshold = input, "80", type=string, tag=告警阈值(%), desc=今日用量达到此百分比时通知呈预警状态（默认 80%）
+
+# 4. Cloudflare 凭据配置（留空自动读取 BoxJS）
+accountTag = input, "", type=string, tag=Account ID, desc=Cloudflare 仪表盘右侧的 32 位 Account ID（留空读取 BoxJS）
+apiToken = input, "", type=string, tag=API Token, desc=Cloudflare API 令牌（需具备 Account Analytics 或 Workers 只读权限，留空读取 BoxJS）
+
+[Script]
+cron ${cronExp} then script("https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/cloudflare/cloudflare.js", {${accountTag}, ${apiToken}, ${alertThreshold}}) with enable=${enable}, tag="Cloudflare Workers Status", timeout=60
