@@ -125,52 +125,6 @@
         "https://raw.githubusercontent.com/fishyo/someLoonThings/main/icons/cloudflare.png",
         "https://raw.githubusercontent.com/fishyo/someLoonThings/main/icons/cloudflare.png"
       ]
-    },
-    {
-      "id": "vercel",
-      "name": "Vercel 状态",
-      "descs_html": [
-        "定时查询 Vercel Hobby 免费计划 30天周期 Serverless 函数调用量 (100万次)",
-        "支持出站流量 (100GB)、构建时长与阈值超限预警"
-      ],
-      "keys": [
-        "vercel.token",
-        "vercel.teamId",
-        "vercel.alertThreshold"
-      ],
-      "settings": [
-        {
-          "id": "vercel.token",
-          "name": "Access Token",
-          "val": "",
-          "type": "text",
-          "placeholder": "输入 Vercel Settings 生成的 Token",
-          "desc": "Vercel 个人访问令牌"
-        },
-        {
-          "id": "vercel.teamId",
-          "name": "Team ID (可选)",
-          "val": "",
-          "type": "text",
-          "placeholder": "个人账号请留空",
-          "desc": "团队账号需填写 Team ID"
-        },
-        {
-          "id": "vercel.alertThreshold",
-          "name": "预警阈值 (%)",
-          "val": "80",
-          "type": "text",
-          "placeholder": "默认 80",
-          "desc": "调用量或流量超出此百分比时触发告警"
-        }
-      ],
-      "author": "@fishyo",
-      "repo": "https://github.com/fishyo/someLoonThings",
-      "script": "https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/vercel/vercel.js",
-      "icons": [
-        "https://raw.githubusercontent.com/fishyo/someLoonThings/main/icons/vercel.png",
-        "https://raw.githubusercontent.com/fishyo/someLoonThings/main/icons/vercel.png"
-      ]
     }
   ]
 }

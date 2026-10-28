@@ -1,6 +1,6 @@
 {
   "name": "someLoonThings 任务画廊",
-  "description": "VPS 状态监控、9bot 签到与 Cloudflare/Vercel 免费额度监控任务",
+  "description": "VPS 状态监控、9bot 签到与 Cloudflare Workers 免费额度监控任务",
   "task": [
     {
       "config": "20 6 * * * https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/9bot/9botsign.js, tag=9bot 签到, img-url=https://fastly.jsdelivr.net/gh/fishyo/someLoonThings@main/icons/ninebot.png, enabled=true",
@@ -14,9 +14,6 @@
     },
     {
       "config": "0 8 * * * https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/cloudflare/cloudflare.js, tag=Cloudflare 额度监控, img-url=https://fastly.jsdelivr.net/gh/fishyo/someLoonThings@main/icons/cloudflare.png, enabled=true"
-    },
-    {
-      "config": "0 9 * * * https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/vercel/vercel.js, tag=Vercel 额度监控, img-url=https://fastly.jsdelivr.net/gh/fishyo/someLoonThings@main/icons/vercel.png, enabled=true"
     }
   ]
 }
