@@ -1,5 +1,5 @@
 #!name = Vercel 免费额度监控
-#!desc = 定时查询 Vercel Hobby 免费计划 30天周期 Serverless 函数调用量 (100万次)、出站流量 (100GB) 与构建时长。支持在插件配置页直接填写 Token 及自定义执行时间，留空则自动读取 BoxJS。
+#!desc = 定时监控 Vercel 账号状态、Hobby 计划周期重置倒计时与活跃项目运行状态；Pro 团队版自动展示函数调用量 (100万次)、出站流量 (100GB) 与构建时长。支持在插件配置页直接填写 Token，留空自动读取 BoxJS。
 #!author = fishyo
 #!homepage = https://github.com/fishyo/someLoonThings
 #!icon = https://raw.githubusercontent.com/fishyo/someLoonThings/refs/heads/main/icons/vercel.png
