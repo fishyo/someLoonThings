@@ -109,6 +109,13 @@ function getConfig() {
   };
 }
 
+// 敏感凭据掩码
+function maskToken(str) {
+  if (!str) return "";
+  if (str.length <= 8) return "****";
+  return str.substring(0, 4) + "...." + str.substring(str.length - 4);
+}
+
 // 进度条渲染
 function makeProgressBar(percent, length = 8) {
   const p = Math.max(0, Math.min(100, percent));
@@ -141,18 +148,25 @@ function formatDate(ts) {
 }
 
 async function main() {
+  console.log("========== [Vercel 额度与账号状态监控] ==========");
   const config = getConfig();
 
   if (!config.token) {
-    console.log("❌ Vercel configuration missing: Token required");
+    console.error("❌ [配置缺失] 请在 Loon 插件配置或 BoxJS 中填写 Vercel Access Token。");
     $.notify(
       "▲ Vercel 监控",
       "⚠️ 缺少配置凭据",
       "请在 Loon 插件配置或 BoxJS 中填写 Vercel Access Token。"
     );
+    console.log("==================================================");
     $.done({});
     return;
   }
+
+  const maskedToken = maskToken(config.token);
+  console.log(`[配置] Token: ${maskedToken} (长度: ${config.token.length})`);
+  console.log(`[配置] Team ID: ${config.teamId ? config.teamId : "未指定 (个人账号)"}`);
+  console.log(`[配置] 告警阈值: ${config.alertThreshold}%`);
 
   const defaultHeaders = {
     "Authorization": `Bearer ${config.token}`,
@@ -162,6 +176,7 @@ async function main() {
 
   try {
     // 1. 验证凭据并获取用户信息 (GET /v2/user)
+    console.log("[请求] 正在获取用户信息与账号计划 (GET /v2/user)...");
     const userRes = await $.httpGet({
       url: "https://api.vercel.com/v2/user",
       headers: defaultHeaders,
@@ -177,8 +192,9 @@ async function main() {
 
     if (userJson.error) {
       const errMsg = userJson.error.message || userJson.error.code || "鉴权失败";
-      console.warn("❌ Vercel Auth Error:", errMsg);
+      console.error("❌ [鉴权失败] Vercel Auth Error:", errMsg);
       $.notify("▲ Vercel 监控", "❌ 鉴权失败", `Token 鉴权失败: ${errMsg}`);
+      console.log("==================================================");
       $.done({});
       return;
     }
@@ -190,11 +206,23 @@ async function main() {
     const periodStart = user.billing?.period?.start;
     const periodEnd = user.billing?.period?.end;
 
+    console.log(`[账号] 用户: ${displayName} (@${username}), 邮箱: ${user.email || "未提供"}`);
+    console.log(`[账号] 订阅计划: ${plan.toUpperCase()}`);
+
+    // 计算周期与重置倒计时
+    let cycleInfo = "近 30 天滑动周期";
+    if (periodStart && periodEnd) {
+      const daysLeft = Math.max(0, Math.ceil((periodEnd - Date.now()) / (1000 * 60 * 60 * 24)));
+      cycleInfo = `${formatDate(periodStart)} ~ ${formatDate(periodEnd)} (剩余 ${daysLeft} 天重置)`;
+    }
+    console.log(`[计费周期] ${cycleInfo}`);
+
     // 2. 检查是否可查询详细用量 (仅 Pro/Enterprise 团队开放 /v1/usage)
     let usageJson = null;
     const isProOrHasTeam = Boolean(config.teamId) || plan !== "hobby";
 
     if (isProOrHasTeam) {
+      console.log(`[模式] 账号属于 ${plan.toUpperCase()} 计划或指定了 Team ID，尝试查询用量 API (/v1/usage)...`);
       try {
         const now = new Date();
         const to = periodEnd ? new Date(periodEnd).toISOString() : now.toISOString();
@@ -216,13 +244,17 @@ async function main() {
         const parsed = JSON.parse(usageRes.body);
         if (parsed && !parsed.error) {
           usageJson = parsed;
+          console.log(`[响应] 成功获取 Pro/Enterprise 团队用量指标`);
         } else if (parsed?.error) {
-          console.warn("[Vercel] Usage API endpoint response:", parsed.error.message);
-          // 若接口报错为仅限 Pro/Enterprise 团队，则平滑降级为 Hobby 状态展示
+          console.warn("[说明] 用量 API 提示:", parsed.error.message);
+          console.log("[降级] 官方限制用量 API 仅对 Pro/Enterprise 团队开放，自动切换至 Hobby 状态展示");
         }
       } catch (e) {
-        console.warn("[Vercel] Usage fetch failed:", e.message);
+        console.warn("[说明] 用量接口请求未完成:", e.message);
       }
+    } else {
+      console.log(`[模式] 账号为 Hobby 个人免费版 (Vercel 官方限制用量 API 仅限 Pro/Enterprise 团队)`);
+      console.log(`[模式] 自动启用 Hobby 账号与活跃项目健康度监控`);
     }
 
     // 3. 情况 A: 成功获取 Pro/Enterprise 用量指标
@@ -308,6 +340,13 @@ async function main() {
 
       const bar = makeProgressBar(invocationsPercentNum);
 
+      console.log(`[结果] 函数调用次数: ${formatNumber(invocations)} / ${formatNumber(invocationsLimit)} ${bar} (${invocationsPercent}%)`);
+      console.log(`[结果] 剩余可用调用: ${formatNumber(remainingInvocations)} 次`);
+      console.log(`[结果] 边缘出站流量: ${formatBytes(bandwidth)} / ${formatBytes(bandwidthLimit)} (${bandwidthPercent}%)`);
+      console.log(`[结果] 累计构建时长: ${formatNumber(buildMinutes)} / ${formatNumber(buildLimit)} 分钟 (${buildPercent}%)`);
+      console.log(`[状态] 预警状态: ${isAlert ? "⚠️ 超出告警阈值 (" + config.alertThreshold + "%)" : "正常"}`);
+      console.log(`[通知] 发送通知: ▲ Vercel 用量监控 | ${subTitle}`);
+
       const content = [
         `▪️ 函数调用: ${formatNumber(invocations)} / ${formatNumber(invocationsLimit)} ${bar} ${invocationsPercent}%`,
         `▪️ 剩余调用: ${formatNumber(remainingInvocations)} 次`,
@@ -320,11 +359,13 @@ async function main() {
         "open-url": "https://vercel.com/dashboard/usage",
         "media-url": "https://fastly.jsdelivr.net/gh/fishyo/someLoonThings@main/icons/vercel.png"
       });
+      console.log("==================================================");
       $.done({});
       return;
     }
 
     // 4. 情况 B: Hobby 计划或降级展示 (查询项目列表与运行状态)
+    console.log("[请求] 正在读取项目列表与部署健康度 (GET /v9/projects)...");
     let projects = [];
     try {
       let prjUrl = "https://api.vercel.com/v9/projects?limit=10";
@@ -340,15 +381,9 @@ async function main() {
       if (Array.isArray(prjJson.projects)) {
         projects = prjJson.projects;
       }
+      console.log(`[响应] 成功获取 ${projects.length} 个活跃项目`);
     } catch (e) {
-      console.warn("[Vercel] Projects fetch failed:", e.message);
-    }
-
-    // 计算周期与重置倒计时
-    let cycleInfo = "近 30 天滑动周期";
-    if (periodStart && periodEnd) {
-      const daysLeft = Math.max(0, Math.ceil((periodEnd - Date.now()) / (1000 * 60 * 60 * 24)));
-      cycleInfo = `${formatDate(periodStart)} ~ ${formatDate(periodEnd)} (剩余 ${daysLeft} 天重置)`;
+      console.warn("[警告] 获取项目列表失败:", e.message);
     }
 
     // 统计部署异常
@@ -363,6 +398,7 @@ async function main() {
       }
       const stateIcon = state === "READY" ? "🟢" : (state === "ERROR" ? "🔴" : "🟡");
       projectSummaryList.push(`${stateIcon} ${p.name}`);
+      console.log(`   - 项目: ${p.name} [${state}] (${p.framework || "other"})`);
     }
 
     const planName = plan === "hobby" ? "Hobby (个人免费版)" : `${plan.toUpperCase()} 团队版`;
@@ -373,6 +409,9 @@ async function main() {
     const recentProjectsText = projectSummaryList.length > 0
       ? projectSummaryList.slice(0, 4).join(", ")
       : "暂无活跃项目";
+
+    console.log(`[结果] 部署状态: ${hasDeployError ? "⚠️ 存在异常部署" : "🟢 全部项目正常"}`);
+    console.log(`[通知] 发送通知: ▲ Vercel 账号监控 | ${subTitle}`);
 
     const content = [
       `▪️ 用户信息: ${displayName} (@${username})`,
@@ -389,9 +428,10 @@ async function main() {
     });
 
   } catch (err) {
-    console.error("❌ Vercel Monitor Error:", err);
+    console.error("❌ [运行异常] Vercel Monitor Error:", err);
     $.notify("▲ Vercel 监控", "❌ 运行异常", err.message || String(err));
   } finally {
+    console.log("==================================================");
     $.done({});
   }
 }

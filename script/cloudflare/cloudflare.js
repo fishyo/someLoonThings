@@ -101,6 +101,13 @@ function getConfig() {
   };
 }
 
+// 敏感凭据掩码
+function maskToken(str) {
+  if (!str) return "";
+  if (str.length <= 8) return "****";
+  return str.substring(0, 4) + "...." + str.substring(str.length - 4);
+}
+
 // 进度条渲染
 function makeProgressBar(percent, length = 8) {
   const p = Math.max(0, Math.min(100, percent));
@@ -115,22 +122,32 @@ function formatNumber(num) {
 }
 
 async function main() {
+  console.log("========== [Cloudflare Workers 额度监控] ==========");
   const config = getConfig();
 
   if (!config.accountTag || !config.apiToken) {
-    console.log("❌ Cloudflare configuration missing");
+    console.error("❌ [配置缺失] 请在 Loon 插件配置或 BoxJS 中填写 Account ID 与 API Token。");
     $.notify(
       "☁️ Cloudflare 额度监控",
       "⚠️ 缺少配置凭据",
       "请在 Loon 插件配置或 BoxJS 中填写 Account ID 与 API Token。"
     );
+    console.log("==================================================");
     $.done({});
     return;
   }
 
+  const maskedTag = maskToken(config.accountTag);
+  const maskedToken = maskToken(config.apiToken);
+  console.log(`[配置] Account ID: ${maskedTag}`);
+  console.log(`[配置] API Token: ${maskedToken} (长度: ${config.apiToken.length})`);
+  console.log(`[配置] 告警阈值: ${config.alertThreshold}%`);
+
   const now = new Date();
   // UTC 当天 00:00:00 开始
   const startUtc = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 0, 0, 0));
+  console.log(`[统计区间] UTC ${startUtc.toISOString()} ~ ${now.toISOString()}`);
+  console.log(`[请求] 正在查询 Cloudflare Workers GraphQL API...`);
 
   const graphqlQuery = {
     query: `query GetWorkersAnalytics($accountTag: String!, $datetimeStart: String!, $datetimeEnd: String!) {
@@ -169,26 +186,33 @@ async function main() {
 
   $.post(options, (err, resp, body) => {
     if (err) {
-      console.error("❌ Request Error:", err);
+      console.error("❌ [网络错误] 请求失败:", err.message || String(err));
       $.notify("☁️ Cloudflare 额度监控", "❌ 网络请求失败", err.message || String(err));
+      console.log("==================================================");
       $.done({});
       return;
     }
+
+    const statusCode = resp ? (resp.status || resp.statusCode) : "200";
+    console.log(`[响应] HTTP 状态码: ${statusCode}`);
 
     try {
       const json = JSON.parse(body);
 
       if (json.errors && json.errors.length > 0) {
-        const errMsg = json.errors[0].message || "GraphQL Error";
-        console.warn("⚠️ API Error:", errMsg);
+        const errMsg = json.errors.map(e => e.message).join("; ") || "GraphQL Error";
+        console.error("❌ [API 报错]:", errMsg);
         $.notify("☁️ Cloudflare 额度监控", "❌ API 报错", errMsg);
+        console.log("==================================================");
         $.done({});
         return;
       }
 
       const accounts = json.data?.viewer?.accounts || [];
       if (accounts.length === 0) {
+        console.warn("⚠️ [未找到账户] 请核对配置的 Account ID 是否正确。");
         $.notify("☁️ Cloudflare 额度监控", "❌ 未找到对应账户", "请核对配置的 Account ID 是否正确。");
+        console.log("==================================================");
         $.done({});
         return;
       }
@@ -218,6 +242,13 @@ async function main() {
 
       const bar = makeProgressBar(percentNum);
 
+      console.log(`[结果] 今日请求总量: ${formatNumber(requests)} / ${formatNumber(dailyLimit)} ${bar} (${percentStr}%)`);
+      console.log(`[结果] 今日剩余可用: ${formatNumber(remaining)} 次`);
+      console.log(`[结果] 子请求调用量: ${formatNumber(subrequests)} 次`);
+      console.log(`[结果] 运行时异常数: ${formatNumber(errors)} 次`);
+      console.log(`[状态] 阈值状态: ${isAlert ? "⚠️ 超出告警阈值 (" + config.alertThreshold + "%)" : "正常"}`);
+      console.log(`[通知] 发送通知: ☁️ Cloudflare Workers 额度 | ${subTitle}`);
+
       const content = [
         `▪️ 今日请求: ${formatNumber(requests)} / ${formatNumber(dailyLimit)} ${bar} ${percentStr}%`,
         `▪️ 剩余可用: ${formatNumber(remaining)} 次`,
@@ -230,9 +261,10 @@ async function main() {
         "open-url": "https://dash.cloudflare.com/"
       });
     } catch (parseErr) {
-      console.error("Parse Error:", parseErr);
+      console.error("❌ [解析错误] 数据解析失败:", parseErr.message);
       $.notify("☁️ Cloudflare 额度监控", "❌ 数据解析失败", parseErr.message);
     } finally {
+      console.log("==================================================");
       $.done({});
     }
   });
