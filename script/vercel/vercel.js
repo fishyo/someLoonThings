@@ -136,9 +136,16 @@ async function main() {
     return;
   }
 
-  let url = "https://api.vercel.com/v2/usage";
+  // 计算 30 天滑动周期 (Hobby Plan 默认 30 天额度重置周期)
+  const now = new Date();
+  const to = now.toISOString();
+  const past30Days = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+  const from = past30Days.toISOString();
+
+  // Vercel 统一 usage 接口为 /v1/usage，需要提供 ISO 时间区间的 from 与 to 参数
+  let url = `https://api.vercel.com/v1/usage?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`;
   if (config.teamId) {
-    url += `?teamId=${encodeURIComponent(config.teamId)}`;
+    url += `&teamId=${encodeURIComponent(config.teamId)}`;
   }
 
   const options = {
@@ -170,27 +177,82 @@ async function main() {
         return;
       }
 
+      let invocations = 0;
+      let invocationsLimit = 1000000;
+      let bandwidth = 0;
+      let bandwidthLimit = 100 * 1024 * 1024 * 1024;
+      let buildMinutes = 0;
+      let buildLimit = 6000;
+
+      // 1. 数组结构聚合 (FOCUS charges 或 timeseries 数据流)
+      if (Array.isArray(json) || Array.isArray(json.data) || Array.isArray(json.records)) {
+        const list = Array.isArray(json) ? json : (json.data || json.records);
+        for (const item of list) {
+          const cat = (item.ChargeSubcategory || item.ServiceName || item.name || item.type || item.metric || "").toLowerCase();
+          const qty = Number(item.ConsumedQuantity ?? item.value ?? item.usage ?? 0);
+          if (cat.includes("function") || cat.includes("invocation") || cat.includes("serverless") || cat.includes("request")) {
+            invocations += qty;
+          } else if (cat.includes("bandwidth") || cat.includes("transfer") || cat.includes("edge") || cat.includes("data")) {
+            bandwidth += qty;
+          } else if (cat.includes("build")) {
+            buildMinutes += qty;
+          }
+        }
+      }
+
+      // 2. 对象结构提取 (metrics 或根对象)
       const metrics = json.metrics || json;
 
-      // 1. 函数调用数 (Hobby 计划 1,000,000 次 / 30天)
-      const invocations = metrics.functionInvocations?.value ??
-                          metrics.serverlessExecutionTime?.value ??
-                          json.functionInvocations ?? 0;
-      const invocationsLimit = metrics.functionInvocations?.limit ?? 1000000;
+      if (invocations === 0) {
+        invocations = Number(
+          metrics.functionInvocations?.value ??
+          metrics.functionInvocations?.usage ??
+          metrics.serverlessFunctionExecutions?.value ??
+          metrics.serverlessFunctionExecutions?.usage ??
+          metrics.serverlessExecutionTime?.value ??
+          json.functionInvocations ??
+          json.serverlessFunctionExecutions ??
+          json.invocations ??
+          json.requests ?? 0
+        );
+      }
+      invocationsLimit = Number(
+        metrics.functionInvocations?.limit ??
+        metrics.serverlessFunctionExecutions?.limit ??
+        invocationsLimit
+      );
+
+      if (bandwidth === 0) {
+        bandwidth = Number(
+          metrics.bandwidth?.value ??
+          metrics.bandwidth?.usage ??
+          json.bandwidth ??
+          json.fastDataTransfer ??
+          json.dataTransfer ?? 0
+        );
+      }
+      bandwidthLimit = Number(metrics.bandwidth?.limit ?? bandwidthLimit);
+
+      if (buildMinutes === 0) {
+        buildMinutes = Number(
+          metrics.buildMinutes?.value ??
+          metrics.buildMinutes?.usage ??
+          metrics.builds?.usage ??
+          (json.buildTime ? Math.round(json.buildTime / 60) : 0) ??
+          json.buildMinutes ??
+          json.builds ?? 0
+        );
+      }
+      buildLimit = Number(metrics.buildMinutes?.limit ?? metrics.builds?.limit ?? buildLimit);
+
+      // 计算百分比与剩余量
       const invocationsPercentNum = (invocations / invocationsLimit) * 100;
       const invocationsPercent = invocationsPercentNum.toFixed(1);
       const remainingInvocations = Math.max(0, invocationsLimit - invocations);
 
-      // 2. 出站流量 (Hobby 计划 100 GB / 30天)
-      const bandwidth = metrics.bandwidth?.value ?? json.bandwidth ?? 0;
-      const bandwidthLimit = metrics.bandwidth?.limit ?? (100 * 1024 * 1024 * 1024);
       const bandwidthPercentNum = (bandwidth / bandwidthLimit) * 100;
       const bandwidthPercent = bandwidthPercentNum.toFixed(1);
 
-      // 3. 构建时长 (Hobby 计划 6,000 分钟 / 30天)
-      const buildMinutes = metrics.buildMinutes?.value ??
-                           (json.buildTime ? Math.round(json.buildTime / 60) : 0);
-      const buildLimit = 6000;
       const buildPercent = ((buildMinutes / buildLimit) * 100).toFixed(1);
 
       // 判断预警状态
