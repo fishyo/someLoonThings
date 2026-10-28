@@ -49,3 +49,7 @@ host-suffix, royaleapi.com, proxy
 
 # giphy
 host-suffix, giphy.com, proxy
+
+# atlassian
+host-suffix, atlassian.com, proxy
+host-suffix, atlassian.net, proxy
