@@ -53,3 +53,10 @@ host-suffix, giphy.com, proxy
 # atlassian
 host-suffix, atlassian.com, proxy
 host-suffix, atlassian.net, proxy
+host-suffix, atl-paas.net, proxy
+host-suffix, jira.com, proxy
+host-suffix, bitbucket.org, proxy
+host-suffix, trello.com, proxy
+host-suffix, ss-inf.net, proxy
+host-suffix, atlassian-dev.net, proxy
+host-suffix, atlassian-3p.com, proxy

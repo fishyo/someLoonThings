@@ -46,3 +46,10 @@ DOMAIN-SUFFIX,giphy.com
 # atlassian
 DOMAIN-SUFFIX,atlassian.com
 DOMAIN-SUFFIX,atlassian.net
+DOMAIN-SUFFIX,atl-paas.net
+DOMAIN-SUFFIX,jira.com
+DOMAIN-SUFFIX,bitbucket.org
+DOMAIN-SUFFIX,trello.com
+DOMAIN-SUFFIX,ss-inf.net
+DOMAIN-SUFFIX,atlassian-dev.net
+DOMAIN-SUFFIX,atlassian-3p.com
