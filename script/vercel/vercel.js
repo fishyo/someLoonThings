@@ -148,7 +148,7 @@ async function main() {
       "Content-Type": "application/json",
       "User-Agent": "Loon-Vercel-Monitor/1.0"
     },
-    timeout: 15
+    timeout: 15000
   };
 
   $.get(options, (err, resp, body) => {

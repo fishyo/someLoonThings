@@ -235,6 +235,10 @@ function createLoonContext(customReq = {}) {
     'racknerd.apiKey': 'test_api_key',
     'racknerd.apiHash': 'test_api_hash',
     '9bot_cookie_data': '{"authorization":"test_token","deviceId":"dev_123"}',
+    'cloudflare.accountTag': 'cf_acc_123',
+    'cloudflare.apiToken': 'cf_token_123',
+    'vercel.token': 've_token_123',
+    'vercel.teamId': '',
   };
   return vm.createContext({
     $httpClient: {
@@ -264,6 +268,10 @@ function createQXContext(customReq = {}, initialPrefs = {}) {
     'racknerd.apiKey': 'test_api_key',
     'racknerd.apiHash': 'test_api_hash',
     '9bot_cookie_data': '{"authorization":"test_token","deviceId":"dev_123"}',
+    'cloudflare.accountTag': 'cf_acc_123',
+    'cloudflare.apiToken': 'cf_token_123',
+    'vercel.token': 've_token_123',
+    'vercel.teamId': '',
     ...initialPrefs
   };
   return {
@@ -297,6 +305,8 @@ const scriptsToVerify = [
   'script/racknerd/racknerd.js',
   'script/9bot/9botsign.js',
   'script/9bot/9bot_cookie.js',
+  'script/cloudflare/cloudflare.js',
+  'script/vercel/vercel.js',
 ];
 
 const mockReq = {

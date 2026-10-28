@@ -36,6 +36,11 @@ host-suffix, cf-ipfs.com, proxy
 host-suffix, videodelivery.net, proxy
 host-suffix, one.one.one, proxy
 
+# vercel
+host-keyword, vercel, proxy
+host-suffix, vercel.com, proxy
+host-suffix, vercel.app, proxy
+
 # uindex
 host-suffix, uindex.org, proxy
 

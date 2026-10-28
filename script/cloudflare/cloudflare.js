@@ -164,7 +164,7 @@ async function main() {
       "User-Agent": "Loon-CF-Monitor/1.0"
     },
     body: JSON.stringify(graphqlQuery),
-    timeout: 15
+    timeout: 15000
   };
 
   $.post(options, (err, resp, body) => {

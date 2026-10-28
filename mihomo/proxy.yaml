@@ -57,5 +57,10 @@ payload:
   - DOMAIN-SUFFIX,videodelivery.net
   - DOMAIN-SUFFIX,one.one.one
   
+  # vercel
+  - DOMAIN-KEYWORD,vercel
+  - DOMAIN-SUFFIX,vercel.com
+  - DOMAIN-SUFFIX,vercel.app
+  
   # uindex
   - DOMAIN-SUFFIX,uindex.org
