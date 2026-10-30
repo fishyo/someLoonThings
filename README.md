@@ -1,6 +1,6 @@
 # someLoonThings
 
-自用 **Loon**、**Quantumult X**、**Egern** 与 **Mihomo** 插件、片段、模块、分流规则及脚本合集。
+自用 **Loon**、**Quantumult X**、**Egern** 与 **Mihomo** 插件、片段、模块、分流规则及脚本
 
 > ⚠️ **测试说明**：Loon 相关配置均已长期实测；Quantumult X 与 Egern 模块、规则与脚本已按规范适配。
 
