@@ -97,59 +97,140 @@ dns:
     localhost: 127.0.0.1
     "*.local": 192.168.1.1
 
+# 默认订阅目标策略组（在 App「工具 -> 订阅」添加/更新订阅时，节点将自动归入此组）
+default_subscription_group: MyNodes
+
+# ==============================================================================
+# 节点列表 (Proxies)
+# 针对 Egern 原生 YAML 规范定义的模板节点（即开即用的本地节点兜底）
+# ==============================================================================
+proxies:
+  # 1. 回家隧道 (Hysteria2)
+  - hysteria2:
+      name: Home-Hysteria
+      server: home.example.com
+      port: 36543
+      auth: "your_hysteria2_password"
+      tfo: true
+      udp_relay: true
+      skip_tls_verify: true
+
+  # 2. 搬瓦工 (Vmess + WS + TLS)
+  - vmess:
+      name: Bwg
+      server: bwg.example.com
+      port: 443
+      user_id: "00000000-0000-0000-0000-000000000000"
+      security: auto
+      transport:
+        wss:
+          path: "/ws"
+          headers:
+            Host: bwg.example.com
+
+  # 3. Racknerd (Vless + WS + TLS)
+  - vless:
+      name: rack
+      server: rack.example.com
+      port: 443
+      user_id: "00000000-0000-0000-0000-000000000000"
+      transport:
+        wss:
+          path: "/ws"
+          headers:
+            Host: rack.example.com
+
+  # 4. Thinfoo (Vless + REALITY + Vision)
+  - vless:
+      name: thinfoo
+      server: 198.51.100.1
+      port: 443
+      user_id: "00000000-0000-0000-0000-000000000000"
+      flow: xtls-rprx-vision
+      udp_relay: true
+      transport:
+        tcp:
+          reality:
+            public_key: "your_reality_public_key"
+            short_id: "your_short_id"
+          sni: "www.stanford.edu"
+
+  # 5. Cone (Vless + REALITY + Vision)
+  - vless:
+      name: cone
+      server: 198.51.100.2
+      port: 443
+      user_id: "00000000-0000-0000-0000-000000000000"
+      flow: xtls-rprx-vision
+      udp_relay: true
+      transport:
+        tcp:
+          reality:
+            public_key: "your_reality_public_key"
+            short_id: "your_short_id"
+          sni: "www.apple.com"
+
+  # 6. 回家隧道备用 (Hysteria2)
+  - hysteria2:
+      name: Home-Hysteria-2
+      server: home.example.com
+      port: 36543
+      auth: "your_hysteria2_password"
+      sni: mystreaming.home
+      skip_tls_verify: true
+
 # ==============================================================================
 # 策略组配置 (Policy Groups)
 # 完美还原：
-# 1. Sub-Store 节点订阅接入
+# 1. 基础节点集合 (MyNodes)，同时支持静态兜底节点与远程 Sub-Store 动态订阅
 # 2. 测速组 (Social: Bwg, rack, thinfoo / urlTest: cone, rack, Bwg, thinfoo)
 # 3. SSID 条件策略组 (处于 "MyHome-WiFi" 自动走 DIRECT；外网/蜂窝走对应代理组)
 # ==============================================================================
 policy_groups:
-  # ---------------- 基础节点集合（来自 Sub-Store 订阅） ----------------
-  - external:
+  # ---------------- 基础节点集合 ----------------
+  - select:
       name: MyNodes
-      type: select
-      urls:
-        - "https://sub-store.example.com/download/collection/ray/egern?token=YOUR_SUB_STORE_TOKEN"
-      filter: ".*"
-      update_interval: 86400
+      policies:
+        - Home-Hysteria
+        - Bwg
+        - rack
+        - thinfoo
+        - cone
+        - Home-Hysteria-2
       icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Auto.png"
 
   # ---------------- 动态自动测速组 (Social & urlTest) ----------------
-  # Social 测速组（提取 Bwg, rack, thinfoo，间隔 600s）
-  - external:
+  # Social 测速组（对应 Loon: Bwg, rack, thinfoo，间隔 600s）
+  - auto_test:
       name: Social
-      type: auto_test
-      urls:
-        - "https://sub-store.example.com/download/collection/ray/egern?token=YOUR_SUB_STORE_TOKEN"
-      filter: "(?i)(Bwg|rack|thinfoo)"
+      policies:
+        - Bwg
+        - rack
+        - thinfoo
       interval: 600
       tolerance: 100
       timeout: 5
-      update_interval: 86400
       icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Bypass.png"
 
-  # 全局 urlTest 自动优选组（提取 cone, rack, Bwg, thinfoo，间隔 600s）
-  - external:
+  # 全局 urlTest 自动优选组（对应 Loon: cone, rack, Bwg, thinfoo，间隔 600s）
+  - auto_test:
       name: urlTest
-      type: auto_test
-      urls:
-        - "https://sub-store.example.com/download/collection/ray/egern?token=YOUR_SUB_STORE_TOKEN"
-      filter: "(?i)(cone|rack|Bwg|thinfoo)"
+      policies:
+        - cone
+        - rack
+        - Bwg
+        - thinfoo
       interval: 600
       tolerance: 100
       timeout: 5
-      update_interval: 86400
       icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Auto.png"
 
   # 回家隧道节点（用于在外网访问家中设备，提取 Home-Hysteria 节点）
-  - external:
+  - select:
       name: Home-Hysteria
-      type: select
-      urls:
-        - "https://sub-store.example.com/download/collection/ray/egern?token=YOUR_SUB_STORE_TOKEN"
-      filter: "(?i)Home.*Hysteria.*"
-      update_interval: 86400
+      policies:
+        - Home-Hysteria
+        - Home-Hysteria-2
       icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Find_My.png"
 
   # ---------------- 条件分流策略组 (对应 Loon 的 ssid: "MyHome-WiFi"=DIRECT) ----------------
