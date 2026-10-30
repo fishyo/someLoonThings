@@ -1,0 +1,42 @@
+# ==============================================================================
+# Custom Proxy Ruleset (Egern Format)
+# Maintainer: fishyo
+# Homepage: https://github.com/fishyo/someLoonThings
+# Description: 自用常用代理域名补充
+# ==============================================================================
+
+no_resolve: true
+domain_suffix_set:
+  - bitwarden.com
+  - pythonhosted.org
+  - pocketcasts.com
+  - pca.st
+  - nxtrace.org
+  - everia.club
+  - reiobox.top
+  - pages.dev
+  - workers.dev
+  - warp.plus
+  - cf-ipfs.com
+  - videodelivery.net
+  - one.one.one
+  - vercel.com
+  - vercel.app
+  - uindex.org
+  - royaleapi.com
+  - giphy.com
+  - atlassian.com
+  - atlassian.net
+  - atl-paas.net
+  - jira.com
+  - bitbucket.org
+  - trello.com
+  - ss-inf.net
+  - atlassian-dev.net
+  - atlassian-3p.com
+
+domain_keyword_set:
+  - hysteria
+  - fireside
+  - cloudflare
+  - vercel

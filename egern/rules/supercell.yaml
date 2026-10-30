@@ -1,0 +1,14 @@
+# ==============================================================================
+# Supercell Direct Ruleset (Egern Format)
+# Maintainer: fishyo
+# Homepage: https://github.com/fishyo/someLoonThings
+# Description: 荒野乱斗 / 皇室战争等 Supercell 游戏直连分流
+# ==============================================================================
+
+no_resolve: true
+domain_suffix_set:
+  - clashroyale.com
+  - clashroyaleapp.com
+  - brawlstars.com
+  - supercell.com
+  - brawlstarsgame.com

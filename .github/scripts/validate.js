@@ -215,7 +215,41 @@ if (fs.existsSync(mihomoDir)) {
   }
 }
 
+// ==========================================
+// 4.1. Egern 模块与规则集校验 (egern/)
+// ==========================================
+console.log('\n--- 4.1 验证 Egern 模块与规则集 (egern/) ---');
+const egernDir = path.join(root, 'egern');
+if (fs.existsSync(egernDir)) {
+  const modulesDir = path.join(egernDir, 'modules');
+  if (fs.existsSync(modulesDir)) {
+    const modFiles = fs.readdirSync(modulesDir).filter(f => f.endsWith('.yaml') || f.endsWith('.yml'));
+    for (const file of modFiles) {
+      const content = fs.readFileSync(path.join(modulesDir, file), 'utf8');
+      if (!content.includes('name:') || !content.includes('description:')) {
+        logFail(`egern/modules/${file}: 缺少必选元数据 name 或 description`);
+      } else {
+        logPass(`egern/modules/${file}: Egern 模块规范校验通过`);
+      }
+    }
+  }
+
+  const rulesDir = path.join(egernDir, 'rules');
+  if (fs.existsSync(rulesDir)) {
+    const ruleFiles = fs.readdirSync(rulesDir).filter(f => f.endsWith('.yaml') || f.endsWith('.yml'));
+    for (const file of ruleFiles) {
+      const content = fs.readFileSync(path.join(rulesDir, file), 'utf8');
+      if (!content.includes('_set:')) {
+        logFail(`egern/rules/${file}: 缺少任何有效 Egern 规则集字段 (如 domain_suffix_set)`);
+      } else {
+        logPass(`egern/rules/${file}: Egern 规则集格式规范校验通过`);
+      }
+    }
+  }
+}
+
 const boxjsPath = path.join(root, 'script/boxjs.json');
+
 if (fs.existsSync(boxjsPath)) {
   try {
     const boxjs = JSON.parse(fs.readFileSync(boxjsPath, 'utf8'));
@@ -356,6 +390,7 @@ if (hasError) {
   console.error('\x1b[31m❌ CI 检查失败，请修复上述错误后重新提交！\x1b[0m\n');
   process.exit(1);
 } else {
-  console.log('\x1b[32m✅ 全部目标校验通过！Loon 与 Quantumult X 规则与沙盒均正常！\x1b[0m\n');
+  console.log('\x1b[32m✅ 全部目标校验通过！Loon、Quantumult X 与 Egern 规则与沙盒均正常！\x1b[0m\n');
   process.exit(0);
 }
+

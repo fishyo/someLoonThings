@@ -1,0 +1,28 @@
+name: "9bot"
+description: "9bot 每日签到与 Cookie 抓取。可在模块设置中修改执行时间；首次使用开启【抓取Cookie】并在 App 中打开签到页即可自动捕获。"
+author: "fishyo"
+homepage: "https://github.com/fishyo/someLoonThings"
+icon: "https://fastly.jsdelivr.net/gh/fishyo/someLoonThings@main/icons/ninebot.png"
+
+compat_arguments:
+  CRON_EXP: "20 6 * * *"
+compat_arguments_desc: "CRON_EXP: 每日签到 Cron 表达式，默认每天 06:20"
+
+scriptings:
+  # 抓取 Cookie
+  - http_request:
+      name: "9bot获取Cookie"
+      match: "^https?:\\/\\/cn-cbu-gateway\\.ninebot\\.com\\/portal\\/api\\/user-sign\\/v(1|2)\\/sign"
+      script_url: "https://fastly.jsdelivr.net/gh/fishyo/someLoonThings@main/script/9bot/9bot_cookie.js"
+      body_required: true
+      timeout: 10
+  # 定时签到
+  - schedule:
+      name: "9bot每日签到"
+      cron: "{{{CRON_EXP}}}"
+      script_url: "https://fastly.jsdelivr.net/gh/fishyo/someLoonThings@main/script/9bot/9botsign.js"
+      timeout: 60
+
+mitm:
+  hostnames:
+    - "cn-cbu-gateway.ninebot.com"

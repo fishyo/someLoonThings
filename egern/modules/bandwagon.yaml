@@ -1,0 +1,26 @@
+name: "搬瓦工 VPS 状态"
+description: "搬瓦工 (BandwagonHost) VPS 状态与流量定时查询。支持在模块中配置 API 信息，留空则自动读取 BoxJS/本地存储。"
+author: "fishyo"
+homepage: "https://github.com/fishyo/someLoonThings"
+icon: "https://fastly.jsdelivr.net/gh/fishyo/someLoonThings@main/icons/bandwagon.png"
+
+compat_arguments:
+  CRON_EXP: "2 6 * * *"
+compat_arguments_desc: "CRON_EXP: 定时查询 Cron 表达式，默认每天 06:02"
+
+env_schema:
+  BANDWAGON_VEID:
+    name: "VEID"
+    description: "KiwiVM 面板中的 VEID（留空自动读取 BoxJS/本地存储）"
+    default_value: ""
+  BANDWAGON_API_KEY:
+    name: "API Key"
+    description: "KiwiVM 面板中的 API KEY（留空自动读取 BoxJS/本地存储）"
+    default_value: ""
+
+scriptings:
+  - schedule:
+      name: "BandwagonHost Status"
+      cron: "{{{CRON_EXP}}}"
+      script_url: "https://fastly.jsdelivr.net/gh/fishyo/someLoonThings@main/script/bandwagon/bwg.js"
+      timeout: 60

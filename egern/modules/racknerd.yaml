@@ -1,0 +1,26 @@
+name: "RackNerd VPS 状态"
+description: "RackNerd VPS 运行状态与流量定时查询。支持在模块中配置 API 信息，留空则自动读取 BoxJS/本地存储。"
+author: "fishyo"
+homepage: "https://github.com/fishyo/someLoonThings"
+icon: "https://fastly.jsdelivr.net/gh/fishyo/someLoonThings@main/icons/racknerd.png"
+
+compat_arguments:
+  CRON_EXP: "1 6 * * *"
+compat_arguments_desc: "CRON_EXP: 定时查询 Cron 表达式，默认每天 06:01"
+
+env_schema:
+  RACKNERD_API_KEY:
+    name: "API Key"
+    description: "RackNerd 控制面板 API Key（留空自动读取 BoxJS/本地存储）"
+    default_value: ""
+  RACKNERD_API_HASH:
+    name: "API Hash"
+    description: "RackNerd 控制面板 API Hash（留空自动读取 BoxJS/本地存储）"
+    default_value: ""
+
+scriptings:
+  - schedule:
+      name: "RackNerd Status"
+      cron: "{{{CRON_EXP}}}"
+      script_url: "https://fastly.jsdelivr.net/gh/fishyo/someLoonThings@main/script/racknerd/racknerd.js"
+      timeout: 60

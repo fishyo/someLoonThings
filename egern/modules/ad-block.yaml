@@ -1,0 +1,39 @@
+name: "自用拦截"
+description: "少数派防盗链、开屏去广告与自用规则补充"
+author: "fishyo"
+homepage: "https://github.com/fishyo/someLoonThings"
+icon: "https://fastly.jsdelivr.net/gh/fishyo/someLoonThings@main/icons/Find_My.png"
+
+header_rewrites:
+  # 少数派 RSS 全文图片防盗链
+  - add:
+      match: "^https://cdnfile\\.sspai\\.com/"
+      name: "Referer"
+      value: "sspai.com"
+      type: request
+
+url_rewrites:
+  # 华尔街见闻广告拦截
+  - match: "^https?://api-one-wscn\\.awtmt\\.com/apiv1/advertising/ads"
+    location: "http://reject-200/"
+  # 京东移动端开屏 CMS
+  - match: "^https://m\\.360buyimg\\.com/mobilecms/s1125x2436_jfs/t1/.*"
+    location: "http://reject-200/"
+  # 同花顺开屏推荐
+  - match: "^https?:\\/\\/adm\\.10jqka\\.com\\.cn\\/interface\\/ad\\/recommend"
+    location: "http://reject-200/"
+  # 腾讯动漫开屏/系统配置
+  - match: "^https?:\\/\\/iphone\\.ac\\.qq\\.com\\/.*\\/Support\\/(getSystemConf|bootScreen)"
+    location: "http://reject-200/"
+  # 同花顺广告统计
+  - match: "^https?:\\/\\/stat\\.10jqka\\.com\\.cn\\/q\\?ld=mobile&id=ad"
+    location: "http://reject-dict/"
+
+mitm:
+  hostnames:
+    - "cdnfile.sspai.com"
+    - "api-one-wscn.awtmt.com"
+    - "m.360buyimg.com"
+    - "adm.10jqka.com.cn"
+    - "iphone.ac.qq.com"
+    - "stat.10jqka.com.cn"
