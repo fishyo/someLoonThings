@@ -1,7 +1,10 @@
 backup/
 loon_config.conf
+*.lcf
+egern/Profile.yaml
 .trunk/
 .pre-commit-config.yaml
 .gemini/
+
 
 

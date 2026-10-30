@@ -1,0 +1,360 @@
+# ==============================================================================
+# Egern Configuration Profile (Migrated from Jav.lcf)
+# Maintainer: fishyo
+# Homepage: https://github.com/fishyo/someLoonThings
+# Description: 针对用户使用习惯（家庭 Wi-Fi 软路由分流、回家隧道、自动测速、多端规则集）定制的 Egern 配置文件
+# ==============================================================================
+
+# IPv6 设置（对应 Loon prefer-v4 / ipv6-vif auto）
+ipv6: false
+
+# 本地代理监听端口（继承 Loon 自定义端口 7222 / 7221）
+http_port: 7222
+socks_port: 7221
+allow_external_connections: false
+
+# 虚拟网卡模式
+vif_only: false
+
+# QUIC 协议控制（节点 > 策略组 > 全局）
+block_quic: false
+
+# [TestFlight 推荐特性] 策略组切换节点时立即重连新节点，避免旧连接延迟感
+close_connections_on_policy_change: true
+
+# 延迟测试 URL（继承自 Loon 配置）
+proxy_latency_test_url: "http://bing.com/generate_204"
+direct_latency_test_url: "http://wifi.vivo.com.cn/generate_204"
+
+# 绕过隧道代理的目标（继承 Loon skip-proxy）
+bypass_tunnel_proxy:
+  - "10.0.0.0/8"
+  - "172.16.0.0/12"
+  - "localhost"
+  - "*.local"
+  - "e.crashlytics.com"
+
+# 虚拟网卡路由排除（继承 Loon bypass-tun）
+vif_excluded_routes:
+  - "10.0.0.0/8"
+  - "100.64.0.0/10"
+  - "127.0.0.0/8"
+  - "169.254.0.0/16"
+  - "172.16.0.0/12"
+  - "192.0.0.0/24"
+  - "192.0.2.0/24"
+  - "192.88.99.0/24"
+  - "198.51.100.0/24"
+  - "203.0.113.0/24"
+  - "224.0.0.0/4"
+  - "255.255.255.255/32"
+
+# ==============================================================================
+# DNS 配置（完美复刻 Loon 的公共 DNS + 家庭 Wi-Fi "MyHome-WiFi" 定向解析）
+# ==============================================================================
+dns:
+  # Bootstrap DNS（用于解析 DoH/DoQ 及初始域名）
+  bootstrap:
+    - system
+    - 223.5.5.5
+    - 119.29.29.29
+    - 114.114.114.114
+
+  # 上游 DNS 分组
+  upstreams:
+    # 家庭软路由 DNS（对应 Loon: ssid:MyHome-WiFi = server:192.168.1.1）
+    router:
+      - 192.168.1.1
+    # 国内主流加速 DNS
+    domestic:
+      - 223.5.5.5
+      - 119.29.29.29
+      - 114.114.114.114
+    # 海外安全防污染 DoH
+    oversea:
+      - https://1.1.1.1/dns-query
+      - https://8.8.8.8/dns-query
+
+  # 转发解析规则 (按顺序优先匹配)
+  forward:
+    # 习惯 1：处于家庭 Wi-Fi "MyHome-WiFi" 时，DNS 自动交给内网网关 192.168.1.1
+    - ssid:
+        match: "MyHome-WiFi"
+        value: router
+    # 国内常规域名走国内快速 DNS
+    - domain_suffix:
+        match: "cn"
+        value: domestic
+    - wildcard:
+        match: "*.cn"
+        value: domestic
+    # 其余默认走 Bootstrap / 国内 DNS
+    - wildcard:
+        match: "*"
+        value: domestic
+
+  hosts:
+    localhost: 127.0.0.1
+    "*.local": 192.168.1.1
+
+# ==============================================================================
+# 策略组配置 (Policy Groups)
+# 完美还原：
+# 1. Sub-Store 节点订阅接入
+# 2. 测速组 (Social: Bwg, rack, thinfoo / urlTest: cone, rack, Bwg, thinfoo)
+# 3. SSID 条件策略组 (处于 "MyHome-WiFi" 自动走 DIRECT；外网/蜂窝走对应代理组)
+# ==============================================================================
+policy_groups:
+  # ---------------- 基础节点集合（来自 Sub-Store 订阅） ----------------
+  - external:
+      name: MyNodes
+      type: select
+      urls:
+        - "https://sub-store.example.com/download/collection/ray/egern?token=YOUR_SUB_STORE_TOKEN"
+      filter: ".*"
+      update_interval: 86400
+      icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Auto.png"
+
+  # ---------------- 动态自动测速组 (Social & urlTest) ----------------
+  # Social 测速组（提取 Bwg, rack, thinfoo，间隔 600s）
+  - external:
+      name: Social
+      type: auto_test
+      urls:
+        - "https://sub-store.example.com/download/collection/ray/egern?token=YOUR_SUB_STORE_TOKEN"
+      filter: "(?i)(Bwg|rack|thinfoo)"
+      interval: 600
+      tolerance: 100
+      timeout: 5
+      update_interval: 86400
+      icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Bypass.png"
+
+  # 全局 urlTest 自动优选组（提取 cone, rack, Bwg, thinfoo，间隔 600s）
+  - external:
+      name: urlTest
+      type: auto_test
+      urls:
+        - "https://sub-store.example.com/download/collection/ray/egern?token=YOUR_SUB_STORE_TOKEN"
+      filter: "(?i)(cone|rack|Bwg|thinfoo)"
+      interval: 600
+      tolerance: 100
+      timeout: 5
+      update_interval: 86400
+      icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Auto.png"
+
+  # 回家隧道节点（用于在外网访问家中设备，提取 Home-Hysteria 节点）
+  - external:
+      name: Home-Hysteria
+      type: select
+      urls:
+        - "https://sub-store.example.com/download/collection/ray/egern?token=YOUR_SUB_STORE_TOKEN"
+      filter: "(?i)Home.*Hysteria.*"
+      update_interval: 86400
+      icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Find_My.png"
+
+  # ---------------- 条件分流策略组 (对应 Loon 的 ssid: "MyHome-WiFi"=DIRECT) ----------------
+  # 习惯核心：在家庭 Wi-Fi "MyHome-WiFi" 时直连家中软路由；在蜂窝或其它 Wi-Fi 下自动启用代理
+
+  # 1. 回家策略组（家庭 Wi-Fi 下直连；外网下通过 Home-Hysteria 访问 192.168.1.0/24）
+  - conditional:
+      name: backHome
+      rules:
+        - ssid:
+            match: "MyHome-WiFi"
+            policy: DIRECT
+      default_policy: Home-Hysteria
+      icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Find_My.png"
+
+  # 2. Twitter 策略组
+  - conditional:
+      name: Twitter
+      rules:
+        - ssid:
+            match: "MyHome-WiFi"
+            policy: DIRECT
+      default_policy: Social
+      icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Twitter.png"
+
+  # 3. AI 策略组
+  - conditional:
+      name: AI
+      rules:
+        - ssid:
+            match: "MyHome-WiFi"
+            policy: DIRECT
+      default_policy: Social
+      icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Available_Alt.png"
+
+  # 4. Auto 常用代理策略组
+  - conditional:
+      name: Auto
+      rules:
+        - ssid:
+            match: "MyHome-WiFi"
+            policy: DIRECT
+      default_policy: urlTest
+      icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Direct.png"
+
+# ==============================================================================
+# 分流规则列表 (Rules)
+# ==============================================================================
+rules:
+  # 家庭网段 (192.168.1.0/24) -> backHome
+  - ip_cidr:
+      match: "192.168.1.0/24"
+      policy: backHome
+
+  # 广告与追踪拦截规则集 (ACL4SSR BanEasyListChina / BanEasyList / BanAD)
+  - rule_set:
+      match: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/BanEasyListChina.list"
+      policy: REJECT
+      update_interval: 86400
+  - rule_set:
+      match: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/raw/refs/heads/master/Clash/BanEasyList.list"
+      policy: REJECT
+      update_interval: 86400
+  - rule_set:
+      match: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/raw/refs/heads/master/Clash/BanAD.list"
+      policy: REJECT
+      update_interval: 86400
+
+  # 微信直连
+  - rule_set:
+      match: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/raw/refs/heads/master/Clash/Ruleset/Wechat.list"
+      policy: DIRECT
+      update_interval: 86400
+
+  # Twitter 规则集
+  - rule_set:
+      match: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Twitter.list"
+      policy: Twitter
+      update_interval: 86400
+
+  # Telegram 规则集
+  - rule_set:
+      match: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/raw/refs/heads/master/Clash/Ruleset/Telegram.list"
+      policy: Auto
+      update_interval: 86400
+
+  # 自用代理规则集 (4me / proxy)
+  - rule_set:
+      match: "https://raw.githubusercontent.com/fishyo/someLoonThings/main/egern/rules/proxy.yaml"
+      policy: Auto
+      update_interval: 86400
+
+  # AI 大模型规则集
+  - rule_set:
+      match: "https://raw.githubusercontent.com/fishyo/someLoonThings/main/egern/rules/ai.yaml"
+      policy: AI
+      update_interval: 86400
+
+  # Supercell 游戏规则集
+  - rule_set:
+      match: "https://raw.githubusercontent.com/fishyo/someLoonThings/main/egern/rules/supercell.yaml"
+      policy: Auto
+      update_interval: 86400
+
+  # ProxyGFWlist 规则集
+  - rule_set:
+      match: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/raw/refs/heads/master/Clash/ProxyGFWlist.list"
+      policy: Auto
+      update_interval: 86400
+
+  # 最终兜底规则 (对应 Loon 的 FINAL,DIRECT)
+  - default:
+      policy: DIRECT
+
+# ==============================================================================
+# 模块列表 (Modules) - 对应 Loon 的 [Plugin]
+# ==============================================================================
+modules:
+  # 1. 本项目自维护核心模块 (Egern 现代原生格式)
+  - name: "九号出行"
+    url: "https://raw.githubusercontent.com/fishyo/someLoonThings/main/egern/modules/ninebot.yaml"
+    enabled: true
+    update_interval: 86400
+
+  - name: "搬瓦工VPS"
+    url: "https://raw.githubusercontent.com/fishyo/someLoonThings/main/egern/modules/bandwagon.yaml"
+    enabled: true
+    update_interval: 86400
+
+  - name: "RackNerd"
+    url: "https://raw.githubusercontent.com/fishyo/someLoonThings/main/egern/modules/racknerd.yaml"
+    enabled: true
+    update_interval: 86400
+
+  - name: "Cloudflare Workers 监控"
+    url: "https://raw.githubusercontent.com/fishyo/someLoonThings/main/egern/modules/cloudflare.yaml"
+    enabled: true
+    update_interval: 86400
+
+  - name: "自用拦截"
+    url: "https://raw.githubusercontent.com/fishyo/someLoonThings/main/egern/modules/ad-block.yaml"
+    enabled: true
+    update_interval: 86400
+
+  # 2. 常用功能模块 (BoxJS 运维面板)
+  - name: "BoxJS"
+    url: "https://raw.githubusercontent.com/chavyleung/scripts/master/box/rewrite/boxjs.rewrite.surge.sgmodule"
+    enabled: true
+    update_interval: 86400
+
+  # 3. 常用去广告与扩展模块 (通过 Script-Hub 转换或社区兼容规范无缝接入)
+  - name: "拦截 HTTPDNS"
+    url: "https://script.hub/convert?type=egern&url=https://kelee.one/Tool/Loon/Lpx/Block_HTTPDNS.lpx"
+    enabled: true
+    update_interval: 86400
+
+  - name: "拦截常见广告商"
+    url: "https://script.hub/convert?type=egern&url=https://kelee.one/Tool/Loon/Lpx/BlockAdvertisers.lpx"
+    enabled: true
+    update_interval: 86400
+
+  - name: "淘宝去广告"
+    url: "https://script.hub/convert?type=egern&url=https://kelee.one/Tool/Loon/Lpx/Taobao_remove_ads.lpx"
+    enabled: true
+    update_interval: 86400
+
+  - name: "网易大神去广告"
+    url: "https://script.hub/convert?type=egern&url=https://kelee.one/Tool/Loon/Lpx/NetEaseGodlike_remove_ads.lpx"
+    enabled: true
+    update_interval: 86400
+
+  - name: "知乎去广告"
+    url: "https://script.hub/convert?type=egern&url=https://kelee.one/Tool/Loon/Lpx/Zhihu_remove_ads.lpx"
+    enabled: true
+    update_interval: 86400
+
+  - name: "小红书去广告"
+    url: "https://script.hub/convert?type=egern&url=https://kelee.one/Tool/Loon/Lpx/RedPaper_remove_ads.lpx"
+    enabled: true
+    update_interval: 86400
+
+  - name: "高德地图去广告"
+    url: "https://script.hub/convert?type=egern&url=https://kelee.one/Tool/Loon/Lpx/Amap_remove_ads.lpx"
+    enabled: true
+    update_interval: 86400
+
+  - name: "哔哩哔哩去广告"
+    url: "https://script.hub/convert?type=egern&url=https://kelee.one/Tool/Loon/Lpx/Bilibili_remove_ads.lpx"
+    enabled: true
+    update_interval: 86400
+
+  - name: "YouTube去广告"
+    url: "https://script.hub/convert?type=egern&url=https://kelee.one/Tool/Loon/Lpx/YouTube_remove_ads.lpx"
+    enabled: true
+    update_interval: 86400
+
+  - name: "iRingo 天气天气源增强"
+    url: "https://script.hub/convert?type=egern&url=https://github.com/NSRingo/WeatherKit/releases/latest/download/iRingo.WeatherKit.lpx"
+    enabled: true
+    update_interval: 86400
+
+# ==============================================================================
+# HTTPS 解密证书 (MITM) - 完全继承 Loon 的既有 CA 证书与私钥
+# ==============================================================================
+mitm:
+  ca_p12: "<YOUR_CA_P12_BASE64>"
+  ca_passphrase: "<YOUR_PASSPHRASE>"
+  skip_server_cert_verify: false
