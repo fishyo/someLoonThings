@@ -309,3 +309,4 @@ keyword: hysteria
 everia.club
 reiobox.top
 uindex.org
+cloud-test.org
