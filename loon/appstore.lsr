@@ -1,0 +1,25 @@
+# App Store & iTunes API
+DOMAIN-SUFFIX,itunes.apple.com
+DOMAIN-SUFFIX,apps.apple.com
+DOMAIN-SUFFIX,appsto.re
+
+# App Store Media & CDN Downloads
+DOMAIN-SUFFIX,mzstatic.com
+DOMAIN-SUFFIX,cdn-apple.com
+DOMAIN-SUFFIX,aaplimg.com
+
+# Apple CDN Scheduling
+DOMAIN-SUFFIX,apple-dns.net
+
+# Specific App Download Endpoints
+DOMAIN-SUFFIX,iosapps.itunes.apple.com
+DOMAIN-SUFFIX,osxapps.itunes.apple.com
+
+# Software & System Updates CDN
+DOMAIN-SUFFIX,swcdn.apple.com
+DOMAIN-SUFFIX,updates-http.cdn-apple.com
+DOMAIN-SUFFIX,updates.cdn-apple.com
+
+# Apple Domestic China Endpoints
+DOMAIN-SUFFIX,apple.com.cn
+DOMAIN-SUFFIX,icloud.com.cn

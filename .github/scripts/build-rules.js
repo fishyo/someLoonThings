@@ -61,6 +61,14 @@ const RULE_CONFIGS = {
     policy: 'proxy',
     title: 'Telegram Ruleset'
   },
+  appstore: {
+    src: path.join(RULES_DIR, 'appstore.txt'),
+    loon: path.join(ROOT_DIR, 'loon/appstore.lsr'),
+    qx: path.join(ROOT_DIR, 'quanX/rules/appstore.list'),
+    mihomo: path.join(ROOT_DIR, 'mihomo/appstore.yaml'),
+    policy: 'direct',
+    title: 'App Store Direct Ruleset'
+  },
   wechat: {
     src: path.join(RULES_DIR, 'wechat.txt'),
     loon: path.join(ROOT_DIR, 'loon/wechat.lsr'),

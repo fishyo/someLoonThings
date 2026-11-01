@@ -1,0 +1,25 @@
+# App Store & iTunes API
+itunes.apple.com
+apps.apple.com
+appsto.re
+
+# App Store Media & CDN Downloads
+mzstatic.com
+cdn-apple.com
+aaplimg.com
+
+# Apple CDN Scheduling
+apple-dns.net
+
+# Specific App Download Endpoints
+iosapps.itunes.apple.com
+osxapps.itunes.apple.com
+
+# Software & System Updates CDN
+swcdn.apple.com
+updates-http.cdn-apple.com
+updates.cdn-apple.com
+
+# Apple Domestic China Endpoints
+apple.com.cn
+icloud.com.cn
