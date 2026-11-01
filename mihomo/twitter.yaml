@@ -5,27 +5,22 @@
 # ==============================================================================
 
 payload:
-  # ==============================================================================
-  # Twitter (X) 专用代理规则源 (Source Ruleset)
-  # 说明: 涵盖 Twitter / X 主站、图片 CDN、官方短链、视频流及第三方客户端服务
-  # ==============================================================================
-
-  # 关键词兜底
+  # Keywords
   - DOMAIN-KEYWORD,twitter
 
-  # 核心主站与域名
+  # Twitter & X Core Domains
   - DOMAIN-SUFFIX,x.com
   - DOMAIN-SUFFIX,twitter.com
   - DOMAIN-SUFFIX,t.co
   - DOMAIN-SUFFIX,twimg.com
 
-  # 客户端与衍生产品
+  # Twitter Clients & Media
   - DOMAIN-SUFFIX,tweetdeck.com
   - DOMAIN-SUFFIX,twitpic.com
   - DOMAIN-SUFFIX,periscope.tv
   - DOMAIN-SUFFIX,pscp.tv
 
-  # 开发者与品牌资源
+  # Twitter Brand & Dev Endpoints
   - DOMAIN-SUFFIX,twttr.com
   - DOMAIN-SUFFIX,twttr.net
   - DOMAIN-SUFFIX,twitterinc.com

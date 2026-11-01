@@ -1,9 +1,10 @@
 # ==============================================================================
-# Supercell 直连规则源 (Source Ruleset)
-# 说明: 荒野乱斗 / 皇室战争等 Supercell 直连
+# Supercell Direct Ruleset (Loon Format)
+# Maintainer: fishyo
+# Homepage: https://github.com/fishyo/someLoonThings
 # ==============================================================================
 
-# Supercell
+# Supercell Games
 DOMAIN-SUFFIX,clashroyale.com
 DOMAIN-SUFFIX,clashroyaleapp.com
 DOMAIN-SUFFIX,brawlstars.com

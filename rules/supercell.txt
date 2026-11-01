@@ -1,9 +1,4 @@
-# ==============================================================================
-# Supercell 直连规则源 (Source Ruleset)
-# 说明: 荒野乱斗 / 皇室战争等 Supercell 直连
-# ==============================================================================
-
-# Supercell
+# Supercell Games
 clashroyale.com
 clashroyaleapp.com
 brawlstars.com

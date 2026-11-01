@@ -5,15 +5,10 @@
 # ==============================================================================
 
 payload:
-  # ==============================================================================
-  # Telegram 专用代理规则源 (Source Ruleset)
-  # 说明: 涵盖 Telegram 官方域名、Telegraph、短链、媒体 CDN 以及各数据中心 (DC) IP-CIDR
-  # ==============================================================================
-
-  # 关键词兜底
+  # Keywords
   - DOMAIN-KEYWORD,telegram
 
-  # 核心域名生态
+  # Telegram Core Domains
   - DOMAIN-SUFFIX,telegram.org
   - DOMAIN-SUFFIX,t.me
   - DOMAIN-SUFFIX,telegra.ph
@@ -24,7 +19,7 @@ payload:
   - DOMAIN-SUFFIX,tdesktop.com
   - DOMAIN-SUFFIX,cdn-telegram.org
 
-  # 辅助服务与衍生平台
+  # Telegram Auxiliary Services
   - DOMAIN-SUFFIX,comments.app
   - DOMAIN-SUFFIX,contest.com
   - DOMAIN-SUFFIX,graph.org
@@ -32,7 +27,7 @@ payload:
   - DOMAIN-SUFFIX,stel.com
   - DOMAIN-SUFFIX,tchannels.me
 
-  # 官方数据中心 IPv4 活跃网段 (IP-CIDR)
+  # Telegram DC IPv4 CIDR
   - IP-CIDR,91.108.4.0/22
   - IP-CIDR,91.108.8.0/22
   - IP-CIDR,91.108.12.0/22
@@ -44,7 +39,7 @@ payload:
   - IP-CIDR,149.154.172.0/22
   - IP-CIDR,95.161.64.0/20
 
-  # 官方数据中心 IPv6 活跃网段 (IP-CIDR6)
+  # Telegram DC IPv6 CIDR
   - IP-CIDR6,2001:b28:f23d::/48
   - IP-CIDR6,2001:b28:f23f::/48
   - IP-CIDR6,2001:67c:4e8::/48

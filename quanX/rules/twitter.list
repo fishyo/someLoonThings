@@ -4,27 +4,22 @@
 # Homepage: https://github.com/fishyo/someLoonThings
 # ==============================================================================
 
-# ==============================================================================
-# Twitter (X) 专用代理规则源 (Source Ruleset)
-# 说明: 涵盖 Twitter / X 主站、图片 CDN、官方短链、视频流及第三方客户端服务
-# ==============================================================================
-
-# 关键词兜底
+# Keywords
 host-keyword, twitter, proxy
 
-# 核心主站与域名
+# Twitter & X Core Domains
 host-suffix, x.com, proxy
 host-suffix, twitter.com, proxy
 host-suffix, t.co, proxy
 host-suffix, twimg.com, proxy
 
-# 客户端与衍生产品
+# Twitter Clients & Media
 host-suffix, tweetdeck.com, proxy
 host-suffix, twitpic.com, proxy
 host-suffix, periscope.tv, proxy
 host-suffix, pscp.tv, proxy
 
-# 开发者与品牌资源
+# Twitter Brand & Dev Endpoints
 host-suffix, twttr.com, proxy
 host-suffix, twttr.net, proxy
 host-suffix, twitterinc.com, proxy

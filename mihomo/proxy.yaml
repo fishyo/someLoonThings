@@ -81,12 +81,12 @@ payload:
   - DOMAIN-SUFFIX,openaicom.imgix.net
   - DOMAIN-SUFFIX,featuregates.org
 
-  # Claude
+  # Anthropic Claude
   - DOMAIN-SUFFIX,anthropic.com
   - DOMAIN-SUFFIX,claude.ai
   - DOMAIN-SUFFIX,claudeusercontent.com
 
-  # Gemini
+  # Google Gemini
   - DOMAIN-SUFFIX,gemini.google.com
   - DOMAIN-SUFFIX,generativeai.google.com
   - DOMAIN-SUFFIX,bard.google.com
@@ -215,14 +215,14 @@ payload:
   - DOMAIN-SUFFIX,stackoverflow.com
   - DOMAIN-SUFFIX,stackexchange.com
 
-  # Spotify
+  # Music & Spotify
   - DOMAIN-SUFFIX,spotify.com
   - DOMAIN-SUFFIX,spotifycdn.com
   - DOMAIN-SUFFIX,scdn.co
   - DOMAIN-SUFFIX,spoti.fi
   - DOMAIN-SUFFIX,spotifycharts.com
 
-  # Streaming
+  # Video Streaming
   - DOMAIN-KEYWORD,netflix
   - DOMAIN-SUFFIX,netflix.com
   - DOMAIN-SUFFIX,netflix.net
@@ -248,7 +248,7 @@ payload:
   - DOMAIN-SUFFIX,transistor.fm
   - DOMAIN-SUFFIX,simplecast.com
 
-  # Gaming & Streaming
+  # Gaming & Esports
   - DOMAIN-SUFFIX,steamcommunity.com
   - DOMAIN-SUFFIX,steamstatic.com
   - DOMAIN-SUFFIX,twitch.tv

@@ -4,41 +4,35 @@
 # Homepage: https://github.com/fishyo/someLoonThings
 # ==============================================================================
 
-# ==============================================================================
-# WeChat (微信) 专用直连规则源 (Source Ruleset)
-# 策略: DIRECT (直连)
-# 作用: 保证微信文字、语音视频通话极速无感直连，防止异地代理 IP 触发频繁风控与封号
-# ==============================================================================
-
-# 微信核心域名
+# WeChat Core Domains
 host-suffix, weixin.com, direct
 host-suffix, wechat.com, direct
 host-suffix, wx.qq.com, direct
 host-suffix, wxs.qq.com, direct
 host-suffix, wechat.org, direct
 
-# 聊天图片、视频与头像 CDN
+# WeChat Media & Avatar CDN
 host-suffix, qpic.cn, direct
 host-suffix, qlogo.cn, direct
 host-suffix, wx.gtimg.com, direct
 
-# 微信小程序服务
+# WeChat Mini Programs
 host-suffix, servicewechat.com, direct
 host-suffix, wxapp.tc.qq.com, direct
 
-# 微信支付与金融风控 (财付通)
+# WeChat Pay & Financial Services
 host-suffix, tenpay.com, direct
 host-suffix, wechatpay.cn, direct
 host-suffix, wechatpay.com, direct
 host-suffix, wechatpay.com.cn, direct
 
-# 微信内网页与 JS-SDK 桥接
+# WeChat Web & SDK Bridge
 host-suffix, weixinbridge.com, direct
 host-suffix, weixinaf.net, direct
 host-suffix, wechatlegal.net, direct
 host-suffix, wechatos.net, direct
 
-# 企业微信
+# WeCom (Work WeChat)
 host-suffix, work.weixin.qq.com, direct
 host-suffix, workweixin.com, direct
 host-suffix, wecom.work, direct

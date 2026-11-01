@@ -140,7 +140,13 @@ function compileSourceFile(confKey) {
 
   const rawLines = fs.readFileSync(conf.src, 'utf8').split(/\r?\n/);
 
-  const loonLines = [];
+  const loonLines = [
+    '# ==============================================================================',
+    `# ${conf.title} (Loon Format)`,
+    '# Maintainer: fishyo',
+    '# Homepage: https://github.com/fishyo/someLoonThings',
+    '# ==============================================================================\n'
+  ];
   const qxLines = [
     '# ==============================================================================',
     `# ${conf.title} (Quantumult X Format)`,

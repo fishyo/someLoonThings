@@ -74,12 +74,12 @@ openaicomproductionae4b.blob.core.windows.net
 openaicom.imgix.net
 featuregates.org
 
-# Claude
+# Anthropic Claude
 anthropic.com
 claude.ai
 claudeusercontent.com
 
-# Gemini
+# Google Gemini
 gemini.google.com
 generativeai.google.com
 bard.google.com
@@ -208,14 +208,14 @@ docker.io
 stackoverflow.com
 stackexchange.com
 
-# Spotify
+# Music & Spotify
 spotify.com
 spotifycdn.com
 scdn.co
 spoti.fi
 spotifycharts.com
 
-# Streaming
+# Video Streaming
 keyword: netflix
 netflix.com
 netflix.net
@@ -241,7 +241,7 @@ megaphone.fm
 transistor.fm
 simplecast.com
 
-# Gaming & Streaming
+# Gaming & Esports
 steamcommunity.com
 steamstatic.com
 twitch.tv

@@ -1,24 +1,19 @@
-# ==============================================================================
-# Twitter (X) 专用代理规则源 (Source Ruleset)
-# 说明: 涵盖 Twitter / X 主站、图片 CDN、官方短链、视频流及第三方客户端服务
-# ==============================================================================
-
-# 关键词兜底
+# Keywords
 keyword: twitter
 
-# 核心主站与域名
+# Twitter & X Core Domains
 x.com
 twitter.com
 t.co
 twimg.com
 
-# 客户端与衍生产品
+# Twitter Clients & Media
 tweetdeck.com
 twitpic.com
 periscope.tv
 pscp.tv
 
-# 开发者与品牌资源
+# Twitter Brand & Dev Endpoints
 twttr.com
 twttr.net
 twitterinc.com

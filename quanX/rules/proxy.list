@@ -80,12 +80,12 @@ host-suffix, openaicomproductionae4b.blob.core.windows.net, proxy
 host-suffix, openaicom.imgix.net, proxy
 host-suffix, featuregates.org, proxy
 
-# Claude
+# Anthropic Claude
 host-suffix, anthropic.com, proxy
 host-suffix, claude.ai, proxy
 host-suffix, claudeusercontent.com, proxy
 
-# Gemini
+# Google Gemini
 host-suffix, gemini.google.com, proxy
 host-suffix, generativeai.google.com, proxy
 host-suffix, bard.google.com, proxy
@@ -214,14 +214,14 @@ host-suffix, docker.io, proxy
 host-suffix, stackoverflow.com, proxy
 host-suffix, stackexchange.com, proxy
 
-# Spotify
+# Music & Spotify
 host-suffix, spotify.com, proxy
 host-suffix, spotifycdn.com, proxy
 host-suffix, scdn.co, proxy
 host-suffix, spoti.fi, proxy
 host-suffix, spotifycharts.com, proxy
 
-# Streaming
+# Video Streaming
 host-keyword, netflix, proxy
 host-suffix, netflix.com, proxy
 host-suffix, netflix.net, proxy
@@ -247,7 +247,7 @@ host-suffix, megaphone.fm, proxy
 host-suffix, transistor.fm, proxy
 host-suffix, simplecast.com, proxy
 
-# Gaming & Streaming
+# Gaming & Esports
 host-suffix, steamcommunity.com, proxy
 host-suffix, steamstatic.com, proxy
 host-suffix, twitch.tv, proxy

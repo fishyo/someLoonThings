@@ -5,20 +5,20 @@
 # ==============================================================================
 
 payload:
-  # App Store & iTunes API
+  # App Store & iTunes
   - DOMAIN-SUFFIX,itunes.apple.com
   - DOMAIN-SUFFIX,apps.apple.com
   - DOMAIN-SUFFIX,appsto.re
 
-  # App Store Media & CDN Downloads
+  # App Store Media & CDN Assets
   - DOMAIN-SUFFIX,mzstatic.com
   - DOMAIN-SUFFIX,cdn-apple.com
   - DOMAIN-SUFFIX,aaplimg.com
 
-  # Apple CDN Scheduling
+  # Apple CDN Traffic Routing
   - DOMAIN-SUFFIX,apple-dns.net
 
-  # Specific App Download Endpoints
+  # iOS & macOS App Downloads
   - DOMAIN-SUFFIX,iosapps.itunes.apple.com
   - DOMAIN-SUFFIX,osxapps.itunes.apple.com
 
@@ -27,6 +27,6 @@ payload:
   - DOMAIN-SUFFIX,updates-http.cdn-apple.com
   - DOMAIN-SUFFIX,updates.cdn-apple.com
 
-  # Apple Domestic China Endpoints
+  # Apple China Domestic Services
   - DOMAIN-SUFFIX,apple.com.cn
   - DOMAIN-SUFFIX,icloud.com.cn
