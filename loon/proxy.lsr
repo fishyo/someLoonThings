@@ -53,3 +53,9 @@ DOMAIN-SUFFIX,trello.com
 DOMAIN-SUFFIX,ss-inf.net
 DOMAIN-SUFFIX,atlassian-dev.net
 DOMAIN-SUFFIX,atlassian-3p.com
+
+# podsights
+DOMAIN-SUFFIX,pdst.fm
+DOMAIN-SUFFIX,pdst.io
+DOMAIN-SUFFIX,podsights.com
+DOMAIN-SUFFIX,podsights.fm

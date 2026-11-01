@@ -60,3 +60,9 @@ host-suffix, trello.com, proxy
 host-suffix, ss-inf.net, proxy
 host-suffix, atlassian-dev.net, proxy
 host-suffix, atlassian-3p.com, proxy
+
+# podsights
+host-suffix, pdst.fm, proxy
+host-suffix, pdst.io, proxy
+host-suffix, podsights.com, proxy
+host-suffix, podsights.fm, proxy
