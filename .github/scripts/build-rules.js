@@ -53,6 +53,30 @@ const RULE_CONFIGS = {
     policy: 'proxy',
     title: 'AI Services Ruleset'
   },
+  twitter: {
+    src: path.join(RULES_DIR, 'twitter.txt'),
+    loon: path.join(ROOT_DIR, 'loon/twitter.lsr'),
+    qx: path.join(ROOT_DIR, 'quanX/rules/twitter.list'),
+    mihomo: path.join(ROOT_DIR, 'mihomo/twitter.yaml'),
+    policy: 'proxy',
+    title: 'Twitter Ruleset'
+  },
+  telegram: {
+    src: path.join(RULES_DIR, 'telegram.txt'),
+    loon: path.join(ROOT_DIR, 'loon/telegram.lsr'),
+    qx: path.join(ROOT_DIR, 'quanX/rules/telegram.list'),
+    mihomo: path.join(ROOT_DIR, 'mihomo/telegram.yaml'),
+    policy: 'proxy',
+    title: 'Telegram Ruleset'
+  },
+  wechat: {
+    src: path.join(RULES_DIR, 'wechat.txt'),
+    loon: path.join(ROOT_DIR, 'loon/wechat.lsr'),
+    qx: path.join(ROOT_DIR, 'quanX/rules/wechat.list'),
+    mihomo: path.join(ROOT_DIR, 'mihomo/wechat.yaml'),
+    policy: 'direct',
+    title: 'WeChat Direct Ruleset'
+  },
   supercell: {
     src: path.join(RULES_DIR, 'supercell.txt'),
     loon: path.join(ROOT_DIR, 'loon/supercell.lsr'),

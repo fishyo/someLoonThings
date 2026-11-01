@@ -29,6 +29,7 @@ googleapis.com
 # ----------------- OpenAI (ChatGPT & Sora) -----------------
 chatgpt.com
 openai.com
+chat.com
 oaistatic.com
 oaiusercontent.com
 sora.com
@@ -37,6 +38,9 @@ openaicomproductionae4b.blob.core.windows.net
 openaicom.imgix.net
 # Statsig 特性标记服务（OpenAI 灰度控制必须走代理）
 featuregates.org
+# 绑卡开通 Plus / 结算必走网关
+stripe.com
+stripe.network
 
 # ----------------- Anthropic Claude -----------------
 anthropic.com

@@ -36,6 +36,7 @@ payload:
   # ----------------- OpenAI (ChatGPT & Sora) -----------------
   - DOMAIN-SUFFIX,chatgpt.com
   - DOMAIN-SUFFIX,openai.com
+  - DOMAIN-SUFFIX,chat.com
   - DOMAIN-SUFFIX,oaistatic.com
   - DOMAIN-SUFFIX,oaiusercontent.com
   - DOMAIN-SUFFIX,sora.com
@@ -44,6 +45,9 @@ payload:
   - DOMAIN-SUFFIX,openaicom.imgix.net
   # Statsig 特性标记服务（OpenAI 灰度控制必须走代理）
   - DOMAIN-SUFFIX,featuregates.org
+  # 绑卡开通 Plus / 结算必走网关
+  - DOMAIN-SUFFIX,stripe.com
+  - DOMAIN-SUFFIX,stripe.network
 
   # ----------------- Anthropic Claude -----------------
   - DOMAIN-SUFFIX,anthropic.com

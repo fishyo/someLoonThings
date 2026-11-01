@@ -1,0 +1,35 @@
+# ==============================================================================
+# Twitter Ruleset (Mihomo Format)
+# Maintainer: fishyo
+# Homepage: https://github.com/fishyo/someLoonThings
+# ==============================================================================
+
+payload:
+  # ==============================================================================
+  # Twitter (X) 专用代理规则源 (Source Ruleset)
+  # 说明: 涵盖 Twitter / X 主站、图片 CDN、官方短链、视频流及第三方客户端服务
+  # ==============================================================================
+
+  # 关键词兜底
+  - DOMAIN-KEYWORD,twitter
+
+  # 核心主站与域名
+  - DOMAIN-SUFFIX,x.com
+  - DOMAIN-SUFFIX,twitter.com
+  - DOMAIN-SUFFIX,t.co
+  - DOMAIN-SUFFIX,twimg.com
+
+  # 客户端与衍生产品
+  - DOMAIN-SUFFIX,tweetdeck.com
+  - DOMAIN-SUFFIX,twitpic.com
+  - DOMAIN-SUFFIX,periscope.tv
+  - DOMAIN-SUFFIX,pscp.tv
+
+  # 开发者与品牌资源
+  - DOMAIN-SUFFIX,twttr.com
+  - DOMAIN-SUFFIX,twttr.net
+  - DOMAIN-SUFFIX,twitterinc.com
+  - DOMAIN-SUFFIX,twitteroauth.com
+  - DOMAIN-SUFFIX,twitterstat.us
+  - DOMAIN-SUFFIX,ads-twitter.com
+  - DOMAIN-SUFFIX,cms-twdigitalassets.com

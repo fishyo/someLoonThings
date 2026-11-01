@@ -1,0 +1,38 @@
+# ==============================================================================
+# WeChat (微信) 专用直连规则源 (Source Ruleset)
+# 策略: DIRECT (直连)
+# 作用: 保证微信文字、语音视频通话极速无感直连，防止异地代理 IP 触发频繁风控与封号
+# ==============================================================================
+
+# 微信核心域名
+DOMAIN-SUFFIX,weixin.com
+DOMAIN-SUFFIX,wechat.com
+DOMAIN-SUFFIX,wx.qq.com
+DOMAIN-SUFFIX,wxs.qq.com
+DOMAIN-SUFFIX,wechat.org
+
+# 聊天图片、视频与头像 CDN
+DOMAIN-SUFFIX,qpic.cn
+DOMAIN-SUFFIX,qlogo.cn
+DOMAIN-SUFFIX,wx.gtimg.com
+
+# 微信小程序服务
+DOMAIN-SUFFIX,servicewechat.com
+DOMAIN-SUFFIX,wxapp.tc.qq.com
+
+# 微信支付与金融风控 (财付通)
+DOMAIN-SUFFIX,tenpay.com
+DOMAIN-SUFFIX,wechatpay.cn
+DOMAIN-SUFFIX,wechatpay.com
+DOMAIN-SUFFIX,wechatpay.com.cn
+
+# 微信内网页与 JS-SDK 桥接
+DOMAIN-SUFFIX,weixinbridge.com
+DOMAIN-SUFFIX,weixinaf.net
+DOMAIN-SUFFIX,wechatlegal.net
+DOMAIN-SUFFIX,wechatos.net
+
+# 企业微信
+DOMAIN-SUFFIX,work.weixin.qq.com
+DOMAIN-SUFFIX,workweixin.com
+DOMAIN-SUFFIX,wecom.work

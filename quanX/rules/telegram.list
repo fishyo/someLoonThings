@@ -1,0 +1,49 @@
+# ==============================================================================
+# Telegram Ruleset (Quantumult X Format)
+# Maintainer: fishyo
+# Homepage: https://github.com/fishyo/someLoonThings
+# ==============================================================================
+
+# ==============================================================================
+# Telegram 专用代理规则源 (Source Ruleset)
+# 说明: 涵盖 Telegram 官方域名、Telegraph、短链、媒体 CDN 以及各数据中心 (DC) IP-CIDR
+# ==============================================================================
+
+# 关键词兜底
+host-keyword, telegram, proxy
+
+# 核心域名生态
+host-suffix, telegram.org, proxy
+host-suffix, t.me, proxy
+host-suffix, telegra.ph, proxy
+host-suffix, telegram.me, proxy
+host-suffix, tx.me, proxy
+host-suffix, telegram.dog, proxy
+host-suffix, telesco.pe, proxy
+host-suffix, tdesktop.com, proxy
+host-suffix, cdn-telegram.org, proxy
+
+# 辅助服务与衍生平台
+host-suffix, comments.app, proxy
+host-suffix, contest.com, proxy
+host-suffix, graph.org, proxy
+host-suffix, quiz.directory, proxy
+host-suffix, stel.com, proxy
+host-suffix, tchannels.me, proxy
+
+# 官方数据中心 IPv4 活跃网段 (IP-CIDR)
+ip-cidr, 91.108.4.0/22, proxy
+ip-cidr, 91.108.8.0/22, proxy
+ip-cidr, 91.108.12.0/22, proxy
+ip-cidr, 91.108.16.0/22, proxy
+ip-cidr, 91.108.20.0/22, proxy
+ip-cidr, 91.108.56.0/22, proxy
+ip-cidr, 149.154.160.0/20, proxy
+ip-cidr, 149.154.164.0/22, proxy
+ip-cidr, 149.154.172.0/22, proxy
+ip-cidr, 95.161.64.0/20, proxy
+
+# 官方数据中心 IPv6 活跃网段 (IP-CIDR6)
+ip-cidr6, 2001:b28:f23d::/48, proxy
+ip-cidr6, 2001:b28:f23f::/48, proxy
+ip-cidr6, 2001:67c:4e8::/48, proxy

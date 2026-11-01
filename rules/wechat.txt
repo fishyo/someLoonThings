@@ -1,0 +1,38 @@
+# ==============================================================================
+# WeChat (微信) 专用直连规则源 (Source Ruleset)
+# 策略: DIRECT (直连)
+# 作用: 保证微信文字、语音视频通话极速无感直连，防止异地代理 IP 触发频繁风控与封号
+# ==============================================================================
+
+# 微信核心域名
+weixin.com
+wechat.com
+wx.qq.com
+wxs.qq.com
+wechat.org
+
+# 聊天图片、视频与头像 CDN
+qpic.cn
+qlogo.cn
+wx.gtimg.com
+
+# 微信小程序服务
+servicewechat.com
+wxapp.tc.qq.com
+
+# 微信支付与金融风控 (财付通)
+tenpay.com
+wechatpay.cn
+wechatpay.com
+wechatpay.com.cn
+
+# 微信内网页与 JS-SDK 桥接
+weixinbridge.com
+weixinaf.net
+wechatlegal.net
+wechatos.net
+
+# 企业微信
+work.weixin.qq.com
+workweixin.com
+wecom.work
