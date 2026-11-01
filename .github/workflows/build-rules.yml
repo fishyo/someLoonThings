@@ -1,0 +1,44 @@
+name: Auto Compile Rulesets
+
+on:
+  push:
+    branches: [main, ruleMaker]
+    paths:
+      - 'rules/**'
+      - '.github/scripts/build-rules.js'
+      - '.github/workflows/build-rules.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Compile & Distribute Rules
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.ref }}
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+
+      - name: Compile Rulesets
+        run: node .github/scripts/build-rules.js
+
+      - name: Commit and Push Compiled Rules
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git add loon/ quanX/rules/ mihomo/
+          if ! git diff --staged --quiet; then
+            git commit -m "chore(rules): auto-compile rulesets from rules/ [skip ci]"
+            git push origin HEAD:${{ github.ref_name }}
+          else
+            echo "No compiled rule changes detected. Working tree clean."
+          fi

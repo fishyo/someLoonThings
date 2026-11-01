@@ -1,0 +1,83 @@
+# Google Gemini & AI Studio
+gemini.google.com
+bard.google.com
+aistudio.google.com
+makersuite.google.com
+generativeai.google
+generativelanguage.googleapis.com
+alkalimakersuite-pa.googleapis.com
+proactivebackend-pa.googleapis.com
+geller-pa.googleapis.com
+odin-pa.googleapis.com
+aiplatform.googleapis.com
+notebooklm.google
+notebooklm.google.com
+deepmind.google
+deepmind.com
+ai.google.dev
+exact: waa-pa.clients6.google.com
+exact: alkali-pa.clients6.google.com
+googleapis.com
+
+# OpenAI & ChatGPT
+chatgpt.com
+openai.com
+chat.com
+oaistatic.com
+oaiusercontent.com
+sora.com
+openaiapi-site.azureedge.net
+openaicomproductionae4b.blob.core.windows.net
+openaicom.imgix.net
+featuregates.org
+stripe.com
+stripe.network
+
+# Anthropic Claude
+anthropic.com
+claude.ai
+claudeusercontent.com
+
+# xAI Grok
+x.ai
+grok.com
+
+# Perplexity AI
+perplexity.ai
+pplx.ai
+
+# Microsoft Copilot
+copilot.microsoft.com
+sydney.bing.com
+exact: edgeservices.bing.com
+
+# Midjourney
+midjourney.com
+cdn.midjourney.com
+
+# AI Developer Tools
+cursor.com
+cursor.sh
+tavily.com
+groq.com
+poe.com
+poecdn.net
+
+# Voice & Music AI
+suno.com
+suno.ai
+udio.com
+elevenlabs.io
+
+# AI Models & Platforms
+mistral.ai
+cohere.com
+cohere.ai
+together.ai
+together.xyz
+replicate.com
+replicate.delivery
+fal.ai
+v0.dev
+huggingface.co
+hf.space

@@ -1,0 +1,23 @@
+# Keywords
+keyword: twitter
+
+# Twitter & X Core Domains
+x.com
+twitter.com
+t.co
+twimg.com
+
+# Twitter Clients & Media
+tweetdeck.com
+twitpic.com
+periscope.tv
+pscp.tv
+
+# Twitter Brand & Dev Endpoints
+twttr.com
+twttr.net
+twitterinc.com
+twitteroauth.com
+twitterstat.us
+ads-twitter.com
+cms-twdigitalassets.com

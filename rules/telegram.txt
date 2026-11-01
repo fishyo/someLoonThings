@@ -1,0 +1,38 @@
+# Keywords
+keyword: telegram
+
+# Telegram Core Domains
+telegram.org
+t.me
+telegra.ph
+telegram.me
+tx.me
+telegram.dog
+telesco.pe
+tdesktop.com
+cdn-telegram.org
+
+# Telegram Auxiliary Services
+comments.app
+contest.com
+graph.org
+quiz.directory
+stel.com
+tchannels.me
+
+# Telegram DC IPv4 CIDR
+91.108.4.0/22
+91.108.8.0/22
+91.108.12.0/22
+91.108.16.0/22
+91.108.20.0/22
+91.108.56.0/22
+149.154.160.0/20
+149.154.164.0/22
+149.154.172.0/22
+95.161.64.0/20
+
+# Telegram DC IPv6 CIDR
+2001:b28:f23d::/48
+2001:b28:f23f::/48
+2001:67c:4e8::/48

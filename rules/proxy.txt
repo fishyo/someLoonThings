@@ -1,0 +1,311 @@
+# Captcha
+recaptcha.net
+hcaptcha.com
+challenges.cloudflare.com
+
+# Public CDNs
+cdnjs.cloudflare.com
+jsdelivr.net
+unpkg.com
+
+# Fonts & Icons
+fonts.googleapis.com
+fonts.gstatic.com
+typekit.net
+giphy.com
+
+# URL Shorteners
+bit.ly
+tinyurl.com
+ow.ly
+is.gd
+
+# Payment
+stripe.com
+stripe.network
+
+# Diagnostics & Speedtest
+speedtest.net
+ipinfo.io
+ipapi.co
+nxtrace.org
+
+# Google
+google.com
+googleapis.com
+gstatic.com
+googleusercontent.com
+googletagmanager.com
+1e100.net
+ggpht.com
+gmail.com
+googlehosted.com
+g.co
+goo.gl
+withgoogle.com
+googleblog.com
+google.com.hk
+google.co.jp
+google.co.uk
+
+# YouTube
+keyword: youtube
+youtube.com
+youtu.be
+yt.be
+ytimg.com
+googlevideo.com
+youtube-nocookie.com
+
+# Microsoft
+copilot.microsoft.com
+sydneystorageextension.blob.core.windows.net
+exact: edgeservices.bing.com
+
+# OpenAI & ChatGPT
+openai.com
+chatgpt.com
+chat.com
+oaistatic.com
+oaiusercontent.com
+sora.com
+openaiapi-site.azureedge.net
+openaicomproductionae4b.blob.core.windows.net
+openaicom.imgix.net
+featuregates.org
+
+# Anthropic Claude
+anthropic.com
+claude.ai
+claudeusercontent.com
+
+# Google Gemini
+gemini.google.com
+generativeai.google.com
+bard.google.com
+
+# AI Tools
+perplexity.ai
+pplx.ai
+poe.com
+x.ai
+grok.com
+cursor.com
+cursor.sh
+
+# Telegram
+keyword: telegram
+telegram.org
+t.me
+telegra.ph
+telegram.me
+tx.me
+telegram.dog
+telesco.pe
+tdesktop.com
+cdn-telegram.org
+
+# Twitter
+keyword: twitter
+x.com
+twitter.com
+t.co
+twimg.com
+tweetdeck.com
+periscope.tv
+pscp.tv
+twitpic.com
+
+# Meta
+facebook.com
+fbcdn.net
+instagram.com
+cdninstagram.com
+threads.net
+whatsapp.com
+whatsapp.net
+messenger.com
+
+# Discord
+keyword: discord
+discord.com
+discord.gg
+discord.media
+discordcdn.com
+discordapp.com
+discordapp.net
+discordstatus.com
+
+# Reddit
+keyword: reddit
+reddit.com
+redd.it
+redditstatic.com
+redditmedia.com
+reddithelp.com
+
+# Signal & Line
+signal.org
+line.me
+line-apps.com
+line-scdn.net
+
+# GitHub
+github.com
+githubassets.com
+githubusercontent.com
+raw.githubusercontent.com
+github.io
+ghcr.io
+git.io
+github.blog
+githubstatus.com
+
+# Cloudflare
+keyword: cloudflare
+pages.dev
+workers.dev
+cf-ipfs.com
+warp.plus
+videodelivery.net
+one.one.one
+
+# Vercel
+keyword: vercel
+vercel.com
+vercel.app
+
+# Cloud & Serverless
+supabase.co
+supabase.com
+netlify.app
+netlify.com
+fly.io
+fly.dev
+render.com
+
+# Atlassian
+atlassian.com
+atlassian.net
+atl-paas.net
+jira.com
+trello.com
+bitbucket.org
+ss-inf.net
+atlassian-dev.net
+atlassian-3p.com
+
+# Package Repositories & Tech
+gitlab.com
+pypi.org
+pythonhosted.org
+crates.io
+rust-lang.org
+golang.org
+pkg.go.dev
+docker.com
+docker.io
+stackoverflow.com
+stackexchange.com
+
+# Music & Spotify
+spotify.com
+spotifycdn.com
+scdn.co
+spoti.fi
+spotifycharts.com
+
+# Video Streaming
+keyword: netflix
+netflix.com
+netflix.net
+nflximg.net
+nflxvideo.net
+nflxext.com
+nflxso.net
+disneyplus.com
+hulu.com
+max.com
+hbomax.com
+primevideo.com
+
+# Podcasts
+pocketcasts.com
+pca.st
+keyword: fireside
+pdst.fm
+pdst.io
+podsights.com
+podsights.fm
+megaphone.fm
+transistor.fm
+simplecast.com
+
+# Gaming & Esports
+steamcommunity.com
+steamstatic.com
+twitch.tv
+ttvnw.net
+jtvnw.net
+twitchcdn.net
+royaleapi.com
+
+# Password Managers
+bitwarden.com
+1password.com
+1password.ca
+1password.eu
+1passwordservices.com
+lastpass.com
+
+# Productivity
+notion.so
+notion.site
+notion.new
+dropbox.com
+dropboxapi.com
+dropboxstatic.com
+dropboxusercontent.com
+figma.com
+slack.com
+linear.app
+onedrive.live.com
+mega.nz
+
+# Wikipedia
+wikipedia.org
+wikimedia.org
+wikidata.org
+wiktionary.org
+wikiquote.org
+wikibooks.org
+wikisource.org
+
+# News & Media
+duckduckgo.com
+duck.com
+ddg.gg
+search.brave.com
+startpage.com
+medium.com
+substack.com
+theverge.com
+wired.com
+nytimes.com
+bbc.com
+bbci.co.uk
+bloomberg.com
+wsj.com
+reuters.com
+
+# Mobile & App Stores
+play.google.com
+android.com
+apkpure.com
+apkmirror.com
+
+# Custom & Misc
+keyword: hysteria
+everia.club
+reiobox.top
+uindex.org

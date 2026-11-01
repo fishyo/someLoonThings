@@ -2,10 +2,9 @@
 # AI Services Ruleset (Quantumult X Format)
 # Maintainer: fishyo
 # Homepage: https://github.com/fishyo/someLoonThings
-# Description: 整合主流 AI 服务（OpenAI, Claude, Gemini, Grok, Perplexity, Copilot 等）
 # ==============================================================================
 
-# ----------------- Google Gemini & AI Studio -----------------
+# Google Gemini & AI Studio
 host-suffix, gemini.google.com, proxy
 host-suffix, bard.google.com, proxy
 host-suffix, aistudio.google.com, proxy
@@ -26,9 +25,10 @@ host, waa-pa.clients6.google.com, proxy
 host, alkali-pa.clients6.google.com, proxy
 host-suffix, googleapis.com, proxy
 
-# ----------------- OpenAI (ChatGPT & Sora) -----------------
+# OpenAI & ChatGPT
 host-suffix, chatgpt.com, proxy
 host-suffix, openai.com, proxy
+host-suffix, chat.com, proxy
 host-suffix, oaistatic.com, proxy
 host-suffix, oaiusercontent.com, proxy
 host-suffix, sora.com, proxy
@@ -36,40 +36,46 @@ host-suffix, openaiapi-site.azureedge.net, proxy
 host-suffix, openaicomproductionae4b.blob.core.windows.net, proxy
 host-suffix, openaicom.imgix.net, proxy
 host-suffix, featuregates.org, proxy
+host-suffix, stripe.com, proxy
+host-suffix, stripe.network, proxy
 
-# ----------------- Anthropic Claude -----------------
+# Anthropic Claude
 host-suffix, anthropic.com, proxy
 host-suffix, claude.ai, proxy
 host-suffix, claudeusercontent.com, proxy
 
-# ----------------- xAI (Grok) -----------------
+# xAI Grok
 host-suffix, x.ai, proxy
 host-suffix, grok.com, proxy
 
-# ----------------- Perplexity AI -----------------
+# Perplexity AI
 host-suffix, perplexity.ai, proxy
 host-suffix, pplx.ai, proxy
 
-# ----------------- Microsoft Copilot -----------------
+# Microsoft Copilot
 host-suffix, copilot.microsoft.com, proxy
 host-suffix, sydney.bing.com, proxy
 host, edgeservices.bing.com, proxy
 
-# ----------------- Midjourney -----------------
+# Midjourney
 host-suffix, midjourney.com, proxy
 host-suffix, cdn.midjourney.com, proxy
 
-# ----------------- 开发者与热门 AI 工具 -----------------
+# AI Developer Tools
 host-suffix, cursor.com, proxy
 host-suffix, cursor.sh, proxy
 host-suffix, tavily.com, proxy
 host-suffix, groq.com, proxy
 host-suffix, poe.com, proxy
 host-suffix, poecdn.net, proxy
+
+# Voice & Music AI
 host-suffix, suno.com, proxy
 host-suffix, suno.ai, proxy
 host-suffix, udio.com, proxy
 host-suffix, elevenlabs.io, proxy
+
+# AI Models & Platforms
 host-suffix, mistral.ai, proxy
 host-suffix, cohere.com, proxy
 host-suffix, cohere.ai, proxy

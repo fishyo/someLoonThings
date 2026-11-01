@@ -30,8 +30,38 @@
 | 规则 | 说明 | Loon | Quantumult X | Mihomo |
 | :--- | :--- | :---: | :---: | :---: |
 | **AI 服务** | ChatGPT / Claude / Gemini / Grok 等主流大模型 | [导入](https://www.nsloon.com/openloon/import?rules=https://raw.githubusercontent.com/fishyo/someLoonThings/main/loon/ai.lsr) | [导入](https://quantumult.app/x/open-app/add-resource?remote-resource=%7B%22filter_remote%22%3A%5B%22https%3A%2F%2Fraw.githubusercontent.com%2Ffishyo%2FsomeLoonThings%2Fmain%2FquanX%2Frules%2Fai.list%2C%20tag%3DAI%20%E6%9C%8D%E5%8A%A1%E5%88%86%E6%B5%81%2C%20force-policy%3Dproxy%2C%20enabled%3Dtrue%22%5D%7D) | [查看](mihomo/ai.yaml) |
-| **自用代理** | Cloudflare / Bitwarden 等常用代理补充 | [导入](https://www.nsloon.com/openloon/import?rules=https://raw.githubusercontent.com/fishyo/someLoonThings/main/loon/proxy.lsr) | [导入](https://quantumult.app/x/open-app/add-resource?remote-resource=%7B%22filter_remote%22%3A%5B%22https%3A%2F%2Fraw.githubusercontent.com%2Ffishyo%2FsomeLoonThings%2Fmain%2FquanX%2Frules%2Fproxy.list%2C%20tag%3D%E8%87%AA%E7%94%A8%E4%BB%A3%E7%90%86%E5%9F%9F%E5%90%8D%2C%20force-policy%3Dproxy%2C%20enabled%3Dtrue%22%5D%7D) | [查看](mihomo/proxy.yaml) |
+| **Twitter (X)** | Twitter / X 主站、图片 CDN、官方短链与客户端 | [导入](https://www.nsloon.com/openloon/import?rules=https://raw.githubusercontent.com/fishyo/someLoonThings/main/loon/twitter.lsr) | [导入](https://quantumult.app/x/open-app/add-resource?remote-resource=%7B%22filter_remote%22%3A%5B%22https%3A%2F%2Fraw.githubusercontent.com%2Ffishyo%2FsomeLoonThings%2Fmain%2FquanX%2Frules%2Ftwitter.list%2C%20tag%3DTwitter%E4%BB%A3%E7%90%86%2C%20force-policy%3Dproxy%2C%20enabled%3Dtrue%22%5D%7D) | [查看](mihomo/twitter.yaml) |
+| **Telegram** | Telegram 域名、短链、媒体流及官方 DC IP-CIDR | [导入](https://www.nsloon.com/openloon/import?rules=https://raw.githubusercontent.com/fishyo/someLoonThings/main/loon/telegram.lsr) | [导入](https://quantumult.app/x/open-app/add-resource?remote-resource=%7B%22filter_remote%22%3A%5B%22https%3A%2F%2Fraw.githubusercontent.com%2Ffishyo%2FsomeLoonThings%2Fmain%2FquanX%2Frules%2Ftelegram.list%2C%20tag%3DTelegram%E4%BB%A3%E7%90%86%2C%20force-policy%3Dproxy%2C%20enabled%3Dtrue%22%5D%7D) | [查看](mihomo/telegram.yaml) |
+| **WeChat (微信)** | 微信文字/语音通话/朋友圈/支付极速直连 (防风控) | [导入](https://www.nsloon.com/openloon/import?rules=https://raw.githubusercontent.com/fishyo/someLoonThings/main/loon/wechat.lsr) | [导入](https://quantumult.app/x/open-app/add-resource?remote-resource=%7B%22filter_remote%22%3A%5B%22https%3A%2F%2Fraw.githubusercontent.com%2Ffishyo%2FsomeLoonThings%2Fmain%2FquanX%2Frules%2Fwechat.list%2C%20tag%3D%E5%BE%AE%E4%BF%A1%E7%9B%B4%E8%BF%9E%2C%20force-policy%3Ddirect%2C%20enabled%3Dtrue%22%5D%7D) | [查看](mihomo/wechat.yaml) |
+| **App Store 直连** | 应用商店资源、应用安装包、更新 CDN 极速直连加速 | [导入](https://www.nsloon.com/openloon/import?rules=https://raw.githubusercontent.com/fishyo/someLoonThings/main/loon/appstore.lsr) | [导入](https://quantumult.app/x/open-app/add-resource?remote-resource=%7B%22filter_remote%22%3A%5B%22https%3A%2F%2Fraw.githubusercontent.com%2Ffishyo%2FsomeLoonThings%2Fmain%2FquanX%2Frules%2Fappstore.list%2C%20tag%3DAppStore%E7%9B%B4%E8%BF%9E%2C%20force-policy%3Ddirect%2C%20enabled%3Dtrue%22%5D%7D) | [查看](mihomo/appstore.yaml) |
+| **代理黑名单** | 全场景主流与自用代理黑名单汇总 (Google/社交/开发者/媒体/人机验证) | [导入](https://www.nsloon.com/openloon/import?rules=https://raw.githubusercontent.com/fishyo/someLoonThings/main/loon/proxy.lsr) | [导入](https://quantumult.app/x/open-app/add-resource?remote-resource=%7B%22filter_remote%22%3A%5B%22https%3A%2F%2Fraw.githubusercontent.com%2Ffishyo%2FsomeLoonThings%2Fmain%2FquanX%2Frules%2Fproxy.list%2C%20tag%3D%E8%87%AA%E7%94%A8%E4%BB%A3%E7%90%86%E5%9F%9F%E5%90%8D%2C%20force-policy%3Dproxy%2C%20enabled%3Dtrue%22%5D%7D) | [查看](mihomo/proxy.yaml) |
 | **游戏直连** | 荒野乱斗 / 皇室战争等 Supercell 直连 | [导入](https://www.nsloon.com/openloon/import?rules=https://raw.githubusercontent.com/fishyo/someLoonThings/main/loon/supercell.lsr) | [导入](https://quantumult.app/x/open-app/add-resource?remote-resource=%7B%22filter_remote%22%3A%5B%22https%3A%2F%2Fraw.githubusercontent.com%2Ffishyo%2FsomeLoonThings%2Fmain%2FquanX%2Frules%2Fsupercell.list%2C%20tag%3DSupercell%20%E7%9B%B4%E8%BF%9E%2C%20force-policy%3Ddirect%2C%20enabled%3Dtrue%22%5D%7D) | [查看](mihomo/direct.yaml) |
+
+---
+
+## 4. 中间层规则源与一键全端编译 (Rule Compiler)
+
+本项目采用**“中间层免语法书写 + 智能推断编译”**模式，集中人工维护自身刚需规则：
+
+### 4.1 中间层书写规范 (`rules/*.txt`)
+日常仅需在 [`rules/`](rules/) 中编辑对应文本，无需记忆各客户端语法：
+* **纯域名**（自动识别为域名后缀）：直接写 `google.com` 或 `bitwarden.com`；
+* **关键词**：写 `keyword: telegram` 或直接写纯英文单词 `telegram`；
+* **精准全域名**：写 `exact: waa-pa.clients6.google.com`；
+* **IP 网段**：直接写 `149.154.160.0/20`。
+
+### 4.2 本地极速编译命令
+```bash
+# 1. 一键全量编译 (将 rules/*.txt 智能分发编译至 Loon、QX 三元组与 Mihomo)
+node .github/scripts/build-rules.js
+
+# 2. 命令行快速追加新域名至中间层并自动三端同步
+node .github/scripts/build-rules.js --add example.com sub.org
+node .github/scripts/build-rules.js --add claude.ai --target ai
+
+# 3. 命令行快速追加关键词
+node .github/scripts/build-rules.js --add-keyword twitter telegram
+```
 
 ---
 

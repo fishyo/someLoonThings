@@ -1,8 +1,13 @@
+# ==============================================================================
+# Supercell Direct Ruleset (Mihomo Format)
+# Maintainer: fishyo
+# Homepage: https://github.com/fishyo/someLoonThings
+# ==============================================================================
+
 payload:
-# Supercell
-  - DOMAIN-KEYWORD, clashroyale.com
-  - DOMAIN-KEYWORD, clashroyaleapp.com
-  - DOMAIN-KEYWORD, brawlstars.com
-  - DOMAIN-KEYWORD, supercell.com
-  - DOMAIN-KEYWORD, brawlstarsgame
-  
+  # Supercell Games
+  - DOMAIN-SUFFIX,clashroyale.com
+  - DOMAIN-SUFFIX,clashroyaleapp.com
+  - DOMAIN-SUFFIX,brawlstars.com
+  - DOMAIN-SUFFIX,supercell.com
+  - DOMAIN-SUFFIX,brawlstarsgame.com

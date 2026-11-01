@@ -1,0 +1,38 @@
+# ==============================================================================
+# WeChat Direct Ruleset (Loon Format)
+# Maintainer: fishyo
+# Homepage: https://github.com/fishyo/someLoonThings
+# ==============================================================================
+
+# WeChat Core Domains
+DOMAIN-SUFFIX,weixin.com
+DOMAIN-SUFFIX,wechat.com
+DOMAIN-SUFFIX,wx.qq.com
+DOMAIN-SUFFIX,wxs.qq.com
+DOMAIN-SUFFIX,wechat.org
+
+# WeChat Media & Avatar CDN
+DOMAIN-SUFFIX,qpic.cn
+DOMAIN-SUFFIX,qlogo.cn
+DOMAIN-SUFFIX,wx.gtimg.com
+
+# WeChat Mini Programs
+DOMAIN-SUFFIX,servicewechat.com
+DOMAIN-SUFFIX,wxapp.tc.qq.com
+
+# WeChat Pay & Financial Services
+DOMAIN-SUFFIX,tenpay.com
+DOMAIN-SUFFIX,wechatpay.cn
+DOMAIN-SUFFIX,wechatpay.com
+DOMAIN-SUFFIX,wechatpay.com.cn
+
+# WeChat Web & SDK Bridge
+DOMAIN-SUFFIX,weixinbridge.com
+DOMAIN-SUFFIX,weixinaf.net
+DOMAIN-SUFFIX,wechatlegal.net
+DOMAIN-SUFFIX,wechatos.net
+
+# WeCom (Work WeChat)
+DOMAIN-SUFFIX,work.weixin.qq.com
+DOMAIN-SUFFIX,workweixin.com
+DOMAIN-SUFFIX,wecom.work
