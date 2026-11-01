@@ -98,6 +98,7 @@ host-suffix, x.ai, proxy
 host-suffix, grok.com, proxy
 host-suffix, cursor.com, proxy
 host-suffix, cursor.sh, proxy
+host-suffix, onorca.dev, proxy
 
 # Telegram
 host-keyword, telegram, proxy
