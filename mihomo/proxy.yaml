@@ -1,10 +1,13 @@
+# ==============================================================================
+# Custom Proxy Ruleset (Mihomo Format)
+# Maintainer: fishyo
+# Homepage: https://github.com/fishyo/someLoonThings
+# ==============================================================================
+
 payload:
-  #
-  - DOMAIN-SUFFIX,pythonhosted.org
-  
-  # bitwarden
+  #for myself
   - DOMAIN-SUFFIX,bitwarden.com
-  
+  - DOMAIN-SUFFIX,pythonhosted.org
   # hysteria
   - DOMAIN-KEYWORD,hysteria
 
@@ -12,42 +15,18 @@ payload:
   - DOMAIN-SUFFIX,pocketcasts.com
   - DOMAIN-SUFFIX,pca.st
 
-  # notion
-  - DOMAIN-KEYWORD,notion.com
-  - DOMAIN-SUFFIX,notionusercontent.com
-  - DOMAIN-SUFFIX,intercom.io
-  - DOMAIN-SUFFIX,segment.io
-
   # nxtrace
   - DOMAIN-SUFFIX,nxtrace.org
 
-  # paypal
-  - DOMAIN-SUFFIX,paypal.com
-  - DOMAIN-SUFFIX,paypalobjects.com
-  - DOMAIN-SUFFIX,paypalcorp.com
-  - DOMAIN-KEYWORD,paypal
-
-  # Mozilla
-  - DOMAIN-SUFFIX,cdn.mozilla.net
-
-  # cider
-  - DOMAIN-SUFFIX,cider.sh
-  
-  # longbridge
-  - DOMAIN-SUFFIX,longbridge.com
-  
-  # royaleapi
-  - DOMAIN-SUFFIX,royaleapi.com
-  
-  # giphy
-  - DOMAIN-SUFFIX,giphy.com
+  # fireside podcast
+  - DOMAIN-KEYWORD,fireside
 
   # everia
   - DOMAIN-SUFFIX,everia.club
-  
+
   # reiobox
   - DOMAIN-SUFFIX,reiobox.top
-  
+
   # cloudflare
   - DOMAIN-KEYWORD,cloudflare
   - DOMAIN-SUFFIX,pages.dev
@@ -56,15 +35,21 @@ payload:
   - DOMAIN-SUFFIX,cf-ipfs.com
   - DOMAIN-SUFFIX,videodelivery.net
   - DOMAIN-SUFFIX,one.one.one
-  
+
   # vercel
   - DOMAIN-KEYWORD,vercel
   - DOMAIN-SUFFIX,vercel.com
   - DOMAIN-SUFFIX,vercel.app
-  
+
   # uindex
   - DOMAIN-SUFFIX,uindex.org
-  
+
+  # royaleapi
+  - DOMAIN-SUFFIX,royaleapi.com
+
+  # giphy
+  - DOMAIN-SUFFIX,giphy.com
+
   # atlassian
   - DOMAIN-SUFFIX,atlassian.com
   - DOMAIN-SUFFIX,atlassian.net
@@ -75,9 +60,10 @@ payload:
   - DOMAIN-SUFFIX,ss-inf.net
   - DOMAIN-SUFFIX,atlassian-dev.net
   - DOMAIN-SUFFIX,atlassian-3p.com
-  
+
   # podsights
   - DOMAIN-SUFFIX,pdst.fm
   - DOMAIN-SUFFIX,pdst.io
   - DOMAIN-SUFFIX,podsights.com
   - DOMAIN-SUFFIX,podsights.fm
+

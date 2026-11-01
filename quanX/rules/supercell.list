@@ -1,11 +1,13 @@
 # ==============================================================================
-# Supercell Games Ruleset (Quantumult X Format)
+# Supercell Direct Ruleset (Quantumult X Format)
 # Maintainer: fishyo
 # Homepage: https://github.com/fishyo/someLoonThings
 # ==============================================================================
 
+# Supercell
 host-suffix, clashroyale.com, direct
 host-suffix, clashroyaleapp.com, direct
 host-suffix, brawlstars.com, direct
 host-suffix, supercell.com, direct
 host-suffix, brawlstarsgame.com, direct
+

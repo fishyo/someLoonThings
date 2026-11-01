@@ -27,8 +27,7 @@ const UPSTREAM_SOURCES = [
 ];
 
 // 内置过滤黑名单 (坚决过滤国家顶级域名通配与国内测速/测试误伤)
-const FILTER_DENY_LIST = new Set([
-  // 国家与地区泛后缀 (严防像 ACL4SSR 那样误伤整个地区)
+const FILTER_DENY_LIST = new Set(
   'hk', 'tw', 'jp', 'kr', 'sg', 'eu', 'cn', 'us', 'uk', 'mo', 'ru', 'de', 'fr', 'ca', 'au',
   // 国内知名 IP 查询与测速平台
   'ip138.com', 'ipip.net', 'speedtest.cn', 'chinaz.com', 'tool.lu',

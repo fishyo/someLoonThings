@@ -4,10 +4,9 @@
 # Homepage: https://github.com/fishyo/someLoonThings
 # ==============================================================================
 
-# for myself
+#for myself
 host-suffix, bitwarden.com, proxy
 host-suffix, pythonhosted.org, proxy
-
 # hysteria
 host-keyword, hysteria, proxy
 
@@ -66,3 +65,4 @@ host-suffix, pdst.fm, proxy
 host-suffix, pdst.io, proxy
 host-suffix, podsights.com, proxy
 host-suffix, podsights.fm, proxy
+
