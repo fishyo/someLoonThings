@@ -1,0 +1,326 @@
+# ==============================================================================
+# OpenWrt-Nikki (Mihomo Core) Configuration Template
+# Maintainer: fishyo
+# Integrated with: someLoonThings Rulesets
+# ==============================================================================
+
+# 通用设置 (General Settings)
+mixed-port: 7890
+allow-lan: true
+mode: rule
+log-level: error
+ipv6: true
+external-controller: 0.0.0.0:9090
+secret: ""
+
+# Mihomo 现代特性优化 (适合 x86 软路由高性能运行)
+unified-delay: true
+tcp-concurrent: true
+
+# TUN 模式配置 (TUN Settings)
+tun:
+  enable: true
+  stack: system
+  device: utun
+  auto-route: false
+  auto-redirect: false
+  auto-detect-interface: false
+
+# 域名嗅探配置 (Sniffer Settings)
+sniffer:
+  enable: true
+  force-dns-mapping: true
+  parse-pure-ips: true
+  sniff:
+    TLS:
+      ports: [443, 8443]
+    HTTP:
+      ports: [80, 8080-8880]
+      force-header: true
+    QUIC:
+      ports: [443]
+
+# DNS 配置 (DNS Settings)
+dns:
+  enable: true
+  listen: 0.0.0.0:1053
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+  fallback:
+    - 8.8.8.8
+    - 1.1.1.1
+
+# 节点列表 (请替换为您的实际代理节点)
+proxies:
+  - name: "Node-01"
+    type: vmess
+    server: server1.example.com
+    port: 443
+    uuid: "00000000-0000-0000-0000-000000000000"
+    alterId: 0
+    cipher: auto
+    tls: true
+    udp: true
+    network: ws
+    ws-opts:
+      path: "/ws"
+      headers:
+        Host: "server1.example.com"
+    servername: "server1.example.com"
+
+  - name: "Node-02"
+    type: vless
+    server: 1.2.3.4
+    port: 443
+    uuid: "00000000-0000-0000-0000-000000000000"
+    network: tcp
+    udp: true
+    tls: true
+    flow: xtls-rprx-vision
+    servername: www.apple.com
+    reality-opts:
+      public-key: "YOUR_REALITY_PUBLIC_KEY"
+      short-id: "YOUR_SHORT_ID"
+    client-fingerprint: chrome
+
+# 策略组 (Proxy Groups)
+proxy-groups:
+  # 主代理策略组 (手动选择节点)
+  - name: Proxy
+    type: select
+    proxies:
+      - Node-01
+      - Node-02
+
+  # 自动测速策略组 (选择延迟最低的节点)
+  - name: Auto
+    type: url-test
+    proxies:
+      - Node-01
+      - Node-02
+    url: 'http://cp.cloudflare.com/generate_204'
+    interval: 600
+    tolerance: 50
+    lazy: true
+
+  # Gemini 策略组 (仅包含经过验证支持 Gemini 的物理节点)
+  - name: Gemini
+    type: url-test
+    proxies:
+      - Node-01
+      - Node-02
+    url: 'http://cp.cloudflare.com/generate_204'
+    interval: 300
+    tolerance: 50
+
+  # AI 策略组 (ChatGPT / Claude / Perplexity / Copilot 等)
+  - name: AI
+    type: select
+    proxies:
+      - Gemini
+      - Proxy
+      - Auto
+      - Node-01
+      - Node-02
+      - DIRECT
+
+  # Twitter 策略组
+  - name: Twitter
+    type: url-test
+    proxies:
+      - Node-01
+      - Node-02
+    url: 'http://cp.cloudflare.com/generate_204'
+    interval: 300
+    tolerance: 50
+    lazy: true
+
+  # Telegram 策略组
+  - name: Telegram
+    type: select
+    proxies:
+      - Proxy
+      - Auto
+      - Node-01
+      - Node-02
+      - DIRECT
+
+  # 通用代理策略组 (黑名单命中流量)
+  - name: poxyList
+    type: select
+    proxies:
+      - Proxy
+      - Auto
+      - DIRECT
+
+  # Apple 策略组 (默认直连 🟢，配合 App Store 国内 CDN 加速)
+  - name: Apple
+    type: select
+    proxies:
+      - DIRECT
+      - Proxy
+      - Auto
+      - Node-01
+      - Node-02
+
+  # Microsoft 策略组 (默认直连 🟢，加速 Windows Update 与常规服务)
+  - name: Microsoft
+    type: select
+    proxies:
+      - DIRECT
+      - Proxy
+      - Auto
+      - Node-01
+      - Node-02
+
+  # Supercell 游戏策略组 (默认直连 🟢，低延迟防跳 Ping)
+  - name: Supercell
+    type: select
+    proxies:
+      - DIRECT
+      - Proxy
+      - Auto
+
+  # 广告拦截策略组
+  - name: Advertising
+    type: select
+    proxies:
+      - REJECT
+      - DIRECT
+
+  # Final 兜底策略组 (黑名单模式下未命中流量默认直连 🟢)
+  - name: Final
+    type: select
+    proxies:
+      - DIRECT
+      - Proxy
+      - Auto
+
+# 规则集定义 (Rule Providers) - 全部整合 someLoonThings 自维护规则
+rule-providers:
+  # 1. 综合代理黑名单 (全场景主流境外网站 + 自用域名)
+  personal_proxy:
+    type: http
+    behavior: classical
+    format: yaml
+    url: "https://raw.githubusercontent.com/fishyo/someLoonThings/refs/heads/main/mihomo/proxy.yaml"
+    path: ./ruleset/personal_proxy.yaml
+    interval: 86400
+
+  # 2. 全套主流 AI 服务 (OpenAI, Claude, Perplexity, Copilot, Cursor 等)
+  ai:
+    type: http
+    behavior: classical
+    format: yaml
+    url: "https://raw.githubusercontent.com/fishyo/someLoonThings/refs/heads/main/mihomo/ai.yaml"
+    path: ./ruleset/ai.yaml
+    interval: 86400
+
+  # 3. Twitter / X 专属规则集
+  twitter:
+    type: http
+    behavior: classical
+    format: yaml
+    url: "https://raw.githubusercontent.com/fishyo/someLoonThings/refs/heads/main/mihomo/twitter.yaml"
+    path: ./ruleset/twitter.yaml
+    interval: 86400
+
+  # 4. Telegram 专属规则集 (主站 + 衍生平台 + DC1-DC5 官方 IP-CIDR)
+  telegram:
+    type: http
+    behavior: classical
+    format: yaml
+    url: "https://raw.githubusercontent.com/fishyo/someLoonThings/refs/heads/main/mihomo/telegram.yaml"
+    path: ./ruleset/telegram.yaml
+    interval: 86400
+
+  # 5. App Store 国内下载加速直连规则集 (商店资源 + 更新 CDN + 媒体直连)
+  appstore:
+    type: http
+    behavior: classical
+    format: yaml
+    url: "https://raw.githubusercontent.com/fishyo/someLoonThings/refs/heads/main/mihomo/appstore.yaml"
+    path: ./ruleset/appstore.yaml
+    interval: 86400
+
+  # 6. WeChat (微信) 极速直连防风控规则集
+  wechat:
+    type: http
+    behavior: classical
+    format: yaml
+    url: "https://raw.githubusercontent.com/fishyo/someLoonThings/refs/heads/main/mihomo/wechat.yaml"
+    path: ./ruleset/wechat.yaml
+    interval: 86400
+
+  # 7. Supercell 游戏极速直连规则集 (荒野乱斗 / 皇室战争等)
+  supercell:
+    type: http
+    behavior: classical
+    format: yaml
+    url: "https://raw.githubusercontent.com/fishyo/someLoonThings/refs/heads/main/mihomo/direct.yaml"
+    path: ./ruleset/supercell.yaml
+    interval: 86400
+
+  # 8. 广告拦截规则集 (保留高精度二进制 MRS 规则)
+  adrules:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://adrules.top/adrules-mihomo.mrs"
+    path: ./ruleset/adrules.mrs
+    interval: 86400
+
+# 规则配置 (Rules) - 严格遵循优先级层叠
+rules:
+  # 1. 局域网及本地回环直连
+  - DOMAIN-SUFFIX,local,DIRECT
+  - IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
+  - IP-CIDR,172.16.0.0/12,DIRECT,no-resolve
+  - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
+  - IP-CIDR,10.0.0.0/8,DIRECT,no-resolve
+
+  # 2. 广告拦截
+  - GEOSITE,category-ads-all,Advertising
+  - RULE-SET,adrules,Advertising
+
+  # 3. 微信极速直连 (防异地代理风控与封号，保证音视频通话低延迟)
+  - RULE-SET,wechat,DIRECT
+
+  # 4. App Store 国内下载极速直连加速 (走国内 CDN 跑满带宽)
+  - RULE-SET,appstore,Apple
+
+  # 5. Supercell 游戏极速直连 (稳定低延迟防跳 Ping)
+  - RULE-SET,supercell,Supercell
+
+  # 6. Google Gemini 专属节点分流 (优先分流至经过验证的 Gemini 解锁节点组)
+  - DOMAIN,gemini.google.com,Gemini
+  - DOMAIN,bard.google.com,Gemini
+  - DOMAIN,aistudio.google.com,Gemini
+  - DOMAIN,makersuite.google.com,Gemini
+  - DOMAIN-SUFFIX,generativeai.google,Gemini
+  - DOMAIN-SUFFIX,deepmind.google,Gemini
+  - DOMAIN-SUFFIX,deepmind.com,Gemini
+  - DOMAIN-SUFFIX,ai.google.dev,Gemini
+  - DOMAIN-KEYWORD,alkalimakersuite,Gemini
+  - DOMAIN-KEYWORD,alkalimira,Gemini
+
+  # 7. 全套 AI 规则分流 (ChatGPT / Claude / Perplexity / Copilot / Cursor 等)
+  - RULE-SET,ai,AI
+
+  # 8. Twitter / X 专属分流
+  - RULE-SET,twitter,Twitter
+
+  # 9. Telegram 专属分流 (官方域名与 DC IP-CIDR 直达)
+  - RULE-SET,telegram,Telegram
+
+  # 10. 综合代理黑名单 (涵盖主流境外网站、全场景社交/开发者/流媒体及自用代理域名)
+  - RULE-SET,personal_proxy,poxyList
+
+  # 11. 中国大陆 IP 直连 (加速国内无域名直连流量)
+  - GEOIP,CN,DIRECT,no-resolve
+
+  # 12. Final：未匹配兜底流量直连 (纯黑名单省流模式)
+  - MATCH,Final
