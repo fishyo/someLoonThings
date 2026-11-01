@@ -35,6 +35,26 @@
 
 ---
 
+## 4. 规则自动化与上游同步工作流 (Upstream Sync & Approval Workflow)
+
+本项目建立了**“自建基准 + 上游增量嗅探 + 人工审批 (Human-in-the-Loop) + 自动同步三端”**的精细化规则维护流：
+
+* **自动化巡检与过滤 (`upstream-sync.yml`)**：每周定期拉取可靠上游（LoyalSoldier GFW 库），坚决剔除地区通配符（如 `.hk/.tw`）与国内测试误伤，并通过“父子域覆盖剪枝算法”自动滤除已收录主域的子域名。
+* **人机审批**：若发现未收录新域名，自动创建待审批 PR；审阅通过合并后触发 `apply-rules.yml` 自动生成 Loon (`.lsr`)、Quantumult X (`.list` 三元组) 与 Mihomo (`.yaml`)。
+* **本地极速维护命令**：
+  ```bash
+  # 1. 检查上游增量与覆盖度统计
+  node .github/scripts/sync-upstream.js --check
+
+  # 2. 本地交互式审批新域名 (按 y 批准 / n 忽略 / s 跳过)
+  node .github/scripts/sync-upstream.js --interactive
+
+  # 3. 将审批结果一键应用至三端并运行 CI 校验
+  node .github/scripts/build-rules.js --apply-staging
+  ```
+
+---
+
 ## 配置与资源 (Configs & Assets)
 
 - **BoxJS 订阅**：`https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/boxjs.json`（支持双端 VPS 凭据可视化配置）

@@ -1,0 +1,45 @@
+name: Apply Approved Rules - 合并已审批代理域名
+
+on:
+  push:
+    paths:
+      - 'staging/candidates.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    name: 格式化合并至 Loon / QuanX / Mihomo
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 检查候选清单并执行多端合并
+        id: apply_step
+        run: |
+          if [ -s staging/candidates.txt ]; then
+            echo "has_candidates=true" >> $GITHUB_OUTPUT
+            node .github/scripts/build-rules.js --apply-staging
+          else
+            echo "has_candidates=false" >> $GITHUB_OUTPUT
+            echo "staging/candidates.txt 为空，无需合并"
+          fi
+
+      - name: 提交更新后的多端规则库
+        if: steps.apply_step.outputs.has_candidates == 'true'
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git add loon/proxy.lsr quanX/rules/proxy.list mihomo/proxy.yaml staging/
+          git commit -m "chore(rules): 自动合并已审批的代理域名至三端 [skip ci]"
+          git push
