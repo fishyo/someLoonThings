@@ -92,6 +92,7 @@ x.ai
 grok.com
 cursor.com
 cursor.sh
+onorca.dev
 
 # Telegram
 keyword: telegram
