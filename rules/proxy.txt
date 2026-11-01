@@ -1,0 +1,68 @@
+# ==============================================================================
+# 自用代理规则源 (Source Ruleset)
+# 说明: 直接写纯域名即可（自动判断为域名后缀）；关键词写 keyword:xxx 或直接写词；精准域名写 exact:xxx
+# ==============================================================================
+
+# for myself
+bitwarden.com
+pythonhosted.org
+
+# hysteria
+keyword: hysteria
+
+# pocketcasts
+pocketcasts.com
+pca.st
+
+# nxtrace
+nxtrace.org
+
+# fireside podcast
+keyword: fireside
+
+# everia
+everia.club
+
+# reiobox
+reiobox.top
+
+# cloudflare
+keyword: cloudflare
+pages.dev
+workers.dev
+warp.plus
+cf-ipfs.com
+videodelivery.net
+one.one.one
+
+# vercel
+keyword: vercel
+vercel.com
+vercel.app
+
+# uindex
+uindex.org
+
+# royaleapi
+royaleapi.com
+
+# giphy
+giphy.com
+
+# atlassian
+atlassian.com
+atlassian.net
+atl-paas.net
+jira.com
+bitbucket.org
+trello.com
+ss-inf.net
+atlassian-dev.net
+atlassian-3p.com
+
+# podsights
+pdst.fm
+pdst.io
+podsights.com
+podsights.fm
+

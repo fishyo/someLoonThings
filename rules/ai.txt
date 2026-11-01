@@ -1,0 +1,89 @@
+# ==============================================================================
+# AI 服务规则源 (Source Ruleset)
+# 说明: 整合主流 AI 服务（OpenAI, Claude, Gemini, Grok, Perplexity, Copilot 等）
+# ==============================================================================
+
+# ----------------- Google Gemini & AI Studio -----------------
+# 针对 Gemini 及其后端接口特别优化（确保不报地区错误）
+gemini.google.com
+bard.google.com
+aistudio.google.com
+makersuite.google.com
+generativeai.google
+generativelanguage.googleapis.com
+alkalimakersuite-pa.googleapis.com
+proactivebackend-pa.googleapis.com
+geller-pa.googleapis.com
+odin-pa.googleapis.com
+aiplatform.googleapis.com
+notebooklm.google
+notebooklm.google.com
+deepmind.google
+deepmind.com
+ai.google.dev
+exact: waa-pa.clients6.google.com
+exact: alkali-pa.clients6.google.com
+# Google APIs 通用域名（Gemini 依赖此域名且对代理地区极其敏感，放入 AI 组保证可用）
+googleapis.com
+
+# ----------------- OpenAI (ChatGPT & Sora) -----------------
+chatgpt.com
+openai.com
+oaistatic.com
+oaiusercontent.com
+sora.com
+openaiapi-site.azureedge.net
+openaicomproductionae4b.blob.core.windows.net
+openaicom.imgix.net
+# Statsig 特性标记服务（OpenAI 灰度控制必须走代理）
+featuregates.org
+
+# ----------------- Anthropic Claude -----------------
+anthropic.com
+claude.ai
+claudeusercontent.com
+
+# ----------------- xAI (Grok) -----------------
+x.ai
+grok.com
+
+# ----------------- Perplexity AI -----------------
+perplexity.ai
+pplx.ai
+
+# ----------------- Microsoft Copilot -----------------
+copilot.microsoft.com
+sydney.bing.com
+exact: edgeservices.bing.com
+
+# ----------------- Midjourney -----------------
+midjourney.com
+cdn.midjourney.com
+
+# ----------------- 开发者与热门 AI 工具 (Cursor, Groq, Poe, Suno等) -----------------
+# Cursor 辅助编程
+cursor.com
+cursor.sh
+tavily.com
+# Groq 极速推理
+groq.com
+# Poe
+poe.com
+poecdn.net
+# 音乐/语音 AI (Suno, Udio, ElevenLabs)
+suno.com
+suno.ai
+udio.com
+elevenlabs.io
+# 开源与推理平台 (Mistral, Cohere, Together, Replicate, Fal, v0)
+mistral.ai
+cohere.com
+cohere.ai
+together.ai
+together.xyz
+replicate.com
+replicate.delivery
+fal.ai
+v0.dev
+huggingface.co
+hf.space

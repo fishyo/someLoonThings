@@ -35,23 +35,35 @@
 
 ---
 
-## 4. 规则自动化与上游同步工作流 (Upstream Sync & Approval Workflow)
+## 4. 中间层规则源与自动化分发工作流 (Rule Compiler & Workflow)
 
-本项目建立了**“自建基准 + 上游增量嗅探 + 人工审批 (Human-in-the-Loop) + 自动同步三端”**的精细化规则维护流：
+本项目支持在 [`rules/`](rules/) 中以**免语法约束**的纯文本方式维护规则源，由编译引擎智能推断类型并自动分发至 Loon、Quantumult X 与 Mihomo 三端：
 
-* **自动化巡检与过滤 (`upstream-sync.yml`)**：每周定期拉取可靠上游（LoyalSoldier GFW 库），坚决剔除地区通配符（如 `.hk/.tw`）与国内测试误伤，并通过“父子域覆盖剪枝算法”自动滤除已收录主域的子域名。
-* **人机审批**：若发现未收录新域名，自动创建待审批 PR；审阅通过合并后触发 `apply-rules.yml` 自动生成 Loon (`.lsr`)、Quantumult X (`.list` 三元组) 与 Mihomo (`.yaml`)。
-* **本地极速维护命令**：
-  ```bash
-  # 1. 检查上游增量与覆盖度统计
-  node .github/scripts/sync-upstream.js --check
+### 4.1 中间层书写规范 (`rules/*.txt`)
+* **纯域名**（自动识别为域名后缀）：直接写 `google.com` 或 `bitwarden.com`；
+* **关键词**：写 `keyword: telegram` 或直接写纯英文单词 `telegram`；
+* **精准全域名**：写 `exact: waa-pa.clients6.google.com`；
+* **IP 网段**：直接写 `149.154.160.0/20`。
 
-  # 2. 本地交互式审批新域名 (按 y 批准 / n 忽略 / s 跳过)
-  node .github/scripts/sync-upstream.js --interactive
+### 4.2 本地极速维护与编译命令
+```bash
+# 1. 一键全量编译 (将 rules/*.txt 智能分发编译至 Loon、QX 三元组与 Mihomo)
+node .github/scripts/build-rules.js
 
-  # 3. 将审批结果一键应用至三端并运行 CI 校验
-  node .github/scripts/build-rules.js --apply-staging
-  ```
+# 2. 命令行快速追加新域名/关键词至中间层并自动三端同步
+node .github/scripts/build-rules.js --add example.com sub.org
+node .github/scripts/build-rules.js --add-keyword twitter telegram
+
+# 3. 检查上游可靠 GFW 增量与覆盖度
+node .github/scripts/sync-upstream.js --check
+
+# 4. 本地交互式审批上游新域名 (y 批准 / n 忽略 / s 跳过)
+node .github/scripts/sync-upstream.js --interactive
+```
+
+### 4.3 GitHub Actions 自动化流水线
+* **`upstream-sync.yml`**：每周定期巡检可靠上游，过滤 `.hk/.tw` 等地区泛后缀并完成父子域覆盖剪枝，发现新域名自动提 PR 供您审批；
+* **`apply-rules.yml`**：PR 合并后自动应用入库、三端同步并由 `validate.js` 做 100% 格式合规把关。
 
 ---
 

@@ -1,6 +1,12 @@
-#for myself
+# ==============================================================================
+# 自用代理规则源 (Source Ruleset)
+# 说明: 直接写纯域名即可（自动判断为域名后缀）；关键词写 keyword:xxx 或直接写词；精准域名写 exact:xxx
+# ==============================================================================
+
+# for myself
 DOMAIN-SUFFIX,bitwarden.com
 DOMAIN-SUFFIX,pythonhosted.org
+
 # hysteria
 DOMAIN-KEYWORD,hysteria
 

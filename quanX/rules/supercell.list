@@ -4,10 +4,14 @@
 # Homepage: https://github.com/fishyo/someLoonThings
 # ==============================================================================
 
+# ==============================================================================
+# Supercell 直连规则源 (Source Ruleset)
+# 说明: 荒野乱斗 / 皇室战争等 Supercell 直连
+# ==============================================================================
+
 # Supercell
 host-suffix, clashroyale.com, direct
 host-suffix, clashroyaleapp.com, direct
 host-suffix, brawlstars.com, direct
 host-suffix, supercell.com, direct
 host-suffix, brawlstarsgame.com, direct
-

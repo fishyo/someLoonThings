@@ -1,8 +1,6 @@
 # ==============================================================================
-# AI Services Ruleset (Loon Format)
-# Maintainer: fishyo
-# Homepage: https://github.com/fishyo/someLoonThings
-# Description: 整合主流 AI 服务（OpenAI, Claude, Gemini, Grok, Perplexity, Copilot 等）
+# AI 服务规则源 (Source Ruleset)
+# 说明: 整合主流 AI 服务（OpenAI, Claude, Gemini, Grok, Perplexity, Copilot 等）
 # ==============================================================================
 
 # ----------------- Google Gemini & AI Studio -----------------

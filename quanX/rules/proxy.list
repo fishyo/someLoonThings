@@ -4,9 +4,15 @@
 # Homepage: https://github.com/fishyo/someLoonThings
 # ==============================================================================
 
-#for myself
+# ==============================================================================
+# 自用代理规则源 (Source Ruleset)
+# 说明: 直接写纯域名即可（自动判断为域名后缀）；关键词写 keyword:xxx 或直接写词；精准域名写 exact:xxx
+# ==============================================================================
+
+# for myself
 host-suffix, bitwarden.com, proxy
 host-suffix, pythonhosted.org, proxy
+
 # hysteria
 host-keyword, hysteria, proxy
 
@@ -65,4 +71,3 @@ host-suffix, pdst.fm, proxy
 host-suffix, pdst.io, proxy
 host-suffix, podsights.com, proxy
 host-suffix, podsights.fm, proxy
-

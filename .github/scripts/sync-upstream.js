@@ -27,7 +27,7 @@ const UPSTREAM_SOURCES = [
 ];
 
 // 内置过滤黑名单 (坚决过滤国家顶级域名通配与国内测速/测试误伤)
-const FILTER_DENY_LIST = new Set(
+const FILTER_DENY_LIST = new Set([
   'hk', 'tw', 'jp', 'kr', 'sg', 'eu', 'cn', 'us', 'uk', 'mo', 'ru', 'de', 'fr', 'ca', 'au',
   // 国内知名 IP 查询与测速平台
   'ip138.com', 'ipip.net', 'speedtest.cn', 'chinaz.com', 'tool.lu',
@@ -69,30 +69,32 @@ function fetchText(url) {
   });
 }
 
-// 读取本地已存在的所有规则 (以 Loon .lsr 为基础，提取现有所有域名、后缀、关键词)
+// 读取本地已存在的所有规则 (以 rules/*.txt 中间层为准，提取现有所有域名、后缀、关键词)
 function loadExistingRules() {
-  const loonDir = path.join(ROOT_DIR, 'loon');
+  const rulesDir = path.join(ROOT_DIR, 'rules');
   const suffixes = new Set();
   const keywords = new Set();
   const fullDomains = new Set();
 
-  if (fs.existsSync(loonDir)) {
-    const files = fs.readdirSync(loonDir).filter(f => f.endsWith('.lsr'));
+  if (fs.existsSync(rulesDir)) {
+    const files = fs.readdirSync(rulesDir).filter(f => f.endsWith('.txt'));
     for (const f of files) {
-      const content = fs.readFileSync(path.join(loonDir, f), 'utf8');
+      const content = fs.readFileSync(path.join(rulesDir, f), 'utf8');
       const lines = content.split(/\r?\n/).map(l => l.trim()).filter(l => l && !l.startsWith('#') && !l.startsWith(';'));
       for (const line of lines) {
-        const parts = line.split(',').map(p => p.trim());
-        const type = parts[0].toUpperCase();
-        const val = (parts[1] || '').toLowerCase();
-        if (!val) continue;
-
-        if (type === 'DOMAIN-SUFFIX') {
-          suffixes.add(val);
-        } else if (type === 'DOMAIN-KEYWORD') {
-          keywords.add(val);
-        } else if (type === 'DOMAIN') {
-          fullDomains.add(val);
+        if (/^(keyword:|kw:|\bDOMAIN-KEYWORD,|\bhost-keyword,)/i.test(line)) {
+          const kw = line.replace(/^(keyword:|kw:|\bDOMAIN-KEYWORD,|\bhost-keyword,)/i, '').replace(/,\s*(proxy|direct)$/i, '').trim().toLowerCase();
+          if (kw) keywords.add(kw);
+        } else if (/^(exact:|full:|\bDOMAIN,|\bhost,)/i.test(line)) {
+          const dom = line.replace(/^(exact:|full:|\bDOMAIN,|\bhost,)/i, '').replace(/,\s*(proxy|direct)$/i, '').trim().toLowerCase();
+          if (dom) fullDomains.add(dom);
+        } else {
+          let val = line.replace(/^(\*\.|\bDOMAIN-SUFFIX,|\bhost-suffix,)/i, '').replace(/,\s*(proxy|direct)$/i, '').trim().toLowerCase();
+          if (!val.includes('.') && /^[a-z0-9_-]+$/i.test(val)) {
+            keywords.add(val);
+          } else if (val) {
+            suffixes.add(val);
+          }
         }
       }
     }

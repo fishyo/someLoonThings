@@ -1,20 +1,26 @@
 /**
- * Multi-Platform Rule Builder & Synchronizer
- * 跨平台分流规则构建、同步与手动添加工具
+ * Multi-Platform Rule Compiler & Synchronizer
+ * 智能规则解析与多平台编译分发引擎
  *
- * 支持方式:
- *   1. 批量/单条命令行添加:
- *      node .github/scripts/build-rules.js --add domain1.com domain2.com
- *      node .github/scripts/build-rules.js --add-keyword keyword1
- *      node .github/scripts/build-rules.js --add domain.com --target ai   # 指定添加到 ai 规则
+ * 核心设计:
+ *   在 rules/*.txt 中只需写纯域名、关键词 (keyword:xxx) 或精准域名 (exact:xxx)，
+ *   引擎会自动推断规则类型，并标准化分发编译至 Loon、Quantumult X 与 Mihomo。
  *
- *   2. 文本暂存区批量合并 (从剪贴板粘贴一批域名到 candidates.txt 后运行):
+ * 用法:
+ *   1. 编译全部分流规则 (将 rules/*.txt 编译分发至三端):
+ *      node .github/scripts/build-rules.js
+ *
+ *   2. 向源文件添加域名并自动全端编译:
+ *      node .github/scripts/build-rules.js --add example.com sub.org
+ *      node .github/scripts/build-rules.js --add claude.ai --target ai
+ *
+ *   3. 向源文件添加关键词:
+ *      node .github/scripts/build-rules.js --add-keyword twitter telegram
+ *
+ *   4. 合并暂存区 (staging/candidates.txt):
  *      node .github/scripts/build-rules.js --apply-staging
  *
- *   3. 终极一键全端同步 (在 loon/*.lsr 手写规则后，一键生成 QX 三元组与 Mihomo YAML):
- *      node .github/scripts/build-rules.js --sync
- *
- *   4. 语法合规性校验:
+ *   5. 校验格式与沙盒:
  *      node .github/scripts/build-rules.js --validate
  */
 
@@ -23,10 +29,12 @@ const path = require('path');
 const { execSync } = require('child_process');
 
 const ROOT_DIR = path.resolve(__dirname, '../../');
+const RULES_DIR = path.join(ROOT_DIR, 'rules');
 const STAGING_DIR = path.join(ROOT_DIR, 'staging');
 
-const RULE_MAP = {
+const RULE_CONFIGS = {
   proxy: {
+    src: path.join(RULES_DIR, 'proxy.txt'),
     loon: path.join(ROOT_DIR, 'loon/proxy.lsr'),
     qx: path.join(ROOT_DIR, 'quanX/rules/proxy.list'),
     mihomo: path.join(ROOT_DIR, 'mihomo/proxy.yaml'),
@@ -34,6 +42,7 @@ const RULE_MAP = {
     title: 'Custom Proxy Ruleset'
   },
   ai: {
+    src: path.join(RULES_DIR, 'ai.txt'),
     loon: path.join(ROOT_DIR, 'loon/ai.lsr'),
     qx: path.join(ROOT_DIR, 'quanX/rules/ai.list'),
     mihomo: path.join(ROOT_DIR, 'mihomo/ai.yaml'),
@@ -41,6 +50,7 @@ const RULE_MAP = {
     title: 'AI Services Ruleset'
   },
   supercell: {
+    src: path.join(RULES_DIR, 'supercell.txt'),
     loon: path.join(ROOT_DIR, 'loon/supercell.lsr'),
     qx: path.join(ROOT_DIR, 'quanX/rules/supercell.list'),
     mihomo: path.join(ROOT_DIR, 'mihomo/direct.yaml'),
@@ -49,160 +59,188 @@ const RULE_MAP = {
   }
 };
 
-// 运行 validate.js 校验
+// 智能单行规则解析器
+function parseRuleLine(rawLine) {
+  const line = rawLine.trim();
+  if (!line) return { type: 'EMPTY', raw: rawLine };
+  if (line.startsWith('#') || line.startsWith(';')) return { type: 'COMMENT', raw: rawLine };
+
+  // 1. 关键词推断 (前缀 keyword:, kw:, 或包含常见关键词指令)
+  if (/^(keyword:|kw:|\bDOMAIN-KEYWORD,|\bhost-keyword,)/i.test(line)) {
+    const val = line.replace(/^(keyword:|kw:|\bDOMAIN-KEYWORD,|\bhost-keyword,)/i, '').replace(/,\s*(proxy|direct)$/i, '').trim();
+    return { type: 'KEYWORD', val };
+  }
+
+  // 2. 精准域名推断 (前缀 exact:, full:, 或包含 DOMAIN/host 精确指令)
+  if (/^(exact:|full:|\bDOMAIN,|\bhost,)/i.test(line)) {
+    const val = line.replace(/^(exact:|full:|\bDOMAIN,|\bhost,)/i, '').replace(/,\s*(proxy|direct)$/i, '').trim();
+    return { type: 'DOMAIN', val };
+  }
+
+  // 3. IPv4 网段 (CIDR)
+  if (/^(cidr:|\bIP-CIDR,|\bip-cidr,)/i.test(line) || (/^\d{1,3}(\.\d{1,3}){3}\/\d+$/.test(line))) {
+    const val = line.replace(/^(cidr:|\bIP-CIDR,|\bip-cidr,)/i, '')
+      .replace(/,\s*no-resolve/i, '')
+      .replace(/,\s*(proxy|direct)$/i, '').trim();
+    return { type: 'IP-CIDR', val };
+  }
+
+  // 4. IPv6 网段 (CIDR6)
+  if (/^(IP-CIDR6,|ip-cidr6,)/i.test(line) || (/^([0-9a-fA-F:]+)\/\d+$/.test(line) && line.includes(':'))) {
+    const val = line.replace(/^(IP-CIDR6,|ip-cidr6,)/i, '')
+      .replace(/,\s*no-resolve/i, '')
+      .replace(/,\s*(proxy|direct)$/i, '').trim();
+    return { type: 'IP-CIDR6', val };
+  }
+
+  // 5. 默认提取值 (去除常见前缀后缀)
+  let val = line.replace(/^(\*\.|\bDOMAIN-SUFFIX,|\bhost-suffix,)/i, '').replace(/,\s*(proxy|direct)$/i, '').trim();
+
+  // 若不含点号且为纯字母数字短语，自动推断为关键词 (例如直接写 telegram)
+  if (!val.includes('.') && /^[a-z0-9_-]+$/i.test(val)) {
+    return { type: 'KEYWORD', val };
+  }
+
+  // 其余标准带点域名默认为域名后缀 (DOMAIN-SUFFIX)
+  return { type: 'DOMAIN-SUFFIX', val };
+}
+
+// 编译单一源文件至 Loon, QX, Mihomo
+function compileSourceFile(confKey) {
+  const conf = RULE_CONFIGS[confKey];
+  if (!fs.existsSync(conf.src)) return;
+
+  const rawLines = fs.readFileSync(conf.src, 'utf8').split(/\r?\n/);
+
+  const loonLines = [];
+  const qxLines = [
+    '# ==============================================================================',
+    `# ${conf.title} (Quantumult X Format)`,
+    '# Maintainer: fishyo',
+    '# Homepage: https://github.com/fishyo/someLoonThings',
+    '# ==============================================================================\n'
+  ];
+  const mihomoLines = [
+    '# ==============================================================================',
+    `# ${conf.title} (Mihomo Format)`,
+    '# Maintainer: fishyo',
+    '# Homepage: https://github.com/fishyo/someLoonThings',
+    '# ==============================================================================\n',
+    'payload:'
+  ];
+
+  for (const rawLine of rawLines) {
+    const item = parseRuleLine(rawLine);
+
+    if (item.type === 'EMPTY') {
+      loonLines.push('');
+      qxLines.push('');
+      mihomoLines.push('');
+      continue;
+    }
+    if (item.type === 'COMMENT') {
+      loonLines.push(item.raw);
+      qxLines.push(item.raw);
+      mihomoLines.push(`  ${item.raw}`);
+      continue;
+    }
+
+    switch (item.type) {
+      case 'DOMAIN-SUFFIX':
+        loonLines.push(`DOMAIN-SUFFIX,${item.val}`);
+        qxLines.push(`host-suffix, ${item.val}, ${conf.policy}`);
+        mihomoLines.push(`  - DOMAIN-SUFFIX,${item.val}`);
+        break;
+      case 'KEYWORD':
+        loonLines.push(`DOMAIN-KEYWORD,${item.val}`);
+        qxLines.push(`host-keyword, ${item.val}, ${conf.policy}`);
+        mihomoLines.push(`  - DOMAIN-KEYWORD,${item.val}`);
+        break;
+      case 'DOMAIN':
+        loonLines.push(`DOMAIN,${item.val}`);
+        qxLines.push(`host, ${item.val}, ${conf.policy}`);
+        mihomoLines.push(`  - DOMAIN,${item.val}`);
+        break;
+      case 'IP-CIDR':
+        loonLines.push(`IP-CIDR,${item.val},no-resolve`);
+        qxLines.push(`ip-cidr, ${item.val}, ${conf.policy}`);
+        mihomoLines.push(`  - IP-CIDR,${item.val}`);
+        break;
+      case 'IP-CIDR6':
+        loonLines.push(`IP-CIDR6,${item.val},no-resolve`);
+        qxLines.push(`ip-cidr6, ${item.val}, ${conf.policy}`);
+        mihomoLines.push(`  - IP-CIDR6,${item.val}`);
+        break;
+    }
+  }
+
+  // 确保目录存在并写入三端文件
+  fs.mkdirSync(path.dirname(conf.loon), { recursive: true });
+  fs.mkdirSync(path.dirname(conf.qx), { recursive: true });
+  fs.mkdirSync(path.dirname(conf.mihomo), { recursive: true });
+
+  fs.writeFileSync(conf.loon, loonLines.join('\n').trimEnd() + '\n', 'utf8');
+  fs.writeFileSync(conf.qx, qxLines.join('\n').trimEnd() + '\n', 'utf8');
+  fs.writeFileSync(conf.mihomo, mihomoLines.join('\n').trimEnd() + '\n', 'utf8');
+
+  console.log(`✔ [${confKey}] 编译成功: Loon (${loonLines.length} 行), QX (${qxLines.length} 行), Mihomo (${mihomoLines.length} 行)`);
+}
+
+// 运行全量编译
+function compileAll() {
+  console.log('🚀 开始将 rules/*.txt 中间层规则智能分发编译至三端平台...\n');
+  for (const key of Object.keys(RULE_CONFIGS)) {
+    compileSourceFile(key);
+  }
+  runValidation();
+}
+
+// 运行官方 validate.js 规范合规校验
 function runValidation() {
   console.log('\n--- 运行平台规范与沙盒合规校验 (validate.js) ---');
   try {
     const valOutput = execSync(`node ${path.join(ROOT_DIR, '.github/scripts/validate.js')}`, { encoding: 'utf8' });
     console.log(valOutput);
-    console.log('🎉 全部多端语法校验通过！');
+    console.log('🎉 全部目标校验通过！Loon 与 Quantumult X 规则与沙盒均正常！');
   } catch (err) {
     console.error('✖ 未通过 validate.js 校验，请检查格式:', err.stdout || err.message);
     process.exit(1);
   }
 }
 
-// 手动追加单条或多条规则 (域名或关键词)
-function appendRules(items, type = 'DOMAIN-SUFFIX', targetKey = 'proxy') {
-  const target = RULE_MAP[targetKey] || RULE_MAP.proxy;
-  const dateStr = new Date().toISOString().split('T')[0];
-
-  const cleanItems = Array.from(new Set(
-    items.map(it => it.trim().toLowerCase().replace(/^DOMAIN(-SUFFIX)?,/i, '').replace(/^host(-suffix)?,/i, '').replace(/,\s*(proxy|direct)$/i, ''))
-      .filter(Boolean)
-  ));
-
-  if (cleanItems.length === 0) {
-    console.log('未检测到有效规则条目。');
+// 向源文件写入新规则
+function addToSource(items, targetKey = 'proxy') {
+  const conf = RULE_CONFIGS[targetKey] || RULE_CONFIGS.proxy;
+  if (!fs.existsSync(conf.src)) {
+    console.error(`源文件不存在: ${conf.src}`);
     return;
   }
 
-  console.log(`准备添加 ${cleanItems.length} 条 [${type}] 规则至 [${targetKey}] ...`);
+  const dateStr = new Date().toISOString().split('T')[0];
+  let srcContent = fs.readFileSync(conf.src, 'utf8').trimEnd();
+  const existingSet = new Set(srcContent.split(/\r?\n/).map(l => l.trim().toLowerCase()));
 
-  // 1. Loon
-  if (fs.existsSync(target.loon)) {
-    let content = fs.readFileSync(target.loon, 'utf8').trimEnd();
-    const existing = new Set(content.split(/\r?\n/).map(l => l.trim().toLowerCase()));
-    const toAdd = cleanItems.filter(it => !existing.has(`${type.toLowerCase()},${it}`));
-    if (toAdd.length > 0) {
-      content += `\n# --- 手动添加 (${dateStr}) ---\n` + toAdd.map(it => `${type},${it}`).join('\n') + '\n';
-      fs.writeFileSync(target.loon, content, 'utf8');
-      console.log(`✔ [Loon] 已追加 ${toAdd.length} 条规则`);
-    } else {
-      console.log(`ℹ [Loon] 条目已全部存在`);
-    }
+  const toAdd = items.filter(it => it && !existingSet.has(it.toLowerCase()));
+  if (toAdd.length === 0) {
+    console.log(`ℹ 待添加条目已在 ${path.basename(conf.src)} 中存在`);
+    return;
   }
 
-  // 2. Quantumult X (严格三元组)
-  if (fs.existsSync(target.qx)) {
-    let content = fs.readFileSync(target.qx, 'utf8').trimEnd();
-    const qxType = type === 'DOMAIN-KEYWORD' ? 'host-keyword' : (type === 'DOMAIN' ? 'host' : 'host-suffix');
-    const existing = new Set(content.split(/\r?\n/).map(l => l.trim().toLowerCase()));
-    const toAdd = cleanItems.filter(it => !existing.has(`${qxType}, ${it}, ${target.policy}`));
-    if (toAdd.length > 0) {
-      content += `\n# --- 手动添加 (${dateStr}) ---\n` + toAdd.map(it => `${qxType}, ${it}, ${target.policy}`).join('\n') + '\n';
-      fs.writeFileSync(target.qx, content, 'utf8');
-      console.log(`✔ [Quantumult X] 已追加 ${toAdd.length} 条三元组规则`);
-    } else {
-      console.log(`ℹ [Quantumult X] 条目已全部存在`);
-    }
-  }
+  srcContent += `\n\n# --- 手动添加 (${dateStr}) ---\n` + toAdd.join('\n') + '\n';
+  fs.writeFileSync(conf.src, srcContent, 'utf8');
+  console.log(`✔ 已将 ${toAdd.length} 条新规则追加到 rules/${path.basename(conf.src)}`);
 
-  // 3. Mihomo (YAML payload)
-  if (fs.existsSync(target.mihomo)) {
-    let content = fs.readFileSync(target.mihomo, 'utf8').trimEnd();
-    const existing = new Set(content.split(/\r?\n/).map(l => l.trim().toLowerCase()));
-    const toAdd = cleanItems.filter(it => !existing.has(`- ${type.toLowerCase()},${it}`));
-    if (toAdd.length > 0) {
-      content += `\n  # --- 手动添加 (${dateStr}) ---\n` + toAdd.map(it => `  - ${type},${it}`).join('\n') + '\n';
-      fs.writeFileSync(target.mihomo, content, 'utf8');
-      console.log(`✔ [Mihomo] 已追加 ${toAdd.length} 条 YAML 规则`);
-    } else {
-      console.log(`ℹ [Mihomo] 条目已全部存在`);
-    }
-  }
-
-  runValidation();
-}
-
-// 以 Loon .lsr 为单一真理源 (Single Source of Truth)，自动同步编译生成 QX 与 Mihomo 规则
-function syncAllFromLoon() {
-  console.log('🔄 开始从 Loon 规则基准一键同步全端 (Loon -> Quantumult X & Mihomo) ...\n');
-
-  for (const [key, conf] of Object.entries(RULE_MAP)) {
-    if (!fs.existsSync(conf.loon)) continue;
-
-    console.log(`正在同步 [${key}] ...`);
-    const loonLines = fs.readFileSync(conf.loon, 'utf8').split(/\r?\n/);
-
-    const qxLines = [
-      '# ==============================================================================',
-      `# ${conf.title} (Quantumult X Format)`,
-      '# Maintainer: fishyo',
-      '# Homepage: https://github.com/fishyo/someLoonThings',
-      '# ==============================================================================\n'
-    ];
-
-    const mihomoLines = [
-      '# ==============================================================================',
-      `# ${conf.title} (Mihomo Format)`,
-      '# Maintainer: fishyo',
-      '# Homepage: https://github.com/fishyo/someLoonThings',
-      '# ==============================================================================\n',
-      'payload:'
-    ];
-
-    for (const rawLine of loonLines) {
-      const line = rawLine.trim();
-
-      // 空行或注释，原汁原味保留
-      if (!line) {
-        qxLines.push('');
-        mihomoLines.push('');
-        continue;
-      }
-      if (line.startsWith('#') || line.startsWith(';')) {
-        qxLines.push(rawLine);
-        mihomoLines.push(`  ${rawLine}`);
-        continue;
-      }
-
-      const parts = line.split(',').map(s => s.trim());
-      const type = parts[0].toUpperCase();
-      const target = parts[1];
-      if (!target) continue;
-
-      // 转换为 QX 三元组语法
-      let qxType = 'host-suffix';
-      if (type === 'DOMAIN-KEYWORD') qxType = 'host-keyword';
-      else if (type === 'DOMAIN') qxType = 'host';
-      else if (type === 'IP-CIDR') qxType = 'ip-cidr';
-      else if (type === 'IP-CIDR6') qxType = 'ip-cidr6';
-      else if (type === 'USER-AGENT') qxType = 'user-agent';
-
-      qxLines.push(`${qxType}, ${target}, ${conf.policy}`);
-
-      // 转换为 Mihomo 语法
-      const mihomoRule = parts.length > 2 && parts[2] ? `${type},${target},${parts[2]}` : `${type},${target}`;
-      mihomoLines.push(`  - ${mihomoRule}`);
-    }
-
-    fs.writeFileSync(conf.qx, qxLines.join('\n') + '\n', 'utf8');
-    fs.writeFileSync(conf.mihomo, mihomoLines.join('\n') + '\n', 'utf8');
-    console.log(`✔ [${key}] 同步完成:`);
-    console.log(`   ↳ Quantumult X: ${conf.qx}`);
-    console.log(`   ↳ Mihomo:       ${conf.mihomo}`);
-  }
-
+  // 触发编译
+  compileSourceFile(targetKey);
   runValidation();
 }
 
 // 主入口
 function main() {
   const args = process.argv.slice(2);
-  const action = args[0] || '--help';
+  const action = args[0] || '--compile';
 
-  // 解析 --target 参数
+  // 解析 --target
   let targetKey = 'proxy';
   const targetIdx = args.indexOf('--target');
   if (targetIdx !== -1 && args[targetIdx + 1]) {
@@ -210,21 +248,24 @@ function main() {
     args.splice(targetIdx, 2);
   }
 
-  if (action === '--add') {
-    const domains = args.slice(1).filter(a => !a.startsWith('--'));
-    if (domains.length === 0) {
+  if (action === '--compile' || action === '--sync') {
+    compileAll();
+
+  } else if (action === '--add') {
+    const items = args.slice(1).filter(a => !a.startsWith('--'));
+    if (items.length === 0) {
       console.error('用法: node build-rules.js --add <domain1> [domain2...] [--target <proxy|ai|supercell>]');
       process.exit(1);
     }
-    appendRules(domains, 'DOMAIN-SUFFIX', targetKey);
+    addToSource(items, targetKey);
 
   } else if (action === '--add-keyword') {
-    const keywords = args.slice(1).filter(a => !a.startsWith('--'));
+    const keywords = args.slice(1).filter(a => !a.startsWith('--')).map(k => `keyword: ${k}`);
     if (keywords.length === 0) {
       console.error('用法: node build-rules.js --add-keyword <keyword1> [keyword2...] [--target <proxy|ai|supercell>]');
       process.exit(1);
     }
-    appendRules(keywords, 'DOMAIN-KEYWORD', targetKey);
+    addToSource(keywords, targetKey);
 
   } else if (action === '--apply-staging') {
     const candidatesPath = path.join(STAGING_DIR, 'candidates.txt');
@@ -237,7 +278,7 @@ function main() {
       .map(l => l.trim())
       .filter(l => l && !l.startsWith('#'));
 
-    appendRules(lines, 'DOMAIN-SUFFIX', targetKey);
+    addToSource(lines, targetKey);
 
     // 归档
     const historyPath = path.join(STAGING_DIR, 'history.log');
@@ -247,31 +288,11 @@ function main() {
     fs.writeFileSync(candidatesPath, '', 'utf8');
     console.log(`✔ 已归档历史记录至 ${historyPath}，并清空 candidates.txt`);
 
-  } else if (action === '--sync') {
-    syncAllFromLoon();
-
   } else if (action === '--validate') {
     runValidation();
 
   } else {
-    console.log(`
-分流规则管理工具使用帮助:
-  1. 添加单个或多个域名:
-     node .github/scripts/build-rules.js --add example.com sub.org
-     node .github/scripts/build-rules.js --add claude.ai --target ai
-
-  2. 添加关键字:
-     node .github/scripts/build-rules.js --add-keyword twitter telegram
-
-  3. 批量合并暂存区 (staging/candidates.txt):
-     node .github/scripts/build-rules.js --apply-staging
-
-  4. 以 Loon 为准一键全端同步 (Loon -> QX & Mihomo):
-     node .github/scripts/build-rules.js --sync
-
-  5. 校验全部格式与沙盒:
-     node .github/scripts/build-rules.js --validate
-`);
+    compileAll();
   }
 }
 
