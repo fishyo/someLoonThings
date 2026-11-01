@@ -1,0 +1,337 @@
+# ==============================================================================
+# 主流高频代理黑名单规则源 (Mainstream Proxy Blacklist Source)
+# 说明: 覆盖日常核心翻墙服务、公共人机验证、媒体流、品牌短链与关键配套依赖
+# 编写规则: 纯域名自动识别为后缀，关键词写 keyword:xxx，精准域名写 exact:xxx
+# ==============================================================================
+
+# ================================================================
+# 1. 基础服务、搜索引擎与公共人机验证 (Base, Search & Captcha)
+# ================================================================
+# 公共人机验证 (致命隐性依赖，防卡死)
+recaptcha.net
+hcaptcha.com
+challenges.cloudflare.com
+
+# Google 核心基础服务与账号体系
+google.com
+googleapis.com
+gstatic.com
+googleusercontent.com
+googletagmanager.com
+1e100.net
+ggpht.com
+gmail.com
+googlehosted.com
+
+# Google 官方短链与品牌域名
+g.co
+goo.gl
+withgoogle.com
+googleblog.com
+
+# 常见地区重定向
+google.com.hk
+google.co.jp
+google.co.uk
+
+# 独立隐私搜索与微软外区
+duckduckgo.com
+duck.com
+ddg.gg
+search.brave.com
+startpage.com
+copilot.microsoft.com
+sydneystorageextension.blob.core.windows.net
+exact: edgeservices.bing.com
+
+
+# ================================================================
+# 2. 社交通讯与全球网络社区 (Social & Communication)
+# ================================================================
+# Telegram 完整生态 (网页版、Telegraph、短链、媒体流)
+keyword: telegram
+t.me
+telegra.ph
+telegram.org
+telegram.me
+tx.me
+telegram.dog
+telesco.pe
+tdesktop.com
+cdn-telegram.org
+
+# X (Twitter) 完整生态 (短链、图片、推流、客户端)
+keyword: twitter
+x.com
+twitter.com
+t.co
+twimg.com
+tweetdeck.com
+periscope.tv
+pscp.tv
+twitpic.com
+
+# Meta 生态 (Facebook / Instagram / Threads / WhatsApp)
+facebook.com
+fbcdn.net
+instagram.com
+cdninstagram.com
+threads.net
+whatsapp.com
+whatsapp.net
+messenger.com
+
+# Discord 完整生态 (文字、静态 CDN、语音媒体服务器)
+keyword: discord
+discord.com
+discord.gg
+discord.media
+discordcdn.com
+discordapp.com
+discordapp.net
+discordstatus.com
+
+# Reddit 完整生态 (主站、图片托管、短链)
+keyword: reddit
+reddit.com
+redd.it
+redditstatic.com
+redditmedia.com
+reddithelp.com
+
+# Signal & Line
+signal.org
+line.me
+line-apps.com
+line-scdn.net
+
+
+# ================================================================
+# 3. AI 人工智能与大模型生态 (AI Services)
+# ================================================================
+# OpenAI / ChatGPT (主站、静态资源、支付鉴权)
+openai.com
+chatgpt.com
+chat.com
+oaistatic.com
+oaiusercontent.com
+sora.com
+stripe.com
+stripe.network
+
+# Anthropic Claude
+anthropic.com
+claude.ai
+claudeusercontent.com
+
+# Google Gemini
+gemini.google.com
+generativeai.google.com
+bard.google.com
+
+# AI 搜索与常用新应用
+perplexity.ai
+pplx.ai
+poe.com
+x.ai
+grok.com
+cursor.com
+cursor.sh
+
+
+# ================================================================
+# 4. 开发者基础设施与现代云平台 (Developer & Cloud)
+# ================================================================
+# GitHub 全套 (主站、Raw 文件、静态资源、镜像、短链)
+github.com
+githubassets.com
+githubusercontent.com
+raw.githubusercontent.com
+github.io
+ghcr.io
+git.io
+github.blog
+githubstatus.com
+
+# 现代云平台与 Serverless 托管
+keyword: vercel
+vercel.com
+vercel.app
+supabase.co
+supabase.com
+netlify.app
+netlify.com
+fly.io
+fly.dev
+render.com
+
+# Cloudflare 开发者产品 (默认二级域名国内阻断)
+keyword: cloudflare
+pages.dev
+workers.dev
+cf-ipfs.com
+warp.plus
+videodelivery.net
+
+# 代码托管与团队协作
+gitlab.com
+bitbucket.org
+atlassian.com
+atlassian.net
+atl-paas.net
+jira.com
+trello.com
+
+# 语言包管理、容器与技术问答
+pypi.org
+pythonhosted.org
+crates.io
+rust-lang.org
+golang.org
+pkg.go.dev
+docker.com
+docker.io
+stackoverflow.com
+stackexchange.com
+
+
+# ================================================================
+# 5. 影音流媒体、播客与游戏社区 (Streaming, Audio & Gaming)
+# ================================================================
+# YouTube 完整生态 (网页端、短链、缩略图、媒体视频流)
+keyword: youtube
+youtube.com
+youtu.be
+yt.be
+ytimg.com
+googlevideo.com
+youtube-nocookie.com
+
+# Spotify 完整生态 (网页端、音频 CDN、短链、图表)
+spotify.com
+spotifycdn.com
+scdn.co
+spoti.fi
+spotifycharts.com
+
+# Steam 社区与相关静态资产 (防头像/个人主页/创意工坊红叉)
+steamcommunity.com
+steamstatic.com
+
+# Twitch 直播与静态视频
+twitch.tv
+ttvnw.net
+jtvnw.net
+twitchcdn.net
+
+# 常用影视流媒体
+keyword: netflix
+netflix.com
+netflix.net
+nflximg.net
+nflxvideo.net
+nflxext.com
+nflxso.net
+disneyplus.com
+hulu.com
+max.com
+hbomax.com
+primevideo.com
+
+# 泛用型播客托管 CDN (黑名单用户经常遭遇单集音频加载失败)
+pocketcasts.com
+pca.st
+keyword: fireside
+pdst.fm
+pdst.io
+podsights.com
+podsights.fm
+megaphone.fm
+transistor.fm
+simplecast.com
+
+
+# ================================================================
+# 6. 生产力、协同工具与密码同步 (Productivity & Security)
+# ================================================================
+# 密码管理器 (主站、API 与多区域同步端点)
+bitwarden.com
+1password.com
+1password.ca
+1password.eu
+1passwordservices.com
+lastpass.com
+
+# Notion 家族 (主站、分享页面、快捷新建)
+notion.so
+notion.site
+notion.new
+
+# Dropbox 完整资产 (主站、API、静态库、用户内容)
+dropbox.com
+dropboxapi.com
+dropboxstatic.com
+dropboxusercontent.com
+
+# Figma / Slack / Linear / OneDrive
+figma.com
+slack.com
+linear.app
+onedrive.live.com
+mega.nz
+
+
+# ================================================================
+# 7. 知识百科与海外深度资讯 (Knowledge & News)
+# ================================================================
+# 维基百科全家桶 (防图片无法加载与引用条目失败)
+wikipedia.org
+wikimedia.org
+wikidata.org
+wiktionary.org
+wikiquote.org
+wikibooks.org
+wikisource.org
+
+# 深度资讯与主流媒体
+medium.com
+substack.com
+theverge.com
+wired.com
+nytimes.com
+bbc.com
+bbci.co.uk
+bloomberg.com
+wsj.com
+reuters.com
+
+
+# ================================================================
+# 8. 跨站隐性依赖：公共前端 CDN、字体、短链与移动应用
+# ================================================================
+# 公共静态库与字体 CDN (防页面排版崩坏/骨架屏)
+cdnjs.cloudflare.com
+jsdelivr.net
+unpkg.com
+fonts.googleapis.com
+fonts.gstatic.com
+typekit.net
+giphy.com
+
+# 全球短链跳转服务
+bit.ly
+tinyurl.com
+ow.ly
+is.gd
+
+# 网络探测与 IP 查询
+speedtest.net
+ipinfo.io
+ipapi.co
+nxtrace.org
+
+# 移动生态与应用市场
+play.google.com
+android.com
+apkpure.com
+apkmirror.com

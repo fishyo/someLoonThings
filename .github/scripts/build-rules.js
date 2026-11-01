@@ -29,6 +29,14 @@ const ROOT_DIR = path.resolve(__dirname, '../../');
 const RULES_DIR = path.join(ROOT_DIR, 'rules');
 
 const RULE_CONFIGS = {
+  mainstream: {
+    src: path.join(RULES_DIR, 'mainstream.txt'),
+    loon: path.join(ROOT_DIR, 'loon/mainstream.lsr'),
+    qx: path.join(ROOT_DIR, 'quanX/rules/mainstream.list'),
+    mihomo: path.join(ROOT_DIR, 'mihomo/mainstream.yaml'),
+    policy: 'proxy',
+    title: 'Mainstream Proxy Blacklist Ruleset'
+  },
   proxy: {
     src: path.join(RULES_DIR, 'proxy.txt'),
     loon: path.join(ROOT_DIR, 'loon/proxy.lsr'),

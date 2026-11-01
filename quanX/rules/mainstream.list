@@ -1,0 +1,343 @@
+# ==============================================================================
+# Mainstream Proxy Blacklist Ruleset (Quantumult X Format)
+# Maintainer: fishyo
+# Homepage: https://github.com/fishyo/someLoonThings
+# ==============================================================================
+
+# ==============================================================================
+# 主流高频代理黑名单规则源 (Mainstream Proxy Blacklist Source)
+# 说明: 覆盖日常核心翻墙服务、公共人机验证、媒体流、品牌短链与关键配套依赖
+# 编写规则: 纯域名自动识别为后缀，关键词写 keyword:xxx，精准域名写 exact:xxx
+# ==============================================================================
+
+# ================================================================
+# 1. 基础服务、搜索引擎与公共人机验证 (Base, Search & Captcha)
+# ================================================================
+# 公共人机验证 (致命隐性依赖，防卡死)
+host-suffix, recaptcha.net, proxy
+host-suffix, hcaptcha.com, proxy
+host-suffix, challenges.cloudflare.com, proxy
+
+# Google 核心基础服务与账号体系
+host-suffix, google.com, proxy
+host-suffix, googleapis.com, proxy
+host-suffix, gstatic.com, proxy
+host-suffix, googleusercontent.com, proxy
+host-suffix, googletagmanager.com, proxy
+host-suffix, 1e100.net, proxy
+host-suffix, ggpht.com, proxy
+host-suffix, gmail.com, proxy
+host-suffix, googlehosted.com, proxy
+
+# Google 官方短链与品牌域名
+host-suffix, g.co, proxy
+host-suffix, goo.gl, proxy
+host-suffix, withgoogle.com, proxy
+host-suffix, googleblog.com, proxy
+
+# 常见地区重定向
+host-suffix, google.com.hk, proxy
+host-suffix, google.co.jp, proxy
+host-suffix, google.co.uk, proxy
+
+# 独立隐私搜索与微软外区
+host-suffix, duckduckgo.com, proxy
+host-suffix, duck.com, proxy
+host-suffix, ddg.gg, proxy
+host-suffix, search.brave.com, proxy
+host-suffix, startpage.com, proxy
+host-suffix, copilot.microsoft.com, proxy
+host-suffix, sydneystorageextension.blob.core.windows.net, proxy
+host, edgeservices.bing.com, proxy
+
+
+# ================================================================
+# 2. 社交通讯与全球网络社区 (Social & Communication)
+# ================================================================
+# Telegram 完整生态 (网页版、Telegraph、短链、媒体流)
+host-keyword, telegram, proxy
+host-suffix, t.me, proxy
+host-suffix, telegra.ph, proxy
+host-suffix, telegram.org, proxy
+host-suffix, telegram.me, proxy
+host-suffix, tx.me, proxy
+host-suffix, telegram.dog, proxy
+host-suffix, telesco.pe, proxy
+host-suffix, tdesktop.com, proxy
+host-suffix, cdn-telegram.org, proxy
+
+# X (Twitter) 完整生态 (短链、图片、推流、客户端)
+host-keyword, twitter, proxy
+host-suffix, x.com, proxy
+host-suffix, twitter.com, proxy
+host-suffix, t.co, proxy
+host-suffix, twimg.com, proxy
+host-suffix, tweetdeck.com, proxy
+host-suffix, periscope.tv, proxy
+host-suffix, pscp.tv, proxy
+host-suffix, twitpic.com, proxy
+
+# Meta 生态 (Facebook / Instagram / Threads / WhatsApp)
+host-suffix, facebook.com, proxy
+host-suffix, fbcdn.net, proxy
+host-suffix, instagram.com, proxy
+host-suffix, cdninstagram.com, proxy
+host-suffix, threads.net, proxy
+host-suffix, whatsapp.com, proxy
+host-suffix, whatsapp.net, proxy
+host-suffix, messenger.com, proxy
+
+# Discord 完整生态 (文字、静态 CDN、语音媒体服务器)
+host-keyword, discord, proxy
+host-suffix, discord.com, proxy
+host-suffix, discord.gg, proxy
+host-suffix, discord.media, proxy
+host-suffix, discordcdn.com, proxy
+host-suffix, discordapp.com, proxy
+host-suffix, discordapp.net, proxy
+host-suffix, discordstatus.com, proxy
+
+# Reddit 完整生态 (主站、图片托管、短链)
+host-keyword, reddit, proxy
+host-suffix, reddit.com, proxy
+host-suffix, redd.it, proxy
+host-suffix, redditstatic.com, proxy
+host-suffix, redditmedia.com, proxy
+host-suffix, reddithelp.com, proxy
+
+# Signal & Line
+host-suffix, signal.org, proxy
+host-suffix, line.me, proxy
+host-suffix, line-apps.com, proxy
+host-suffix, line-scdn.net, proxy
+
+
+# ================================================================
+# 3. AI 人工智能与大模型生态 (AI Services)
+# ================================================================
+# OpenAI / ChatGPT (主站、静态资源、支付鉴权)
+host-suffix, openai.com, proxy
+host-suffix, chatgpt.com, proxy
+host-suffix, chat.com, proxy
+host-suffix, oaistatic.com, proxy
+host-suffix, oaiusercontent.com, proxy
+host-suffix, sora.com, proxy
+host-suffix, stripe.com, proxy
+host-suffix, stripe.network, proxy
+
+# Anthropic Claude
+host-suffix, anthropic.com, proxy
+host-suffix, claude.ai, proxy
+host-suffix, claudeusercontent.com, proxy
+
+# Google Gemini
+host-suffix, gemini.google.com, proxy
+host-suffix, generativeai.google.com, proxy
+host-suffix, bard.google.com, proxy
+
+# AI 搜索与常用新应用
+host-suffix, perplexity.ai, proxy
+host-suffix, pplx.ai, proxy
+host-suffix, poe.com, proxy
+host-suffix, x.ai, proxy
+host-suffix, grok.com, proxy
+host-suffix, cursor.com, proxy
+host-suffix, cursor.sh, proxy
+
+
+# ================================================================
+# 4. 开发者基础设施与现代云平台 (Developer & Cloud)
+# ================================================================
+# GitHub 全套 (主站、Raw 文件、静态资源、镜像、短链)
+host-suffix, github.com, proxy
+host-suffix, githubassets.com, proxy
+host-suffix, githubusercontent.com, proxy
+host-suffix, raw.githubusercontent.com, proxy
+host-suffix, github.io, proxy
+host-suffix, ghcr.io, proxy
+host-suffix, git.io, proxy
+host-suffix, github.blog, proxy
+host-suffix, githubstatus.com, proxy
+
+# 现代云平台与 Serverless 托管
+host-keyword, vercel, proxy
+host-suffix, vercel.com, proxy
+host-suffix, vercel.app, proxy
+host-suffix, supabase.co, proxy
+host-suffix, supabase.com, proxy
+host-suffix, netlify.app, proxy
+host-suffix, netlify.com, proxy
+host-suffix, fly.io, proxy
+host-suffix, fly.dev, proxy
+host-suffix, render.com, proxy
+
+# Cloudflare 开发者产品 (默认二级域名国内阻断)
+host-keyword, cloudflare, proxy
+host-suffix, pages.dev, proxy
+host-suffix, workers.dev, proxy
+host-suffix, cf-ipfs.com, proxy
+host-suffix, warp.plus, proxy
+host-suffix, videodelivery.net, proxy
+
+# 代码托管与团队协作
+host-suffix, gitlab.com, proxy
+host-suffix, bitbucket.org, proxy
+host-suffix, atlassian.com, proxy
+host-suffix, atlassian.net, proxy
+host-suffix, atl-paas.net, proxy
+host-suffix, jira.com, proxy
+host-suffix, trello.com, proxy
+
+# 语言包管理、容器与技术问答
+host-suffix, pypi.org, proxy
+host-suffix, pythonhosted.org, proxy
+host-suffix, crates.io, proxy
+host-suffix, rust-lang.org, proxy
+host-suffix, golang.org, proxy
+host-suffix, pkg.go.dev, proxy
+host-suffix, docker.com, proxy
+host-suffix, docker.io, proxy
+host-suffix, stackoverflow.com, proxy
+host-suffix, stackexchange.com, proxy
+
+
+# ================================================================
+# 5. 影音流媒体、播客与游戏社区 (Streaming, Audio & Gaming)
+# ================================================================
+# YouTube 完整生态 (网页端、短链、缩略图、媒体视频流)
+host-keyword, youtube, proxy
+host-suffix, youtube.com, proxy
+host-suffix, youtu.be, proxy
+host-suffix, yt.be, proxy
+host-suffix, ytimg.com, proxy
+host-suffix, googlevideo.com, proxy
+host-suffix, youtube-nocookie.com, proxy
+
+# Spotify 完整生态 (网页端、音频 CDN、短链、图表)
+host-suffix, spotify.com, proxy
+host-suffix, spotifycdn.com, proxy
+host-suffix, scdn.co, proxy
+host-suffix, spoti.fi, proxy
+host-suffix, spotifycharts.com, proxy
+
+# Steam 社区与相关静态资产 (防头像/个人主页/创意工坊红叉)
+host-suffix, steamcommunity.com, proxy
+host-suffix, steamstatic.com, proxy
+
+# Twitch 直播与静态视频
+host-suffix, twitch.tv, proxy
+host-suffix, ttvnw.net, proxy
+host-suffix, jtvnw.net, proxy
+host-suffix, twitchcdn.net, proxy
+
+# 常用影视流媒体
+host-keyword, netflix, proxy
+host-suffix, netflix.com, proxy
+host-suffix, netflix.net, proxy
+host-suffix, nflximg.net, proxy
+host-suffix, nflxvideo.net, proxy
+host-suffix, nflxext.com, proxy
+host-suffix, nflxso.net, proxy
+host-suffix, disneyplus.com, proxy
+host-suffix, hulu.com, proxy
+host-suffix, max.com, proxy
+host-suffix, hbomax.com, proxy
+host-suffix, primevideo.com, proxy
+
+# 泛用型播客托管 CDN (黑名单用户经常遭遇单集音频加载失败)
+host-suffix, pocketcasts.com, proxy
+host-suffix, pca.st, proxy
+host-keyword, fireside, proxy
+host-suffix, pdst.fm, proxy
+host-suffix, pdst.io, proxy
+host-suffix, podsights.com, proxy
+host-suffix, podsights.fm, proxy
+host-suffix, megaphone.fm, proxy
+host-suffix, transistor.fm, proxy
+host-suffix, simplecast.com, proxy
+
+
+# ================================================================
+# 6. 生产力、协同工具与密码同步 (Productivity & Security)
+# ================================================================
+# 密码管理器 (主站、API 与多区域同步端点)
+host-suffix, bitwarden.com, proxy
+host-suffix, 1password.com, proxy
+host-suffix, 1password.ca, proxy
+host-suffix, 1password.eu, proxy
+host-suffix, 1passwordservices.com, proxy
+host-suffix, lastpass.com, proxy
+
+# Notion 家族 (主站、分享页面、快捷新建)
+host-suffix, notion.so, proxy
+host-suffix, notion.site, proxy
+host-suffix, notion.new, proxy
+
+# Dropbox 完整资产 (主站、API、静态库、用户内容)
+host-suffix, dropbox.com, proxy
+host-suffix, dropboxapi.com, proxy
+host-suffix, dropboxstatic.com, proxy
+host-suffix, dropboxusercontent.com, proxy
+
+# Figma / Slack / Linear / OneDrive
+host-suffix, figma.com, proxy
+host-suffix, slack.com, proxy
+host-suffix, linear.app, proxy
+host-suffix, onedrive.live.com, proxy
+host-suffix, mega.nz, proxy
+
+
+# ================================================================
+# 7. 知识百科与海外深度资讯 (Knowledge & News)
+# ================================================================
+# 维基百科全家桶 (防图片无法加载与引用条目失败)
+host-suffix, wikipedia.org, proxy
+host-suffix, wikimedia.org, proxy
+host-suffix, wikidata.org, proxy
+host-suffix, wiktionary.org, proxy
+host-suffix, wikiquote.org, proxy
+host-suffix, wikibooks.org, proxy
+host-suffix, wikisource.org, proxy
+
+# 深度资讯与主流媒体
+host-suffix, medium.com, proxy
+host-suffix, substack.com, proxy
+host-suffix, theverge.com, proxy
+host-suffix, wired.com, proxy
+host-suffix, nytimes.com, proxy
+host-suffix, bbc.com, proxy
+host-suffix, bbci.co.uk, proxy
+host-suffix, bloomberg.com, proxy
+host-suffix, wsj.com, proxy
+host-suffix, reuters.com, proxy
+
+
+# ================================================================
+# 8. 跨站隐性依赖：公共前端 CDN、字体、短链与移动应用
+# ================================================================
+# 公共静态库与字体 CDN (防页面排版崩坏/骨架屏)
+host-suffix, cdnjs.cloudflare.com, proxy
+host-suffix, jsdelivr.net, proxy
+host-suffix, unpkg.com, proxy
+host-suffix, fonts.googleapis.com, proxy
+host-suffix, fonts.gstatic.com, proxy
+host-suffix, typekit.net, proxy
+host-suffix, giphy.com, proxy
+
+# 全球短链跳转服务
+host-suffix, bit.ly, proxy
+host-suffix, tinyurl.com, proxy
+host-suffix, ow.ly, proxy
+host-suffix, is.gd, proxy
+
+# 网络探测与 IP 查询
+host-suffix, speedtest.net, proxy
+host-suffix, ipinfo.io, proxy
+host-suffix, ipapi.co, proxy
+host-suffix, nxtrace.org, proxy
+
+# 移动生态与应用市场
+host-suffix, play.google.com, proxy
+host-suffix, android.com, proxy
+host-suffix, apkpure.com, proxy
+host-suffix, apkmirror.com, proxy
