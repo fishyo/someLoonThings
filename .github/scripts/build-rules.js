@@ -17,10 +17,7 @@
  *   3. 向源文件添加关键词:
  *      node .github/scripts/build-rules.js --add-keyword twitter telegram
  *
- *   4. 合并暂存区 (staging/candidates.txt):
- *      node .github/scripts/build-rules.js --apply-staging
- *
- *   5. 校验格式与沙盒:
+ *   4. 校验格式与沙盒:
  *      node .github/scripts/build-rules.js --validate
  */
 
@@ -30,7 +27,6 @@ const { execSync } = require('child_process');
 
 const ROOT_DIR = path.resolve(__dirname, '../../');
 const RULES_DIR = path.join(ROOT_DIR, 'rules');
-const STAGING_DIR = path.join(ROOT_DIR, 'staging');
 
 const RULE_CONFIGS = {
   proxy: {
@@ -266,27 +262,6 @@ function main() {
       process.exit(1);
     }
     addToSource(keywords, targetKey);
-
-  } else if (action === '--apply-staging') {
-    const candidatesPath = path.join(STAGING_DIR, 'candidates.txt');
-    if (!fs.existsSync(candidatesPath)) {
-      console.log(`未找到待合并的 staging 文件: ${candidatesPath}`);
-      return;
-    }
-    const lines = fs.readFileSync(candidatesPath, 'utf8')
-      .split(/\r?\n/)
-      .map(l => l.trim())
-      .filter(l => l && !l.startsWith('#'));
-
-    addToSource(lines, targetKey);
-
-    // 归档
-    const historyPath = path.join(STAGING_DIR, 'history.log');
-    const timestamp = new Date().toISOString();
-    const historyLog = `\n# --- Applied at ${timestamp} (${lines.length} domains) ---\n` + lines.join('\n') + '\n';
-    fs.appendFileSync(historyPath, historyLog, 'utf8');
-    fs.writeFileSync(candidatesPath, '', 'utf8');
-    console.log(`✔ 已归档历史记录至 ${historyPath}，并清空 candidates.txt`);
 
   } else if (action === '--validate') {
     runValidation();
