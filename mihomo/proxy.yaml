@@ -522,3 +522,5 @@ payload:
   - DOMAIN-SUFFIX,guim.co.uk
   - DOMAIN-SUFFIX,dw.com
   - DOMAIN-SUFFIX,dw.de
+  - DOMAIN-SUFFIX,dw-world.de
+  - DOMAIN-SUFFIX,dwnews.net

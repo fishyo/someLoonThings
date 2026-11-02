@@ -521,3 +521,5 @@ host-suffix, cloudcone.com, proxy
 host-suffix, guim.co.uk, proxy
 host-suffix, dw.com, proxy
 host-suffix, dw.de, proxy
+host-suffix, dw-world.de, proxy
+host-suffix, dwnews.net, proxy
