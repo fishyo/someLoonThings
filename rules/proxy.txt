@@ -6,7 +6,7 @@
 # Rules are automatically compiled to Loon (.lsr), Quantumult X (.list), and Mihomo (.yaml).
 # ==============================================================================
 
-# ----------------- 1. Web Essentials & Infrastructure (基础网络与验证) -----------------
+# ----------------- Web Essentials & Infrastructure -----------------
 # Captcha & Human Verification
 recaptcha.net
 hcaptcha.com
@@ -39,14 +39,14 @@ nxtrace.org
 stripe.com
 stripe.network
 
-# ----------------- 2. Search Engines & Privacy (搜索引擎) -----------------
+# ----------------- Search Engines & Privacy -----------------
 duckduckgo.com
 duck.com
 ddg.gg
 search.brave.com
 startpage.com
 
-# ----------------- 3. Tech Giants & Cloud Infrastructure (科技巨头生态) -----------------
+# ----------------- Tech Giants & Cloud Infrastructure -----------------
 # Google
 google.com
 googleapis.com
@@ -79,7 +79,7 @@ warp.plus
 videodelivery.net
 exact: one.one.one.one
 
-# ----------------- 4. Artificial Intelligence (人工智能与大模型) -----------------
+# ----------------- Artificial Intelligence -----------------
 # OpenAI & ChatGPT
 openai.com
 chatgpt.com
@@ -112,7 +112,7 @@ cursor.com
 cursor.sh
 onorca.dev
 
-# ----------------- 5. Social Media & Messaging (社交与即时通讯) -----------------
+# ----------------- Social Media & Messaging -----------------
 # Telegram
 keyword: telegram
 telegram.org
@@ -170,7 +170,7 @@ line.me
 line-apps.com
 line-scdn.net
 
-# ----------------- 6. Developer Platforms & Programming (开发者与代码生态) -----------------
+# ----------------- Developer Platforms & Programming -----------------
 # GitHub
 github.com
 githubassets.com
@@ -222,7 +222,7 @@ atlassian-dev.net
 atlassian-3p.com
 linear.app
 
-# ----------------- 7. Media & Entertainment (流媒体与影音娱乐) -----------------
+# ----------------- Media & Entertainment -----------------
 # YouTube
 keyword: youtube
 youtube.com
@@ -274,7 +274,7 @@ jtvnw.net
 twitchcdn.net
 royaleapi.com
 
-# ----------------- 8. Productivity & Cloud Storage (效率办公与云存储) -----------------
+# ----------------- Productivity & Cloud Storage -----------------
 # Password Managers
 bitwarden.com
 1password.com
@@ -296,7 +296,7 @@ slack.com
 onedrive.live.com
 mega.nz
 
-# ----------------- 9. Knowledge & Reference (维基百科与知识库) -----------------
+# ----------------- Knowledge & Reference -----------------
 wikipedia.org
 wikimedia.org
 wikidata.org
@@ -305,7 +305,7 @@ wikiquote.org
 wikibooks.org
 wikisource.org
 
-# ----------------- 10. News & Global Media (国际新闻与深度媒体) -----------------
+# ----------------- News & Global Media -----------------
 medium.com
 substack.com
 theverge.com
@@ -317,13 +317,13 @@ bloomberg.com
 wsj.com
 reuters.com
 
-# ----------------- 11. Mobile Ecosystem & App Stores (移动生态) -----------------
+# ----------------- Mobile Ecosystem & App Stores -----------------
 play.google.com
 android.com
 apkpure.com
 apkmirror.com
 
-# ----------------- 12. Custom & Network Utilities (自用补充与网络工具) -----------------
+# ----------------- Custom & Network Utilities -----------------
 keyword: hysteria
 everia.club
 reiobox.top

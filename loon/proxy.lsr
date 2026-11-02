@@ -12,7 +12,7 @@
 # Rules are automatically compiled to Loon (.lsr), Quantumult X (.list), and Mihomo (.yaml).
 # ==============================================================================
 
-# ----------------- 1. Web Essentials & Infrastructure (基础网络与验证) -----------------
+# ----------------- Web Essentials & Infrastructure -----------------
 # Captcha & Human Verification
 DOMAIN-SUFFIX,recaptcha.net
 DOMAIN-SUFFIX,hcaptcha.com
@@ -45,14 +45,14 @@ DOMAIN-SUFFIX,nxtrace.org
 DOMAIN-SUFFIX,stripe.com
 DOMAIN-SUFFIX,stripe.network
 
-# ----------------- 2. Search Engines & Privacy (搜索引擎) -----------------
+# ----------------- Search Engines & Privacy -----------------
 DOMAIN-SUFFIX,duckduckgo.com
 DOMAIN-SUFFIX,duck.com
 DOMAIN-SUFFIX,ddg.gg
 DOMAIN-SUFFIX,search.brave.com
 DOMAIN-SUFFIX,startpage.com
 
-# ----------------- 3. Tech Giants & Cloud Infrastructure (科技巨头生态) -----------------
+# ----------------- Tech Giants & Cloud Infrastructure -----------------
 # Google
 DOMAIN-SUFFIX,google.com
 DOMAIN-SUFFIX,googleapis.com
@@ -85,7 +85,7 @@ DOMAIN-SUFFIX,warp.plus
 DOMAIN-SUFFIX,videodelivery.net
 DOMAIN,one.one.one.one
 
-# ----------------- 4. Artificial Intelligence (人工智能与大模型) -----------------
+# ----------------- Artificial Intelligence -----------------
 # OpenAI & ChatGPT
 DOMAIN-SUFFIX,openai.com
 DOMAIN-SUFFIX,chatgpt.com
@@ -118,7 +118,7 @@ DOMAIN-SUFFIX,cursor.com
 DOMAIN-SUFFIX,cursor.sh
 DOMAIN-SUFFIX,onorca.dev
 
-# ----------------- 5. Social Media & Messaging (社交与即时通讯) -----------------
+# ----------------- Social Media & Messaging -----------------
 # Telegram
 DOMAIN-KEYWORD,telegram
 DOMAIN-SUFFIX,telegram.org
@@ -176,7 +176,7 @@ DOMAIN-SUFFIX,line.me
 DOMAIN-SUFFIX,line-apps.com
 DOMAIN-SUFFIX,line-scdn.net
 
-# ----------------- 6. Developer Platforms & Programming (开发者与代码生态) -----------------
+# ----------------- Developer Platforms & Programming -----------------
 # GitHub
 DOMAIN-SUFFIX,github.com
 DOMAIN-SUFFIX,githubassets.com
@@ -228,7 +228,7 @@ DOMAIN-SUFFIX,atlassian-dev.net
 DOMAIN-SUFFIX,atlassian-3p.com
 DOMAIN-SUFFIX,linear.app
 
-# ----------------- 7. Media & Entertainment (流媒体与影音娱乐) -----------------
+# ----------------- Media & Entertainment -----------------
 # YouTube
 DOMAIN-KEYWORD,youtube
 DOMAIN-SUFFIX,youtube.com
@@ -280,7 +280,7 @@ DOMAIN-SUFFIX,jtvnw.net
 DOMAIN-SUFFIX,twitchcdn.net
 DOMAIN-SUFFIX,royaleapi.com
 
-# ----------------- 8. Productivity & Cloud Storage (效率办公与云存储) -----------------
+# ----------------- Productivity & Cloud Storage -----------------
 # Password Managers
 DOMAIN-SUFFIX,bitwarden.com
 DOMAIN-SUFFIX,1password.com
@@ -302,7 +302,7 @@ DOMAIN-SUFFIX,slack.com
 DOMAIN-SUFFIX,onedrive.live.com
 DOMAIN-SUFFIX,mega.nz
 
-# ----------------- 9. Knowledge & Reference (维基百科与知识库) -----------------
+# ----------------- Knowledge & Reference -----------------
 DOMAIN-SUFFIX,wikipedia.org
 DOMAIN-SUFFIX,wikimedia.org
 DOMAIN-SUFFIX,wikidata.org
@@ -311,7 +311,7 @@ DOMAIN-SUFFIX,wikiquote.org
 DOMAIN-SUFFIX,wikibooks.org
 DOMAIN-SUFFIX,wikisource.org
 
-# ----------------- 10. News & Global Media (国际新闻与深度媒体) -----------------
+# ----------------- News & Global Media -----------------
 DOMAIN-SUFFIX,medium.com
 DOMAIN-SUFFIX,substack.com
 DOMAIN-SUFFIX,theverge.com
@@ -323,13 +323,13 @@ DOMAIN-SUFFIX,bloomberg.com
 DOMAIN-SUFFIX,wsj.com
 DOMAIN-SUFFIX,reuters.com
 
-# ----------------- 11. Mobile Ecosystem & App Stores (移动生态) -----------------
+# ----------------- Mobile Ecosystem & App Stores -----------------
 DOMAIN-SUFFIX,play.google.com
 DOMAIN-SUFFIX,android.com
 DOMAIN-SUFFIX,apkpure.com
 DOMAIN-SUFFIX,apkmirror.com
 
-# ----------------- 12. Custom & Network Utilities (自用补充与网络工具) -----------------
+# ----------------- Custom & Network Utilities -----------------
 DOMAIN-KEYWORD,hysteria
 DOMAIN-SUFFIX,everia.club
 DOMAIN-SUFFIX,reiobox.top

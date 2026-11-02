@@ -62,3 +62,12 @@
 
 ---
 
+## 4. 注释与语言规范 (Commenting & Language Standards)
+
+- **注释严禁使用中文 (Strictly No Chinese in Comments)**：
+  - 无论何时，**所有规则源文件 (`rules/*.txt`)、编译生成文件 (`.lsr`, `.list`, `.yaml`)、脚本与配置文件中的注释，必须且只能使用纯英文 (English Only)**。
+  - 严禁在注释中包含任何中文字符或中英混合注释。
+  - 注释力求简短、精准、国际化标准（例如 `# Web Essentials & Infrastructure`, `# Search Engines`, `# Google`, `# Developer Platforms`）。
+
+---
+

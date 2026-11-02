@@ -38,9 +38,9 @@ jobs:
           git add loon/ quanX/rules/ mihomo/
           if ! git diff --staged --quiet; then
             CHANGED_MODULES=$(git diff --staged --name-only | sed -E 's|.*/([^/.]+)\..*|\1|' | sort -u | tr '\n' ' ' | sed 's/[[:space:]]*$//' | sed 's/ /, /g')
-            git commit -m "build(rules): 自动编译分发三端规则 (${CHANGED_MODULES}) [skip ci]" \
-                       -m "触发源提交: ${{ github.sha }}" \
-                       -m "已同步至 Loon、Quantumult X 与 Mihomo 规则集"
+            git commit -m "build(rules): auto-compile rulesets (${CHANGED_MODULES}) [skip ci]" \
+                       -m "Triggered by commit: ${{ github.sha }}" \
+                       -m "Synchronized across Loon, Quantumult X, and Mihomo"
             git push origin HEAD:${{ github.ref_name }}
           else
             echo "No compiled rule changes detected. Working tree clean."

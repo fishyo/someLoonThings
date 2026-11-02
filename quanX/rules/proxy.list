@@ -12,7 +12,7 @@
 # Rules are automatically compiled to Loon (.lsr), Quantumult X (.list), and Mihomo (.yaml).
 # ==============================================================================
 
-# ----------------- 1. Web Essentials & Infrastructure (基础网络与验证) -----------------
+# ----------------- Web Essentials & Infrastructure -----------------
 # Captcha & Human Verification
 host-suffix, recaptcha.net, proxy
 host-suffix, hcaptcha.com, proxy
@@ -45,14 +45,14 @@ host-suffix, nxtrace.org, proxy
 host-suffix, stripe.com, proxy
 host-suffix, stripe.network, proxy
 
-# ----------------- 2. Search Engines & Privacy (搜索引擎) -----------------
+# ----------------- Search Engines & Privacy -----------------
 host-suffix, duckduckgo.com, proxy
 host-suffix, duck.com, proxy
 host-suffix, ddg.gg, proxy
 host-suffix, search.brave.com, proxy
 host-suffix, startpage.com, proxy
 
-# ----------------- 3. Tech Giants & Cloud Infrastructure (科技巨头生态) -----------------
+# ----------------- Tech Giants & Cloud Infrastructure -----------------
 # Google
 host-suffix, google.com, proxy
 host-suffix, googleapis.com, proxy
@@ -85,7 +85,7 @@ host-suffix, warp.plus, proxy
 host-suffix, videodelivery.net, proxy
 host, one.one.one.one, proxy
 
-# ----------------- 4. Artificial Intelligence (人工智能与大模型) -----------------
+# ----------------- Artificial Intelligence -----------------
 # OpenAI & ChatGPT
 host-suffix, openai.com, proxy
 host-suffix, chatgpt.com, proxy
@@ -118,7 +118,7 @@ host-suffix, cursor.com, proxy
 host-suffix, cursor.sh, proxy
 host-suffix, onorca.dev, proxy
 
-# ----------------- 5. Social Media & Messaging (社交与即时通讯) -----------------
+# ----------------- Social Media & Messaging -----------------
 # Telegram
 host-keyword, telegram, proxy
 host-suffix, telegram.org, proxy
@@ -176,7 +176,7 @@ host-suffix, line.me, proxy
 host-suffix, line-apps.com, proxy
 host-suffix, line-scdn.net, proxy
 
-# ----------------- 6. Developer Platforms & Programming (开发者与代码生态) -----------------
+# ----------------- Developer Platforms & Programming -----------------
 # GitHub
 host-suffix, github.com, proxy
 host-suffix, githubassets.com, proxy
@@ -228,7 +228,7 @@ host-suffix, atlassian-dev.net, proxy
 host-suffix, atlassian-3p.com, proxy
 host-suffix, linear.app, proxy
 
-# ----------------- 7. Media & Entertainment (流媒体与影音娱乐) -----------------
+# ----------------- Media & Entertainment -----------------
 # YouTube
 host-keyword, youtube, proxy
 host-suffix, youtube.com, proxy
@@ -280,7 +280,7 @@ host-suffix, jtvnw.net, proxy
 host-suffix, twitchcdn.net, proxy
 host-suffix, royaleapi.com, proxy
 
-# ----------------- 8. Productivity & Cloud Storage (效率办公与云存储) -----------------
+# ----------------- Productivity & Cloud Storage -----------------
 # Password Managers
 host-suffix, bitwarden.com, proxy
 host-suffix, 1password.com, proxy
@@ -302,7 +302,7 @@ host-suffix, slack.com, proxy
 host-suffix, onedrive.live.com, proxy
 host-suffix, mega.nz, proxy
 
-# ----------------- 9. Knowledge & Reference (维基百科与知识库) -----------------
+# ----------------- Knowledge & Reference -----------------
 host-suffix, wikipedia.org, proxy
 host-suffix, wikimedia.org, proxy
 host-suffix, wikidata.org, proxy
@@ -311,7 +311,7 @@ host-suffix, wikiquote.org, proxy
 host-suffix, wikibooks.org, proxy
 host-suffix, wikisource.org, proxy
 
-# ----------------- 10. News & Global Media (国际新闻与深度媒体) -----------------
+# ----------------- News & Global Media -----------------
 host-suffix, medium.com, proxy
 host-suffix, substack.com, proxy
 host-suffix, theverge.com, proxy
@@ -323,13 +323,13 @@ host-suffix, bloomberg.com, proxy
 host-suffix, wsj.com, proxy
 host-suffix, reuters.com, proxy
 
-# ----------------- 11. Mobile Ecosystem & App Stores (移动生态) -----------------
+# ----------------- Mobile Ecosystem & App Stores -----------------
 host-suffix, play.google.com, proxy
 host-suffix, android.com, proxy
 host-suffix, apkpure.com, proxy
 host-suffix, apkmirror.com, proxy
 
-# ----------------- 12. Custom & Network Utilities (自用补充与网络工具) -----------------
+# ----------------- Custom & Network Utilities -----------------
 host-keyword, hysteria, proxy
 host-suffix, everia.club, proxy
 host-suffix, reiobox.top, proxy
