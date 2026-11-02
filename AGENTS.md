@@ -73,12 +73,12 @@
 
 ## 5. 规则分流与从属架构规范 (Ruleset Architecture)
 
-- **代理主从从属机制 (Master-Subordinate Proxy Architecture)**：
-  - `proxy`（`rules/proxy.txt`）作为全量代理黑名单主规则库（Master Ruleset）。
-  - 独立代理片段（如 `ai.txt`、`twitter.txt`、`telegram.txt` 等 `policy: 'proxy'` 的规则集）统一定义为 `subordinateTo: 'proxy'`。
-  - 编译引擎 (`build-rules.js`) 自动将所有从属代理片段同步（Sync）嵌入 `rules/proxy.txt`（通过 `# >>> BEGIN SUBORDINATE: <key>` 标记块隔离），保证主规则库与各端编译产物始终具备完备的代理覆盖。
-  - 直连白名单规则集（如 `appstore.txt`、`wechat.txt`、`supercell.txt` 等 `policy: 'direct'` 的规则集）保持独立，严禁混入代理主规则。
-  - 编译生成各端规则文件时，引擎自动对重复条目执行去重（Deduplication），保证最终输出规范、纯净、无冗余。
+- **代理主从装配机制 (Declarative Target Assembly Architecture)**：
+  - `rules/` 下所有 `.txt` 文件均为**纯粹单一的原子源文件**（如 `ai.txt`、`twitter.txt`、`telegram.txt`、`proxy.txt` 等），绝无跨文件物理重复，亦无任何机器标记。
+  - 编译引擎 (`build-rules.js`) 声明式装配目标：生成全量代理黑名单（`proxy.lsr`, `proxy.list`, `proxy.yaml`）时，自动在内存中汇聚 `ai.txt + twitter.txt + telegram.txt + proxy.txt` 并执行唯一性去重（Deduplication），保证最终代理黑名单完备无遗漏。
+  - 独立代理片段（`ai`, `twitter`, `telegram`）各自生成专有订阅，供指定节点分流使用。
+  - 直连白名单规则集（`appstore.txt`, `wechat.txt`, `supercell.txt` 等 `policy: 'direct'`）保持独立，严禁混入代理主规则。
+  - 无论本地保存还是云端推送，人类只需直接编辑任意 `.txt` 文件，三端规则与主从覆盖均全自动编译生成。
 
 ---
 

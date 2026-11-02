@@ -1,32 +1,22 @@
-# WeChat Core Domains
+# WeChat
 weixin.com
 wechat.com
 wx.qq.com
 wxs.qq.com
 wechat.org
-
-# WeChat Media & Avatar CDN
 qpic.cn
 qlogo.cn
 wx.gtimg.com
-
-# WeChat Mini Programs
 servicewechat.com
 wxapp.tc.qq.com
-
-# WeChat Pay & Financial Services
 tenpay.com
 wechatpay.cn
 wechatpay.com
 wechatpay.com.cn
-
-# WeChat Web & SDK Bridge
 weixinbridge.com
 weixinaf.net
 wechatlegal.net
 wechatos.net
-
-# WeCom (Work WeChat)
 work.weixin.qq.com
 workweixin.com
 wecom.work

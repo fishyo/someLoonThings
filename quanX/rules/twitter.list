@@ -1,25 +1,20 @@
-# ==============================================================================
-# Twitter Ruleset (Quantumult X Format)
-# Maintainer: fishyo
-# Homepage: https://github.com/fishyo/someLoonThings
-# ==============================================================================
+# Title: Twitter Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
 
-# Keywords
+# Twitter
 host-keyword, twitter, proxy
-
-# Twitter & X Core Domains
 host-suffix, x.com, proxy
 host-suffix, twitter.com, proxy
 host-suffix, t.co, proxy
 host-suffix, twimg.com, proxy
 
-# Twitter Clients & Media
+# Clients
 host-suffix, tweetdeck.com, proxy
 host-suffix, twitpic.com, proxy
 host-suffix, periscope.tv, proxy
 host-suffix, pscp.tv, proxy
 
-# Twitter Brand & Dev Endpoints
+# Endpoints
 host-suffix, twttr.com, proxy
 host-suffix, twttr.net, proxy
 host-suffix, twitterinc.com, proxy

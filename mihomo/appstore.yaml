@@ -1,32 +1,19 @@
-# ==============================================================================
-# App Store Direct Ruleset (Mihomo Format)
-# Maintainer: fishyo
-# Homepage: https://github.com/fishyo/someLoonThings
-# ==============================================================================
+# Title: App Store Direct Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
 
 payload:
-  # App Store & iTunes
+  # App Store
   - DOMAIN-SUFFIX,itunes.apple.com
   - DOMAIN-SUFFIX,apps.apple.com
   - DOMAIN-SUFFIX,appsto.re
-
-  # App Store Media & CDN Assets
   - DOMAIN-SUFFIX,mzstatic.com
   - DOMAIN-SUFFIX,cdn-apple.com
   - DOMAIN-SUFFIX,aaplimg.com
-
-  # Apple CDN Traffic Routing
   - DOMAIN-SUFFIX,apple-dns.net
-
-  # iOS & macOS App Downloads
   - DOMAIN-SUFFIX,iosapps.itunes.apple.com
   - DOMAIN-SUFFIX,osxapps.itunes.apple.com
-
-  # Software & System Updates CDN
   - DOMAIN-SUFFIX,swcdn.apple.com
   - DOMAIN-SUFFIX,updates-http.cdn-apple.com
   - DOMAIN-SUFFIX,updates.cdn-apple.com
-
-  # Apple China Domestic Services
   - DOMAIN-SUFFIX,apple.com.cn
   - DOMAIN-SUFFIX,icloud.com.cn

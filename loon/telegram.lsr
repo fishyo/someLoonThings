@@ -1,13 +1,8 @@
-# ==============================================================================
-# Telegram Ruleset (Loon Format)
-# Maintainer: fishyo
-# Homepage: https://github.com/fishyo/someLoonThings
-# ==============================================================================
+# Title: Telegram Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
 
-# Keywords
+# Telegram
 DOMAIN-KEYWORD,telegram
-
-# Telegram Core Domains
 DOMAIN-SUFFIX,telegram.org
 DOMAIN-SUFFIX,t.me
 DOMAIN-SUFFIX,telegra.ph
@@ -18,7 +13,7 @@ DOMAIN-SUFFIX,telesco.pe
 DOMAIN-SUFFIX,tdesktop.com
 DOMAIN-SUFFIX,cdn-telegram.org
 
-# Telegram Auxiliary Services
+# Services
 DOMAIN-SUFFIX,comments.app
 DOMAIN-SUFFIX,contest.com
 DOMAIN-SUFFIX,graph.org
@@ -26,7 +21,7 @@ DOMAIN-SUFFIX,quiz.directory
 DOMAIN-SUFFIX,stel.com
 DOMAIN-SUFFIX,tchannels.me
 
-# Telegram DC IPv4 CIDR
+# IPv4
 IP-CIDR,91.108.4.0/22,no-resolve
 IP-CIDR,91.108.8.0/22,no-resolve
 IP-CIDR,91.108.12.0/22,no-resolve
@@ -38,7 +33,7 @@ IP-CIDR,149.154.164.0/22,no-resolve
 IP-CIDR,149.154.172.0/22,no-resolve
 IP-CIDR,95.161.64.0/20,no-resolve
 
-# Telegram DC IPv6 CIDR
+# IPv6
 IP-CIDR6,2001:b28:f23d::/48,no-resolve
 IP-CIDR6,2001:b28:f23f::/48,no-resolve
 IP-CIDR6,2001:67c:4e8::/48,no-resolve

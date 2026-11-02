@@ -1,11 +1,8 @@
-# ==============================================================================
-# AI Services Ruleset (Mihomo Format)
-# Maintainer: fishyo
-# Homepage: https://github.com/fishyo/someLoonThings
-# ==============================================================================
+# Title: AI Services Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
 
 payload:
-  # Google Gemini & AI Studio
+  # Gemini
   - DOMAIN-SUFFIX,gemini.google.com
   - DOMAIN-SUFFIX,bard.google.com
   - DOMAIN-SUFFIX,aistudio.google.com
@@ -27,7 +24,7 @@ payload:
   - DOMAIN,alkali-pa.clients6.google.com
   - DOMAIN-SUFFIX,googleapis.com
 
-  # OpenAI & ChatGPT
+  # OpenAI
   - DOMAIN-SUFFIX,chatgpt.com
   - DOMAIN-SUFFIX,openai.com
   - DOMAIN-SUFFIX,chat.com
@@ -41,20 +38,20 @@ payload:
   - DOMAIN-SUFFIX,stripe.com
   - DOMAIN-SUFFIX,stripe.network
 
-  # Anthropic Claude
+  # Claude
   - DOMAIN-SUFFIX,anthropic.com
   - DOMAIN-SUFFIX,claude.ai
   - DOMAIN-SUFFIX,claudeusercontent.com
 
-  # xAI Grok
+  # Grok
   - DOMAIN-SUFFIX,x.ai
   - DOMAIN-SUFFIX,grok.com
 
-  # Perplexity AI
+  # Perplexity
   - DOMAIN-SUFFIX,perplexity.ai
   - DOMAIN-SUFFIX,pplx.ai
 
-  # Microsoft Copilot
+  # Copilot
   - DOMAIN-SUFFIX,copilot.microsoft.com
   - DOMAIN-SUFFIX,sydney.bing.com
   - DOMAIN,edgeservices.bing.com
@@ -63,7 +60,7 @@ payload:
   - DOMAIN-SUFFIX,midjourney.com
   - DOMAIN-SUFFIX,cdn.midjourney.com
 
-  # AI Developer Tools
+  # Tools
   - DOMAIN-SUFFIX,cursor.com
   - DOMAIN-SUFFIX,cursor.sh
   - DOMAIN-SUFFIX,onorca.dev
@@ -72,13 +69,13 @@ payload:
   - DOMAIN-SUFFIX,poe.com
   - DOMAIN-SUFFIX,poecdn.net
 
-  # Voice & Music AI
+  # Audio
   - DOMAIN-SUFFIX,suno.com
   - DOMAIN-SUFFIX,suno.ai
   - DOMAIN-SUFFIX,udio.com
   - DOMAIN-SUFFIX,elevenlabs.io
 
-  # AI Models & Platforms
+  # Models
   - DOMAIN-SUFFIX,mistral.ai
   - DOMAIN-SUFFIX,cohere.com
   - DOMAIN-SUFFIX,cohere.ai

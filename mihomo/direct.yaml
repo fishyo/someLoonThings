@@ -1,11 +1,8 @@
-# ==============================================================================
-# Supercell Direct Ruleset (Mihomo Format)
-# Maintainer: fishyo
-# Homepage: https://github.com/fishyo/someLoonThings
-# ==============================================================================
+# Title: Supercell Direct Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
 
 payload:
-  # Supercell Games
+  # Supercell
   - DOMAIN-SUFFIX,clashroyale.com
   - DOMAIN-SUFFIX,clashroyaleapp.com
   - DOMAIN-SUFFIX,brawlstars.com

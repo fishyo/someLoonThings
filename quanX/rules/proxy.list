@@ -1,93 +1,7 @@
-# ==============================================================================
-# Custom Proxy Ruleset (Quantumult X Format)
-# Maintainer: fishyo
-# Homepage: https://github.com/fishyo/someLoonThings
-# ==============================================================================
+# Title: Custom Proxy Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
 
-# ==============================================================================
-# Custom Proxy Ruleset (Source List)
-# Maintainer: fishyo
-# Homepage: https://github.com/fishyo/someLoonThings
-#
-# Rules are automatically compiled to Loon (.lsr), Quantumult X (.list), and Mihomo (.yaml).
-# ==============================================================================
-
-# ----------------- Web Essentials & Infrastructure -----------------
-# Captcha & Human Verification
-host-suffix, recaptcha.net, proxy
-host-suffix, hcaptcha.com, proxy
-host-suffix, challenges.cloudflare.com, proxy
-
-# Public CDNs & Libraries
-host-suffix, cdnjs.cloudflare.com, proxy
-host-suffix, jsdelivr.net, proxy
-host-suffix, unpkg.com, proxy
-
-# Fonts & Icons
-host-suffix, fonts.googleapis.com, proxy
-host-suffix, fonts.gstatic.com, proxy
-host-suffix, typekit.net, proxy
-host-suffix, giphy.com, proxy
-
-# URL Shorteners
-host-suffix, bit.ly, proxy
-host-suffix, tinyurl.com, proxy
-host-suffix, ow.ly, proxy
-host-suffix, is.gd, proxy
-
-# Network Diagnostics & Speedtest
-host-suffix, speedtest.net, proxy
-host-suffix, ipinfo.io, proxy
-host-suffix, ipapi.co, proxy
-host-suffix, nxtrace.org, proxy
-
-# Payment & Financial Services
-host-suffix, stripe.com, proxy
-host-suffix, stripe.network, proxy
-
-# ----------------- Search Engines & Privacy -----------------
-host-suffix, duckduckgo.com, proxy
-host-suffix, duck.com, proxy
-host-suffix, ddg.gg, proxy
-host-suffix, search.brave.com, proxy
-host-suffix, startpage.com, proxy
-
-# ----------------- Tech Giants & Cloud Infrastructure -----------------
-# Google
-host-suffix, google.com, proxy
-host-suffix, googleapis.com, proxy
-host-suffix, gstatic.com, proxy
-host-suffix, googleusercontent.com, proxy
-host-suffix, googletagmanager.com, proxy
-host-suffix, 1e100.net, proxy
-host-suffix, ggpht.com, proxy
-host-suffix, gmail.com, proxy
-host-suffix, googlehosted.com, proxy
-host-suffix, g.co, proxy
-host-suffix, goo.gl, proxy
-host-suffix, withgoogle.com, proxy
-host-suffix, googleblog.com, proxy
-host-suffix, google.com.hk, proxy
-host-suffix, google.co.jp, proxy
-host-suffix, google.co.uk, proxy
-
-# Microsoft
-host-suffix, copilot.microsoft.com, proxy
-host-suffix, sydneystorageextension.blob.core.windows.net, proxy
-host, edgeservices.bing.com, proxy
-
-# Cloudflare
-host-keyword, cloudflare, proxy
-host-suffix, pages.dev, proxy
-host-suffix, workers.dev, proxy
-host-suffix, cf-ipfs.com, proxy
-host-suffix, warp.plus, proxy
-host-suffix, videodelivery.net, proxy
-host, one.one.one.one, proxy
-
-# ----------------- Artificial Intelligence -----------------
-# >>> BEGIN SUBORDINATE: ai (rules/ai.txt)
-# Google Gemini & AI Studio
+# Gemini
 host-suffix, gemini.google.com, proxy
 host-suffix, bard.google.com, proxy
 host-suffix, aistudio.google.com, proxy
@@ -107,8 +21,9 @@ host-suffix, deepmind.com, proxy
 host-suffix, ai.google.dev, proxy
 host, waa-pa.clients6.google.com, proxy
 host, alkali-pa.clients6.google.com, proxy
+host-suffix, googleapis.com, proxy
 
-# OpenAI & ChatGPT
+# OpenAI
 host-suffix, chatgpt.com, proxy
 host-suffix, openai.com, proxy
 host-suffix, chat.com, proxy
@@ -119,28 +34,32 @@ host-suffix, openaiapi-site.azureedge.net, proxy
 host-suffix, openaicomproductionae4b.blob.core.windows.net, proxy
 host-suffix, openaicom.imgix.net, proxy
 host-suffix, featuregates.org, proxy
+host-suffix, stripe.com, proxy
+host-suffix, stripe.network, proxy
 
-# Anthropic Claude
+# Claude
 host-suffix, anthropic.com, proxy
 host-suffix, claude.ai, proxy
 host-suffix, claudeusercontent.com, proxy
 
-# xAI Grok
+# Grok
 host-suffix, x.ai, proxy
 host-suffix, grok.com, proxy
 
-# Perplexity AI
+# Perplexity
 host-suffix, perplexity.ai, proxy
 host-suffix, pplx.ai, proxy
 
-# Microsoft Copilot
+# Copilot
+host-suffix, copilot.microsoft.com, proxy
 host-suffix, sydney.bing.com, proxy
+host, edgeservices.bing.com, proxy
 
 # Midjourney
 host-suffix, midjourney.com, proxy
 host-suffix, cdn.midjourney.com, proxy
 
-# AI Developer Tools
+# Tools
 host-suffix, cursor.com, proxy
 host-suffix, cursor.sh, proxy
 host-suffix, onorca.dev, proxy
@@ -149,13 +68,13 @@ host-suffix, groq.com, proxy
 host-suffix, poe.com, proxy
 host-suffix, poecdn.net, proxy
 
-# Voice & Music AI
+# Audio
 host-suffix, suno.com, proxy
 host-suffix, suno.ai, proxy
 host-suffix, udio.com, proxy
 host-suffix, elevenlabs.io, proxy
 
-# AI Models & Platforms
+# Models
 host-suffix, mistral.ai, proxy
 host-suffix, cohere.com, proxy
 host-suffix, cohere.ai, proxy
@@ -167,14 +86,9 @@ host-suffix, fal.ai, proxy
 host-suffix, v0.dev, proxy
 host-suffix, huggingface.co, proxy
 host-suffix, hf.space, proxy
-# <<< END SUBORDINATE: ai
 
-# ----------------- Social Media & Messaging -----------------
-# >>> BEGIN SUBORDINATE: telegram (rules/telegram.txt)
-# Keywords
+# Telegram
 host-keyword, telegram, proxy
-
-# Telegram Core Domains
 host-suffix, telegram.org, proxy
 host-suffix, t.me, proxy
 host-suffix, telegra.ph, proxy
@@ -185,7 +99,7 @@ host-suffix, telesco.pe, proxy
 host-suffix, tdesktop.com, proxy
 host-suffix, cdn-telegram.org, proxy
 
-# Telegram Auxiliary Services
+# Services
 host-suffix, comments.app, proxy
 host-suffix, contest.com, proxy
 host-suffix, graph.org, proxy
@@ -193,7 +107,7 @@ host-suffix, quiz.directory, proxy
 host-suffix, stel.com, proxy
 host-suffix, tchannels.me, proxy
 
-# Telegram DC IPv4 CIDR
+# IPv4
 ip-cidr, 91.108.4.0/22, proxy
 ip-cidr, 91.108.8.0/22, proxy
 ip-cidr, 91.108.12.0/22, proxy
@@ -205,29 +119,25 @@ ip-cidr, 149.154.164.0/22, proxy
 ip-cidr, 149.154.172.0/22, proxy
 ip-cidr, 95.161.64.0/20, proxy
 
-# Telegram DC IPv6 CIDR
+# IPv6
 ip-cidr6, 2001:b28:f23d::/48, proxy
 ip-cidr6, 2001:b28:f23f::/48, proxy
 ip-cidr6, 2001:67c:4e8::/48, proxy
-# <<< END SUBORDINATE: telegram
 
-# >>> BEGIN SUBORDINATE: twitter (rules/twitter.txt)
-# Keywords
+# Twitter
 host-keyword, twitter, proxy
-
-# Twitter & X Core Domains
 host-suffix, x.com, proxy
 host-suffix, twitter.com, proxy
 host-suffix, t.co, proxy
 host-suffix, twimg.com, proxy
 
-# Twitter Clients & Media
+# Clients
 host-suffix, tweetdeck.com, proxy
 host-suffix, twitpic.com, proxy
 host-suffix, periscope.tv, proxy
 host-suffix, pscp.tv, proxy
 
-# Twitter Brand & Dev Endpoints
+# Endpoints
 host-suffix, twttr.com, proxy
 host-suffix, twttr.net, proxy
 host-suffix, twitterinc.com, proxy
@@ -235,44 +145,104 @@ host-suffix, twitteroauth.com, proxy
 host-suffix, twitterstat.us, proxy
 host-suffix, ads-twitter.com, proxy
 host-suffix, cms-twdigitalassets.com, proxy
-# <<< END SUBORDINATE: twitter
 
-# Meta (Facebook, Instagram, WhatsApp, Threads)
-host-suffix, facebook.com, proxy
-host-suffix, fbcdn.net, proxy
-host-suffix, instagram.com, proxy
-host-suffix, cdninstagram.com, proxy
-host-suffix, threads.net, proxy
-host-suffix, whatsapp.com, proxy
-host-suffix, whatsapp.net, proxy
-host-suffix, messenger.com, proxy
+# Infrastructure
+host-suffix, recaptcha.net, proxy
+host-suffix, hcaptcha.com, proxy
+host-suffix, challenges.cloudflare.com, proxy
+host-suffix, cdnjs.cloudflare.com, proxy
+host-suffix, jsdelivr.net, proxy
+host-suffix, unpkg.com, proxy
+host-suffix, fastly.net, proxy
+host-suffix, fastlylb.net, proxy
+host-suffix, akamai.net, proxy
+host-suffix, akamaiedge.net, proxy
+host-suffix, cloudfront.net, proxy
+host-suffix, edgecastcdn.net, proxy
+host-suffix, fonts.googleapis.com, proxy
+host-suffix, fonts.gstatic.com, proxy
+host-suffix, typekit.net, proxy
+host-suffix, giphy.com, proxy
+host-suffix, bit.ly, proxy
+host-suffix, tinyurl.com, proxy
+host-suffix, ow.ly, proxy
+host-suffix, is.gd, proxy
+host-suffix, speedtest.net, proxy
+host-suffix, fast.com, proxy
+host-suffix, ipinfo.io, proxy
+host-suffix, ipapi.co, proxy
+host-suffix, nxtrace.org, proxy
+host-suffix, bgp.he.net, proxy
+host-suffix, iplocation.net, proxy
+host-suffix, ip2location.com, proxy
+host-suffix, whatismyipaddress.com, proxy
+host-suffix, link.com, proxy
+host-suffix, checkout.stripe.com, proxy
+host-suffix, paypal.com, proxy
+host-suffix, paypalobjects.com, proxy
+host-suffix, wise.com, proxy
 
-# Discord
-host-keyword, discord, proxy
-host-suffix, discord.com, proxy
-host-suffix, discord.gg, proxy
-host-suffix, discord.media, proxy
-host-suffix, discordcdn.com, proxy
-host-suffix, discordapp.com, proxy
-host-suffix, discordapp.net, proxy
-host-suffix, discordstatus.com, proxy
+# Search
+host-suffix, duckduckgo.com, proxy
+host-suffix, duck.com, proxy
+host-suffix, ddg.gg, proxy
+host-suffix, search.brave.com, proxy
+host-suffix, startpage.com, proxy
+host-suffix, ecosia.org, proxy
+host-suffix, qwant.com, proxy
+host-suffix, kagi.com, proxy
 
-# Reddit
-host-keyword, reddit, proxy
-host-suffix, reddit.com, proxy
-host-suffix, redd.it, proxy
-host-suffix, redditstatic.com, proxy
-host-suffix, redditmedia.com, proxy
-host-suffix, reddithelp.com, proxy
+# Google
+host-suffix, google.com, proxy
+host-suffix, gstatic.com, proxy
+host-suffix, googleusercontent.com, proxy
+host-suffix, googletagmanager.com, proxy
+host-suffix, 1e100.net, proxy
+host-suffix, ggpht.com, proxy
+host-suffix, gmail.com, proxy
+host-suffix, googlehosted.com, proxy
+host-suffix, g.co, proxy
+host-suffix, goo.gl, proxy
+host-suffix, withgoogle.com, proxy
+host-suffix, googleblog.com, proxy
+host-suffix, google.com.hk, proxy
+host-suffix, google.co.jp, proxy
+host-suffix, google.co.uk, proxy
+host-suffix, googledrive.com, proxy
+host-suffix, googlemail.com, proxy
+host-suffix, appspot.com, proxy
+host-suffix, blogger.com, proxy
+host-suffix, blogspot.com, proxy
+host-suffix, chromium.org, proxy
+host-suffix, firebaseio.com, proxy
+host-suffix, firebase.com, proxy
 
-# Signal & LINE
-host-suffix, signal.org, proxy
-host-suffix, line.me, proxy
-host-suffix, line-apps.com, proxy
-host-suffix, line-scdn.net, proxy
+# Microsoft
+host-suffix, microsoft.com, proxy
+host-suffix, live.com, proxy
+host-suffix, office.com, proxy
+host-suffix, office365.com, proxy
+host-suffix, azure.com, proxy
+host-suffix, azureedge.net, proxy
+host-suffix, bing.com, proxy
+host-suffix, sydneystorageextension.blob.core.windows.net, proxy
 
-# ----------------- Developer Platforms & Programming -----------------
-# GitHub
+# Cloudflare
+host-keyword, cloudflare, proxy
+host-suffix, pages.dev, proxy
+host-suffix, workers.dev, proxy
+host-suffix, cloudflareworkers.com, proxy
+host-suffix, cf-ipfs.com, proxy
+host-suffix, warp.plus, proxy
+host-suffix, videodelivery.net, proxy
+host, one.one.one.one, proxy
+
+# Amazon
+host-suffix, amazon.com, proxy
+host-suffix, amazonaws.com, proxy
+host-suffix, awsstatic.com, proxy
+
+# Development
 host-suffix, github.com, proxy
 host-suffix, githubassets.com, proxy
 host-suffix, githubusercontent.com, proxy
@@ -282,49 +252,91 @@ host-suffix, ghcr.io, proxy
 host-suffix, git.io, proxy
 host-suffix, github.blog, proxy
 host-suffix, githubstatus.com, proxy
-
-# Vercel & Deployment
+host-suffix, gitlab.com, proxy
+host-suffix, bitbucket.org, proxy
+host-suffix, codeberg.org, proxy
 host-keyword, vercel, proxy
 host-suffix, vercel.com, proxy
 host-suffix, vercel.app, proxy
-
-# Cloud & PaaS
-host-suffix, supabase.co, proxy
 host-suffix, supabase.com, proxy
-host-suffix, netlify.app, proxy
+host-suffix, supabase.co, proxy
 host-suffix, netlify.com, proxy
+host-suffix, netlify.app, proxy
 host-suffix, fly.io, proxy
 host-suffix, fly.dev, proxy
 host-suffix, render.com, proxy
-
-# Programming Languages & Package Registries
-host-suffix, gitlab.com, proxy
+host-suffix, railway.app, proxy
+host-suffix, neon.tech, proxy
+host-suffix, convex.dev, proxy
+host-suffix, heroku.com, proxy
+host-suffix, docker.com, proxy
+host-suffix, docker.io, proxy
 host-suffix, pypi.org, proxy
 host-suffix, pythonhosted.org, proxy
 host-suffix, crates.io, proxy
 host-suffix, rust-lang.org, proxy
 host-suffix, golang.org, proxy
-host-suffix, pkg.go.dev, proxy
 host-suffix, go.dev, proxy
-host-suffix, docker.com, proxy
-host-suffix, docker.io, proxy
+host-suffix, pkg.go.dev, proxy
+host-suffix, npmjs.com, proxy
+host-suffix, npmjs.org, proxy
+host-suffix, yarnpkg.com, proxy
+host-suffix, maven.org, proxy
+host-suffix, brew.sh, proxy
+host-suffix, anaconda.com, proxy
+host-suffix, anaconda.org, proxy
 host-suffix, stackoverflow.com, proxy
 host-suffix, stackexchange.com, proxy
-
-# Atlassian Suite & Team Collaboration
+host-suffix, superuser.com, proxy
+host-suffix, serverfault.com, proxy
+host-suffix, sentry.io, proxy
+host-suffix, datadoghq.com, proxy
+host-suffix, postman.com, proxy
+host-suffix, gitbook.io, proxy
+host-suffix, readme.io, proxy
+host-suffix, linear.app, proxy
+host-suffix, jira.com, proxy
+host-suffix, trello.com, proxy
 host-suffix, atlassian.com, proxy
 host-suffix, atlassian.net, proxy
 host-suffix, atl-paas.net, proxy
-host-suffix, jira.com, proxy
-host-suffix, trello.com, proxy
-host-suffix, bitbucket.org, proxy
-host-suffix, ss-inf.net, proxy
-host-suffix, atlassian-dev.net, proxy
-host-suffix, atlassian-3p.com, proxy
-host-suffix, linear.app, proxy
+host-suffix, kaggle.com, proxy
 
-# ----------------- Media & Entertainment -----------------
-# YouTube
+# Social
+host-suffix, facebook.com, proxy
+host-suffix, fbcdn.net, proxy
+host-suffix, instagram.com, proxy
+host-suffix, cdninstagram.com, proxy
+host-suffix, threads.net, proxy
+host-suffix, whatsapp.com, proxy
+host-suffix, whatsapp.net, proxy
+host-suffix, messenger.com, proxy
+host-keyword, discord, proxy
+host-suffix, discord.com, proxy
+host-suffix, discord.gg, proxy
+host-suffix, discord.media, proxy
+host-suffix, discordcdn.com, proxy
+host-suffix, discordapp.com, proxy
+host-suffix, discordapp.net, proxy
+host-suffix, discordstatus.com, proxy
+host-keyword, reddit, proxy
+host-suffix, reddit.com, proxy
+host-suffix, redd.it, proxy
+host-suffix, redditstatic.com, proxy
+host-suffix, redditmedia.com, proxy
+host-suffix, reddithelp.com, proxy
+host-suffix, bsky.app, proxy
+host-suffix, bsky.social, proxy
+host-suffix, mastodon.social, proxy
+host-suffix, tumblr.com, proxy
+host-suffix, pinterest.com, proxy
+host-suffix, pinimg.com, proxy
+host-suffix, signal.org, proxy
+host-suffix, line.me, proxy
+host-suffix, line-apps.com, proxy
+host-suffix, line-scdn.net, proxy
+
+# Streaming
 host-keyword, youtube, proxy
 host-suffix, youtube.com, proxy
 host-suffix, youtu.be, proxy
@@ -332,8 +344,7 @@ host-suffix, yt.be, proxy
 host-suffix, ytimg.com, proxy
 host-suffix, googlevideo.com, proxy
 host-suffix, youtube-nocookie.com, proxy
-
-# Video Streaming (VOD)
+host-suffix, youtubekids.com, proxy
 host-keyword, netflix, proxy
 host-suffix, netflix.com, proxy
 host-suffix, netflix.net, proxy
@@ -342,62 +353,144 @@ host-suffix, nflxvideo.net, proxy
 host-suffix, nflxext.com, proxy
 host-suffix, nflxso.net, proxy
 host-suffix, disneyplus.com, proxy
+host-suffix, disneystreaming.com, proxy
+host-suffix, dssott.com, proxy
+host-suffix, bamgrid.com, proxy
 host-suffix, hulu.com, proxy
 host-suffix, max.com, proxy
 host-suffix, hbomax.com, proxy
+host-suffix, hbo.com, proxy
 host-suffix, primevideo.com, proxy
-
-# Music & Audio Streaming (Spotify)
+host-suffix, pv-cdn.net, proxy
 host-suffix, spotify.com, proxy
 host-suffix, spotifycdn.com, proxy
 host-suffix, scdn.co, proxy
 host-suffix, spoti.fi, proxy
 host-suffix, spotifycharts.com, proxy
-
-# Podcasts & Audio Hosting
+host-suffix, soundcloud.com, proxy
+host-suffix, sndcdn.com, proxy
+host-suffix, deezer.com, proxy
+host-suffix, dzcdn.net, proxy
+host-suffix, tidal.com, proxy
+host-suffix, bandcamp.com, proxy
 host-suffix, pocketcasts.com, proxy
 host-suffix, pca.st, proxy
 host-keyword, fireside, proxy
 host-suffix, pdst.fm, proxy
 host-suffix, pdst.io, proxy
-host-suffix, podsights.com, proxy
-host-suffix, podsights.fm, proxy
 host-suffix, megaphone.fm, proxy
 host-suffix, transistor.fm, proxy
 host-suffix, simplecast.com, proxy
-
-# Gaming & Live Streaming
-host-suffix, steamcommunity.com, proxy
-host-suffix, steamstatic.com, proxy
 host-suffix, twitch.tv, proxy
 host-suffix, ttvnw.net, proxy
 host-suffix, jtvnw.net, proxy
 host-suffix, twitchcdn.net, proxy
+
+# Gaming
+host-suffix, steampowered.com, proxy
+host-suffix, steamcommunity.com, proxy
+host-suffix, steamstatic.com, proxy
+host-suffix, steamcontent.com, proxy
+host-suffix, steam-chat.com, proxy
+host-suffix, epicgames.com, proxy
+host-suffix, unrealengine.com, proxy
+host-suffix, playstation.com, proxy
+host-suffix, playstation.net, proxy
+host-suffix, sonyentertainmentnetwork.com, proxy
+host-suffix, xbox.com, proxy
+host-suffix, xboxlive.com, proxy
+host-suffix, nintendo.com, proxy
+host-suffix, nintendo.net, proxy
+host-suffix, ea.com, proxy
+host-suffix, origin.com, proxy
+host-suffix, ubisoft.com, proxy
+host-suffix, uplay.com, proxy
+host-suffix, riotgames.com, proxy
+host-suffix, leagueoflegends.com, proxy
+host-suffix, battle.net, proxy
+host-suffix, blizzard.com, proxy
 host-suffix, royaleapi.com, proxy
 
-# ----------------- Productivity & Cloud Storage -----------------
-# Password Managers
+# Finance
+host-suffix, tradingview.com, proxy
+host-suffix, investing.com, proxy
+host-suffix, binance.com, proxy
+host-suffix, binance.vision, proxy
+host-suffix, binance.cloud, proxy
+host-suffix, binance.charity, proxy
+host-suffix, bnapp.net, proxy
+host-suffix, okx.com, proxy
+host-suffix, oklink.com, proxy
+host-suffix, coinbase.com, proxy
+host-suffix, bybit.com, proxy
+host-suffix, coingecko.com, proxy
+host-suffix, coinmarketcap.com, proxy
+
+# Productivity
+host-suffix, notion.so, proxy
+host-suffix, notion.site, proxy
+host-suffix, notion.new, proxy
+host-suffix, slack.com, proxy
+host-suffix, slack-edge.com, proxy
+host-suffix, figma.com, proxy
+host-suffix, canva.com, proxy
+host-suffix, miro.com, proxy
+host-suffix, airtable.com, proxy
+host-suffix, zoom.us, proxy
+host-suffix, zoom.com, proxy
+host-suffix, dropbox.com, proxy
+host-suffix, dropboxapi.com, proxy
+host-suffix, dropboxstatic.com, proxy
+host-suffix, dropboxusercontent.com, proxy
+host-suffix, mega.nz, proxy
+host-suffix, mega.io, proxy
+host-suffix, box.com, proxy
+host-suffix, wetransfer.com, proxy
+host-suffix, onedrive.live.com, proxy
+
+# Privacy
+host-suffix, proton.me, proxy
+host-suffix, protonmail.com, proxy
+host-suffix, protonvpn.com, proxy
+host-suffix, protonstatus.com, proxy
+host-suffix, tuta.com, proxy
+host-suffix, tutanota.com, proxy
+host-suffix, torproject.org, proxy
+host-suffix, mullvad.net, proxy
 host-suffix, bitwarden.com, proxy
+host-suffix, bitwarden.net, proxy
 host-suffix, 1password.com, proxy
 host-suffix, 1password.ca, proxy
 host-suffix, 1password.eu, proxy
 host-suffix, 1passwordservices.com, proxy
 host-suffix, lastpass.com, proxy
+host-suffix, adguard.com, proxy
+host-suffix, adguard-dns.io, proxy
+host-suffix, nextdns.io, proxy
+host-suffix, quad9.net, proxy
 
-# Productivity & Cloud Drives
-host-suffix, notion.so, proxy
-host-suffix, notion.site, proxy
-host-suffix, notion.new, proxy
-host-suffix, dropbox.com, proxy
-host-suffix, dropboxapi.com, proxy
-host-suffix, dropboxstatic.com, proxy
-host-suffix, dropboxusercontent.com, proxy
-host-suffix, figma.com, proxy
-host-suffix, slack.com, proxy
-host-suffix, onedrive.live.com, proxy
-host-suffix, mega.nz, proxy
-
-# ----------------- Knowledge & Reference -----------------
+# News
+host-suffix, theverge.com, proxy
+host-suffix, wired.com, proxy
+host-suffix, arstechnica.com, proxy
+host-suffix, techcrunch.com, proxy
+host-suffix, engadget.com, proxy
+host-suffix, medium.com, proxy
+host-suffix, substack.com, proxy
+host-suffix, news.ycombinator.com, proxy
+host-suffix, reuters.com, proxy
+host-suffix, bloomberg.com, proxy
+host-suffix, wsj.com, proxy
+host-suffix, ft.com, proxy
+host-suffix, ftchinese.com, proxy
+host-suffix, economist.com, proxy
+host-suffix, nytimes.com, proxy
+host-suffix, theguardian.com, proxy
+host-suffix, bbc.com, proxy
+host-suffix, bbci.co.uk, proxy
+host-suffix, apnews.com, proxy
+host-suffix, time.com, proxy
+host-suffix, cnbc.com, proxy
 host-suffix, wikipedia.org, proxy
 host-suffix, wikimedia.org, proxy
 host-suffix, wikidata.org, proxy
@@ -405,26 +498,20 @@ host-suffix, wiktionary.org, proxy
 host-suffix, wikiquote.org, proxy
 host-suffix, wikibooks.org, proxy
 host-suffix, wikisource.org, proxy
+host-suffix, arxiv.org, proxy
+host-suffix, nature.com, proxy
+host-suffix, sciencedirect.com, proxy
+host-suffix, researchgate.net, proxy
 
-# ----------------- News & Global Media -----------------
-host-suffix, medium.com, proxy
-host-suffix, substack.com, proxy
-host-suffix, theverge.com, proxy
-host-suffix, wired.com, proxy
-host-suffix, nytimes.com, proxy
-host-suffix, bbc.com, proxy
-host-suffix, bbci.co.uk, proxy
-host-suffix, bloomberg.com, proxy
-host-suffix, wsj.com, proxy
-host-suffix, reuters.com, proxy
-
-# ----------------- Mobile Ecosystem & App Stores -----------------
+# Android
 host-suffix, play.google.com, proxy
 host-suffix, android.com, proxy
 host-suffix, apkpure.com, proxy
 host-suffix, apkmirror.com, proxy
+host-suffix, aptoide.com, proxy
+host-suffix, f-droid.org, proxy
 
-# ----------------- Custom & Network Utilities -----------------
+# Custom
 host-keyword, hysteria, proxy
 host-suffix, everia.club, proxy
 host-suffix, reiobox.top, proxy

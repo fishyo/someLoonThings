@@ -1,38 +1,25 @@
-# ==============================================================================
-# WeChat Direct Ruleset (Quantumult X Format)
-# Maintainer: fishyo
-# Homepage: https://github.com/fishyo/someLoonThings
-# ==============================================================================
+# Title: WeChat Direct Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
 
-# WeChat Core Domains
+# WeChat
 host-suffix, weixin.com, direct
 host-suffix, wechat.com, direct
 host-suffix, wx.qq.com, direct
 host-suffix, wxs.qq.com, direct
 host-suffix, wechat.org, direct
-
-# WeChat Media & Avatar CDN
 host-suffix, qpic.cn, direct
 host-suffix, qlogo.cn, direct
 host-suffix, wx.gtimg.com, direct
-
-# WeChat Mini Programs
 host-suffix, servicewechat.com, direct
 host-suffix, wxapp.tc.qq.com, direct
-
-# WeChat Pay & Financial Services
 host-suffix, tenpay.com, direct
 host-suffix, wechatpay.cn, direct
 host-suffix, wechatpay.com, direct
 host-suffix, wechatpay.com.cn, direct
-
-# WeChat Web & SDK Bridge
 host-suffix, weixinbridge.com, direct
 host-suffix, weixinaf.net, direct
 host-suffix, wechatlegal.net, direct
 host-suffix, wechatos.net, direct
-
-# WeCom (Work WeChat)
 host-suffix, work.weixin.qq.com, direct
 host-suffix, workweixin.com, direct
 host-suffix, wecom.work, direct

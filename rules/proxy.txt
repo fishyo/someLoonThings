@@ -1,52 +1,51 @@
-# ==============================================================================
-# Custom Proxy Ruleset (Source List)
-# Maintainer: fishyo
-# Homepage: https://github.com/fishyo/someLoonThings
-#
-# Rules are automatically compiled to Loon (.lsr), Quantumult X (.list), and Mihomo (.yaml).
-# ==============================================================================
-
-# ----------------- Web Essentials & Infrastructure -----------------
-# Captcha & Human Verification
+# Infrastructure
 recaptcha.net
 hcaptcha.com
 challenges.cloudflare.com
-
-# Public CDNs & Libraries
 cdnjs.cloudflare.com
 jsdelivr.net
 unpkg.com
-
-# Fonts & Icons
+fastly.net
+fastlylb.net
+akamai.net
+akamaiedge.net
+cloudfront.net
+edgecastcdn.net
 fonts.googleapis.com
 fonts.gstatic.com
 typekit.net
 giphy.com
-
-# URL Shorteners
 bit.ly
 tinyurl.com
 ow.ly
 is.gd
-
-# Network Diagnostics & Speedtest
 speedtest.net
+fast.com
 ipinfo.io
 ipapi.co
 nxtrace.org
-
-# Payment & Financial Services
+bgp.he.net
+iplocation.net
+ip2location.com
+whatismyipaddress.com
 stripe.com
 stripe.network
+link.com
+checkout.stripe.com
+paypal.com
+paypalobjects.com
+wise.com
 
-# ----------------- Search Engines & Privacy -----------------
+# Search
 duckduckgo.com
 duck.com
 ddg.gg
 search.brave.com
 startpage.com
+ecosia.org
+qwant.com
+kagi.com
 
-# ----------------- Tech Giants & Cloud Infrastructure -----------------
 # Google
 google.com
 googleapis.com
@@ -64,8 +63,24 @@ googleblog.com
 google.com.hk
 google.co.jp
 google.co.uk
+googledrive.com
+googlemail.com
+appspot.com
+blogger.com
+blogspot.com
+chromium.org
+firebaseio.com
+firebase.com
 
 # Microsoft
+microsoft.com
+live.com
+office.com
+office365.com
+azure.com
+azureedge.net
+bing.com
+sydney.bing.com
 copilot.microsoft.com
 sydneystorageextension.blob.core.windows.net
 exact: edgeservices.bing.com
@@ -74,205 +89,18 @@ exact: edgeservices.bing.com
 keyword: cloudflare
 pages.dev
 workers.dev
+cloudflareworkers.com
 cf-ipfs.com
 warp.plus
 videodelivery.net
 exact: one.one.one.one
 
+# Amazon
+amazon.com
+amazonaws.com
+awsstatic.com
 
-# ----------------- Artificial Intelligence -----------------
-# >>> BEGIN SUBORDINATE: ai (rules/ai.txt)
-# Google Gemini & AI Studio
-gemini.google.com
-bard.google.com
-aistudio.google.com
-makersuite.google.com
-generativeai.google
-generativeai.google.com
-generativelanguage.googleapis.com
-alkalimakersuite-pa.googleapis.com
-proactivebackend-pa.googleapis.com
-geller-pa.googleapis.com
-odin-pa.googleapis.com
-aiplatform.googleapis.com
-notebooklm.google
-notebooklm.google.com
-deepmind.google
-deepmind.com
-ai.google.dev
-exact: waa-pa.clients6.google.com
-exact: alkali-pa.clients6.google.com
-googleapis.com
-
-# OpenAI & ChatGPT
-chatgpt.com
-openai.com
-chat.com
-oaistatic.com
-oaiusercontent.com
-sora.com
-openaiapi-site.azureedge.net
-openaicomproductionae4b.blob.core.windows.net
-openaicom.imgix.net
-featuregates.org
-stripe.com
-stripe.network
-
-# Anthropic Claude
-anthropic.com
-claude.ai
-claudeusercontent.com
-
-# xAI Grok
-x.ai
-grok.com
-
-# Perplexity AI
-perplexity.ai
-pplx.ai
-
-# Microsoft Copilot
-copilot.microsoft.com
-sydney.bing.com
-exact: edgeservices.bing.com
-
-# Midjourney
-midjourney.com
-cdn.midjourney.com
-
-# AI Developer Tools
-cursor.com
-cursor.sh
-onorca.dev
-tavily.com
-groq.com
-poe.com
-poecdn.net
-
-# Voice & Music AI
-suno.com
-suno.ai
-udio.com
-elevenlabs.io
-
-# AI Models & Platforms
-mistral.ai
-cohere.com
-cohere.ai
-together.ai
-together.xyz
-replicate.com
-replicate.delivery
-fal.ai
-v0.dev
-huggingface.co
-hf.space
-# <<< END SUBORDINATE: ai
-
-# ----------------- Social Media & Messaging -----------------
-# >>> BEGIN SUBORDINATE: telegram (rules/telegram.txt)
-# Keywords
-keyword: telegram
-
-# Telegram Core Domains
-telegram.org
-t.me
-telegra.ph
-telegram.me
-tx.me
-telegram.dog
-telesco.pe
-tdesktop.com
-cdn-telegram.org
-
-# Telegram Auxiliary Services
-comments.app
-contest.com
-graph.org
-quiz.directory
-stel.com
-tchannels.me
-
-# Telegram DC IPv4 CIDR
-91.108.4.0/22
-91.108.8.0/22
-91.108.12.0/22
-91.108.16.0/22
-91.108.20.0/22
-91.108.56.0/22
-149.154.160.0/20
-149.154.164.0/22
-149.154.172.0/22
-95.161.64.0/20
-
-# Telegram DC IPv6 CIDR
-2001:b28:f23d::/48
-2001:b28:f23f::/48
-2001:67c:4e8::/48
-# <<< END SUBORDINATE: telegram
-
-# >>> BEGIN SUBORDINATE: twitter (rules/twitter.txt)
-# Keywords
-keyword: twitter
-
-# Twitter & X Core Domains
-x.com
-twitter.com
-t.co
-twimg.com
-
-# Twitter Clients & Media
-tweetdeck.com
-twitpic.com
-periscope.tv
-pscp.tv
-
-# Twitter Brand & Dev Endpoints
-twttr.com
-twttr.net
-twitterinc.com
-twitteroauth.com
-twitterstat.us
-ads-twitter.com
-cms-twdigitalassets.com
-# <<< END SUBORDINATE: twitter
-
-# Meta (Facebook, Instagram, WhatsApp, Threads)
-facebook.com
-fbcdn.net
-instagram.com
-cdninstagram.com
-threads.net
-whatsapp.com
-whatsapp.net
-messenger.com
-
-# Discord
-keyword: discord
-discord.com
-discord.gg
-discord.media
-discordcdn.com
-discordapp.com
-discordapp.net
-discordstatus.com
-
-# Reddit
-keyword: reddit
-reddit.com
-redd.it
-redditstatic.com
-redditmedia.com
-reddithelp.com
-
-# Signal & LINE
-signal.org
-line.me
-line-apps.com
-line-scdn.net
-
-# ----------------- Developer Platforms & Programming -----------------
-# GitHub
+# Development
 github.com
 githubassets.com
 githubusercontent.com
@@ -282,49 +110,93 @@ ghcr.io
 git.io
 github.blog
 githubstatus.com
-
-# Vercel & Deployment
+gitlab.com
+bitbucket.org
+codeberg.org
 keyword: vercel
 vercel.com
 vercel.app
-
-# Cloud & PaaS
-supabase.co
 supabase.com
-netlify.app
+supabase.co
 netlify.com
+netlify.app
 fly.io
 fly.dev
 render.com
-
-# Programming Languages & Package Registries
-gitlab.com
+railway.app
+neon.tech
+convex.dev
+heroku.com
+docker.com
+docker.io
 pypi.org
 pythonhosted.org
 crates.io
 rust-lang.org
 golang.org
-pkg.go.dev
 go.dev
-docker.com
-docker.io
+pkg.go.dev
+npmjs.com
+npmjs.org
+yarnpkg.com
+maven.org
+brew.sh
+anaconda.com
+anaconda.org
 stackoverflow.com
 stackexchange.com
-
-# Atlassian Suite & Team Collaboration
+superuser.com
+serverfault.com
+sentry.io
+datadoghq.com
+postman.com
+gitbook.io
+readme.io
+linear.app
+jira.com
+trello.com
 atlassian.com
 atlassian.net
 atl-paas.net
-jira.com
-trello.com
-bitbucket.org
-ss-inf.net
-atlassian-dev.net
-atlassian-3p.com
-linear.app
+huggingface.co
+hf.space
+kaggle.com
 
-# ----------------- Media & Entertainment -----------------
-# YouTube
+# Social
+facebook.com
+fbcdn.net
+instagram.com
+cdninstagram.com
+threads.net
+whatsapp.com
+whatsapp.net
+messenger.com
+keyword: discord
+discord.com
+discord.gg
+discord.media
+discordcdn.com
+discordapp.com
+discordapp.net
+discordstatus.com
+keyword: reddit
+reddit.com
+redd.it
+redditstatic.com
+redditmedia.com
+reddithelp.com
+bsky.app
+bsky.social
+mastodon.social
+tumblr.com
+pinterest.com
+pinimg.com
+signal.org
+line.me
+line-apps.com
+line-scdn.net
+
+# Streaming
 keyword: youtube
 youtube.com
 youtu.be
@@ -332,8 +204,7 @@ yt.be
 ytimg.com
 googlevideo.com
 youtube-nocookie.com
-
-# Video Streaming (VOD)
+youtubekids.com
 keyword: netflix
 netflix.com
 netflix.net
@@ -342,62 +213,144 @@ nflxvideo.net
 nflxext.com
 nflxso.net
 disneyplus.com
+disneystreaming.com
+dssott.com
+bamgrid.com
 hulu.com
 max.com
 hbomax.com
+hbo.com
 primevideo.com
-
-# Music & Audio Streaming (Spotify)
+pv-cdn.net
 spotify.com
 spotifycdn.com
 scdn.co
 spoti.fi
 spotifycharts.com
-
-# Podcasts & Audio Hosting
+soundcloud.com
+sndcdn.com
+deezer.com
+dzcdn.net
+tidal.com
+bandcamp.com
 pocketcasts.com
 pca.st
 keyword: fireside
 pdst.fm
 pdst.io
-podsights.com
-podsights.fm
 megaphone.fm
 transistor.fm
 simplecast.com
-
-# Gaming & Live Streaming
-steamcommunity.com
-steamstatic.com
 twitch.tv
 ttvnw.net
 jtvnw.net
 twitchcdn.net
+
+# Gaming
+steampowered.com
+steamcommunity.com
+steamstatic.com
+steamcontent.com
+steam-chat.com
+epicgames.com
+unrealengine.com
+playstation.com
+playstation.net
+sonyentertainmentnetwork.com
+xbox.com
+xboxlive.com
+nintendo.com
+nintendo.net
+ea.com
+origin.com
+ubisoft.com
+uplay.com
+riotgames.com
+leagueoflegends.com
+battle.net
+blizzard.com
 royaleapi.com
 
-# ----------------- Productivity & Cloud Storage -----------------
-# Password Managers
+# Finance
+tradingview.com
+investing.com
+binance.com
+binance.vision
+binance.cloud
+binance.charity
+bnapp.net
+okx.com
+oklink.com
+coinbase.com
+bybit.com
+coingecko.com
+coinmarketcap.com
+
+# Productivity
+notion.so
+notion.site
+notion.new
+slack.com
+slack-edge.com
+figma.com
+canva.com
+miro.com
+airtable.com
+zoom.us
+zoom.com
+dropbox.com
+dropboxapi.com
+dropboxstatic.com
+dropboxusercontent.com
+mega.nz
+mega.io
+box.com
+wetransfer.com
+onedrive.live.com
+
+# Privacy
+proton.me
+protonmail.com
+protonvpn.com
+protonstatus.com
+tuta.com
+tutanota.com
+torproject.org
+mullvad.net
 bitwarden.com
+bitwarden.net
 1password.com
 1password.ca
 1password.eu
 1passwordservices.com
 lastpass.com
+adguard.com
+adguard-dns.io
+nextdns.io
+quad9.net
 
-# Productivity & Cloud Drives
-notion.so
-notion.site
-notion.new
-dropbox.com
-dropboxapi.com
-dropboxstatic.com
-dropboxusercontent.com
-figma.com
-slack.com
-onedrive.live.com
-mega.nz
-
-# ----------------- Knowledge & Reference -----------------
+# News
+theverge.com
+wired.com
+arstechnica.com
+techcrunch.com
+engadget.com
+medium.com
+substack.com
+news.ycombinator.com
+reuters.com
+bloomberg.com
+wsj.com
+ft.com
+ftchinese.com
+economist.com
+nytimes.com
+theguardian.com
+bbc.com
+bbci.co.uk
+apnews.com
+time.com
+cnbc.com
 wikipedia.org
 wikimedia.org
 wikidata.org
@@ -405,26 +358,20 @@ wiktionary.org
 wikiquote.org
 wikibooks.org
 wikisource.org
+arxiv.org
+nature.com
+sciencedirect.com
+researchgate.net
 
-# ----------------- News & Global Media -----------------
-medium.com
-substack.com
-theverge.com
-wired.com
-nytimes.com
-bbc.com
-bbci.co.uk
-bloomberg.com
-wsj.com
-reuters.com
-
-# ----------------- Mobile Ecosystem & App Stores -----------------
+# Android
 play.google.com
 android.com
 apkpure.com
 apkmirror.com
+aptoide.com
+f-droid.org
 
-# ----------------- Custom & Network Utilities -----------------
+# Custom
 keyword: hysteria
 everia.club
 reiobox.top

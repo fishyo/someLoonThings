@@ -1,4 +1,4 @@
-# Google Gemini & AI Studio
+# Gemini
 gemini.google.com
 bard.google.com
 aistudio.google.com
@@ -20,7 +20,7 @@ exact: waa-pa.clients6.google.com
 exact: alkali-pa.clients6.google.com
 googleapis.com
 
-# OpenAI & ChatGPT
+# OpenAI
 chatgpt.com
 openai.com
 chat.com
@@ -34,20 +34,20 @@ featuregates.org
 stripe.com
 stripe.network
 
-# Anthropic Claude
+# Claude
 anthropic.com
 claude.ai
 claudeusercontent.com
 
-# xAI Grok
+# Grok
 x.ai
 grok.com
 
-# Perplexity AI
+# Perplexity
 perplexity.ai
 pplx.ai
 
-# Microsoft Copilot
+# Copilot
 copilot.microsoft.com
 sydney.bing.com
 exact: edgeservices.bing.com
@@ -56,7 +56,7 @@ exact: edgeservices.bing.com
 midjourney.com
 cdn.midjourney.com
 
-# AI Developer Tools
+# Tools
 cursor.com
 cursor.sh
 onorca.dev
@@ -65,13 +65,13 @@ groq.com
 poe.com
 poecdn.net
 
-# Voice & Music AI
+# Audio
 suno.com
 suno.ai
 udio.com
 elevenlabs.io
 
-# AI Models & Platforms
+# Models
 mistral.ai
 cohere.com
 cohere.ai

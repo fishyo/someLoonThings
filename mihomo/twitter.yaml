@@ -1,26 +1,21 @@
-# ==============================================================================
-# Twitter Ruleset (Mihomo Format)
-# Maintainer: fishyo
-# Homepage: https://github.com/fishyo/someLoonThings
-# ==============================================================================
+# Title: Twitter Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
 
 payload:
-  # Keywords
+  # Twitter
   - DOMAIN-KEYWORD,twitter
-
-  # Twitter & X Core Domains
   - DOMAIN-SUFFIX,x.com
   - DOMAIN-SUFFIX,twitter.com
   - DOMAIN-SUFFIX,t.co
   - DOMAIN-SUFFIX,twimg.com
 
-  # Twitter Clients & Media
+  # Clients
   - DOMAIN-SUFFIX,tweetdeck.com
   - DOMAIN-SUFFIX,twitpic.com
   - DOMAIN-SUFFIX,periscope.tv
   - DOMAIN-SUFFIX,pscp.tv
 
-  # Twitter Brand & Dev Endpoints
+  # Endpoints
   - DOMAIN-SUFFIX,twttr.com
   - DOMAIN-SUFFIX,twttr.net
   - DOMAIN-SUFFIX,twitterinc.com

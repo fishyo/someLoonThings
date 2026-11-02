@@ -1,25 +1,15 @@
-# App Store & iTunes
+# App Store
 itunes.apple.com
 apps.apple.com
 appsto.re
-
-# App Store Media & CDN Assets
 mzstatic.com
 cdn-apple.com
 aaplimg.com
-
-# Apple CDN Traffic Routing
 apple-dns.net
-
-# iOS & macOS App Downloads
 iosapps.itunes.apple.com
 osxapps.itunes.apple.com
-
-# Software & System Updates CDN
 swcdn.apple.com
 updates-http.cdn-apple.com
 updates.cdn-apple.com
-
-# Apple China Domestic Services
 apple.com.cn
 icloud.com.cn

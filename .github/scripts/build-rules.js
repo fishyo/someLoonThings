@@ -1,21 +1,12 @@
 /**
  * Multi-Platform Rule Compiler & Synchronizer
- * Compiles and synchronizes routing rules for Loon, Quantumult X, and Mihomo.
- *
- * Core Architecture:
- *   - Source lists are maintained in rules/*.txt as plain domains, keywords, or CIDRs.
- *   - Subordinate proxy rulesets (ai, twitter, telegram) automatically synchronize into
- *     the master proxy ruleset (rules/proxy.txt) to guarantee complete proxy coverage.
- *   - Whitelist / direct rulesets (appstore, wechat, supercell) remain independent.
- *   - The compiler infers rule directives, eliminates duplicates, and formats outputs
- *     specifically for Loon (.lsr), Quantumult X (.list), and Mihomo (.yaml).
+ * Automatically discovers rules/*.txt and compiles routing rules for Loon, Quantumult X, and Mihomo.
  *
  * Usage:
  *   node .github/scripts/build-rules.js
- *   node .github/scripts/build-rules.js --sync
- *   node .github/scripts/build-rules.js --add example.com sub.org
- *   node .github/scripts/build-rules.js --add claude.ai --target ai
- *   node .github/scripts/build-rules.js --add-keyword twitter telegram
+ *   node .github/scripts/build-rules.js --watch
+ *   node .github/scripts/build-rules.js --add example.com [--target ai|twitter|proxy]
+ *   node .github/scripts/build-rules.js --add-keyword twitter [--target twitter]
  *   node .github/scripts/build-rules.js --validate
  */
 
@@ -26,117 +17,81 @@ const { execSync } = require('child_process');
 const ROOT_DIR = path.resolve(__dirname, '../../');
 const RULES_DIR = path.join(ROOT_DIR, 'rules');
 
-const RULE_CONFIGS = {
-  proxy: {
-    src: path.join(RULES_DIR, 'proxy.txt'),
-    loon: path.join(ROOT_DIR, 'loon/proxy.lsr'),
-    qx: path.join(ROOT_DIR, 'quanX/rules/proxy.list'),
-    mihomo: path.join(ROOT_DIR, 'mihomo/proxy.yaml'),
-    policy: 'proxy',
-    title: 'Custom Proxy Ruleset',
-    isMaster: true
-  },
-  ai: {
-    src: path.join(RULES_DIR, 'ai.txt'),
-    loon: path.join(ROOT_DIR, 'loon/ai.lsr'),
-    qx: path.join(ROOT_DIR, 'quanX/rules/ai.list'),
-    mihomo: path.join(ROOT_DIR, 'mihomo/ai.yaml'),
-    policy: 'proxy',
-    title: 'AI Services Ruleset',
-    subordinateTo: 'proxy'
-  },
-  twitter: {
-    src: path.join(RULES_DIR, 'twitter.txt'),
-    loon: path.join(ROOT_DIR, 'loon/twitter.lsr'),
-    qx: path.join(ROOT_DIR, 'quanX/rules/twitter.list'),
-    mihomo: path.join(ROOT_DIR, 'mihomo/twitter.yaml'),
-    policy: 'proxy',
-    title: 'Twitter Ruleset',
-    subordinateTo: 'proxy'
-  },
-  telegram: {
-    src: path.join(RULES_DIR, 'telegram.txt'),
-    loon: path.join(ROOT_DIR, 'loon/telegram.lsr'),
-    qx: path.join(ROOT_DIR, 'quanX/rules/telegram.list'),
-    mihomo: path.join(ROOT_DIR, 'mihomo/telegram.yaml'),
-    policy: 'proxy',
-    title: 'Telegram Ruleset',
-    subordinateTo: 'proxy'
-  },
-  appstore: {
-    src: path.join(RULES_DIR, 'appstore.txt'),
-    loon: path.join(ROOT_DIR, 'loon/appstore.lsr'),
-    qx: path.join(ROOT_DIR, 'quanX/rules/appstore.list'),
-    mihomo: path.join(ROOT_DIR, 'mihomo/appstore.yaml'),
-    policy: 'direct',
-    title: 'App Store Direct Ruleset'
-  },
-  wechat: {
-    src: path.join(RULES_DIR, 'wechat.txt'),
-    loon: path.join(ROOT_DIR, 'loon/wechat.lsr'),
-    qx: path.join(ROOT_DIR, 'quanX/rules/wechat.list'),
-    mihomo: path.join(ROOT_DIR, 'mihomo/wechat.yaml'),
-    policy: 'direct',
-    title: 'WeChat Direct Ruleset'
-  },
-  supercell: {
-    src: path.join(RULES_DIR, 'supercell.txt'),
-    loon: path.join(ROOT_DIR, 'loon/supercell.lsr'),
-    qx: path.join(ROOT_DIR, 'quanX/rules/supercell.list'),
-    mihomo: path.join(ROOT_DIR, 'mihomo/direct.yaml'),
-    policy: 'direct',
-    title: 'Supercell Direct Ruleset'
-  }
-};
+// Title formatting helper
+function formatTitle(key, content, policy) {
+  const titleMap = {
+    proxy: 'Custom Proxy Ruleset',
+    ai: 'AI Services Ruleset',
+    twitter: 'Twitter Ruleset',
+    telegram: 'Telegram Ruleset',
+    appstore: 'App Store Direct Ruleset',
+    wechat: 'WeChat Direct Ruleset',
+    supercell: 'Supercell Direct Ruleset'
+  };
+  if (titleMap[key]) return titleMap[key];
 
-function escapeRegExp(string) {
-  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const firstLine = content.split('\n')[0].trim();
+  if (firstLine.startsWith('#')) {
+    const clean = firstLine.replace(/^#\s*/, '').replace(/^(policy:\s*direct|direct)\s*/i, '').trim();
+    if (clean) return `${clean} Ruleset`;
+  }
+
+  const capitalized = key.charAt(0).toUpperCase() + key.slice(1);
+  return `${capitalized} ${policy === 'direct' ? 'Direct ' : ''}Ruleset`;
 }
 
-// Synchronize all subordinate rulesets into the master ruleset
-function syncSubordinatesToMaster(masterKey = 'proxy') {
-  const masterConf = RULE_CONFIGS[masterKey];
-  if (!masterConf || !fs.existsSync(masterConf.src)) return false;
+// Automatically discover targets from rules/*.txt (Convention over Configuration)
+function getTargets() {
+  if (!fs.existsSync(RULES_DIR)) return {};
 
-  let masterContent = fs.readFileSync(masterConf.src, 'utf8').replace(/\r\n/g, '\n');
-  let changed = false;
+  const files = fs.readdirSync(RULES_DIR).filter(f => f.endsWith('.txt')).sort();
+  const targets = {};
+  const proxySources = [];
 
-  const subordinateKeys = Object.keys(RULE_CONFIGS).filter(
-    k => RULE_CONFIGS[k].subordinateTo === masterKey
-  );
+  for (const file of files) {
+    const key = path.basename(file, '.txt').toLowerCase();
+    const filePath = path.join(RULES_DIR, file);
+    const content = fs.readFileSync(filePath, 'utf8');
 
-  for (const subKey of subordinateKeys) {
-    const subConf = RULE_CONFIGS[subKey];
-    if (!fs.existsSync(subConf.src)) continue;
+    // Any snippet with "# policy: direct" or "# direct" (or known direct lists) is direct
+    const isDirect = /^\s*#\s*(policy:\s*direct|direct)\b/im.test(content) ||
+                     ['appstore', 'wechat', 'supercell'].includes(key);
 
-    const subContent = fs.readFileSync(subConf.src, 'utf8').trim().replace(/\r\n/g, '\n');
-    const beginMarker = `# >>> BEGIN SUBORDINATE: ${subKey} (rules/${path.basename(subConf.src)})`;
-    const endMarker = `# <<< END SUBORDINATE: ${subKey}`;
+    const policy = isDirect ? 'direct' : 'proxy';
+    const title = formatTitle(key, content, policy);
 
-    const blockRegex = new RegExp(`${escapeRegExp(beginMarker)}[\\s\\S]*?${escapeRegExp(endMarker)}`, 'm');
-    const replacementBlock = `${beginMarker}\n${subContent}\n${endMarker}`;
-
-    if (blockRegex.test(masterContent)) {
-      const currentMatch = masterContent.match(blockRegex)[0];
-      if (currentMatch !== replacementBlock) {
-        masterContent = masterContent.replace(blockRegex, replacementBlock);
-        changed = true;
-      }
-    } else {
-      masterContent = masterContent.trimEnd() + `\n\n${replacementBlock}\n`;
-      changed = true;
+    // Collect subordinate proxy sources to automatically roll into master proxy
+    if (policy === 'proxy' && key !== 'proxy') {
+      proxySources.push(file);
     }
+
+    const mihomoPath = (key === 'supercell')
+      ? path.join(ROOT_DIR, 'mihomo/direct.yaml')
+      : path.join(ROOT_DIR, `mihomo/${key}.yaml`);
+
+    targets[key] = {
+      key,
+      title,
+      policy,
+      sources: [file],
+      outputs: {
+        loon: path.join(ROOT_DIR, `loon/${key}.lsr`),
+        qx: path.join(ROOT_DIR, `quanX/rules/${key}.list`),
+        mihomo: mihomoPath
+      }
+    };
   }
 
-  if (changed) {
-    fs.writeFileSync(masterConf.src, masterContent.trimEnd() + '\n', 'utf8');
-    console.log(`[sync] Synchronized subordinate rulesets (${subordinateKeys.join(', ')}) into rules/${path.basename(masterConf.src)}`);
-    return true;
+  // Master proxy aggregates all discovered proxy snippets + proxy.txt
+  if (targets.proxy) {
+    targets.proxy.sources = [...proxySources, 'proxy.txt'];
+    targets.proxy.title = 'Custom Proxy Ruleset';
   }
-  return false;
+
+  return targets;
 }
 
-// Intelligent single-line rule parser
+// Parse single line rule
 function parseRuleLine(rawLine) {
   const line = rawLine.trim();
   if (!line) return { type: 'EMPTY', raw: rawLine };
@@ -170,7 +125,7 @@ function parseRuleLine(rawLine) {
     return { type: 'IP-CIDR6', val };
   }
 
-  // 5. Default domain suffix or standalone keyword
+  // 5. Default domain suffix or keyword
   let val = line.replace(/^(\*\.|\bDOMAIN-SUFFIX,|\bhost-suffix,)/i, '').replace(/,\s*(proxy|direct)$/i, '').trim();
 
   // If no dot and alphanumeric, treat as keyword
@@ -178,124 +133,122 @@ function parseRuleLine(rawLine) {
     return { type: 'KEYWORD', val };
   }
 
-  // Standard domain suffix
   return { type: 'DOMAIN-SUFFIX', val };
 }
 
-// Compile a single source file to Loon, Quantumult X, and Mihomo
-function compileSourceFile(confKey) {
-  const conf = RULE_CONFIGS[confKey];
-  if (!fs.existsSync(conf.src)) return;
-
-  const rawLines = fs.readFileSync(conf.src, 'utf8').split(/\r?\n/);
+// Compile a single target
+function compileTarget(targetKey, targets) {
+  const target = targets[targetKey];
+  if (!target) return;
 
   const loonLines = [
-    '# ==============================================================================',
-    `# ${conf.title} (Loon Format)`,
-    '# Maintainer: fishyo',
-    '# Homepage: https://github.com/fishyo/someLoonThings',
-    '# ==============================================================================\n'
+    `# Title: ${target.title}`,
+    '# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)',
+    ''
   ];
   const qxLines = [
-    '# ==============================================================================',
-    `# ${conf.title} (Quantumult X Format)`,
-    '# Maintainer: fishyo',
-    '# Homepage: https://github.com/fishyo/someLoonThings',
-    '# ==============================================================================\n'
+    `# Title: ${target.title}`,
+    '# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)',
+    ''
   ];
   const mihomoLines = [
-    '# ==============================================================================',
-    `# ${conf.title} (Mihomo Format)`,
-    '# Maintainer: fishyo',
-    '# Homepage: https://github.com/fishyo/someLoonThings',
-    '# ==============================================================================\n',
+    `# Title: ${target.title}`,
+    '# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)',
+    '',
     'payload:'
   ];
 
   const seenRules = new Set();
+  const seenComments = new Set();
   let prevWasEmpty = false;
 
-  for (const rawLine of rawLines) {
-    const item = parseRuleLine(rawLine);
+  for (const srcFileName of target.sources) {
+    const srcPath = path.join(RULES_DIR, srcFileName);
+    if (!fs.existsSync(srcPath)) continue;
 
-    if (item.type === 'EMPTY') {
-      if (!prevWasEmpty) {
-        loonLines.push('');
-        qxLines.push('');
-        mihomoLines.push('');
-        prevWasEmpty = true;
+    const rawLines = fs.readFileSync(srcPath, 'utf8').split(/\r?\n/);
+    for (const rawLine of rawLines) {
+      const item = parseRuleLine(rawLine);
+
+      if (item.type === 'EMPTY') {
+        if (!prevWasEmpty) {
+          loonLines.push('');
+          qxLines.push('');
+          mihomoLines.push('');
+          prevWasEmpty = true;
+        }
+        continue;
       }
-      continue;
-    }
 
-    if (item.type === 'COMMENT') {
-      loonLines.push(item.raw);
-      qxLines.push(item.raw);
-      mihomoLines.push(`  ${item.raw}`);
+      if (item.type === 'COMMENT') {
+        const commentText = item.raw.trim();
+        if (seenComments.has(commentText.toLowerCase())) continue;
+        seenComments.add(commentText.toLowerCase());
+
+        loonLines.push(item.raw);
+        qxLines.push(item.raw);
+        mihomoLines.push(`  ${item.raw}`);
+        prevWasEmpty = false;
+        continue;
+      }
+
+      const ruleKey = `${item.type}:${item.val.toLowerCase()}`;
+      if (seenRules.has(ruleKey)) continue;
+      seenRules.add(ruleKey);
       prevWasEmpty = false;
-      continue;
-    }
 
-    // Deduplicate identical rule directives
-    const ruleKey = `${item.type}:${item.val.toLowerCase()}`;
-    if (seenRules.has(ruleKey)) {
-      continue;
-    }
-    seenRules.add(ruleKey);
-    prevWasEmpty = false;
-
-    switch (item.type) {
-      case 'DOMAIN-SUFFIX':
-        loonLines.push(`DOMAIN-SUFFIX,${item.val}`);
-        qxLines.push(`host-suffix, ${item.val}, ${conf.policy}`);
-        mihomoLines.push(`  - DOMAIN-SUFFIX,${item.val}`);
-        break;
-      case 'KEYWORD':
-        loonLines.push(`DOMAIN-KEYWORD,${item.val}`);
-        qxLines.push(`host-keyword, ${item.val}, ${conf.policy}`);
-        mihomoLines.push(`  - DOMAIN-KEYWORD,${item.val}`);
-        break;
-      case 'DOMAIN':
-        loonLines.push(`DOMAIN,${item.val}`);
-        qxLines.push(`host, ${item.val}, ${conf.policy}`);
-        mihomoLines.push(`  - DOMAIN,${item.val}`);
-        break;
-      case 'IP-CIDR':
-        loonLines.push(`IP-CIDR,${item.val},no-resolve`);
-        qxLines.push(`ip-cidr, ${item.val}, ${conf.policy}`);
-        mihomoLines.push(`  - IP-CIDR,${item.val}`);
-        break;
-      case 'IP-CIDR6':
-        loonLines.push(`IP-CIDR6,${item.val},no-resolve`);
-        qxLines.push(`ip-cidr6, ${item.val}, ${conf.policy}`);
-        mihomoLines.push(`  - IP-CIDR6,${item.val}`);
-        break;
+      switch (item.type) {
+        case 'DOMAIN-SUFFIX':
+          loonLines.push(`DOMAIN-SUFFIX,${item.val}`);
+          qxLines.push(`host-suffix, ${item.val}, ${target.policy}`);
+          mihomoLines.push(`  - DOMAIN-SUFFIX,${item.val}`);
+          break;
+        case 'KEYWORD':
+          loonLines.push(`DOMAIN-KEYWORD,${item.val}`);
+          qxLines.push(`host-keyword, ${item.val}, ${target.policy}`);
+          mihomoLines.push(`  - DOMAIN-KEYWORD,${item.val}`);
+          break;
+        case 'DOMAIN':
+          loonLines.push(`DOMAIN,${item.val}`);
+          qxLines.push(`host, ${item.val}, ${target.policy}`);
+          mihomoLines.push(`  - DOMAIN,${item.val}`);
+          break;
+        case 'IP-CIDR':
+          loonLines.push(`IP-CIDR,${item.val},no-resolve`);
+          qxLines.push(`ip-cidr, ${item.val}, ${target.policy}`);
+          mihomoLines.push(`  - IP-CIDR,${item.val}`);
+          break;
+        case 'IP-CIDR6':
+          loonLines.push(`IP-CIDR6,${item.val},no-resolve`);
+          qxLines.push(`ip-cidr6, ${item.val}, ${target.policy}`);
+          mihomoLines.push(`  - IP-CIDR6,${item.val}`);
+          break;
+      }
     }
   }
 
-  // Ensure output directories exist and write files
-  fs.mkdirSync(path.dirname(conf.loon), { recursive: true });
-  fs.mkdirSync(path.dirname(conf.qx), { recursive: true });
-  fs.mkdirSync(path.dirname(conf.mihomo), { recursive: true });
+  fs.mkdirSync(path.dirname(target.outputs.loon), { recursive: true });
+  fs.mkdirSync(path.dirname(target.outputs.qx), { recursive: true });
+  fs.mkdirSync(path.dirname(target.outputs.mihomo), { recursive: true });
 
-  fs.writeFileSync(conf.loon, loonLines.join('\n').trimEnd() + '\n', 'utf8');
-  fs.writeFileSync(conf.qx, qxLines.join('\n').trimEnd() + '\n', 'utf8');
-  fs.writeFileSync(conf.mihomo, mihomoLines.join('\n').trimEnd() + '\n', 'utf8');
+  fs.writeFileSync(target.outputs.loon, loonLines.join('\n').trimEnd() + '\n', 'utf8');
+  fs.writeFileSync(target.outputs.qx, qxLines.join('\n').trimEnd() + '\n', 'utf8');
+  fs.writeFileSync(target.outputs.mihomo, mihomoLines.join('\n').trimEnd() + '\n', 'utf8');
 
-  console.log(`✔ [${confKey}] Compiled successfully: Loon (${loonLines.length} lines), QX (${qxLines.length} lines), Mihomo (${mihomoLines.length} lines)`);
+  console.log(`✔ [${targetKey}] Generated: Loon (${loonLines.length}), QX (${qxLines.length}), Mihomo (${mihomoLines.length})`);
 }
 
-// Run compilation for all rulesets
+// Compile all targets
 function compileAll() {
-  console.log('Synchronizing and compiling rulesets across all platforms...\n');
-  syncSubordinatesToMaster('proxy');
-  for (const key of Object.keys(RULE_CONFIGS)) {
-    compileSourceFile(key);
+  console.log('Discovering and compiling rulesets across all platforms...\n');
+  const targets = getTargets();
+  for (const key of Object.keys(targets)) {
+    compileTarget(key, targets);
   }
   runValidation();
 }
 
-// Run platform validation
+// Run validation script
 function runValidation() {
   console.log('\n--- Running Platform Specification & Sandbox Validation (validate.js) ---');
   try {
@@ -303,21 +256,18 @@ function runValidation() {
     console.log(valOutput);
     console.log('All targets validated successfully.');
   } catch (err) {
-    console.error('Validation failed. Please inspect rule syntax:', err.stdout || err.message);
+    console.error('Validation failed:', err.stdout || err.message);
     process.exit(1);
   }
 }
 
-// Add new rules to a source file
+// Add entries to a source file
 function addToSource(items, targetKey = 'proxy') {
-  const conf = RULE_CONFIGS[targetKey] || RULE_CONFIGS.proxy;
-  if (!fs.existsSync(conf.src)) {
-    console.error(`Source file does not exist: ${conf.src}`);
-    return;
-  }
+  const targets = getTargets();
+  const primarySource = targets[targetKey] ? targets[targetKey].sources[0] : `${targetKey}.txt`;
+  const srcPath = path.join(RULES_DIR, primarySource);
 
-  const dateStr = new Date().toISOString().split('T')[0];
-  let srcContent = fs.readFileSync(conf.src, 'utf8').trimEnd();
+  let srcContent = fs.existsSync(srcPath) ? fs.readFileSync(srcPath, 'utf8').trimEnd() : '';
   const existingSet = new Set(
     srcContent
       .split(/\r?\n/)
@@ -327,23 +277,31 @@ function addToSource(items, targetKey = 'proxy') {
 
   const toAdd = items.filter(it => it && !existingSet.has(it.toLowerCase()));
   if (toAdd.length === 0) {
-    console.log(`[info] Target entries already exist in ${path.basename(conf.src)}`);
+    console.log(`[info] Entries already exist in rules/${primarySource}`);
     return;
   }
 
-  srcContent += `\n\n# --- Manual Addition (${dateStr}) ---\n` + toAdd.join('\n') + '\n';
-  fs.writeFileSync(conf.src, srcContent + '\n', 'utf8');
-  console.log(`✔ Added ${toAdd.length} entries to rules/${path.basename(conf.src)}`);
+  srcContent += (srcContent ? '\n\n' : '') + `# Additions\n` + toAdd.join('\n') + '\n';
+  fs.writeFileSync(srcPath, srcContent, 'utf8');
+  console.log(`✔ Added ${toAdd.length} entries to rules/${primarySource}`);
 
-  // If the target is subordinate to a master ruleset, sync and compile both
-  if (conf.subordinateTo) {
-    syncSubordinatesToMaster(conf.subordinateTo);
-    compileSourceFile(targetKey);
-    compileSourceFile(conf.subordinateTo);
-  } else {
-    compileSourceFile(targetKey);
-  }
-  runValidation();
+  compileAll();
+}
+
+// Watch mode for instant hot reload
+function watchRules() {
+  console.log('Watching rules/*.txt for changes... (Press Ctrl+C to stop)');
+  compileAll();
+
+  let debounceTimer = null;
+  fs.watch(RULES_DIR, (eventType, filename) => {
+    if (!filename || !filename.endsWith('.txt')) return;
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => {
+      console.log(`\n[watch] Detected change or new file in rules/${filename}, compiling all targets...`);
+      compileAll();
+    }, 150);
+  });
 }
 
 // CLI entry point
@@ -362,10 +320,13 @@ function main() {
   if (action === '--compile' || action === '--sync') {
     compileAll();
 
+  } else if (action === '--watch') {
+    watchRules();
+
   } else if (action === '--add') {
     const items = args.slice(1).filter(a => !a.startsWith('--'));
     if (items.length === 0) {
-      console.error('Usage: node build-rules.js --add <domain1> [domain2...] [--target <proxy|ai|telegram|twitter>]');
+      console.error('Usage: node build-rules.js --add <domain1> [domain2...] [--target <name>]');
       process.exit(1);
     }
     addToSource(items, targetKey);
@@ -373,7 +334,7 @@ function main() {
   } else if (action === '--add-keyword') {
     const keywords = args.slice(1).filter(a => !a.startsWith('--')).map(k => `keyword: ${k}`);
     if (keywords.length === 0) {
-      console.error('Usage: node build-rules.js --add-keyword <keyword1> [keyword2...] [--target <proxy|ai|telegram|twitter>]');
+      console.error('Usage: node build-rules.js --add-keyword <keyword1> [keyword2...] [--target <name>]');
       process.exit(1);
     }
     addToSource(keywords, targetKey);
