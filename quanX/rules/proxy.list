@@ -529,3 +529,6 @@ host-suffix, 500px.com, proxy
 host-suffix, 500px.org, proxy
 host-suffix, 500px.net, proxy
 host-suffix, theinitium.com, proxy
+host-keyword, livedoor, proxy
+host-keyword, blogimg, proxy
+host-keyword, ldblog, proxy
