@@ -120,7 +120,7 @@ if (fs.existsSync(loonDir)) {
 console.log('\n--- 3. 验证 Quantumult X 片段与规则 (quanX/) ---');
 const qxDir = path.join(root, 'quanX');
 const validRuleTypesQX = new Set([
-  'HOST', 'HOST-SUFFIX', 'HOST-KEYWORD', 'IP-CIDR', 'IP-CIDR6',
+  'HOST', 'HOST-SUFFIX', 'HOST-KEYWORD', 'HOST-WILDCARD', 'IP-CIDR', 'IP-CIDR6', 'IP6-CIDR',
   'GEOIP', 'USER-AGENT', 'FINAL'
 ]);
 

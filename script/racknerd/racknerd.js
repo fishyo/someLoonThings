@@ -32,7 +32,7 @@ const $ = {
       $task.fetch(opts).then(
         (resp) => cb(null, { ...resp, status: resp.statusCode || 200 }, resp.body || ""),
         (err) => cb(err, null, null)
-      ).catch((err) => cb(err, null, null));
+      );
       return;
     }
     cb(new Error("No supported HTTP client found"), null, null);
@@ -40,31 +40,6 @@ const $ = {
   done: (obj = {}) => {
     if (typeof $done !== "undefined") $done(obj);
   },
-};
-
-// BoxJS 应用配置
-const boxjsConfig = {
-  icon: "https://raw.githubusercontent.com/fishyo/someLoonThings/main/icons/racknerd.png",
-  title: "RackNerd Status",
-  desc: "RackNerd VPS 状态查询",
-  settings: [
-    {
-      id: "racknerd.apiKey",
-      name: "API Key",
-      val: "",
-      type: "text",
-      desc: "RackNerd API Key",
-      placeholder: "输入 API Key",
-    },
-    {
-      id: "racknerd.apiHash",
-      name: "API Hash",
-      val: "",
-      type: "text",
-      desc: "RackNerd API Hash",
-      placeholder: "输入 API Hash",
-    },
-  ],
 };
 
 // 解析插件参数 ($argument)
@@ -142,17 +117,16 @@ function getServiceInfo() {
     method: "GET",
     headers: {
       "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36"
-    }
+    },
+    timeout: 15000
   };
 
   const maskedUrl = apiUrl.replace(/key=([^&]+)/, "key=****").replace(/hash=([^&]+)/, "hash=****");
   console.log(`Request API: ${maskedUrl}`);
 
-  const httpGet = typeof $httpClient !== "undefined" ? $httpClient.get.bind($httpClient) : $.get;
-
-  httpGet(request, function (error, response, data) {
+  $.get(request, function (error, response, data) {
     if (error) {
-      console.error("❌ Request Error:", error);
+      console.error("❌ Request Error:", error.message || String(error));
       $.notify("RackNerd Status", "❌ 查询失败", error.message || String(error));
       $.done({});
       return;
@@ -183,11 +157,12 @@ function getServiceInfo() {
         }
       }
       if (!resData) resData = {};
-      console.log("Parsed Data:", JSON.stringify(resData, null, 2));
+      console.log(`Parsed Data Status: ${resData.status || resData.vmstat || "OK"}`);
 
-      if (resData.status === "error" || (resData.statusmsg && resData.status !== "success")) {
-        console.warn("⚠️ API Returned Error:", resData.statusmsg);
-        $.notify("RackNerd Status", "❌ API 错误", resData.statusmsg || "未知错误");
+      if (resData.status === "error" || (resData.statusmsg && resData.status !== "success") || (!resData.status && !resData.vmstat && !resData.bw && !resData.ipaddr && !resData.ipaddress)) {
+        const errorMsg = resData.statusmsg || "API 返回数据异常或服务不可用";
+        console.warn("⚠️ API Returned Error:", errorMsg);
+        $.notify("RackNerd Status", "❌ API 错误", errorMsg);
         $.done({});
         return;
       }
@@ -286,19 +261,7 @@ function getServiceInfo() {
 }
 
 function main() {
-  if (typeof $environment !== "undefined" && $environment.platform === "boxjs") {
-    const config = getConfig();
-    $.done({
-      title: boxjsConfig.title,
-      icon: boxjsConfig.icon,
-      items: boxjsConfig.settings.map((item) => ({
-        ...item,
-        val: item.id === "racknerd.apiKey" ? config.apiKey : config.apiHash,
-      })),
-    });
-  } else {
-    getServiceInfo();
-  }
+  getServiceInfo();
 }
 
 main();

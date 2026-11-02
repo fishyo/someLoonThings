@@ -175,7 +175,7 @@ DOMAIN-SUFFIX,workers.dev
 DOMAIN-SUFFIX,cf-ipfs.com
 DOMAIN-SUFFIX,warp.plus
 DOMAIN-SUFFIX,videodelivery.net
-DOMAIN-SUFFIX,one.one.one
+DOMAIN,one.one.one.one
 
 # Vercel
 DOMAIN-KEYWORD,vercel
@@ -316,3 +316,5 @@ DOMAIN-KEYWORD,hysteria
 DOMAIN-SUFFIX,everia.club
 DOMAIN-SUFFIX,reiobox.top
 DOMAIN-SUFFIX,uindex.org
+
+DOMAIN-SUFFIX,go.dev

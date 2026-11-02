@@ -169,7 +169,7 @@ workers.dev
 cf-ipfs.com
 warp.plus
 videodelivery.net
-one.one.one
+exact: one.one.one.one
 
 # Vercel
 keyword: vercel
@@ -310,3 +310,5 @@ keyword: hysteria
 everia.club
 reiobox.top
 uindex.org
+
+go.dev

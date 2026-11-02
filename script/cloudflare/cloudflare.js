@@ -38,14 +38,18 @@ const $ = {
   post: (options, callback) => {
     if (typeof $httpClient !== "undefined") {
       $httpClient.post(options, callback);
-    } else if (typeof $task !== "undefined") {
+      return;
+    }
+    if (typeof $task !== "undefined") {
       const opts = typeof options === "string" ? { url: options } : { ...options };
       opts.method = "POST";
       $task.fetch(opts).then(
-        (resp) => callback(null, { ...resp, status: resp.statusCode }, resp.body),
+        (resp) => callback(null, { ...resp, status: resp.statusCode || 200 }, resp.body || ""),
         (err) => callback(err, null, null)
       );
+      return;
     }
+    callback(new Error("No supported HTTP client found"), null, null);
   },
   done: (obj = {}) => {
     if (typeof $done !== "undefined") $done(obj);
@@ -89,7 +93,7 @@ function getConfig() {
     ""
   ).trim();
 
-  const alertThreshold = parseInt(
+  const rawThreshold = parseInt(
     $.read("cloudflare.alertThreshold") || arg.alertThreshold || "80",
     10
   );
@@ -97,7 +101,7 @@ function getConfig() {
   return {
     accountTag,
     apiToken,
-    alertThreshold: isNaN(alertThreshold) ? 80 : alertThreshold
+    alertThreshold: isNaN(rawThreshold) ? 80 : Math.max(0, Math.min(100, rawThreshold))
   };
 }
 
@@ -121,14 +125,16 @@ function formatNumber(num) {
   return Number(num || 0).toLocaleString("en-US");
 }
 
-async function main() {
+const APP_TITLE = "☁️ Cloudflare Workers 额度";
+
+function main() {
   console.log("========== [Cloudflare Workers 额度监控] ==========");
   const config = getConfig();
 
   if (!config.accountTag || !config.apiToken) {
     console.error("❌ [配置缺失] 请在 Loon 插件配置或 BoxJS 中填写 Account ID 与 API Token。");
     $.notify(
-      "☁️ Cloudflare 额度监控",
+      APP_TITLE,
       "⚠️ 缺少配置凭据",
       "请在 Loon 插件配置或 BoxJS 中填写 Account ID 与 API Token。"
     );
@@ -187,7 +193,7 @@ async function main() {
   $.post(options, (err, resp, body) => {
     if (err) {
       console.error("❌ [网络错误] 请求失败:", err.message || String(err));
-      $.notify("☁️ Cloudflare 额度监控", "❌ 网络请求失败", err.message || String(err));
+      $.notify(APP_TITLE, "❌ 网络请求失败", err.message || String(err));
       console.log("==================================================");
       $.done({});
       return;
@@ -202,7 +208,7 @@ async function main() {
       if (json.errors && json.errors.length > 0) {
         const errMsg = json.errors.map(e => e.message).join("; ") || "GraphQL Error";
         console.error("❌ [API 报错]:", errMsg);
-        $.notify("☁️ Cloudflare 额度监控", "❌ API 报错", errMsg);
+        $.notify(APP_TITLE, "❌ API 报错", errMsg);
         console.log("==================================================");
         $.done({});
         return;
@@ -211,7 +217,7 @@ async function main() {
       const accounts = json.data?.viewer?.accounts || [];
       if (accounts.length === 0) {
         console.warn("⚠️ [未找到账户] 请核对配置的 Account ID 是否正确。");
-        $.notify("☁️ Cloudflare 额度监控", "❌ 未找到对应账户", "请核对配置的 Account ID 是否正确。");
+        $.notify(APP_TITLE, "❌ 未找到对应账户", "请核对配置的 Account ID 是否正确。");
         console.log("==================================================");
         $.done({});
         return;
@@ -247,7 +253,7 @@ async function main() {
       console.log(`[结果] 子请求调用量: ${formatNumber(subrequests)} 次`);
       console.log(`[结果] 运行时异常数: ${formatNumber(errors)} 次`);
       console.log(`[状态] 阈值状态: ${isAlert ? "⚠️ 超出告警阈值 (" + config.alertThreshold + "%)" : "正常"}`);
-      console.log(`[通知] 发送通知: ☁️ Cloudflare Workers 额度 | ${subTitle}`);
+      console.log(`[通知] 发送通知: ${APP_TITLE} | ${subTitle}`);
 
       const content = [
         `▪️ 今日请求: ${formatNumber(requests)} / ${formatNumber(dailyLimit)} ${bar} ${percentStr}%`,
@@ -257,12 +263,12 @@ async function main() {
         `🕒 额度周期: 每日 UTC 00:00 重置 (北京时间 08:00)`
       ].join("\n");
 
-      $.notify("☁️ Cloudflare Workers 额度", subTitle, content, {
+      $.notify(APP_TITLE, subTitle, content, {
         "open-url": "https://dash.cloudflare.com/"
       });
     } catch (parseErr) {
       console.error("❌ [解析错误] 数据解析失败:", parseErr.message);
-      $.notify("☁️ Cloudflare 额度监控", "❌ 数据解析失败", parseErr.message);
+      $.notify(APP_TITLE, "❌ 数据解析失败", parseErr.message);
     } finally {
       console.log("==================================================");
       $.done({});

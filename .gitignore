@@ -1,5 +1,3 @@
 backup/
 loon_config.conf
 .trunk/
-.pre-commit-config.yaml
-

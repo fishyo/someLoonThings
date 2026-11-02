@@ -32,7 +32,7 @@
         $task.fetch(opts).then(
           (resp) => cb(null, { ...resp, status: resp.statusCode || 200 }, resp.body || ""),
           (err) => cb(err, null, null)
-        ).catch((err) => cb(err, null, null));
+        );
         return;
       }
       cb(new Error("No supported HTTP client found"), null, null);
@@ -48,7 +48,7 @@
         $task.fetch(opts).then(
           (resp) => cb(null, { ...resp, status: resp.statusCode || 200 }, resp.body || ""),
           (err) => cb(err, null, null)
-        ).catch((err) => cb(err, null, null));
+        );
         return;
       }
       cb(new Error("No supported HTTP client found"), null, null);
@@ -67,9 +67,9 @@
   };
 
   const CONFIG = {
-    maxRetries: 3,
+    maxRetries: 2,
     retryDelay: 2000,
-    timeout: 15000,
+    timeout: 10000,
   };
 
   const UA = "Mozilla/5.0 (iPhone; CPU iPhone OS 13_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.5 Mobile/15E148 Safari/604.1";
@@ -181,12 +181,12 @@
 
     $.post(options, (error, response, data) => {
       if (error) {
-        console.log(`请求失败 (${retryCount + 1}/${CONFIG.maxRetries}): ${error}`);
+        console.log(`请求失败 (第 ${retryCount + 1} 次尝试): ${error.message || String(error)}`);
         if (retryCount < CONFIG.maxRetries) {
           setTimeout(() => sign(retryCount + 1), CONFIG.retryDelay);
           return;
         }
-        $.notify(APP.name, "签到失败", `网络请求错误 · 已重试 ${CONFIG.maxRetries} 次`);
+        $.notify(APP.name, "签到失败", `网络请求错误 · 已尝试 ${retryCount + 1} 次`);
         $.done({});
         return;
       }
@@ -206,19 +206,11 @@
         const result = JSON.parse(data);
         console.log(`✓ 响应码: ${result.code}`);
 
-        if (result.code === 0) {
-          // 签到成功
+        if (result.code === 0 || result.code === 10014 || result.code === 540004) {
+          const isSuccess = result.code === 0;
           querySignStatus((statusData) => {
             const days = statusData?.consecutiveDays || 0;
-            const subtitle = `签到成功 · 连续 ${days} 天`;
-            $.notify(APP.name, subtitle, buildNotifyBody(statusData));
-            $.done({});
-          });
-        } else if (result.code === 10014 || result.code === 540004) {
-          // 今日已签到
-          querySignStatus((statusData) => {
-            const days = statusData?.consecutiveDays || 0;
-            const subtitle = `今日已签到 · 连续 ${days} 天`;
+            const subtitle = `${isSuccess ? "签到成功" : "今日已签到"} · 连续 ${days} 天`;
             $.notify(APP.name, subtitle, buildNotifyBody(statusData));
             $.done({});
           });

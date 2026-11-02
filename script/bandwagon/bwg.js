@@ -22,44 +22,24 @@ const $ = {
     else console.log(`${title}\n${sub}\n${msg}`);
   },
   get: (opts, cb) => {
-    if (typeof $httpClient !== "undefined") $httpClient.get(opts, cb);
-    else if (typeof $task !== "undefined") {
+    if (typeof $httpClient !== "undefined") {
+      $httpClient.get(opts, cb);
+      return;
+    }
+    if (typeof $task !== "undefined") {
       if (typeof opts === "string") opts = { url: opts };
       opts.method = "GET";
       $task.fetch(opts).then(
-        (resp) => cb(null, { ...resp, status: resp.statusCode }, resp.body),
+        (resp) => cb(null, { ...resp, status: resp.statusCode || 200 }, resp.body || ""),
         (err) => cb(err, null, null)
       );
+      return;
     }
+    cb(new Error("No supported HTTP client found"), null, null);
   },
   done: (obj = {}) => {
     if (typeof $done !== "undefined") $done(obj);
   }
-};
-
-// BoxJS 应用配置
-const boxjsConfig = {
-  icon: "https://raw.githubusercontent.com/fishyo/someLoonThings/main/icons/bandwagon.png",
-  title: "Bandwagon Status",
-  desc: "Bandwagon VPS 状态查询",
-  settings: [
-    {
-      id: "bandwagon.apiKey",
-      name: "API Key",
-      val: "",
-      type: "text",
-      desc: "Bandwagon API Key",
-      placeholder: "输入 API Key",
-    },
-    {
-      id: "bandwagon.veid",
-      name: "VEID",
-      val: "",
-      type: "text",
-      desc: "Bandwagon VEID",
-      placeholder: "输入 VEID",
-    },
-  ],
 };
 
 // 解析插件参数 ($argument)
@@ -120,15 +100,15 @@ function getServiceInfo() {
     return;
   }
 
-  const apiUrl = `https://api.64clouds.com/v1/getServiceInfo?veid=${config.veid}&api_key=${config.apiKey}`;
-  const request = { url: apiUrl, method: "GET" };
+  const apiUrl = `https://api.64clouds.com/v1/getServiceInfo?veid=${encodeURIComponent(config.veid)}&api_key=${encodeURIComponent(config.apiKey)}`;
+  const request = { url: apiUrl, method: "GET", timeout: 15000 };
 
   const maskedUrl = apiUrl.replace(/veid=([^&]+)/, "veid=****").replace(/api_key=([^&]+)/, "api_key=****");
   console.log(`Request API: ${maskedUrl}`);
 
   $.get(request, function (error, response, data) {
     if (error) {
-      console.error("❌ Request Error:", error);
+      console.error("❌ Request Error:", error.message || String(error));
       $.notify("BandwagonHost Status", "❌ 查询失败", error.message || String(error));
       $.done({});
       return;
@@ -142,7 +122,7 @@ function getServiceInfo() {
 
     try {
       const jsonData = JSON.parse(data);
-      console.log("Parsed Data:", JSON.stringify(jsonData, null, 2));
+      console.log(`Parsed Data Status - Location: ${jsonData.node_location || "N/A"}`);
 
       if (jsonData.error) {
         console.warn("⚠️ API Returned Error:", jsonData.error);
@@ -152,10 +132,12 @@ function getServiceInfo() {
       }
 
       // 提取用量与状态
-      const dataCounter = jsonData.data_counter;
-      const planMonthlyData = jsonData.plan_monthly_data;
-      const monthlyDataMultiplier = jsonData.monthly_data_multiplier;
-      const dataNextReset = new Date(jsonData.data_next_reset * 1000).toLocaleDateString();
+      const dataCounter = Number(jsonData.data_counter) || 0;
+      const planMonthlyData = Number(jsonData.plan_monthly_data) || 0;
+      const monthlyDataMultiplier = Number(jsonData.monthly_data_multiplier) || 1;
+      const dataNextReset = jsonData.data_next_reset
+        ? new Date(jsonData.data_next_reset * 1000).toLocaleDateString()
+        : "未知";
       const location = jsonData.node_location || "";
 
       // 提取并分类 IPv4 / IPv6
@@ -171,13 +153,14 @@ function getServiceInfo() {
         else if (trimmed.includes(".")) ipv4List.push(trimmed);
       });
 
-      // 带宽与进度条计算
+      // 带宽与进度条计算 (防御除零与 NaN 隐患)
       const usedBandwidthGB = ((dataCounter * monthlyDataMultiplier) / (1024 * 1024 * 1024)).toFixed(2);
       const totalBandwidthGB = ((planMonthlyData * monthlyDataMultiplier) / (1024 * 1024 * 1024)).toFixed(2);
-      const usedPercentage = ((dataCounter / planMonthlyData) * 100).toFixed(2);
+      const usageRatio = planMonthlyData > 0 ? (dataCounter / planMonthlyData) : 0;
+      const usedPercentage = (usageRatio * 100).toFixed(2);
 
       const barLen = 10;
-      const filled = Math.min(Math.max(Math.round(barLen * (dataCounter / planMonthlyData)), 0), barLen);
+      const filled = Math.min(Math.max(Math.round(barLen * usageRatio), 0), barLen);
       const progressBar = "█".repeat(filled) + "░".repeat(barLen - filled);
 
       const subTitle = location || (ipv4List[0] ? `IP: ${ipv4List[0]}` : "正常运行");
@@ -207,19 +190,7 @@ function getServiceInfo() {
 }
 
 function main() {
-  if (typeof $environment !== "undefined" && $environment.platform === "boxjs") {
-    const config = getConfig();
-    $.done({
-      title: boxjsConfig.title,
-      icon: boxjsConfig.icon,
-      items: boxjsConfig.settings.map((item) => ({
-        ...item,
-        val: item.id === "bandwagon.apiKey" ? config.apiKey : config.veid,
-      })),
-    });
-  } else {
-    getServiceInfo();
-  }
+  getServiceInfo();
 }
 
 main();

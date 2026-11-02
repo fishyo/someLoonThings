@@ -38,8 +38,7 @@
       "repo": "https://github.com/fishyo/someLoonThings",
       "script": "https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/bandwagon/bwg.js",
       "icons": [
-        "https://raw.githubusercontent.com/fishyo/someLoonThings/main/icons/bandwagon.png",
-        "https://raw.githubusercontent.com/fishyo/someLoonThings/main/icons/bandwagon.png"
+        "https://fastly.jsdelivr.net/gh/fishyo/someLoonThings@main/icons/bandwagon.png"
       ]
     },
     {
@@ -76,8 +75,7 @@
       "repo": "https://github.com/fishyo/someLoonThings",
       "script": "https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/racknerd/racknerd.js",
       "icons": [
-        "https://raw.githubusercontent.com/fishyo/someLoonThings/main/icons/racknerd.png",
-        "https://raw.githubusercontent.com/fishyo/someLoonThings/main/icons/racknerd.png"
+        "https://fastly.jsdelivr.net/gh/fishyo/someLoonThings@main/icons/racknerd.png"
       ]
     },
     {
@@ -122,8 +120,7 @@
       "repo": "https://github.com/fishyo/someLoonThings",
       "script": "https://raw.githubusercontent.com/fishyo/someLoonThings/main/script/cloudflare/cloudflare.js",
       "icons": [
-        "https://raw.githubusercontent.com/fishyo/someLoonThings/main/icons/cloudflare.png",
-        "https://raw.githubusercontent.com/fishyo/someLoonThings/main/icons/cloudflare.png"
+        "https://fastly.jsdelivr.net/gh/fishyo/someLoonThings@main/icons/cloudflare.png"
       ]
     }
   ]

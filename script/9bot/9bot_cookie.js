@@ -28,7 +28,7 @@ const cookieKey = "9bot_cookie_data";
 const legacyCookieKey = "ninebot_cookie_data";
 
 // 仅在签到接口请求时进行捕获
-if (typeof $request !== "undefined" && $request.url && $request.url.indexOf("user-sign") > -1 && $request.url.indexOf("sign") > -1) {
+if (typeof $request !== "undefined" && $request.url && /\/user-sign\/v\d+\/sign/.test($request.url)) {
   const headers = $request.headers || {};
   const authorization = headers["authorization"] || headers["Authorization"];
   
@@ -48,14 +48,12 @@ if (typeof $request !== "undefined" && $request.url && $request.url.indexOf("use
       deviceId: deviceId,
       userAgent: headers["user-agent"] || headers["User-Agent"] || "",
       updateTime: new Date().toLocaleString("zh-CN", { timeZone: "Asia/Shanghai" }),
-      url: $request.url,
     });
 
     const oldData = $.read(cookieKey) || $.read(legacyCookieKey);
 
     if (oldData !== cookieData) {
       $.write(cookieData, cookieKey);
-      $.write(cookieData, legacyCookieKey);
       $.notify("9bot", "Cookie 获取成功", "授权信息已更新，可在配置中关闭获取开关");
       console.log("9bot Cookie 已更新并保存");
     } else {

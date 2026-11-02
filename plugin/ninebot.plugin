@@ -2,7 +2,7 @@
 #!desc = 9bot 自动签到与 Cookie 获取。可在插件配置页开启/关闭签到任务及自定义签到时间；首次使用或 Cookie 失效时开启【获取Cookie】开关，打开 App 签到页面即可自动捕获。
 #!author = fishyo
 #!homepage = https://github.com/fishyo/someLoonThings
-#!icon = https://raw.githubusercontent.com/fishyo/someLoonThings/refs/heads/main/icons/ninebot.png
+#!icon = https://fastly.jsdelivr.net/gh/fishyo/someLoonThings@main/icons/ninebot.png
 #!date = 2026-10-21
 
 [Argument]

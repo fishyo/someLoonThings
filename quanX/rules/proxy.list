@@ -175,7 +175,7 @@ host-suffix, workers.dev, proxy
 host-suffix, cf-ipfs.com, proxy
 host-suffix, warp.plus, proxy
 host-suffix, videodelivery.net, proxy
-host-suffix, one.one.one, proxy
+host, one.one.one.one, proxy
 
 # Vercel
 host-keyword, vercel, proxy
@@ -316,3 +316,5 @@ host-keyword, hysteria, proxy
 host-suffix, everia.club, proxy
 host-suffix, reiobox.top, proxy
 host-suffix, uindex.org, proxy
+
+host-suffix, go.dev, proxy

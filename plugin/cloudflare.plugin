@@ -2,7 +2,7 @@
 #!desc = 定时查询 Cloudflare Workers 每日免费请求配额 (100,000次/天) 使用情况、剩余可用量与子请求统计。支持在插件配置页直接填写 API 凭证及自定义执行时间，留空则自动读取 BoxJS。
 #!author = fishyo
 #!homepage = https://github.com/fishyo/someLoonThings
-#!icon = https://raw.githubusercontent.com/fishyo/someLoonThings/refs/heads/main/icons/cloudflare.png
+#!icon = https://fastly.jsdelivr.net/gh/fishyo/someLoonThings@main/icons/cloudflare.png
 #!date = 2026-10-28
 
 [Argument]
