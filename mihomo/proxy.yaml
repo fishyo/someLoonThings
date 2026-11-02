@@ -5,12 +5,21 @@
 # ==============================================================================
 
 payload:
-  # Captcha
+  # ==============================================================================
+  # Custom Proxy Ruleset (Source List)
+  # Maintainer: fishyo
+  # Homepage: https://github.com/fishyo/someLoonThings
+  #
+  # Rules are automatically compiled to Loon (.lsr), Quantumult X (.list), and Mihomo (.yaml).
+  # ==============================================================================
+
+  # ----------------- 1. Web Essentials & Infrastructure (基础网络与验证) -----------------
+  # Captcha & Human Verification
   - DOMAIN-SUFFIX,recaptcha.net
   - DOMAIN-SUFFIX,hcaptcha.com
   - DOMAIN-SUFFIX,challenges.cloudflare.com
 
-  # Public CDNs
+  # Public CDNs & Libraries
   - DOMAIN-SUFFIX,cdnjs.cloudflare.com
   - DOMAIN-SUFFIX,jsdelivr.net
   - DOMAIN-SUFFIX,unpkg.com
@@ -27,16 +36,24 @@ payload:
   - DOMAIN-SUFFIX,ow.ly
   - DOMAIN-SUFFIX,is.gd
 
-  # Payment
-  - DOMAIN-SUFFIX,stripe.com
-  - DOMAIN-SUFFIX,stripe.network
-
-  # Diagnostics & Speedtest
+  # Network Diagnostics & Speedtest
   - DOMAIN-SUFFIX,speedtest.net
   - DOMAIN-SUFFIX,ipinfo.io
   - DOMAIN-SUFFIX,ipapi.co
   - DOMAIN-SUFFIX,nxtrace.org
 
+  # Payment & Financial Services
+  - DOMAIN-SUFFIX,stripe.com
+  - DOMAIN-SUFFIX,stripe.network
+
+  # ----------------- 2. Search Engines & Privacy (搜索引擎) -----------------
+  - DOMAIN-SUFFIX,duckduckgo.com
+  - DOMAIN-SUFFIX,duck.com
+  - DOMAIN-SUFFIX,ddg.gg
+  - DOMAIN-SUFFIX,search.brave.com
+  - DOMAIN-SUFFIX,startpage.com
+
+  # ----------------- 3. Tech Giants & Cloud Infrastructure (科技巨头生态) -----------------
   # Google
   - DOMAIN-SUFFIX,google.com
   - DOMAIN-SUFFIX,googleapis.com
@@ -55,20 +72,21 @@ payload:
   - DOMAIN-SUFFIX,google.co.jp
   - DOMAIN-SUFFIX,google.co.uk
 
-  # YouTube
-  - DOMAIN-KEYWORD,youtube
-  - DOMAIN-SUFFIX,youtube.com
-  - DOMAIN-SUFFIX,youtu.be
-  - DOMAIN-SUFFIX,yt.be
-  - DOMAIN-SUFFIX,ytimg.com
-  - DOMAIN-SUFFIX,googlevideo.com
-  - DOMAIN-SUFFIX,youtube-nocookie.com
-
   # Microsoft
   - DOMAIN-SUFFIX,copilot.microsoft.com
   - DOMAIN-SUFFIX,sydneystorageextension.blob.core.windows.net
   - DOMAIN,edgeservices.bing.com
 
+  # Cloudflare
+  - DOMAIN-KEYWORD,cloudflare
+  - DOMAIN-SUFFIX,pages.dev
+  - DOMAIN-SUFFIX,workers.dev
+  - DOMAIN-SUFFIX,cf-ipfs.com
+  - DOMAIN-SUFFIX,warp.plus
+  - DOMAIN-SUFFIX,videodelivery.net
+  - DOMAIN,one.one.one.one
+
+  # ----------------- 4. Artificial Intelligence (人工智能与大模型) -----------------
   # OpenAI & ChatGPT
   - DOMAIN-SUFFIX,openai.com
   - DOMAIN-SUFFIX,chatgpt.com
@@ -86,12 +104,12 @@ payload:
   - DOMAIN-SUFFIX,claude.ai
   - DOMAIN-SUFFIX,claudeusercontent.com
 
-  # Google Gemini
+  # Google Gemini & AI
   - DOMAIN-SUFFIX,gemini.google.com
   - DOMAIN-SUFFIX,generativeai.google.com
   - DOMAIN-SUFFIX,bard.google.com
 
-  # AI Tools
+  # AI Tools & IDEs
   - DOMAIN-SUFFIX,perplexity.ai
   - DOMAIN-SUFFIX,pplx.ai
   - DOMAIN-SUFFIX,poe.com
@@ -101,6 +119,7 @@ payload:
   - DOMAIN-SUFFIX,cursor.sh
   - DOMAIN-SUFFIX,onorca.dev
 
+  # ----------------- 5. Social Media & Messaging (社交与即时通讯) -----------------
   # Telegram
   - DOMAIN-KEYWORD,telegram
   - DOMAIN-SUFFIX,telegram.org
@@ -113,7 +132,7 @@ payload:
   - DOMAIN-SUFFIX,tdesktop.com
   - DOMAIN-SUFFIX,cdn-telegram.org
 
-  # Twitter
+  # Twitter / X
   - DOMAIN-KEYWORD,twitter
   - DOMAIN-SUFFIX,x.com
   - DOMAIN-SUFFIX,twitter.com
@@ -124,7 +143,7 @@ payload:
   - DOMAIN-SUFFIX,pscp.tv
   - DOMAIN-SUFFIX,twitpic.com
 
-  # Meta
+  # Meta (Facebook, Instagram, WhatsApp, Threads)
   - DOMAIN-SUFFIX,facebook.com
   - DOMAIN-SUFFIX,fbcdn.net
   - DOMAIN-SUFFIX,instagram.com
@@ -152,12 +171,13 @@ payload:
   - DOMAIN-SUFFIX,redditmedia.com
   - DOMAIN-SUFFIX,reddithelp.com
 
-  # Signal & Line
+  # Signal & LINE
   - DOMAIN-SUFFIX,signal.org
   - DOMAIN-SUFFIX,line.me
   - DOMAIN-SUFFIX,line-apps.com
   - DOMAIN-SUFFIX,line-scdn.net
 
+  # ----------------- 6. Developer Platforms & Programming (开发者与代码生态) -----------------
   # GitHub
   - DOMAIN-SUFFIX,github.com
   - DOMAIN-SUFFIX,githubassets.com
@@ -169,21 +189,12 @@ payload:
   - DOMAIN-SUFFIX,github.blog
   - DOMAIN-SUFFIX,githubstatus.com
 
-  # Cloudflare
-  - DOMAIN-KEYWORD,cloudflare
-  - DOMAIN-SUFFIX,pages.dev
-  - DOMAIN-SUFFIX,workers.dev
-  - DOMAIN-SUFFIX,cf-ipfs.com
-  - DOMAIN-SUFFIX,warp.plus
-  - DOMAIN-SUFFIX,videodelivery.net
-  - DOMAIN,one.one.one.one
-
-  # Vercel
+  # Vercel & Deployment
   - DOMAIN-KEYWORD,vercel
   - DOMAIN-SUFFIX,vercel.com
   - DOMAIN-SUFFIX,vercel.app
 
-  # Cloud & Serverless
+  # Cloud & PaaS
   - DOMAIN-SUFFIX,supabase.co
   - DOMAIN-SUFFIX,supabase.com
   - DOMAIN-SUFFIX,netlify.app
@@ -192,7 +203,21 @@ payload:
   - DOMAIN-SUFFIX,fly.dev
   - DOMAIN-SUFFIX,render.com
 
-  # Atlassian
+  # Programming Languages & Package Registries
+  - DOMAIN-SUFFIX,gitlab.com
+  - DOMAIN-SUFFIX,pypi.org
+  - DOMAIN-SUFFIX,pythonhosted.org
+  - DOMAIN-SUFFIX,crates.io
+  - DOMAIN-SUFFIX,rust-lang.org
+  - DOMAIN-SUFFIX,golang.org
+  - DOMAIN-SUFFIX,pkg.go.dev
+  - DOMAIN-SUFFIX,go.dev
+  - DOMAIN-SUFFIX,docker.com
+  - DOMAIN-SUFFIX,docker.io
+  - DOMAIN-SUFFIX,stackoverflow.com
+  - DOMAIN-SUFFIX,stackexchange.com
+
+  # Atlassian Suite & Team Collaboration
   - DOMAIN-SUFFIX,atlassian.com
   - DOMAIN-SUFFIX,atlassian.net
   - DOMAIN-SUFFIX,atl-paas.net
@@ -202,28 +227,19 @@ payload:
   - DOMAIN-SUFFIX,ss-inf.net
   - DOMAIN-SUFFIX,atlassian-dev.net
   - DOMAIN-SUFFIX,atlassian-3p.com
+  - DOMAIN-SUFFIX,linear.app
 
-  # Package Repositories & Tech
-  - DOMAIN-SUFFIX,gitlab.com
-  - DOMAIN-SUFFIX,pypi.org
-  - DOMAIN-SUFFIX,pythonhosted.org
-  - DOMAIN-SUFFIX,crates.io
-  - DOMAIN-SUFFIX,rust-lang.org
-  - DOMAIN-SUFFIX,golang.org
-  - DOMAIN-SUFFIX,pkg.go.dev
-  - DOMAIN-SUFFIX,docker.com
-  - DOMAIN-SUFFIX,docker.io
-  - DOMAIN-SUFFIX,stackoverflow.com
-  - DOMAIN-SUFFIX,stackexchange.com
+  # ----------------- 7. Media & Entertainment (流媒体与影音娱乐) -----------------
+  # YouTube
+  - DOMAIN-KEYWORD,youtube
+  - DOMAIN-SUFFIX,youtube.com
+  - DOMAIN-SUFFIX,youtu.be
+  - DOMAIN-SUFFIX,yt.be
+  - DOMAIN-SUFFIX,ytimg.com
+  - DOMAIN-SUFFIX,googlevideo.com
+  - DOMAIN-SUFFIX,youtube-nocookie.com
 
-  # Music & Spotify
-  - DOMAIN-SUFFIX,spotify.com
-  - DOMAIN-SUFFIX,spotifycdn.com
-  - DOMAIN-SUFFIX,scdn.co
-  - DOMAIN-SUFFIX,spoti.fi
-  - DOMAIN-SUFFIX,spotifycharts.com
-
-  # Video Streaming
+  # Video Streaming (VOD)
   - DOMAIN-KEYWORD,netflix
   - DOMAIN-SUFFIX,netflix.com
   - DOMAIN-SUFFIX,netflix.net
@@ -237,7 +253,14 @@ payload:
   - DOMAIN-SUFFIX,hbomax.com
   - DOMAIN-SUFFIX,primevideo.com
 
-  # Podcasts
+  # Music & Audio Streaming (Spotify)
+  - DOMAIN-SUFFIX,spotify.com
+  - DOMAIN-SUFFIX,spotifycdn.com
+  - DOMAIN-SUFFIX,scdn.co
+  - DOMAIN-SUFFIX,spoti.fi
+  - DOMAIN-SUFFIX,spotifycharts.com
+
+  # Podcasts & Audio Hosting
   - DOMAIN-SUFFIX,pocketcasts.com
   - DOMAIN-SUFFIX,pca.st
   - DOMAIN-KEYWORD,fireside
@@ -249,7 +272,7 @@ payload:
   - DOMAIN-SUFFIX,transistor.fm
   - DOMAIN-SUFFIX,simplecast.com
 
-  # Gaming & Esports
+  # Gaming & Live Streaming
   - DOMAIN-SUFFIX,steamcommunity.com
   - DOMAIN-SUFFIX,steamstatic.com
   - DOMAIN-SUFFIX,twitch.tv
@@ -258,6 +281,7 @@ payload:
   - DOMAIN-SUFFIX,twitchcdn.net
   - DOMAIN-SUFFIX,royaleapi.com
 
+  # ----------------- 8. Productivity & Cloud Storage (效率办公与云存储) -----------------
   # Password Managers
   - DOMAIN-SUFFIX,bitwarden.com
   - DOMAIN-SUFFIX,1password.com
@@ -266,7 +290,7 @@ payload:
   - DOMAIN-SUFFIX,1passwordservices.com
   - DOMAIN-SUFFIX,lastpass.com
 
-  # Productivity
+  # Productivity & Cloud Drives
   - DOMAIN-SUFFIX,notion.so
   - DOMAIN-SUFFIX,notion.site
   - DOMAIN-SUFFIX,notion.new
@@ -276,11 +300,10 @@ payload:
   - DOMAIN-SUFFIX,dropboxusercontent.com
   - DOMAIN-SUFFIX,figma.com
   - DOMAIN-SUFFIX,slack.com
-  - DOMAIN-SUFFIX,linear.app
   - DOMAIN-SUFFIX,onedrive.live.com
   - DOMAIN-SUFFIX,mega.nz
 
-  # Wikipedia
+  # ----------------- 9. Knowledge & Reference (维基百科与知识库) -----------------
   - DOMAIN-SUFFIX,wikipedia.org
   - DOMAIN-SUFFIX,wikimedia.org
   - DOMAIN-SUFFIX,wikidata.org
@@ -289,12 +312,7 @@ payload:
   - DOMAIN-SUFFIX,wikibooks.org
   - DOMAIN-SUFFIX,wikisource.org
 
-  # News & Media
-  - DOMAIN-SUFFIX,duckduckgo.com
-  - DOMAIN-SUFFIX,duck.com
-  - DOMAIN-SUFFIX,ddg.gg
-  - DOMAIN-SUFFIX,search.brave.com
-  - DOMAIN-SUFFIX,startpage.com
+  # ----------------- 10. News & Global Media (国际新闻与深度媒体) -----------------
   - DOMAIN-SUFFIX,medium.com
   - DOMAIN-SUFFIX,substack.com
   - DOMAIN-SUFFIX,theverge.com
@@ -306,16 +324,14 @@ payload:
   - DOMAIN-SUFFIX,wsj.com
   - DOMAIN-SUFFIX,reuters.com
 
-  # Mobile & App Stores
+  # ----------------- 11. Mobile Ecosystem & App Stores (移动生态) -----------------
   - DOMAIN-SUFFIX,play.google.com
   - DOMAIN-SUFFIX,android.com
   - DOMAIN-SUFFIX,apkpure.com
   - DOMAIN-SUFFIX,apkmirror.com
 
-  # Custom & Misc
+  # ----------------- 12. Custom & Network Utilities (自用补充与网络工具) -----------------
   - DOMAIN-KEYWORD,hysteria
   - DOMAIN-SUFFIX,everia.club
   - DOMAIN-SUFFIX,reiobox.top
   - DOMAIN-SUFFIX,uindex.org
-
-  - DOMAIN-SUFFIX,go.dev

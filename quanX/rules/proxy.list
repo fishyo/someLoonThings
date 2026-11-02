@@ -4,12 +4,21 @@
 # Homepage: https://github.com/fishyo/someLoonThings
 # ==============================================================================
 
-# Captcha
+# ==============================================================================
+# Custom Proxy Ruleset (Source List)
+# Maintainer: fishyo
+# Homepage: https://github.com/fishyo/someLoonThings
+#
+# Rules are automatically compiled to Loon (.lsr), Quantumult X (.list), and Mihomo (.yaml).
+# ==============================================================================
+
+# ----------------- 1. Web Essentials & Infrastructure (基础网络与验证) -----------------
+# Captcha & Human Verification
 host-suffix, recaptcha.net, proxy
 host-suffix, hcaptcha.com, proxy
 host-suffix, challenges.cloudflare.com, proxy
 
-# Public CDNs
+# Public CDNs & Libraries
 host-suffix, cdnjs.cloudflare.com, proxy
 host-suffix, jsdelivr.net, proxy
 host-suffix, unpkg.com, proxy
@@ -26,16 +35,24 @@ host-suffix, tinyurl.com, proxy
 host-suffix, ow.ly, proxy
 host-suffix, is.gd, proxy
 
-# Payment
-host-suffix, stripe.com, proxy
-host-suffix, stripe.network, proxy
-
-# Diagnostics & Speedtest
+# Network Diagnostics & Speedtest
 host-suffix, speedtest.net, proxy
 host-suffix, ipinfo.io, proxy
 host-suffix, ipapi.co, proxy
 host-suffix, nxtrace.org, proxy
 
+# Payment & Financial Services
+host-suffix, stripe.com, proxy
+host-suffix, stripe.network, proxy
+
+# ----------------- 2. Search Engines & Privacy (搜索引擎) -----------------
+host-suffix, duckduckgo.com, proxy
+host-suffix, duck.com, proxy
+host-suffix, ddg.gg, proxy
+host-suffix, search.brave.com, proxy
+host-suffix, startpage.com, proxy
+
+# ----------------- 3. Tech Giants & Cloud Infrastructure (科技巨头生态) -----------------
 # Google
 host-suffix, google.com, proxy
 host-suffix, googleapis.com, proxy
@@ -54,20 +71,21 @@ host-suffix, google.com.hk, proxy
 host-suffix, google.co.jp, proxy
 host-suffix, google.co.uk, proxy
 
-# YouTube
-host-keyword, youtube, proxy
-host-suffix, youtube.com, proxy
-host-suffix, youtu.be, proxy
-host-suffix, yt.be, proxy
-host-suffix, ytimg.com, proxy
-host-suffix, googlevideo.com, proxy
-host-suffix, youtube-nocookie.com, proxy
-
 # Microsoft
 host-suffix, copilot.microsoft.com, proxy
 host-suffix, sydneystorageextension.blob.core.windows.net, proxy
 host, edgeservices.bing.com, proxy
 
+# Cloudflare
+host-keyword, cloudflare, proxy
+host-suffix, pages.dev, proxy
+host-suffix, workers.dev, proxy
+host-suffix, cf-ipfs.com, proxy
+host-suffix, warp.plus, proxy
+host-suffix, videodelivery.net, proxy
+host, one.one.one.one, proxy
+
+# ----------------- 4. Artificial Intelligence (人工智能与大模型) -----------------
 # OpenAI & ChatGPT
 host-suffix, openai.com, proxy
 host-suffix, chatgpt.com, proxy
@@ -85,12 +103,12 @@ host-suffix, anthropic.com, proxy
 host-suffix, claude.ai, proxy
 host-suffix, claudeusercontent.com, proxy
 
-# Google Gemini
+# Google Gemini & AI
 host-suffix, gemini.google.com, proxy
 host-suffix, generativeai.google.com, proxy
 host-suffix, bard.google.com, proxy
 
-# AI Tools
+# AI Tools & IDEs
 host-suffix, perplexity.ai, proxy
 host-suffix, pplx.ai, proxy
 host-suffix, poe.com, proxy
@@ -100,6 +118,7 @@ host-suffix, cursor.com, proxy
 host-suffix, cursor.sh, proxy
 host-suffix, onorca.dev, proxy
 
+# ----------------- 5. Social Media & Messaging (社交与即时通讯) -----------------
 # Telegram
 host-keyword, telegram, proxy
 host-suffix, telegram.org, proxy
@@ -112,7 +131,7 @@ host-suffix, telesco.pe, proxy
 host-suffix, tdesktop.com, proxy
 host-suffix, cdn-telegram.org, proxy
 
-# Twitter
+# Twitter / X
 host-keyword, twitter, proxy
 host-suffix, x.com, proxy
 host-suffix, twitter.com, proxy
@@ -123,7 +142,7 @@ host-suffix, periscope.tv, proxy
 host-suffix, pscp.tv, proxy
 host-suffix, twitpic.com, proxy
 
-# Meta
+# Meta (Facebook, Instagram, WhatsApp, Threads)
 host-suffix, facebook.com, proxy
 host-suffix, fbcdn.net, proxy
 host-suffix, instagram.com, proxy
@@ -151,12 +170,13 @@ host-suffix, redditstatic.com, proxy
 host-suffix, redditmedia.com, proxy
 host-suffix, reddithelp.com, proxy
 
-# Signal & Line
+# Signal & LINE
 host-suffix, signal.org, proxy
 host-suffix, line.me, proxy
 host-suffix, line-apps.com, proxy
 host-suffix, line-scdn.net, proxy
 
+# ----------------- 6. Developer Platforms & Programming (开发者与代码生态) -----------------
 # GitHub
 host-suffix, github.com, proxy
 host-suffix, githubassets.com, proxy
@@ -168,21 +188,12 @@ host-suffix, git.io, proxy
 host-suffix, github.blog, proxy
 host-suffix, githubstatus.com, proxy
 
-# Cloudflare
-host-keyword, cloudflare, proxy
-host-suffix, pages.dev, proxy
-host-suffix, workers.dev, proxy
-host-suffix, cf-ipfs.com, proxy
-host-suffix, warp.plus, proxy
-host-suffix, videodelivery.net, proxy
-host, one.one.one.one, proxy
-
-# Vercel
+# Vercel & Deployment
 host-keyword, vercel, proxy
 host-suffix, vercel.com, proxy
 host-suffix, vercel.app, proxy
 
-# Cloud & Serverless
+# Cloud & PaaS
 host-suffix, supabase.co, proxy
 host-suffix, supabase.com, proxy
 host-suffix, netlify.app, proxy
@@ -191,7 +202,21 @@ host-suffix, fly.io, proxy
 host-suffix, fly.dev, proxy
 host-suffix, render.com, proxy
 
-# Atlassian
+# Programming Languages & Package Registries
+host-suffix, gitlab.com, proxy
+host-suffix, pypi.org, proxy
+host-suffix, pythonhosted.org, proxy
+host-suffix, crates.io, proxy
+host-suffix, rust-lang.org, proxy
+host-suffix, golang.org, proxy
+host-suffix, pkg.go.dev, proxy
+host-suffix, go.dev, proxy
+host-suffix, docker.com, proxy
+host-suffix, docker.io, proxy
+host-suffix, stackoverflow.com, proxy
+host-suffix, stackexchange.com, proxy
+
+# Atlassian Suite & Team Collaboration
 host-suffix, atlassian.com, proxy
 host-suffix, atlassian.net, proxy
 host-suffix, atl-paas.net, proxy
@@ -201,28 +226,19 @@ host-suffix, bitbucket.org, proxy
 host-suffix, ss-inf.net, proxy
 host-suffix, atlassian-dev.net, proxy
 host-suffix, atlassian-3p.com, proxy
+host-suffix, linear.app, proxy
 
-# Package Repositories & Tech
-host-suffix, gitlab.com, proxy
-host-suffix, pypi.org, proxy
-host-suffix, pythonhosted.org, proxy
-host-suffix, crates.io, proxy
-host-suffix, rust-lang.org, proxy
-host-suffix, golang.org, proxy
-host-suffix, pkg.go.dev, proxy
-host-suffix, docker.com, proxy
-host-suffix, docker.io, proxy
-host-suffix, stackoverflow.com, proxy
-host-suffix, stackexchange.com, proxy
+# ----------------- 7. Media & Entertainment (流媒体与影音娱乐) -----------------
+# YouTube
+host-keyword, youtube, proxy
+host-suffix, youtube.com, proxy
+host-suffix, youtu.be, proxy
+host-suffix, yt.be, proxy
+host-suffix, ytimg.com, proxy
+host-suffix, googlevideo.com, proxy
+host-suffix, youtube-nocookie.com, proxy
 
-# Music & Spotify
-host-suffix, spotify.com, proxy
-host-suffix, spotifycdn.com, proxy
-host-suffix, scdn.co, proxy
-host-suffix, spoti.fi, proxy
-host-suffix, spotifycharts.com, proxy
-
-# Video Streaming
+# Video Streaming (VOD)
 host-keyword, netflix, proxy
 host-suffix, netflix.com, proxy
 host-suffix, netflix.net, proxy
@@ -236,7 +252,14 @@ host-suffix, max.com, proxy
 host-suffix, hbomax.com, proxy
 host-suffix, primevideo.com, proxy
 
-# Podcasts
+# Music & Audio Streaming (Spotify)
+host-suffix, spotify.com, proxy
+host-suffix, spotifycdn.com, proxy
+host-suffix, scdn.co, proxy
+host-suffix, spoti.fi, proxy
+host-suffix, spotifycharts.com, proxy
+
+# Podcasts & Audio Hosting
 host-suffix, pocketcasts.com, proxy
 host-suffix, pca.st, proxy
 host-keyword, fireside, proxy
@@ -248,7 +271,7 @@ host-suffix, megaphone.fm, proxy
 host-suffix, transistor.fm, proxy
 host-suffix, simplecast.com, proxy
 
-# Gaming & Esports
+# Gaming & Live Streaming
 host-suffix, steamcommunity.com, proxy
 host-suffix, steamstatic.com, proxy
 host-suffix, twitch.tv, proxy
@@ -257,6 +280,7 @@ host-suffix, jtvnw.net, proxy
 host-suffix, twitchcdn.net, proxy
 host-suffix, royaleapi.com, proxy
 
+# ----------------- 8. Productivity & Cloud Storage (效率办公与云存储) -----------------
 # Password Managers
 host-suffix, bitwarden.com, proxy
 host-suffix, 1password.com, proxy
@@ -265,7 +289,7 @@ host-suffix, 1password.eu, proxy
 host-suffix, 1passwordservices.com, proxy
 host-suffix, lastpass.com, proxy
 
-# Productivity
+# Productivity & Cloud Drives
 host-suffix, notion.so, proxy
 host-suffix, notion.site, proxy
 host-suffix, notion.new, proxy
@@ -275,11 +299,10 @@ host-suffix, dropboxstatic.com, proxy
 host-suffix, dropboxusercontent.com, proxy
 host-suffix, figma.com, proxy
 host-suffix, slack.com, proxy
-host-suffix, linear.app, proxy
 host-suffix, onedrive.live.com, proxy
 host-suffix, mega.nz, proxy
 
-# Wikipedia
+# ----------------- 9. Knowledge & Reference (维基百科与知识库) -----------------
 host-suffix, wikipedia.org, proxy
 host-suffix, wikimedia.org, proxy
 host-suffix, wikidata.org, proxy
@@ -288,12 +311,7 @@ host-suffix, wikiquote.org, proxy
 host-suffix, wikibooks.org, proxy
 host-suffix, wikisource.org, proxy
 
-# News & Media
-host-suffix, duckduckgo.com, proxy
-host-suffix, duck.com, proxy
-host-suffix, ddg.gg, proxy
-host-suffix, search.brave.com, proxy
-host-suffix, startpage.com, proxy
+# ----------------- 10. News & Global Media (国际新闻与深度媒体) -----------------
 host-suffix, medium.com, proxy
 host-suffix, substack.com, proxy
 host-suffix, theverge.com, proxy
@@ -305,16 +323,14 @@ host-suffix, bloomberg.com, proxy
 host-suffix, wsj.com, proxy
 host-suffix, reuters.com, proxy
 
-# Mobile & App Stores
+# ----------------- 11. Mobile Ecosystem & App Stores (移动生态) -----------------
 host-suffix, play.google.com, proxy
 host-suffix, android.com, proxy
 host-suffix, apkpure.com, proxy
 host-suffix, apkmirror.com, proxy
 
-# Custom & Misc
+# ----------------- 12. Custom & Network Utilities (自用补充与网络工具) -----------------
 host-keyword, hysteria, proxy
 host-suffix, everia.club, proxy
 host-suffix, reiobox.top, proxy
 host-suffix, uindex.org, proxy
-
-host-suffix, go.dev, proxy

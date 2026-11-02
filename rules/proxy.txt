@@ -1,9 +1,18 @@
-# Captcha
+# ==============================================================================
+# Custom Proxy Ruleset (Source List)
+# Maintainer: fishyo
+# Homepage: https://github.com/fishyo/someLoonThings
+#
+# Rules are automatically compiled to Loon (.lsr), Quantumult X (.list), and Mihomo (.yaml).
+# ==============================================================================
+
+# ----------------- 1. Web Essentials & Infrastructure (基础网络与验证) -----------------
+# Captcha & Human Verification
 recaptcha.net
 hcaptcha.com
 challenges.cloudflare.com
 
-# Public CDNs
+# Public CDNs & Libraries
 cdnjs.cloudflare.com
 jsdelivr.net
 unpkg.com
@@ -20,16 +29,24 @@ tinyurl.com
 ow.ly
 is.gd
 
-# Payment
-stripe.com
-stripe.network
-
-# Diagnostics & Speedtest
+# Network Diagnostics & Speedtest
 speedtest.net
 ipinfo.io
 ipapi.co
 nxtrace.org
 
+# Payment & Financial Services
+stripe.com
+stripe.network
+
+# ----------------- 2. Search Engines & Privacy (搜索引擎) -----------------
+duckduckgo.com
+duck.com
+ddg.gg
+search.brave.com
+startpage.com
+
+# ----------------- 3. Tech Giants & Cloud Infrastructure (科技巨头生态) -----------------
 # Google
 google.com
 googleapis.com
@@ -48,20 +65,21 @@ google.com.hk
 google.co.jp
 google.co.uk
 
-# YouTube
-keyword: youtube
-youtube.com
-youtu.be
-yt.be
-ytimg.com
-googlevideo.com
-youtube-nocookie.com
-
 # Microsoft
 copilot.microsoft.com
 sydneystorageextension.blob.core.windows.net
 exact: edgeservices.bing.com
 
+# Cloudflare
+keyword: cloudflare
+pages.dev
+workers.dev
+cf-ipfs.com
+warp.plus
+videodelivery.net
+exact: one.one.one.one
+
+# ----------------- 4. Artificial Intelligence (人工智能与大模型) -----------------
 # OpenAI & ChatGPT
 openai.com
 chatgpt.com
@@ -79,12 +97,12 @@ anthropic.com
 claude.ai
 claudeusercontent.com
 
-# Google Gemini
+# Google Gemini & AI
 gemini.google.com
 generativeai.google.com
 bard.google.com
 
-# AI Tools
+# AI Tools & IDEs
 perplexity.ai
 pplx.ai
 poe.com
@@ -94,6 +112,7 @@ cursor.com
 cursor.sh
 onorca.dev
 
+# ----------------- 5. Social Media & Messaging (社交与即时通讯) -----------------
 # Telegram
 keyword: telegram
 telegram.org
@@ -106,7 +125,7 @@ telesco.pe
 tdesktop.com
 cdn-telegram.org
 
-# Twitter
+# Twitter / X
 keyword: twitter
 x.com
 twitter.com
@@ -117,7 +136,7 @@ periscope.tv
 pscp.tv
 twitpic.com
 
-# Meta
+# Meta (Facebook, Instagram, WhatsApp, Threads)
 facebook.com
 fbcdn.net
 instagram.com
@@ -145,12 +164,13 @@ redditstatic.com
 redditmedia.com
 reddithelp.com
 
-# Signal & Line
+# Signal & LINE
 signal.org
 line.me
 line-apps.com
 line-scdn.net
 
+# ----------------- 6. Developer Platforms & Programming (开发者与代码生态) -----------------
 # GitHub
 github.com
 githubassets.com
@@ -162,21 +182,12 @@ git.io
 github.blog
 githubstatus.com
 
-# Cloudflare
-keyword: cloudflare
-pages.dev
-workers.dev
-cf-ipfs.com
-warp.plus
-videodelivery.net
-exact: one.one.one.one
-
-# Vercel
+# Vercel & Deployment
 keyword: vercel
 vercel.com
 vercel.app
 
-# Cloud & Serverless
+# Cloud & PaaS
 supabase.co
 supabase.com
 netlify.app
@@ -185,7 +196,21 @@ fly.io
 fly.dev
 render.com
 
-# Atlassian
+# Programming Languages & Package Registries
+gitlab.com
+pypi.org
+pythonhosted.org
+crates.io
+rust-lang.org
+golang.org
+pkg.go.dev
+go.dev
+docker.com
+docker.io
+stackoverflow.com
+stackexchange.com
+
+# Atlassian Suite & Team Collaboration
 atlassian.com
 atlassian.net
 atl-paas.net
@@ -195,28 +220,19 @@ bitbucket.org
 ss-inf.net
 atlassian-dev.net
 atlassian-3p.com
+linear.app
 
-# Package Repositories & Tech
-gitlab.com
-pypi.org
-pythonhosted.org
-crates.io
-rust-lang.org
-golang.org
-pkg.go.dev
-docker.com
-docker.io
-stackoverflow.com
-stackexchange.com
+# ----------------- 7. Media & Entertainment (流媒体与影音娱乐) -----------------
+# YouTube
+keyword: youtube
+youtube.com
+youtu.be
+yt.be
+ytimg.com
+googlevideo.com
+youtube-nocookie.com
 
-# Music & Spotify
-spotify.com
-spotifycdn.com
-scdn.co
-spoti.fi
-spotifycharts.com
-
-# Video Streaming
+# Video Streaming (VOD)
 keyword: netflix
 netflix.com
 netflix.net
@@ -230,7 +246,14 @@ max.com
 hbomax.com
 primevideo.com
 
-# Podcasts
+# Music & Audio Streaming (Spotify)
+spotify.com
+spotifycdn.com
+scdn.co
+spoti.fi
+spotifycharts.com
+
+# Podcasts & Audio Hosting
 pocketcasts.com
 pca.st
 keyword: fireside
@@ -242,7 +265,7 @@ megaphone.fm
 transistor.fm
 simplecast.com
 
-# Gaming & Esports
+# Gaming & Live Streaming
 steamcommunity.com
 steamstatic.com
 twitch.tv
@@ -251,6 +274,7 @@ jtvnw.net
 twitchcdn.net
 royaleapi.com
 
+# ----------------- 8. Productivity & Cloud Storage (效率办公与云存储) -----------------
 # Password Managers
 bitwarden.com
 1password.com
@@ -259,7 +283,7 @@ bitwarden.com
 1passwordservices.com
 lastpass.com
 
-# Productivity
+# Productivity & Cloud Drives
 notion.so
 notion.site
 notion.new
@@ -269,11 +293,10 @@ dropboxstatic.com
 dropboxusercontent.com
 figma.com
 slack.com
-linear.app
 onedrive.live.com
 mega.nz
 
-# Wikipedia
+# ----------------- 9. Knowledge & Reference (维基百科与知识库) -----------------
 wikipedia.org
 wikimedia.org
 wikidata.org
@@ -282,12 +305,7 @@ wikiquote.org
 wikibooks.org
 wikisource.org
 
-# News & Media
-duckduckgo.com
-duck.com
-ddg.gg
-search.brave.com
-startpage.com
+# ----------------- 10. News & Global Media (国际新闻与深度媒体) -----------------
 medium.com
 substack.com
 theverge.com
@@ -299,16 +317,14 @@ bloomberg.com
 wsj.com
 reuters.com
 
-# Mobile & App Stores
+# ----------------- 11. Mobile Ecosystem & App Stores (移动生态) -----------------
 play.google.com
 android.com
 apkpure.com
 apkmirror.com
 
-# Custom & Misc
+# ----------------- 12. Custom & Network Utilities (自用补充与网络工具) -----------------
 keyword: hysteria
 everia.club
 reiobox.top
 uindex.org
-
-go.dev
