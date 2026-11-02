@@ -532,3 +532,6 @@ host-suffix, theinitium.com, proxy
 host-keyword, livedoor, proxy
 host-keyword, blogimg, proxy
 host-keyword, ldblog, proxy
+host-suffix, dmm.co.jp, proxy
+host-suffix, dmm.com, proxy
+host-suffix, fanza.com, proxy
