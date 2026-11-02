@@ -79,10 +79,34 @@ warp.plus
 videodelivery.net
 exact: one.one.one.one
 
+
 # ----------------- Artificial Intelligence -----------------
+# >>> BEGIN SUBORDINATE: ai (rules/ai.txt)
+# Google Gemini & AI Studio
+gemini.google.com
+bard.google.com
+aistudio.google.com
+makersuite.google.com
+generativeai.google
+generativeai.google.com
+generativelanguage.googleapis.com
+alkalimakersuite-pa.googleapis.com
+proactivebackend-pa.googleapis.com
+geller-pa.googleapis.com
+odin-pa.googleapis.com
+aiplatform.googleapis.com
+notebooklm.google
+notebooklm.google.com
+deepmind.google
+deepmind.com
+ai.google.dev
+exact: waa-pa.clients6.google.com
+exact: alkali-pa.clients6.google.com
+googleapis.com
+
 # OpenAI & ChatGPT
-openai.com
 chatgpt.com
+openai.com
 chat.com
 oaistatic.com
 oaiusercontent.com
@@ -91,30 +115,66 @@ openaiapi-site.azureedge.net
 openaicomproductionae4b.blob.core.windows.net
 openaicom.imgix.net
 featuregates.org
+stripe.com
+stripe.network
 
 # Anthropic Claude
 anthropic.com
 claude.ai
 claudeusercontent.com
 
-# Google Gemini & AI
-gemini.google.com
-generativeai.google.com
-bard.google.com
-
-# AI Tools & IDEs
-perplexity.ai
-pplx.ai
-poe.com
+# xAI Grok
 x.ai
 grok.com
+
+# Perplexity AI
+perplexity.ai
+pplx.ai
+
+# Microsoft Copilot
+copilot.microsoft.com
+sydney.bing.com
+exact: edgeservices.bing.com
+
+# Midjourney
+midjourney.com
+cdn.midjourney.com
+
+# AI Developer Tools
 cursor.com
 cursor.sh
 onorca.dev
+tavily.com
+groq.com
+poe.com
+poecdn.net
+
+# Voice & Music AI
+suno.com
+suno.ai
+udio.com
+elevenlabs.io
+
+# AI Models & Platforms
+mistral.ai
+cohere.com
+cohere.ai
+together.ai
+together.xyz
+replicate.com
+replicate.delivery
+fal.ai
+v0.dev
+huggingface.co
+hf.space
+# <<< END SUBORDINATE: ai
 
 # ----------------- Social Media & Messaging -----------------
-# Telegram
+# >>> BEGIN SUBORDINATE: telegram (rules/telegram.txt)
+# Keywords
 keyword: telegram
+
+# Telegram Core Domains
 telegram.org
 t.me
 telegra.ph
@@ -125,16 +185,57 @@ telesco.pe
 tdesktop.com
 cdn-telegram.org
 
-# Twitter / X
+# Telegram Auxiliary Services
+comments.app
+contest.com
+graph.org
+quiz.directory
+stel.com
+tchannels.me
+
+# Telegram DC IPv4 CIDR
+91.108.4.0/22
+91.108.8.0/22
+91.108.12.0/22
+91.108.16.0/22
+91.108.20.0/22
+91.108.56.0/22
+149.154.160.0/20
+149.154.164.0/22
+149.154.172.0/22
+95.161.64.0/20
+
+# Telegram DC IPv6 CIDR
+2001:b28:f23d::/48
+2001:b28:f23f::/48
+2001:67c:4e8::/48
+# <<< END SUBORDINATE: telegram
+
+# >>> BEGIN SUBORDINATE: twitter (rules/twitter.txt)
+# Keywords
 keyword: twitter
+
+# Twitter & X Core Domains
 x.com
 twitter.com
 t.co
 twimg.com
+
+# Twitter Clients & Media
 tweetdeck.com
+twitpic.com
 periscope.tv
 pscp.tv
-twitpic.com
+
+# Twitter Brand & Dev Endpoints
+twttr.com
+twttr.net
+twitterinc.com
+twitteroauth.com
+twitterstat.us
+ads-twitter.com
+cms-twdigitalassets.com
+# <<< END SUBORDINATE: twitter
 
 # Meta (Facebook, Instagram, WhatsApp, Threads)
 facebook.com

@@ -86,9 +86,31 @@ host-suffix, videodelivery.net, proxy
 host, one.one.one.one, proxy
 
 # ----------------- Artificial Intelligence -----------------
+# >>> BEGIN SUBORDINATE: ai (rules/ai.txt)
+# Google Gemini & AI Studio
+host-suffix, gemini.google.com, proxy
+host-suffix, bard.google.com, proxy
+host-suffix, aistudio.google.com, proxy
+host-suffix, makersuite.google.com, proxy
+host-suffix, generativeai.google, proxy
+host-suffix, generativeai.google.com, proxy
+host-suffix, generativelanguage.googleapis.com, proxy
+host-suffix, alkalimakersuite-pa.googleapis.com, proxy
+host-suffix, proactivebackend-pa.googleapis.com, proxy
+host-suffix, geller-pa.googleapis.com, proxy
+host-suffix, odin-pa.googleapis.com, proxy
+host-suffix, aiplatform.googleapis.com, proxy
+host-suffix, notebooklm.google, proxy
+host-suffix, notebooklm.google.com, proxy
+host-suffix, deepmind.google, proxy
+host-suffix, deepmind.com, proxy
+host-suffix, ai.google.dev, proxy
+host, waa-pa.clients6.google.com, proxy
+host, alkali-pa.clients6.google.com, proxy
+
 # OpenAI & ChatGPT
-host-suffix, openai.com, proxy
 host-suffix, chatgpt.com, proxy
+host-suffix, openai.com, proxy
 host-suffix, chat.com, proxy
 host-suffix, oaistatic.com, proxy
 host-suffix, oaiusercontent.com, proxy
@@ -103,24 +125,56 @@ host-suffix, anthropic.com, proxy
 host-suffix, claude.ai, proxy
 host-suffix, claudeusercontent.com, proxy
 
-# Google Gemini & AI
-host-suffix, gemini.google.com, proxy
-host-suffix, generativeai.google.com, proxy
-host-suffix, bard.google.com, proxy
-
-# AI Tools & IDEs
-host-suffix, perplexity.ai, proxy
-host-suffix, pplx.ai, proxy
-host-suffix, poe.com, proxy
+# xAI Grok
 host-suffix, x.ai, proxy
 host-suffix, grok.com, proxy
+
+# Perplexity AI
+host-suffix, perplexity.ai, proxy
+host-suffix, pplx.ai, proxy
+
+# Microsoft Copilot
+host-suffix, sydney.bing.com, proxy
+
+# Midjourney
+host-suffix, midjourney.com, proxy
+host-suffix, cdn.midjourney.com, proxy
+
+# AI Developer Tools
 host-suffix, cursor.com, proxy
 host-suffix, cursor.sh, proxy
 host-suffix, onorca.dev, proxy
+host-suffix, tavily.com, proxy
+host-suffix, groq.com, proxy
+host-suffix, poe.com, proxy
+host-suffix, poecdn.net, proxy
+
+# Voice & Music AI
+host-suffix, suno.com, proxy
+host-suffix, suno.ai, proxy
+host-suffix, udio.com, proxy
+host-suffix, elevenlabs.io, proxy
+
+# AI Models & Platforms
+host-suffix, mistral.ai, proxy
+host-suffix, cohere.com, proxy
+host-suffix, cohere.ai, proxy
+host-suffix, together.ai, proxy
+host-suffix, together.xyz, proxy
+host-suffix, replicate.com, proxy
+host-suffix, replicate.delivery, proxy
+host-suffix, fal.ai, proxy
+host-suffix, v0.dev, proxy
+host-suffix, huggingface.co, proxy
+host-suffix, hf.space, proxy
+# <<< END SUBORDINATE: ai
 
 # ----------------- Social Media & Messaging -----------------
-# Telegram
+# >>> BEGIN SUBORDINATE: telegram (rules/telegram.txt)
+# Keywords
 host-keyword, telegram, proxy
+
+# Telegram Core Domains
 host-suffix, telegram.org, proxy
 host-suffix, t.me, proxy
 host-suffix, telegra.ph, proxy
@@ -131,16 +185,57 @@ host-suffix, telesco.pe, proxy
 host-suffix, tdesktop.com, proxy
 host-suffix, cdn-telegram.org, proxy
 
-# Twitter / X
+# Telegram Auxiliary Services
+host-suffix, comments.app, proxy
+host-suffix, contest.com, proxy
+host-suffix, graph.org, proxy
+host-suffix, quiz.directory, proxy
+host-suffix, stel.com, proxy
+host-suffix, tchannels.me, proxy
+
+# Telegram DC IPv4 CIDR
+ip-cidr, 91.108.4.0/22, proxy
+ip-cidr, 91.108.8.0/22, proxy
+ip-cidr, 91.108.12.0/22, proxy
+ip-cidr, 91.108.16.0/22, proxy
+ip-cidr, 91.108.20.0/22, proxy
+ip-cidr, 91.108.56.0/22, proxy
+ip-cidr, 149.154.160.0/20, proxy
+ip-cidr, 149.154.164.0/22, proxy
+ip-cidr, 149.154.172.0/22, proxy
+ip-cidr, 95.161.64.0/20, proxy
+
+# Telegram DC IPv6 CIDR
+ip-cidr6, 2001:b28:f23d::/48, proxy
+ip-cidr6, 2001:b28:f23f::/48, proxy
+ip-cidr6, 2001:67c:4e8::/48, proxy
+# <<< END SUBORDINATE: telegram
+
+# >>> BEGIN SUBORDINATE: twitter (rules/twitter.txt)
+# Keywords
 host-keyword, twitter, proxy
+
+# Twitter & X Core Domains
 host-suffix, x.com, proxy
 host-suffix, twitter.com, proxy
 host-suffix, t.co, proxy
 host-suffix, twimg.com, proxy
+
+# Twitter Clients & Media
 host-suffix, tweetdeck.com, proxy
+host-suffix, twitpic.com, proxy
 host-suffix, periscope.tv, proxy
 host-suffix, pscp.tv, proxy
-host-suffix, twitpic.com, proxy
+
+# Twitter Brand & Dev Endpoints
+host-suffix, twttr.com, proxy
+host-suffix, twttr.net, proxy
+host-suffix, twitterinc.com, proxy
+host-suffix, twitteroauth.com, proxy
+host-suffix, twitterstat.us, proxy
+host-suffix, ads-twitter.com, proxy
+host-suffix, cms-twdigitalassets.com, proxy
+# <<< END SUBORDINATE: twitter
 
 # Meta (Facebook, Instagram, WhatsApp, Threads)
 host-suffix, facebook.com, proxy

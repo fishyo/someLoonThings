@@ -65,9 +65,20 @@
 ## 4. 注释与语言规范 (Commenting & Language Standards)
 
 - **注释严禁使用中文 (Strictly No Chinese in Comments)**：
-  - 无论何时，**所有规则源文件 (`rules/*.txt`)、编译生成文件 (`.lsr`, `.list`, `.yaml`)、脚本与配置文件中的注释，必须且只能使用纯英文 (English Only)**。
+  - 无论何时，**所有规则源文件 (**`rules/*.txt`**)、编译生成文件 (**`.lsr`**,** `.list`**,** `.yaml`**)、脚本与配置文件中的注释，必须且只能使用纯英文 (English Only),注释必须简洁明了禁止过长**。
   - 严禁在注释中包含任何中文字符或中英混合注释。
   - 注释力求简短、精准、国际化标准（例如 `# Web Essentials & Infrastructure`, `# Search Engines`, `# Google`, `# Developer Platforms`）。
+
+---
+
+## 5. 规则分流与从属架构规范 (Ruleset Architecture)
+
+- **代理主从从属机制 (Master-Subordinate Proxy Architecture)**：
+  - `proxy`（`rules/proxy.txt`）作为全量代理黑名单主规则库（Master Ruleset）。
+  - 独立代理片段（如 `ai.txt`、`twitter.txt`、`telegram.txt` 等 `policy: 'proxy'` 的规则集）统一定义为 `subordinateTo: 'proxy'`。
+  - 编译引擎 (`build-rules.js`) 自动将所有从属代理片段同步（Sync）嵌入 `rules/proxy.txt`（通过 `# >>> BEGIN SUBORDINATE: <key>` 标记块隔离），保证主规则库与各端编译产物始终具备完备的代理覆盖。
+  - 直连白名单规则集（如 `appstore.txt`、`wechat.txt`、`supercell.txt` 等 `policy: 'direct'` 的规则集）保持独立，严禁混入代理主规则。
+  - 编译生成各端规则文件时，引擎自动对重复条目执行去重（Deduplication），保证最终输出规范、纯净、无冗余。
 
 ---
 

@@ -4,6 +4,7 @@ bard.google.com
 aistudio.google.com
 makersuite.google.com
 generativeai.google
+generativeai.google.com
 generativelanguage.googleapis.com
 alkalimakersuite-pa.googleapis.com
 proactivebackend-pa.googleapis.com
@@ -58,6 +59,7 @@ cdn.midjourney.com
 # AI Developer Tools
 cursor.com
 cursor.sh
+onorca.dev
 tavily.com
 groq.com
 poe.com
