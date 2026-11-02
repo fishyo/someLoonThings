@@ -519,3 +519,5 @@ host-suffix, uindex.org, proxy
 host-suffix, bandwagonhost.com, proxy
 host-suffix, cloudcone.com, proxy
 host-suffix, guim.co.uk, proxy
+host-suffix, dw.com, proxy
+host-suffix, dw.de, proxy
