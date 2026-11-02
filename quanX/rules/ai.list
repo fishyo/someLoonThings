@@ -19,12 +19,14 @@ host-suffix, notebooklm.google.com, proxy
 host-suffix, deepmind.google, proxy
 host-suffix, deepmind.com, proxy
 host-suffix, ai.google.dev, proxy
+host-suffix, gemini.google, proxy
 host, waa-pa.clients6.google.com, proxy
 host, alkali-pa.clients6.google.com, proxy
 host-suffix, googleapis.com, proxy
 
 # OpenAI
 host-suffix, chatgpt.com, proxy
+host-suffix, chatgpt.site, proxy
 host-suffix, openai.com, proxy
 host-suffix, chat.com, proxy
 host-suffix, oaistatic.com, proxy
@@ -61,21 +63,25 @@ host-suffix, midjourney.com, proxy
 host-suffix, cdn.midjourney.com, proxy
 
 # Tools
+host-suffix, augmentcode.com, proxy
+host-suffix, character.ai, proxy
+host-suffix, civitai.com, proxy
+host-suffix, coze.com, proxy
 host-suffix, cursor.com, proxy
 host-suffix, cursor.sh, proxy
-host-suffix, onorca.dev, proxy
-host-suffix, tavily.com, proxy
+host-suffix, cursorvm.com, proxy
+host-suffix, dify.ai, proxy
+host-suffix, genspark.ai, proxy
 host-suffix, groq.com, proxy
+host-suffix, meta.ai, proxy
+host-suffix, onorca.dev, proxy
+host-suffix, opencode.ai, proxy
+host-suffix, openrouter.ai, proxy
+host-suffix, phind.com, proxy
 host-suffix, poe.com, proxy
 host-suffix, poecdn.net, proxy
-host-suffix, civitai.com, proxy
-host-suffix, character.ai, proxy
-host-suffix, coze.com, proxy
-host-suffix, dify.ai, proxy
-host-suffix, openrouter.ai, proxy
+host-suffix, tavily.com, proxy
 host-suffix, you.com, proxy
-host-suffix, phind.com, proxy
-host-suffix, genspark.ai, proxy
 
 # Audio
 host-suffix, suno.com, proxy
@@ -84,17 +90,18 @@ host-suffix, udio.com, proxy
 host-suffix, elevenlabs.io, proxy
 
 # Models
-host-suffix, mistral.ai, proxy
-host-suffix, cohere.com, proxy
 host-suffix, cohere.ai, proxy
-host-suffix, together.ai, proxy
-host-suffix, together.xyz, proxy
+host-suffix, cohere.com, proxy
+host-suffix, fal.ai, proxy
+host-suffix, hf.space, proxy
+host-suffix, huggingface.co, proxy
+host-suffix, mistral.ai, proxy
+host-suffix, models.dev, proxy
 host-suffix, replicate.com, proxy
 host-suffix, replicate.delivery, proxy
-host-suffix, fal.ai, proxy
+host-suffix, together.ai, proxy
+host-suffix, together.xyz, proxy
 host-suffix, v0.dev, proxy
-host-suffix, huggingface.co, proxy
-host-suffix, hf.space, proxy
 
 # Media
 host-suffix, runwayml.com, proxy

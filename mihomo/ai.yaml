@@ -20,12 +20,14 @@ payload:
   - DOMAIN-SUFFIX,deepmind.google
   - DOMAIN-SUFFIX,deepmind.com
   - DOMAIN-SUFFIX,ai.google.dev
+  - DOMAIN-SUFFIX,gemini.google
   - DOMAIN,waa-pa.clients6.google.com
   - DOMAIN,alkali-pa.clients6.google.com
   - DOMAIN-SUFFIX,googleapis.com
 
   # OpenAI
   - DOMAIN-SUFFIX,chatgpt.com
+  - DOMAIN-SUFFIX,chatgpt.site
   - DOMAIN-SUFFIX,openai.com
   - DOMAIN-SUFFIX,chat.com
   - DOMAIN-SUFFIX,oaistatic.com
@@ -62,21 +64,25 @@ payload:
   - DOMAIN-SUFFIX,cdn.midjourney.com
 
   # Tools
+  - DOMAIN-SUFFIX,augmentcode.com
+  - DOMAIN-SUFFIX,character.ai
+  - DOMAIN-SUFFIX,civitai.com
+  - DOMAIN-SUFFIX,coze.com
   - DOMAIN-SUFFIX,cursor.com
   - DOMAIN-SUFFIX,cursor.sh
-  - DOMAIN-SUFFIX,onorca.dev
-  - DOMAIN-SUFFIX,tavily.com
+  - DOMAIN-SUFFIX,cursorvm.com
+  - DOMAIN-SUFFIX,dify.ai
+  - DOMAIN-SUFFIX,genspark.ai
   - DOMAIN-SUFFIX,groq.com
+  - DOMAIN-SUFFIX,meta.ai
+  - DOMAIN-SUFFIX,onorca.dev
+  - DOMAIN-SUFFIX,opencode.ai
+  - DOMAIN-SUFFIX,openrouter.ai
+  - DOMAIN-SUFFIX,phind.com
   - DOMAIN-SUFFIX,poe.com
   - DOMAIN-SUFFIX,poecdn.net
-  - DOMAIN-SUFFIX,civitai.com
-  - DOMAIN-SUFFIX,character.ai
-  - DOMAIN-SUFFIX,coze.com
-  - DOMAIN-SUFFIX,dify.ai
-  - DOMAIN-SUFFIX,openrouter.ai
+  - DOMAIN-SUFFIX,tavily.com
   - DOMAIN-SUFFIX,you.com
-  - DOMAIN-SUFFIX,phind.com
-  - DOMAIN-SUFFIX,genspark.ai
 
   # Audio
   - DOMAIN-SUFFIX,suno.com
@@ -85,17 +91,18 @@ payload:
   - DOMAIN-SUFFIX,elevenlabs.io
 
   # Models
-  - DOMAIN-SUFFIX,mistral.ai
-  - DOMAIN-SUFFIX,cohere.com
   - DOMAIN-SUFFIX,cohere.ai
-  - DOMAIN-SUFFIX,together.ai
-  - DOMAIN-SUFFIX,together.xyz
+  - DOMAIN-SUFFIX,cohere.com
+  - DOMAIN-SUFFIX,fal.ai
+  - DOMAIN-SUFFIX,hf.space
+  - DOMAIN-SUFFIX,huggingface.co
+  - DOMAIN-SUFFIX,mistral.ai
+  - DOMAIN-SUFFIX,models.dev
   - DOMAIN-SUFFIX,replicate.com
   - DOMAIN-SUFFIX,replicate.delivery
-  - DOMAIN-SUFFIX,fal.ai
+  - DOMAIN-SUFFIX,together.ai
+  - DOMAIN-SUFFIX,together.xyz
   - DOMAIN-SUFFIX,v0.dev
-  - DOMAIN-SUFFIX,huggingface.co
-  - DOMAIN-SUFFIX,hf.space
 
   # Media
   - DOMAIN-SUFFIX,runwayml.com

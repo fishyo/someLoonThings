@@ -16,12 +16,14 @@ notebooklm.google.com
 deepmind.google
 deepmind.com
 ai.google.dev
+gemini.google
 exact: waa-pa.clients6.google.com
 exact: alkali-pa.clients6.google.com
 googleapis.com
 
 # OpenAI
 chatgpt.com
+chatgpt.site
 openai.com
 chat.com
 oaistatic.com
@@ -58,21 +60,25 @@ midjourney.com
 cdn.midjourney.com
 
 # Tools
+augmentcode.com
+character.ai
+civitai.com
+coze.com
 cursor.com
 cursor.sh
-onorca.dev
-tavily.com
+cursorvm.com
+dify.ai
+genspark.ai
 groq.com
+meta.ai
+onorca.dev
+opencode.ai
+openrouter.ai
+phind.com
 poe.com
 poecdn.net
-civitai.com
-character.ai
-coze.com
-dify.ai
-openrouter.ai
+tavily.com
 you.com
-phind.com
-genspark.ai
 
 # Audio
 suno.com
@@ -81,17 +87,18 @@ udio.com
 elevenlabs.io
 
 # Models
-mistral.ai
-cohere.com
 cohere.ai
-together.ai
-together.xyz
+cohere.com
+fal.ai
+hf.space
+huggingface.co
+mistral.ai
+models.dev
 replicate.com
 replicate.delivery
-fal.ai
+together.ai
+together.xyz
 v0.dev
-huggingface.co
-hf.space
 
 # Media
 runwayml.com

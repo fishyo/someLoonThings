@@ -46,6 +46,7 @@ datadoghq.com
 deno.com
 deno.land
 digitalocean.com
+digitaloceanspaces.com
 distrowatch.com
 do.co
 docker.com
@@ -70,10 +71,12 @@ gitlab.io
 go.dev
 golang.org
 gradle.org
+greasyfork.org
 hashicorp.com
 heroku.com
 hetzner.cloud
 hetzner.com
+iconify.design
 jetbrains.com
 jira.com
 jitpack.io
@@ -100,6 +103,7 @@ pypi.org
 pythonhosted.org
 railway.app
 raw.githubusercontent.com
+raycast.com
 readme.io
 render.com
 replit.com
@@ -117,8 +121,10 @@ sublimetext.com
 supabase.co
 supabase.com
 superuser.com
+tampermonkey.net
 terraform.io
 trello.com
+typora.io
 vercel.app
 vercel.com
 visualstudio.com
@@ -126,6 +132,8 @@ vscode-cdn.net
 vscode-unpkg.net
 vultr.com
 yarnpkg.com
+zeabur.com
+zen-browser.app
 
 # Entertainment
 abema-tv.com
@@ -140,6 +148,8 @@ bamgrid.com
 bandcamp.com
 bilibili.tv
 booth.pm
+buzzsprout.com
+cider.sh
 crunchyroll.com
 dailymotion.com
 deezer.com
@@ -147,6 +157,7 @@ disneyplus.com
 disneystreaming.com
 dmc.nico
 dmcdn.net
+donmai.us
 dssott.com
 dzcdn.net
 fanbox.cc
@@ -176,6 +187,7 @@ nflxvideo.net
 nhk.or.jp
 nicovideo.jp
 nimg.jp
+nyaa.net
 nyaa.si
 odysee.com
 opensubtitles.com
@@ -190,6 +202,7 @@ pixiv.me
 pixiv.net
 pixiv.org
 pocketcasts.com
+podtrac.com
 primevideo.com
 pv-cdn.net
 pximg.net
@@ -197,22 +210,30 @@ radiko.jp
 rottentomatoes.com
 rumble.com
 scdn.co
+shazam.com
 simplecast.com
+simplecastaudio.com
 sndcdn.com
 soundcloud.com
 spoti.fi
 spotify.com
 spotifycdn.com
 spotifycharts.com
+subhd.me
 sukebei.nyaa.si
 syosetu.com
+themoviedb.org
 tidal.com
+tinymediamanager.org
+tmdb.org
+trakt.tv
 transistor.fm
 ttvnw.net
 tunein.com
 tver.jp
 twitch.tv
 twitchcdn.net
+yande.re
 youtu.be
 youtube-nocookie.com
 youtube.com
@@ -315,7 +336,10 @@ googlehosted.com
 googlemail.com
 googleusercontent.com
 gstatic.com
+gvt1.com
+gvt2.com
 play.google.com
+run.app
 withgoogle.com
 
 # Infrastructure
@@ -367,9 +391,11 @@ rentry.co
 rentry.org
 rsshub.app
 speedtest.net
+stripecdn.com
 tinyurl.com
 typekit.net
 unpkg.com
+unsplash.com
 whatismyipaddress.com
 wise.com
 
@@ -408,6 +434,7 @@ forbes.com
 france24.com
 ft.com
 ftchinese.com
+guardianapis.com
 guim.co.uk
 jstor.org
 keyword: deutschewelle
@@ -454,6 +481,7 @@ wiktionary.org
 wiley.com
 wired.com
 wsj.com
+wsj.net
 zaobao.com
 zaobao.com.sg
 
@@ -471,6 +499,7 @@ dropboxusercontent.com
 evernote.com
 figma.com
 grammarly.com
+instapaper.com
 lucid.app
 lucidchart.com
 mediafire.com
@@ -533,6 +562,7 @@ protonmail.com
 protonstatus.com
 protonvpn.com
 quad9.net
+quantumult.app
 racknerd.com
 riseup.net
 shadowsocks.org
@@ -573,6 +603,7 @@ element.io
 facebook.com
 fbcdn.net
 flickr.com
+gravatar.com
 ibytedtos.com
 instagram.com
 joinclubhouse.com
@@ -588,11 +619,13 @@ keyword: tiktok
 line-apps.com
 line-scdn.net
 line.me
+linktr.ee
 mastodon.social
 matrix.org
 matters.news
 matters.town
 messenger.com
+meta.com
 musical.ly
 pincong.rocks
 pinimg.com
@@ -622,6 +655,8 @@ vk.com
 vk.me
 whatsapp.com
 whatsapp.net
+wordpress.com
+wp.com
 
 # XX
 dmm.co.jp
