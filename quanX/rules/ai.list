@@ -40,6 +40,7 @@ host-suffix, stripe.network, proxy
 # Claude
 host-suffix, anthropic.com, proxy
 host-suffix, claude.ai, proxy
+host-suffix, claude.com, proxy
 host-suffix, claudeusercontent.com, proxy
 
 # Grok
@@ -67,6 +68,14 @@ host-suffix, tavily.com, proxy
 host-suffix, groq.com, proxy
 host-suffix, poe.com, proxy
 host-suffix, poecdn.net, proxy
+host-suffix, civitai.com, proxy
+host-suffix, character.ai, proxy
+host-suffix, coze.com, proxy
+host-suffix, dify.ai, proxy
+host-suffix, openrouter.ai, proxy
+host-suffix, you.com, proxy
+host-suffix, phind.com, proxy
+host-suffix, genspark.ai, proxy
 
 # Audio
 host-suffix, suno.com, proxy
@@ -86,3 +95,13 @@ host-suffix, fal.ai, proxy
 host-suffix, v0.dev, proxy
 host-suffix, huggingface.co, proxy
 host-suffix, hf.space, proxy
+
+# Media
+host-suffix, runwayml.com, proxy
+host-suffix, runway.com, proxy
+host-suffix, luma.ai, proxy
+host-suffix, lumalabs.ai, proxy
+host-suffix, pika.art, proxy
+host-suffix, stability.ai, proxy
+host-suffix, dreamstudio.ai, proxy
+host-suffix, clipdrop.co, proxy

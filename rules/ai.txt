@@ -37,6 +37,7 @@ stripe.network
 # Claude
 anthropic.com
 claude.ai
+claude.com
 claudeusercontent.com
 
 # Grok
@@ -64,6 +65,14 @@ tavily.com
 groq.com
 poe.com
 poecdn.net
+civitai.com
+character.ai
+coze.com
+dify.ai
+openrouter.ai
+you.com
+phind.com
+genspark.ai
 
 # Audio
 suno.com
@@ -83,3 +92,13 @@ fal.ai
 v0.dev
 huggingface.co
 hf.space
+
+# Media
+runwayml.com
+runway.com
+luma.ai
+lumalabs.ai
+pika.art
+stability.ai
+dreamstudio.ai
+clipdrop.co

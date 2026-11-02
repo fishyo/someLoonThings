@@ -17,5 +17,4 @@ twttr.net
 twitterinc.com
 twitteroauth.com
 twitterstat.us
-ads-twitter.com
 cms-twdigitalassets.com

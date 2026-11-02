@@ -41,6 +41,7 @@ payload:
   # Claude
   - DOMAIN-SUFFIX,anthropic.com
   - DOMAIN-SUFFIX,claude.ai
+  - DOMAIN-SUFFIX,claude.com
   - DOMAIN-SUFFIX,claudeusercontent.com
 
   # Grok
@@ -68,6 +69,14 @@ payload:
   - DOMAIN-SUFFIX,groq.com
   - DOMAIN-SUFFIX,poe.com
   - DOMAIN-SUFFIX,poecdn.net
+  - DOMAIN-SUFFIX,civitai.com
+  - DOMAIN-SUFFIX,character.ai
+  - DOMAIN-SUFFIX,coze.com
+  - DOMAIN-SUFFIX,dify.ai
+  - DOMAIN-SUFFIX,openrouter.ai
+  - DOMAIN-SUFFIX,you.com
+  - DOMAIN-SUFFIX,phind.com
+  - DOMAIN-SUFFIX,genspark.ai
 
   # Audio
   - DOMAIN-SUFFIX,suno.com
@@ -87,3 +96,13 @@ payload:
   - DOMAIN-SUFFIX,v0.dev
   - DOMAIN-SUFFIX,huggingface.co
   - DOMAIN-SUFFIX,hf.space
+
+  # Media
+  - DOMAIN-SUFFIX,runwayml.com
+  - DOMAIN-SUFFIX,runway.com
+  - DOMAIN-SUFFIX,luma.ai
+  - DOMAIN-SUFFIX,lumalabs.ai
+  - DOMAIN-SUFFIX,pika.art
+  - DOMAIN-SUFFIX,stability.ai
+  - DOMAIN-SUFFIX,dreamstudio.ai
+  - DOMAIN-SUFFIX,clipdrop.co
