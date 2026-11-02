@@ -526,3 +526,6 @@ payload:
   - DOMAIN-SUFFIX,dwnews.net
   - DOMAIN-SUFFIX,t66y.com
   - DOMAIN-KEYWORD,deutschewelle
+  - DOMAIN-SUFFIX,500px.com
+  - DOMAIN-SUFFIX,500px.org
+  - DOMAIN-SUFFIX,500px.net

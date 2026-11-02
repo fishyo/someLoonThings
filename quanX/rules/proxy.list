@@ -525,3 +525,6 @@ host-suffix, dw-world.de, proxy
 host-suffix, dwnews.net, proxy
 host-suffix, t66y.com, proxy
 host-keyword, deutschewelle, proxy
+host-suffix, 500px.com, proxy
+host-suffix, 500px.org, proxy
+host-suffix, 500px.net, proxy
