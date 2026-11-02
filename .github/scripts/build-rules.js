@@ -24,6 +24,7 @@ function formatTitle(key, content, policy) {
     ai: 'AI Services Ruleset',
     twitter: 'Twitter Ruleset',
     telegram: 'Telegram Ruleset',
+    direct: 'Direct Whitelist Ruleset',
     appstore: 'App Store Direct Ruleset',
     wechat: 'WeChat Direct Ruleset',
     supercell: 'Supercell Direct Ruleset'
@@ -55,7 +56,7 @@ function getTargets() {
 
     // Any snippet with "# policy: direct" or "# direct" (or known direct lists) is direct
     const isDirect = /^\s*#\s*(policy:\s*direct|direct)\b/im.test(content) ||
-                     ['appstore', 'wechat', 'supercell'].includes(key);
+                     ['appstore', 'wechat', 'supercell', 'direct'].includes(key);
 
     const policy = isDirect ? 'direct' : 'proxy';
     const title = formatTitle(key, content, policy);
@@ -65,9 +66,7 @@ function getTargets() {
       proxySources.push(file);
     }
 
-    const mihomoPath = (key === 'supercell')
-      ? path.join(ROOT_DIR, 'mihomo/direct.yaml')
-      : path.join(ROOT_DIR, `mihomo/${key}.yaml`);
+    const mihomoPath = path.join(ROOT_DIR, `mihomo/${key}.yaml`);
 
     targets[key] = {
       key,

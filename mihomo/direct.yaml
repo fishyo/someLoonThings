@@ -1,10 +1,6 @@
-# Title: Supercell Direct Ruleset
+# Title: Direct Whitelist Ruleset
 # Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
 
 payload:
-  # Supercell
-  - DOMAIN-SUFFIX,clashroyale.com
-  - DOMAIN-SUFFIX,clashroyaleapp.com
-  - DOMAIN-SUFFIX,brawlstars.com
-  - DOMAIN-SUFFIX,supercell.com
-  - DOMAIN-SUFFIX,brawlstarsgame.com
+  # policy: direct
+  # Direct
