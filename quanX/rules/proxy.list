@@ -852,3 +852,9 @@ host-suffix, t66y.com, proxy
 host-suffix, xnxx.com, proxy
 host-suffix, xvideos.com, proxy
 host-keyword, thepiratebay, proxy
+host-suffix, feedly.com, proxy
+host-suffix, feedlylabs.com, proxy
+host-suffix, feedly.net, proxy
+host-suffix, feedlycdn.com, proxy
+host-suffix, inoreader.com, proxy
+host-suffix, inoreader.net, proxy
