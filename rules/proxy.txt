@@ -685,3 +685,4 @@ feedly.net
 feedlycdn.com
 inoreader.com
 inoreader.net
+nyt.com
