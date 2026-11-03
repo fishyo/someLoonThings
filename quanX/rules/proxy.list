@@ -858,3 +858,4 @@ host-suffix, feedly.net, proxy
 host-suffix, feedlycdn.com, proxy
 host-suffix, inoreader.com, proxy
 host-suffix, inoreader.net, proxy
+host-suffix, nyt.com, proxy
