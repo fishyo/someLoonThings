@@ -6,6 +6,22 @@
 
 ## [2026-11-06] - 规则分流体系重构与次级文件夹原子架构升级
 
+### 🧹 平台目录结构完全同构化与孤立文件自动同步清理 (Structural Homomorphism & Auto-Pruning)
+- **编译引擎支持父文件就地维护通用规则 (In-Place Master Local/General Rules)**：
+  - 彻底打破“父文件只能只读覆盖”的机械限制：允许人类或 Bot 直接在 `rules/game.txt`、`rules/streaming.txt` 等父文件底部手写通用规则（如 `# General`）。
+  - 编译器自动进行双向智能合并：提取非子文件来源的本地规则，原样保留在父文件底部，并自动三端编译装配及全量同步至 `proxy.lsr`。
+  - 支持就地对称删除：在父文件里直接删除某条手写规则，下游全端与代理黑名单秒级同步剔除。
+- **编译引擎自动垃圾回收 (Auto-Pruning Engine)**：
+  - `build-rules.js` 增加 `pruneOrphans` 机制，在 `rules/` 源文件被删除时，全自动物理同步删除 Loon (`.lsr`)、Quantumult X (`.list`)、Mihomo (`.yaml`) 对应的废弃客户端规则，并自动递归清理各端空目录。
+  - 彻底移除过度防御性吸收逻辑，确保用户的删除操作具备最高优先级权威，杜绝已删规则被逆向复活到其他文件。
+- **绝对 1:1 镜像对齐**：三大平台（Loon, Quantumult X, Mihomo）的规则输出目录结构与源目录 `rules/` 达到绝对 100% 结构同构（现存各 43 个规则文件，0 缺失，0 冗余）。
+- **废弃历史旧兼容别名 (Legacy Aliases Removed)**：
+  - 彻底清理从根目录迁移入子文件夹后遗留的兼容别名：`twitter.*`、`telegram.*`、`wechat.*`、`supercell.*` 以及 `streaming/twitch.*` 共 15 个历史文件。
+  - 编译引擎 `build-rules.js` 移除别名生成逻辑，全面转向子目录标准路径（如 `social/twitter.lsr`, `game/supercell.lsr` 等）。
+  - 同步更新 README.md 与相关文档订阅链接至最新标准子路径。
+- **游戏分流精简 (`rules/game/`)**：
+  - 按需移除 `nintendo`、`playstation`、`xbox`、`twitch` 等独立规则，三端平台对应规则文件自动同步清理并从全量代理池中移除。
+
 ### 🚀 架构革新 (Architecture)
 - **主规则与次级原子文件夹装配架构 (Declarative Target Assembly Architecture)**：
   - 将庞杂的平铺规则源彻底分层，创建结构化子目录：`rules/streaming/`（18 个流媒体平台）、`rules/social/`（7 个社交平台）、`rules/ai/`（10 个 AI 模块）及 `rules/game/`。

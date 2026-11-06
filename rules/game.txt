@@ -1,31 +1,3 @@
-# Nintendo
-nintendo-europe.com
-nintendo.be
-nintendo.co.jp
-nintendo.co.uk
-nintendo.com
-nintendo.com.au
-nintendo.de
-nintendo.es
-nintendo.eu
-nintendo.fr
-nintendo.it
-nintendo.jp
-nintendo.net
-nintendo.nl
-nintendo.pt
-nintendonetwork.net
-nintendostore.com
-nintendoswitch.com
-
-# PlayStation
-playstation.com
-playstation.net
-playstation.org
-playstationnetwork.com
-sie.com
-sonyentertainmentnetwork.com
-
 # Steam
 steam-chat.com
 steambroadcast.com
@@ -40,20 +12,3 @@ steamstat.us
 steamstatic.com
 steamusercontent.com
 valvesoftware.com
-
-# Twitch
-jtvnw.net
-live-video.net
-ttvnw.net
-twitch.tv
-twitchcdn.net
-twitchsvc.net
-
-# Xbox
-forzamotorsport.net
-gamepass.com
-xbox.com
-xboxab.com
-xboxgamestudios.com
-xboxlive.com
-xboxservices.com

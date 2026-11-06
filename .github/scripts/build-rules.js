@@ -32,12 +32,15 @@ function formatTitle(key, content, policy) {
     'ai/tools': 'AI Tools Ruleset',
     'ai/models': 'AI Models Ruleset',
     'ai/media': 'AI Media Generation Ruleset',
-    twitter: 'Twitter Ruleset',
-    telegram: 'Telegram Ruleset',
     direct: 'Direct Whitelist Ruleset',
     appstore: 'App Store Direct Ruleset',
-    wechat: 'WeChat Direct Ruleset',
-    supercell: 'Supercell Direct Ruleset',
+    game: 'Game Services Ruleset',
+    'game/steam': 'Steam Ruleset',
+    'game/nintendo': 'Nintendo Ruleset',
+    'game/playstation': 'PlayStation Ruleset',
+    'game/xbox': 'Xbox Ruleset',
+    'game/twitch': 'Twitch Ruleset',
+    'game/supercell': 'Supercell Direct Ruleset',
     streaming: 'Streaming Media Ruleset',
     'streaming/youtube': 'YouTube Ruleset',
     'streaming/netflix': 'Netflix Ruleset',
@@ -48,7 +51,6 @@ function formatTitle(key, content, policy) {
     'streaming/hbo': 'HBO Max Ruleset',
     'streaming/primevideo': 'Prime Video Ruleset',
     'streaming/hulu': 'Hulu Ruleset',
-    'streaming/twitch': 'Twitch Ruleset',
     'streaming/abema': 'AbemaTV Ruleset',
     'streaming/dazn': 'DAZN Ruleset',
     'streaming/paramount': 'Paramount+ Ruleset',
@@ -63,7 +65,8 @@ function formatTitle(key, content, policy) {
     'social/telegram': 'Telegram Ruleset',
     'social/discord': 'Discord Ruleset',
     'social/reddit': 'Reddit Ruleset',
-    'social/tiktok': 'TikTok Ruleset'
+    'social/tiktok': 'TikTok Ruleset',
+    'social/wechat': 'WeChat Direct Ruleset'
   };
   if (titleMap[key]) return titleMap[key];
 
@@ -184,8 +187,8 @@ function getTargets() {
     };
   }
 
-  // Ensure streaming master rule also aggregates Twitch from game/
-  if (targets.streaming && !targets.streaming.sources.includes('game/twitch.txt')) {
+  // Ensure streaming master rule also aggregates Twitch from game/ (if twitch rule exists)
+  if (targets.streaming && fs.existsSync(path.join(RULES_DIR, 'game/twitch.txt')) && !targets.streaming.sources.includes('game/twitch.txt')) {
     targets.streaming.sources.push('game/twitch.txt');
   }
 
@@ -266,52 +269,6 @@ function compileTarget(targetKey, targets) {
   ];
   const txtLines = target.outputs.txt ? [] : null;
 
-  // Defensive absorption: Check if synthesized master file already exists on disk
-  // and contains orphan rules not yet present in any atomic sub-source files.
-  if (target.outputs.txt && fs.existsSync(target.outputs.txt)) {
-    const defaultAbsorbFile = {
-      'ai': 'ai/tools.txt',
-      'social': 'social/meta.txt',
-      'streaming': 'streaming/youtube.txt',
-      'game': 'game/steam.txt'
-    }[targetKey] || target.sources[0];
-
-    if (defaultAbsorbFile) {
-      const sourceRules = new Set();
-      const allAtomicFiles = findRuleFiles(RULES_DIR)
-        .filter(f => f.endsWith('.txt') && !['ai.txt', 'social.txt', 'streaming.txt', 'game.txt'].includes(path.basename(f)));
-      for (const src of allAtomicFiles) {
-        const p = path.join(RULES_DIR, src);
-        if (fs.existsSync(p)) {
-          for (const line of fs.readFileSync(p, 'utf8').split(/\r?\n/)) {
-            const item = parseRuleLine(line);
-            if (item.type !== 'EMPTY' && item.type !== 'COMMENT') {
-              sourceRules.add(`${item.type}:${item.val.toLowerCase()}`);
-            }
-          }
-        }
-      }
-
-      const orphanLines = [];
-      for (const line of fs.readFileSync(target.outputs.txt, 'utf8').split(/\r?\n/)) {
-        const item = parseRuleLine(line);
-        if (item.type !== 'EMPTY' && item.type !== 'COMMENT') {
-          const k = `${item.type}:${item.val.toLowerCase()}`;
-          if (!sourceRules.has(k)) {
-            orphanLines.push(line.trim());
-            sourceRules.add(k);
-          }
-        }
-      }
-
-      if (orphanLines.length > 0) {
-        const absorbPath = path.join(RULES_DIR, defaultAbsorbFile);
-        const appendContent = '\n# Absorbed rules from master file\n' + orphanLines.join('\n') + '\n';
-        fs.appendFileSync(absorbPath, appendContent, 'utf8');
-        console.log(`[DEFENSIVE] Absorbed ${orphanLines.length} orphan rules from ${path.basename(target.outputs.txt)} into ${defaultAbsorbFile}`);
-      }
-    }
-  }
 
   const seenRules = new Set();
   const seenComments = new Set();
@@ -400,6 +357,177 @@ function compileTarget(targetKey, targets) {
     }
   }
 
+  // Handle Master Local / General rules written directly into the Master .txt file
+  if (target.outputs.txt && fs.existsSync(target.outputs.txt)) {
+    const childRuleKeys = new Set();
+    for (const src of target.sources) {
+      const p = path.join(RULES_DIR, src);
+      if (fs.existsSync(p)) {
+        for (const l of fs.readFileSync(p, 'utf8').split(/\r?\n/)) {
+          const item = parseRuleLine(l);
+          if (item.type !== 'EMPTY' && item.type !== 'COMMENT') {
+            childRuleKeys.add(`${item.type}:${item.val.toLowerCase()}`);
+          }
+        }
+      }
+    }
+
+    const masterRawLines = fs.readFileSync(target.outputs.txt, 'utf8').split(/\r?\n/);
+    const localLines = [];
+    let currentComment = null;
+
+    for (const rawLine of masterRawLines) {
+      const item = parseRuleLine(rawLine);
+      if (item.type === 'EMPTY') continue;
+      if (item.type === 'COMMENT') {
+        currentComment = item.raw.trim();
+        continue;
+      }
+
+      const k = `${item.type}:${item.val.toLowerCase()}`;
+      if (!childRuleKeys.has(k)) {
+        if (currentComment) {
+          localLines.push({ type: 'COMMENT', raw: currentComment });
+          currentComment = null;
+        }
+        localLines.push(item);
+      } else {
+        currentComment = null;
+      }
+    }
+
+    if (localLines.length > 0) {
+      target.localRules = [];
+      if (!prevWasEmpty) {
+        loonLines.push('');
+        qxLines.push('');
+        mihomoLines.push('');
+        if (txtLines) txtLines.push('');
+        prevWasEmpty = true;
+      }
+
+      let hasHeader = false;
+      for (const item of localLines) {
+        if (item.type === 'COMMENT') {
+          const commentText = item.raw.trim();
+          if (seenComments.has(commentText.toLowerCase())) continue;
+          seenComments.add(commentText.toLowerCase());
+
+          loonLines.push(item.raw);
+          qxLines.push(item.raw);
+          mihomoLines.push(`  ${item.raw}`);
+          if (txtLines) txtLines.push(item.raw);
+          hasHeader = true;
+          prevWasEmpty = false;
+          continue;
+        }
+
+        if (!hasHeader) {
+          const defaultComment = '# General';
+          if (!seenComments.has(defaultComment.toLowerCase())) {
+            seenComments.add(defaultComment.toLowerCase());
+            loonLines.push(defaultComment);
+            qxLines.push(defaultComment);
+            mihomoLines.push(`  ${defaultComment}`);
+            if (txtLines) txtLines.push(defaultComment);
+          }
+          hasHeader = true;
+        }
+
+        const ruleKey = `${item.type}:${item.val.toLowerCase()}`;
+        if (seenRules.has(ruleKey)) continue;
+        seenRules.add(ruleKey);
+        prevWasEmpty = false;
+
+        target.localRules.push(item);
+
+        let txtVal = item.val;
+        switch (item.type) {
+          case 'DOMAIN-SUFFIX':
+            loonLines.push(`DOMAIN-SUFFIX,${item.val}`);
+            qxLines.push(`host-suffix, ${item.val}, ${target.policy}`);
+            mihomoLines.push(`  - DOMAIN-SUFFIX,${item.val}`);
+            txtVal = item.val;
+            break;
+          case 'KEYWORD':
+            loonLines.push(`DOMAIN-KEYWORD,${item.val}`);
+            qxLines.push(`host-keyword, ${item.val}, ${target.policy}`);
+            mihomoLines.push(`  - DOMAIN-KEYWORD,${item.val}`);
+            txtVal = item.val.includes('.') ? `keyword: ${item.val}` : item.val;
+            break;
+          case 'DOMAIN':
+            loonLines.push(`DOMAIN,${item.val}`);
+            qxLines.push(`host, ${item.val}, ${target.policy}`);
+            mihomoLines.push(`  - DOMAIN,${item.val}`);
+            txtVal = `exact: ${item.val}`;
+            break;
+          case 'IP-CIDR':
+            loonLines.push(`IP-CIDR,${item.val},no-resolve`);
+            qxLines.push(`ip-cidr, ${item.val}, ${target.policy}`);
+            mihomoLines.push(`  - IP-CIDR,${item.val}`);
+            txtVal = `cidr: ${item.val}`;
+            break;
+          case 'IP-CIDR6':
+            loonLines.push(`IP-CIDR6,${item.val},no-resolve`);
+            qxLines.push(`ip-cidr6, ${item.val}, ${target.policy}`);
+            mihomoLines.push(`  - IP-CIDR6,${item.val}`);
+            txtVal = `IP-CIDR6,${item.val}`;
+            break;
+        }
+        if (txtLines) txtLines.push(txtVal);
+      }
+    }
+  }
+
+  // Absorb all Master local/general rules into proxy target
+  if (targetKey === 'proxy') {
+    for (const [k, t] of Object.entries(targets)) {
+      if (t.localRules && t.localRules.length > 0 && t.policy === 'proxy') {
+        const catName = k.charAt(0).toUpperCase() + k.slice(1);
+        loonLines.push('');
+        loonLines.push(`# ${catName} - General`);
+        qxLines.push('');
+        qxLines.push(`# ${catName} - General`);
+        mihomoLines.push('');
+        mihomoLines.push(`  # ${catName} - General`);
+
+        for (const item of t.localRules) {
+          const ruleKey = `${item.type}:${item.val.toLowerCase()}`;
+          if (seenRules.has(ruleKey)) continue;
+          seenRules.add(ruleKey);
+
+          switch (item.type) {
+            case 'DOMAIN-SUFFIX':
+              loonLines.push(`DOMAIN-SUFFIX,${item.val}`);
+              qxLines.push(`host-suffix, ${item.val}, ${target.policy}`);
+              mihomoLines.push(`  - DOMAIN-SUFFIX,${item.val}`);
+              break;
+            case 'KEYWORD':
+              loonLines.push(`DOMAIN-KEYWORD,${item.val}`);
+              qxLines.push(`host-keyword, ${item.val}, ${target.policy}`);
+              mihomoLines.push(`  - DOMAIN-KEYWORD,${item.val}`);
+              break;
+            case 'DOMAIN':
+              loonLines.push(`DOMAIN,${item.val}`);
+              qxLines.push(`host, ${item.val}, ${target.policy}`);
+              mihomoLines.push(`  - DOMAIN,${item.val}`);
+              break;
+            case 'IP-CIDR':
+              loonLines.push(`IP-CIDR,${item.val},no-resolve`);
+              qxLines.push(`ip-cidr, ${item.val}, ${target.policy}`);
+              mihomoLines.push(`  - IP-CIDR,${item.val}`);
+              break;
+            case 'IP-CIDR6':
+              loonLines.push(`IP-CIDR6,${item.val},no-resolve`);
+              qxLines.push(`ip-cidr6, ${item.val}, ${target.policy}`);
+              mihomoLines.push(`  - IP-CIDR6,${item.val}`);
+              break;
+          }
+        }
+      }
+    }
+  }
+
   fs.mkdirSync(path.dirname(target.outputs.loon), { recursive: true });
   fs.mkdirSync(path.dirname(target.outputs.qx), { recursive: true });
   fs.mkdirSync(path.dirname(target.outputs.mihomo), { recursive: true });
@@ -408,44 +536,6 @@ function compileTarget(targetKey, targets) {
   fs.writeFileSync(target.outputs.qx, qxLines.join('\n').trimEnd() + '\n', 'utf8');
   fs.writeFileSync(target.outputs.mihomo, mihomoLines.join('\n').trimEnd() + '\n', 'utf8');
 
-  // Legacy aliases for backward-compatible subscriptions
-  const legacyAliases = {
-    'social/twitter': {
-      loon: path.join(ROOT_DIR, 'loon/twitter.lsr'),
-      qx: path.join(ROOT_DIR, 'quanX/rules/twitter.list'),
-      mihomo: path.join(ROOT_DIR, 'mihomo/twitter.yaml')
-    },
-    'social/telegram': {
-      loon: path.join(ROOT_DIR, 'loon/telegram.lsr'),
-      qx: path.join(ROOT_DIR, 'quanX/rules/telegram.list'),
-      mihomo: path.join(ROOT_DIR, 'mihomo/telegram.yaml')
-    },
-    'social/wechat': {
-      loon: path.join(ROOT_DIR, 'loon/wechat.lsr'),
-      qx: path.join(ROOT_DIR, 'quanX/rules/wechat.list'),
-      mihomo: path.join(ROOT_DIR, 'mihomo/wechat.yaml')
-    },
-    'game/supercell': {
-      loon: path.join(ROOT_DIR, 'loon/supercell.lsr'),
-      qx: path.join(ROOT_DIR, 'quanX/rules/supercell.list'),
-      mihomo: path.join(ROOT_DIR, 'mihomo/supercell.yaml')
-    },
-    'game/twitch': {
-      loon: path.join(ROOT_DIR, 'loon/streaming/twitch.lsr'),
-      qx: path.join(ROOT_DIR, 'quanX/rules/streaming/twitch.list'),
-      mihomo: path.join(ROOT_DIR, 'mihomo/streaming/twitch.yaml')
-    }
-  };
-
-  if (legacyAliases[targetKey]) {
-    const alias = legacyAliases[targetKey];
-    fs.mkdirSync(path.dirname(alias.loon), { recursive: true });
-    fs.mkdirSync(path.dirname(alias.qx), { recursive: true });
-    fs.mkdirSync(path.dirname(alias.mihomo), { recursive: true });
-    fs.writeFileSync(alias.loon, loonLines.join('\n').trimEnd() + '\n', 'utf8');
-    fs.writeFileSync(alias.qx, qxLines.join('\n').trimEnd() + '\n', 'utf8');
-    fs.writeFileSync(alias.mihomo, mihomoLines.join('\n').trimEnd() + '\n', 'utf8');
-  }
 
   if (target.outputs.txt) {
     fs.mkdirSync(path.dirname(target.outputs.txt), { recursive: true });
@@ -455,13 +545,109 @@ function compileTarget(targetKey, targets) {
   console.log(`✔ [${targetKey}] Generated: Loon (${loonLines.length}), QX (${qxLines.length}), Mihomo (${mihomoLines.length})${target.outputs.txt ? `, TXT (${txtLines.length})` : ''}`);
 }
 
+// Helper to recursively find files with specific extension
+function findFilesRecursive(dir, ext) {
+  if (!fs.existsSync(dir)) return [];
+  let results = [];
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      results = results.concat(findFilesRecursive(fullPath, ext));
+    } else if (entry.isFile() && entry.name.endsWith(ext)) {
+      results.push(fullPath);
+    }
+  }
+  return results;
+}
+
+// Automatically prune orphan platform files and empty subdirectories
+function pruneOrphans(targets) {
+  const validFiles = {
+    loon: new Set(),
+    qx: new Set(),
+    mihomo: new Set(),
+    txt: new Set()
+  };
+
+  for (const t of Object.values(targets)) {
+    if (t.outputs.loon) validFiles.loon.add(path.resolve(t.outputs.loon));
+    if (t.outputs.qx) validFiles.qx.add(path.resolve(t.outputs.qx));
+    if (t.outputs.mihomo) validFiles.mihomo.add(path.resolve(t.outputs.mihomo));
+    if (t.outputs.txt) validFiles.txt.add(path.resolve(t.outputs.txt));
+  }
+
+  // Retain existing atomic source txt files in rules/
+  for (const src of findRuleFiles(RULES_DIR)) {
+    validFiles.txt.add(path.resolve(RULES_DIR, src));
+  }
+
+  const checkDirs = [
+    { name: 'Loon', dir: path.join(ROOT_DIR, 'loon'), ext: '.lsr', set: validFiles.loon },
+    { name: 'Quantumult X', dir: path.join(ROOT_DIR, 'quanX/rules'), ext: '.list', set: validFiles.qx },
+    { name: 'Mihomo', dir: path.join(ROOT_DIR, 'mihomo'), ext: '.yaml', set: validFiles.mihomo }
+  ];
+
+  let prunedCount = 0;
+  for (const item of checkDirs) {
+    if (!fs.existsSync(item.dir)) continue;
+    const files = findFilesRecursive(item.dir, item.ext);
+    for (const f of files) {
+      const resolved = path.resolve(f);
+      if (!item.set.has(resolved)) {
+        fs.unlinkSync(resolved);
+        const rel = path.relative(ROOT_DIR, resolved).replace(/\\/g, '/');
+        console.log(`🗑  [PRUNED] Removed orphan ${item.name} rule: ${rel}`);
+        prunedCount++;
+      }
+    }
+  }
+
+  // Clean empty subdirectories in platform output directories
+  const cleanupDirs = [
+    path.join(ROOT_DIR, 'loon'),
+    path.join(ROOT_DIR, 'quanX/rules'),
+    path.join(ROOT_DIR, 'mihomo'),
+    RULES_DIR
+  ];
+
+  function cleanEmptyDirs(dir) {
+    if (!fs.existsSync(dir)) return;
+    for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
+      if (ent.isDirectory()) {
+        const sub = path.join(dir, ent.name);
+        cleanEmptyDirs(sub);
+        if (fs.readdirSync(sub).length === 0) {
+          fs.rmdirSync(sub);
+          const rel = path.relative(ROOT_DIR, sub).replace(/\\/g, '/');
+          console.log(`📁 [PRUNED] Cleaned empty directory: ${rel}`);
+        }
+      }
+    }
+  }
+
+  for (const dir of cleanupDirs) {
+    cleanEmptyDirs(dir);
+  }
+
+  if (prunedCount > 0) {
+    console.log(`✔ Pruned ${prunedCount} orphan output files across platforms.\n`);
+  }
+}
+
 // Compile all targets
 function compileAll() {
   console.log('Discovering and compiling rulesets across all platforms...\n');
   const targets = getTargets();
-  for (const key of Object.keys(targets)) {
+  const keys = Object.keys(targets).sort((a, b) => {
+    if (a === 'proxy') return 1;
+    if (b === 'proxy') return -1;
+    return a.localeCompare(b);
+  });
+  for (const key of keys) {
     compileTarget(key, targets);
   }
+  pruneOrphans(targets);
   runValidation();
 }
 
@@ -481,7 +667,14 @@ function runValidation() {
 // Add entries to a source file
 function addToSource(items, targetKey = 'proxy') {
   const targets = getTargets();
-  const primarySource = targets[targetKey] ? targets[targetKey].sources[0] : `${targetKey}.txt`;
+  let primarySource;
+  if (targets[targetKey] && targets[targetKey].outputs.txt) {
+    primarySource = `${targetKey}.txt`;
+  } else if (targets[targetKey]) {
+    primarySource = targets[targetKey].sources[0];
+  } else {
+    primarySource = `${targetKey}.txt`;
+  }
   const srcPath = path.join(RULES_DIR, primarySource);
 
   let srcContent = fs.existsSync(srcPath) ? fs.readFileSync(srcPath, 'utf8').trimEnd() : '';
@@ -498,7 +691,8 @@ function addToSource(items, targetKey = 'proxy') {
     return;
   }
 
-  srcContent += (srcContent ? '\n\n' : '') + `# Additions\n` + toAdd.join('\n') + '\n';
+  const defaultHeader = (targets[targetKey] && targets[targetKey].outputs.txt) ? '# General' : '# Additions';
+  srcContent += (srcContent ? '\n\n' : '') + `${defaultHeader}\n` + toAdd.join('\n') + '\n';
   fs.writeFileSync(srcPath, srcContent, 'utf8');
   console.log(`✔ Added ${toAdd.length} entries to rules/${primarySource}`);
 
@@ -512,10 +706,10 @@ function watchRules() {
 
   let debounceTimer = null;
   fs.watch(RULES_DIR, { recursive: true }, (eventType, filename) => {
-    if (!filename || !filename.endsWith('.txt')) return;
+    if (filename && !filename.endsWith('.txt')) return;
     clearTimeout(debounceTimer);
     debounceTimer = setTimeout(() => {
-      console.log(`\n[watch] Detected change or new file in rules/${filename}, compiling all targets...`);
+      console.log(`\n[watch] Detected change in rules/${filename || ''}, compiling all targets...`);
       compileAll();
     }, 150);
   });

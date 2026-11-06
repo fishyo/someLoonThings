@@ -1,7 +1,0 @@
-# Twitch
-jtvnw.net
-live-video.net
-ttvnw.net
-twitch.tv
-twitchcdn.net
-twitchsvc.net

@@ -1,33 +1,5 @@
-# Title: Game Ruleset
+# Title: Game Services Ruleset
 # Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
-
-# Nintendo
-host-suffix, nintendo-europe.com, proxy
-host-suffix, nintendo.be, proxy
-host-suffix, nintendo.co.jp, proxy
-host-suffix, nintendo.co.uk, proxy
-host-suffix, nintendo.com, proxy
-host-suffix, nintendo.com.au, proxy
-host-suffix, nintendo.de, proxy
-host-suffix, nintendo.es, proxy
-host-suffix, nintendo.eu, proxy
-host-suffix, nintendo.fr, proxy
-host-suffix, nintendo.it, proxy
-host-suffix, nintendo.jp, proxy
-host-suffix, nintendo.net, proxy
-host-suffix, nintendo.nl, proxy
-host-suffix, nintendo.pt, proxy
-host-suffix, nintendonetwork.net, proxy
-host-suffix, nintendostore.com, proxy
-host-suffix, nintendoswitch.com, proxy
-
-# PlayStation
-host-suffix, playstation.com, proxy
-host-suffix, playstation.net, proxy
-host-suffix, playstation.org, proxy
-host-suffix, playstationnetwork.com, proxy
-host-suffix, sie.com, proxy
-host-suffix, sonyentertainmentnetwork.com, proxy
 
 # Steam
 host-suffix, steam-chat.com, proxy
@@ -43,20 +15,3 @@ host-suffix, steamstat.us, proxy
 host-suffix, steamstatic.com, proxy
 host-suffix, steamusercontent.com, proxy
 host-suffix, valvesoftware.com, proxy
-
-# Twitch
-host-suffix, jtvnw.net, proxy
-host-suffix, live-video.net, proxy
-host-suffix, ttvnw.net, proxy
-host-suffix, twitch.tv, proxy
-host-suffix, twitchcdn.net, proxy
-host-suffix, twitchsvc.net, proxy
-
-# Xbox
-host-suffix, forzamotorsport.net, proxy
-host-suffix, gamepass.com, proxy
-host-suffix, xbox.com, proxy
-host-suffix, xboxab.com, proxy
-host-suffix, xboxgamestudios.com, proxy
-host-suffix, xboxlive.com, proxy
-host-suffix, xboxservices.com, proxy

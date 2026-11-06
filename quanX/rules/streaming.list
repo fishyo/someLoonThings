@@ -216,11 +216,3 @@ host-suffix, youtubego.com, proxy
 host-suffix, youtubekids.com, proxy
 host-suffix, yt.be, proxy
 host-suffix, ytimg.com, proxy
-
-# Twitch
-host-suffix, jtvnw.net, proxy
-host-suffix, live-video.net, proxy
-host-suffix, ttvnw.net, proxy
-host-suffix, twitch.tv, proxy
-host-suffix, twitchcdn.net, proxy
-host-suffix, twitchsvc.net, proxy

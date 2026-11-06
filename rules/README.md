@@ -74,7 +74,7 @@ flowchart TD
 - 修改通用翻墙黑名单 👉 编辑 [`rules/proxy.txt`](proxy.txt)
 
 **自动联动效果**：
-在 `rules/social/twitter.txt` 里添加了新域名，编译时不仅 `social/twitter.lsr`（及向后兼容的 `twitter.lsr`）拥有该规则，`social.lsr` 主规则与全量 `proxy.lsr` 也**自动同步收录**，无需双重维护！
+在 `rules/social/twitter.txt` 里添加了新域名，编译时不仅 `social/twitter.lsr` 拥有该规则，`social.lsr` 主规则与全量 `proxy.lsr` 也**自动同步收录**，无需双重维护！
 
 ---
 
@@ -87,12 +87,12 @@ flowchart TD
    - 自动生成独立规则 `loon/streaming/<platform>.lsr` 与全量主规则 `loon/streaming.lsr`。
 2. **社交网络体系 (`rules/social/`)**：
    - 包含 `meta.txt` (Threads, Instagram, Facebook, WhatsApp 及官方 AS32934 IPv4/IPv6 CIDR)、`twitter.txt`, `telegram.txt`, `discord.txt`, `reddit.txt`, `tiktok.txt` 等。
-   - 自动生成独立规则 `loon/social/<platform>.lsr` 与全量主规则 `loon/social.lsr`（并向前兼容旧版 `loon/twitter.lsr` 等）。
+   - 自动生成独立规则 `loon/social/<platform>.lsr` 与全量主规则 `loon/social.lsr`。
 3. **AI 智能服务体系 (`rules/ai/`)**：
    - 包含 `openai.txt`, `claude.txt`, `gemini.txt`, `copilot.txt`, `grok.txt`, `perplexity.txt`, `midjourney.txt`, `tools.txt`, `models.txt`, `media.txt` 等 10 个独立平台/模块。
    - 自动生成独立规则 `loon/ai/<platform>.lsr` 与全量主规则 `loon/ai.lsr`（现有订阅 100% 向后兼容）。
 4. **游戏专区体系 (`rules/game/`)**：
-   - 包含 `steam.txt` (Steam 商店/社区/聊天)、`nintendo.txt` (Switch / eShop 各区服务)、`playstation.txt` (PSN 登录与商店)、`xbox.txt` (Xbox Live 与 Game Pass) 与 `twitch.txt` (游戏直播流)。
+   - 包含 `steam.txt` (Steam 商店/社区/聊天游戏服务)。
    - 包含游戏直连白名单 `supercell.txt`（Supercell 全系游戏保持直连独立分流）。
    - 自动生成独立规则 `loon/game/<platform>.lsr` 与游戏代理主规则 `loon/game.lsr`。
 5. **引擎自动处理**：
