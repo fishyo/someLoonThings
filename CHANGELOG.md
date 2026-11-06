@@ -21,6 +21,15 @@
   - 同步更新 README.md 与相关文档订阅链接至最新标准子路径。
 - **游戏分流精简 (`rules/game/`)**：
   - 按需移除 `nintendo`、`playstation`、`xbox`、`twitch` 等独立规则，三端平台对应规则文件自动同步清理并从全量代理池中移除。
+- **全量通用代理规则系统性扩充与查漏补缺 (`rules/proxy.txt` & 子规则库)**：
+  - **AI 开发者与模型生态**：补齐 Cursor 后端及母公司鉴权（`cursorapi.com`, `anysphere.inc`）、Windsurf 官网（`windsurf.com`）、Cerebras 超低延迟推理（`cerebras.ai`）、Fireworks AI（`fireworks.ai`）及 Mistral（`mistral.com`）。
+  - **创作者支持与赞助**：新增 Patreon 官方与资源 CDN（`patreon.com`, `patreonusercontent.com`）、Gumroad（`gumroad.com`）、Ko-fi（`ko-fi.com`）。
+  - **影子图书馆与学术社群**：新增全球最大全能影子图书馆 Anna's Archive（`annas-archive.org`, `.li`, `.se`）、Z-Library 活跃登录镜像（`z-lib.id`, `singlelogin.re`）与 Goodreads 书评社区（`goodreads.com`）。
+  - **媒体中心与影音刮削**：新增 Infuse / Plex / Emby 剧集与海报刮削核心源（`thetvdb.com`, `fanart.tv`）、Subscene 字幕网（`subscene.com`）、Bangumi 番组计划（`bangumi.tv`, `bgm.tv`, `chii.in`）与 MyAnimeList（`myanimelist.net`）。
+  - **现代开发生态与包管理**：新增 CocoaPods（`cocoapods.org`）、Flutter 依赖仓库（`pub.dev`, `flutter.dev`）、JSR 注册表（`jsr.io`）、Kubernetes 镜像（`k8s.io`, `registry.k8s.io`）、Quay 容器源（`quay.io`）、Clerk 鉴权服务（`clerk.com`, `clerk.dev`）、Auth0（`auth0.com`）及 Serverless 数据库（`turso.tech`, `planetscale.com`, `upstash.com`）。
+  - **跨国金融与海淘**：补齐 Stripe 根域名（`stripe.com`）、海外数字银行 Revolut（`revolut.com`）、Monzo（`monzo.com`）、虚拟卡 Dupay（`dupay.one`）、OneKey 钱包（`onekey.so`）及日本亚马逊商城与图片 CDN（`amazon.co.jp`, `ssl-images-amazon.com`）。
+  - **网络诊断与出口指纹测试**：新增纯净出口 IP 查询（`ip.sb`, `api.ip.sb`, `ip.me`, `ip.gs`, `ifconfig.me`, `ifconfig.co`, `icanhazip.com`）与指纹/泄漏检测（`dnsleaktest.com`, `browserleaks.com`, `bgp.tools`）。
+  - **Apple 生态与播客**：新增 TestFlight 官方内测服务（`testflight.apple.com`）与 iOS 第一方热门播客 Overcast（`overcast.fm`）。
 
 ### 🚀 架构革新 (Architecture)
 - **主规则与次级原子文件夹装配架构 (Declarative Target Assembly Architecture)**：

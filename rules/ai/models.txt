@@ -1,10 +1,13 @@
 # AI Models
+cerebras.ai
 cohere.ai
 cohere.com
 fal.ai
+fireworks.ai
 hf.space
 huggingface.co
 mistral.ai
+mistral.com
 models.dev
 replicate.com
 replicate.delivery

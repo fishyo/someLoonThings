@@ -53,12 +53,15 @@ cdn.midjourney.com
 midjourney.com
 
 # AI Models
+cerebras.ai
 cohere.ai
 cohere.com
 fal.ai
+fireworks.ai
 hf.space
 huggingface.co
 mistral.ai
+mistral.com
 models.dev
 replicate.com
 replicate.delivery
@@ -87,6 +90,7 @@ perplexity.ai
 pplx.ai
 
 # AI Tools
+anysphere.inc
 augmentcode.com
 bolt.new
 character.ai
@@ -95,6 +99,7 @@ codeium.com
 coze.com
 cursor.com
 cursor.sh
+cursorapi.com
 cursorvm.com
 dify.ai
 genspark.ai
@@ -110,4 +115,5 @@ poe.com
 poecdn.net
 tavily.com
 windsurf.ai
+windsurf.com
 you.com

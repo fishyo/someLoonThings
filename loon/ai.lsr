@@ -56,12 +56,15 @@ DOMAIN-SUFFIX,cdn.midjourney.com
 DOMAIN-SUFFIX,midjourney.com
 
 # AI Models
+DOMAIN-SUFFIX,cerebras.ai
 DOMAIN-SUFFIX,cohere.ai
 DOMAIN-SUFFIX,cohere.com
 DOMAIN-SUFFIX,fal.ai
+DOMAIN-SUFFIX,fireworks.ai
 DOMAIN-SUFFIX,hf.space
 DOMAIN-SUFFIX,huggingface.co
 DOMAIN-SUFFIX,mistral.ai
+DOMAIN-SUFFIX,mistral.com
 DOMAIN-SUFFIX,models.dev
 DOMAIN-SUFFIX,replicate.com
 DOMAIN-SUFFIX,replicate.delivery
@@ -90,6 +93,7 @@ DOMAIN-SUFFIX,perplexity.ai
 DOMAIN-SUFFIX,pplx.ai
 
 # AI Tools
+DOMAIN-SUFFIX,anysphere.inc
 DOMAIN-SUFFIX,augmentcode.com
 DOMAIN-SUFFIX,bolt.new
 DOMAIN-SUFFIX,character.ai
@@ -98,6 +102,7 @@ DOMAIN-SUFFIX,codeium.com
 DOMAIN-SUFFIX,coze.com
 DOMAIN-SUFFIX,cursor.com
 DOMAIN-SUFFIX,cursor.sh
+DOMAIN-SUFFIX,cursorapi.com
 DOMAIN-SUFFIX,cursorvm.com
 DOMAIN-SUFFIX,dify.ai
 DOMAIN-SUFFIX,genspark.ai
@@ -113,4 +118,5 @@ DOMAIN-SUFFIX,poe.com
 DOMAIN-SUFFIX,poecdn.net
 DOMAIN-SUFFIX,tavily.com
 DOMAIN-SUFFIX,windsurf.ai
+DOMAIN-SUFFIX,windsurf.com
 DOMAIN-SUFFIX,you.com

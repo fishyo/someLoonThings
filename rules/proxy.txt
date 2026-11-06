@@ -2,14 +2,15 @@
 apple.news
 books.apple.com
 news.apple.com
+testflight.apple.com
 tv.apple.com
 
 # Cloudflare
 cf-ipfs.com
+keyword: cloudflare
 cloudflarestream.com
 cloudflareworkers.com
 exact: one.one.one.one
-keyword: cloudflare
 pages.dev
 videodelivery.net
 warp.plus
@@ -31,11 +32,15 @@ atl-paas.net
 atlassian.com
 atlassian.net
 aur.archlinux.org
+auth0.com
 bandwagonhost.com
 bitbucket.org
 brew.sh
 chocolatey.org
+clerk.com
+clerk.dev
 cloudcone.com
+cocoapods.org
 codeberg.org
 codepen.io
 codesandbox.io
@@ -52,6 +57,7 @@ do.co
 docker.com
 docker.io
 f-droid.org
+flutter.dev
 fly.dev
 fly.io
 gallery.vsassets.io
@@ -81,9 +87,10 @@ jetbrains.com
 jira.com
 jitpack.io
 jsfiddle.net
+jsr.io
+k8s.io
 kaggle.com
 kernel.org
-keyword: vercel
 linear.app
 linode.com
 maven.org
@@ -99,13 +106,17 @@ ovh.com
 ovhcloud.com
 packagecontrol.io
 pkg.go.dev
+planetscale.com
 postman.com
+pub.dev
 pypi.org
 pythonhosted.org
+quay.io
 railway.app
 raw.githubusercontent.com
 raycast.com
 readme.io
+registry.k8s.io
 render.com
 replit.com
 replit.dev
@@ -125,7 +136,10 @@ superuser.com
 tampermonkey.net
 terraform.io
 trello.com
+turso.tech
 typora.io
+upstash.com
+keyword: vercel
 vercel.app
 vercel.com
 visualstudio.com
@@ -138,18 +152,24 @@ zen-browser.app
 
 # Entertainment
 acg.rip
+anilist.co
 ao3.org
 archiveofourown.org
+bangumi.tv
+bgm.tv
 booth.pm
+chii.in
 dailymotion.com
 dmcdn.net
 donmai.us
+fanart.tv
 fanbox.cc
 imdb.com
 kakuyomu.jp
 letterboxd.com
 mangadex.org
 media-imdb.com
+myanimelist.net
 nyaa.net
 nyaa.si
 odysee.com
@@ -162,9 +182,11 @@ pximg.net
 rottentomatoes.com
 rumble.com
 subhd.me
+subscene.com
 sukebei.nyaa.si
 syosetu.com
 themoviedb.org
+thetvdb.com
 tinymediamanager.org
 tmdb.org
 trakt.tv
@@ -187,6 +209,7 @@ coinmarketcap.com
 cointelegraph.com
 dexscreener.com
 dextools.io
+dupay.one
 ebay.com
 ebayimg.com
 etherscan.io
@@ -198,12 +221,16 @@ kucoin.com
 mercari.com
 metamask.io
 mexc.com
+monzo.com
 oklink.com
 okx.com
+onekey.so
 phantom.app
 rakuten.co.jp
 rakuten.com
+revolut.com
 solscan.io
+stripe.com
 suruga-ya.jp
 tradingview.com
 uniswap.org
@@ -262,9 +289,10 @@ withgoogle.com
 # Infrastructure
 akamai.net
 akamaiedge.net
-arkoselabs.com
+amazon.co.jp
 amazon.com
 amazonaws.com
+api.ip.sb
 archive.is
 archive.li
 archive.md
@@ -272,15 +300,19 @@ archive.org
 archive.ph
 archive.today
 archive.vn
+arkoselabs.com
 awsstatic.com
 bgp.he.net
+bgp.tools
 bit.ly
+browserleaks.com
 cdnjs.cloudflare.com
 challenges.cloudflare.com
 checkout.stripe.com
 cloudfront.net
 cutt.ly
 deepl.com
+dnsleaktest.com
 edgecastcdn.net
 fastly.net
 fastlylb.net
@@ -289,6 +321,12 @@ fonts.gstatic.com
 giphy.com
 gofile.io
 hcaptcha.com
+icanhazip.com
+ifconfig.co
+ifconfig.me
+ip.gs
+ip.me
+ip.sb
 ip2location.com
 ipapi.co
 ipinfo.io
@@ -308,6 +346,7 @@ rentry.co
 rentry.org
 rsshub.app
 speedtest.net
+ssl-images-amazon.com
 stripecdn.com
 tinyurl.com
 typekit.net
@@ -330,6 +369,9 @@ sydneystorageextension.blob.core.windows.net
 abc.net.au
 academia.edu
 aljazeera.com
+annas-archive.li
+annas-archive.org
+annas-archive.se
 apnews.com
 arstechnica.com
 arxiv.org
@@ -341,6 +383,7 @@ cn.nikkei.com
 cna.com.tw
 cnbc.com
 cnn.com
+keyword: deutschewelle
 dw-world.de
 dw.com
 dw.de
@@ -351,10 +394,10 @@ forbes.com
 france24.com
 ft.com
 ftchinese.com
+goodreads.com
 guardianapis.com
 guim.co.uk
 jstor.org
-keyword: deutschewelle
 latimes.com
 libgen.is
 libgen.li
@@ -375,6 +418,7 @@ sci-hub.se
 sci-hub.st
 sciencedirect.com
 scmp.com
+singlelogin.re
 springer.com
 storm.mg
 substack.com
@@ -400,6 +444,7 @@ wiley.com
 wired.com
 wsj.com
 wsj.net
+z-lib.id
 zaobao.com
 zaobao.com.sg
 
@@ -421,9 +466,11 @@ feedlycdn.com
 feedlylabs.com
 figma.com
 grammarly.com
+gumroad.com
 inoreader.com
 inoreader.net
 instapaper.com
+ko-fi.com
 lucid.app
 lucidchart.com
 mediafire.com
@@ -435,6 +482,8 @@ notion.new
 notion.site
 notion.so
 onedrive.live.com
+patreon.com
+patreonusercontent.com
 pcloud.com
 slack-edge.com
 slack.com
@@ -509,6 +558,7 @@ zerotier.com
 500px.net
 500px.org
 5ch.net
+keyword: blogimg
 bsky.app
 bsky.network
 bsky.social
@@ -522,13 +572,12 @@ joinclubhouse.com
 kakao.com
 kakaocdn.net
 kakaotalk.com
-keyword: blogimg
 keyword: ldblog
-keyword: livedoor
 line-apps.com
 line-scdn.net
 line.me
 linktr.ee
+keyword: livedoor
 mastodon.social
 matrix.org
 matters.news
@@ -564,7 +613,6 @@ fanza.com
 javbus.com
 javdb.com
 keyword: missav
-keyword: thepiratebay
 onlyfans.com
 phncdn.com
 phprcdn.com
@@ -572,5 +620,6 @@ pornhub.com
 pornhubpremium.com
 surrit.com
 t66y.com
+keyword: thepiratebay
 xnxx.com
 xvideos.com

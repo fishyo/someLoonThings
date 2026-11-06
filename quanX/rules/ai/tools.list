@@ -2,6 +2,7 @@
 # Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
 
 # AI Tools
+host-suffix, anysphere.inc, proxy
 host-suffix, augmentcode.com, proxy
 host-suffix, bolt.new, proxy
 host-suffix, character.ai, proxy
@@ -10,6 +11,7 @@ host-suffix, codeium.com, proxy
 host-suffix, coze.com, proxy
 host-suffix, cursor.com, proxy
 host-suffix, cursor.sh, proxy
+host-suffix, cursorapi.com, proxy
 host-suffix, cursorvm.com, proxy
 host-suffix, dify.ai, proxy
 host-suffix, genspark.ai, proxy
@@ -25,4 +27,5 @@ host-suffix, poe.com, proxy
 host-suffix, poecdn.net, proxy
 host-suffix, tavily.com, proxy
 host-suffix, windsurf.ai, proxy
+host-suffix, windsurf.com, proxy
 host-suffix, you.com, proxy

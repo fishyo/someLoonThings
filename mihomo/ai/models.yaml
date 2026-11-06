@@ -3,12 +3,15 @@
 
 payload:
   # AI Models
+  - DOMAIN-SUFFIX,cerebras.ai
   - DOMAIN-SUFFIX,cohere.ai
   - DOMAIN-SUFFIX,cohere.com
   - DOMAIN-SUFFIX,fal.ai
+  - DOMAIN-SUFFIX,fireworks.ai
   - DOMAIN-SUFFIX,hf.space
   - DOMAIN-SUFFIX,huggingface.co
   - DOMAIN-SUFFIX,mistral.ai
+  - DOMAIN-SUFFIX,mistral.com
   - DOMAIN-SUFFIX,models.dev
   - DOMAIN-SUFFIX,replicate.com
   - DOMAIN-SUFFIX,replicate.delivery

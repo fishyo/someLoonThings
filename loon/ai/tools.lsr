@@ -2,6 +2,7 @@
 # Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
 
 # AI Tools
+DOMAIN-SUFFIX,anysphere.inc
 DOMAIN-SUFFIX,augmentcode.com
 DOMAIN-SUFFIX,bolt.new
 DOMAIN-SUFFIX,character.ai
@@ -10,6 +11,7 @@ DOMAIN-SUFFIX,codeium.com
 DOMAIN-SUFFIX,coze.com
 DOMAIN-SUFFIX,cursor.com
 DOMAIN-SUFFIX,cursor.sh
+DOMAIN-SUFFIX,cursorapi.com
 DOMAIN-SUFFIX,cursorvm.com
 DOMAIN-SUFFIX,dify.ai
 DOMAIN-SUFFIX,genspark.ai
@@ -25,4 +27,5 @@ DOMAIN-SUFFIX,poe.com
 DOMAIN-SUFFIX,poecdn.net
 DOMAIN-SUFFIX,tavily.com
 DOMAIN-SUFFIX,windsurf.ai
+DOMAIN-SUFFIX,windsurf.com
 DOMAIN-SUFFIX,you.com
