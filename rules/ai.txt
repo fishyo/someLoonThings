@@ -49,7 +49,6 @@ runwayml.com
 stability.ai
 
 # Midjourney
-cdn.midjourney.com
 midjourney.com
 
 # AI Models
@@ -58,6 +57,7 @@ cohere.ai
 cohere.com
 fal.ai
 fireworks.ai
+hf.co
 hf.space
 huggingface.co
 mistral.ai
@@ -107,6 +107,7 @@ groq.com
 lovable.dev
 manus.im
 meta.ai
+ollama.com
 onorca.dev
 opencode.ai
 openrouter.ai
@@ -114,6 +115,7 @@ phind.com
 poe.com
 poecdn.net
 tavily.com
+wandb.ai
 windsurf.ai
 windsurf.com
 you.com

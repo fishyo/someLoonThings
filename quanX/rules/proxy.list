@@ -52,7 +52,6 @@ host-suffix, runwayml.com, proxy
 host-suffix, stability.ai, proxy
 
 # Midjourney
-host-suffix, cdn.midjourney.com, proxy
 host-suffix, midjourney.com, proxy
 
 # AI Models
@@ -61,6 +60,7 @@ host-suffix, cohere.ai, proxy
 host-suffix, cohere.com, proxy
 host-suffix, fal.ai, proxy
 host-suffix, fireworks.ai, proxy
+host-suffix, hf.co, proxy
 host-suffix, hf.space, proxy
 host-suffix, huggingface.co, proxy
 host-suffix, mistral.ai, proxy
@@ -110,6 +110,7 @@ host-suffix, groq.com, proxy
 host-suffix, lovable.dev, proxy
 host-suffix, manus.im, proxy
 host-suffix, meta.ai, proxy
+host-suffix, ollama.com, proxy
 host-suffix, onorca.dev, proxy
 host-suffix, opencode.ai, proxy
 host-suffix, openrouter.ai, proxy
@@ -117,6 +118,7 @@ host-suffix, phind.com, proxy
 host-suffix, poe.com, proxy
 host-suffix, poecdn.net, proxy
 host-suffix, tavily.com, proxy
+host-suffix, wandb.ai, proxy
 host-suffix, windsurf.ai, proxy
 host-suffix, windsurf.com, proxy
 host-suffix, you.com, proxy
@@ -359,7 +361,6 @@ host-suffix, hulu.jp, proxy
 host-suffix, hulu.sc.omtrdc.net, proxy
 host-suffix, huluad.com, proxy
 host-suffix, hulustream.com, proxy
-host-suffix, play.hulu.com, proxy
 
 # Japan TV
 host-suffix, dmc.nico, proxy
@@ -516,6 +517,7 @@ host-suffix, reiobox.top, proxy
 host-suffix, uindex.org, proxy
 
 # Development
+host-suffix, alchemy.com, proxy
 host-suffix, alpinelinux.org, proxy
 host-suffix, anaconda.com, proxy
 host-suffix, anaconda.org, proxy
@@ -526,7 +528,6 @@ host-suffix, archlinux.org, proxy
 host-suffix, atl-paas.net, proxy
 host-suffix, atlassian.com, proxy
 host-suffix, atlassian.net, proxy
-host-suffix, aur.archlinux.org, proxy
 host-suffix, auth0.com, proxy
 host-suffix, bandwagonhost.com, proxy
 host-suffix, bitbucket.org, proxy
@@ -599,18 +600,16 @@ host-suffix, nuget.org, proxy
 host-suffix, ovh.com, proxy
 host-suffix, ovhcloud.com, proxy
 host-suffix, packagecontrol.io, proxy
-host-suffix, pkg.go.dev, proxy
 host-suffix, planetscale.com, proxy
+host-suffix, posthog.com, proxy
 host-suffix, postman.com, proxy
 host-suffix, pub.dev, proxy
 host-suffix, pypi.org, proxy
 host-suffix, pythonhosted.org, proxy
 host-suffix, quay.io, proxy
 host-suffix, railway.app, proxy
-host-suffix, raw.githubusercontent.com, proxy
 host-suffix, raycast.com, proxy
 host-suffix, readme.io, proxy
-host-suffix, registry.k8s.io, proxy
 host-suffix, render.com, proxy
 host-suffix, replit.com, proxy
 host-suffix, replit.dev, proxy
@@ -647,6 +646,7 @@ host-suffix, zen-browser.app, proxy
 # Entertainment
 host-suffix, acg.rip, proxy
 host-suffix, anilist.co, proxy
+host-suffix, animate.co.jp, proxy
 host-suffix, ao3.org, proxy
 host-suffix, archiveofourown.org, proxy
 host-suffix, bangumi.tv, proxy
@@ -658,11 +658,16 @@ host-suffix, dmcdn.net, proxy
 host-suffix, donmai.us, proxy
 host-suffix, fanart.tv, proxy
 host-suffix, fanbox.cc, proxy
+host-suffix, gelbooru.com, proxy
 host-suffix, imdb.com, proxy
 host-suffix, kakuyomu.jp, proxy
+host-suffix, konachan.com, proxy
+host-suffix, konachan.net, proxy
 host-suffix, letterboxd.com, proxy
+host-suffix, mandarake.co.jp, proxy
 host-suffix, mangadex.org, proxy
 host-suffix, media-imdb.com, proxy
+host-suffix, melonbooks.co.jp, proxy
 host-suffix, myanimelist.net, proxy
 host-suffix, nyaa.net, proxy
 host-suffix, nyaa.si, proxy
@@ -677,12 +682,12 @@ host-suffix, rottentomatoes.com, proxy
 host-suffix, rumble.com, proxy
 host-suffix, subhd.me, proxy
 host-suffix, subscene.com, proxy
-host-suffix, sukebei.nyaa.si, proxy
 host-suffix, syosetu.com, proxy
 host-suffix, themoviedb.org, proxy
 host-suffix, thetvdb.com, proxy
 host-suffix, tinymediamanager.org, proxy
 host-suffix, tmdb.org, proxy
+host-suffix, toranoana.jp, proxy
 host-suffix, trakt.tv, proxy
 host-suffix, yande.re, proxy
 
@@ -695,6 +700,7 @@ host-suffix, binance.vision, proxy
 host-suffix, bitfinex.com, proxy
 host-suffix, bitget.com, proxy
 host-suffix, bnapp.net, proxy
+host-suffix, buyee.jp, proxy
 host-suffix, bybit.com, proxy
 host-suffix, coinbase.com, proxy
 host-suffix, coindesk.com, proxy
@@ -709,7 +715,6 @@ host-suffix, ebayimg.com, proxy
 host-suffix, etherscan.io, proxy
 host-suffix, gate.io, proxy
 host-suffix, investing.com, proxy
-host-suffix, jp.mercari.com, proxy
 host-suffix, kraken.com, proxy
 host-suffix, kucoin.com, proxy
 host-suffix, mercari.com, proxy
@@ -720,12 +725,16 @@ host-suffix, oklink.com, proxy
 host-suffix, okx.com, proxy
 host-suffix, onekey.so, proxy
 host-suffix, phantom.app, proxy
+host-suffix, rabby.io, proxy
 host-suffix, rakuten.co.jp, proxy
 host-suffix, rakuten.com, proxy
+host-suffix, redotpay.com, proxy
 host-suffix, revolut.com, proxy
 host-suffix, solscan.io, proxy
 host-suffix, suruga-ya.jp, proxy
+host-suffix, tenso.com, proxy
 host-suffix, tradingview.com, proxy
+host-suffix, tronscan.org, proxy
 host-suffix, uniswap.org, proxy
 
 # Gaming
@@ -766,6 +775,8 @@ host-suffix, google.co.jp, proxy
 host-suffix, google.co.uk, proxy
 host-suffix, google.com, proxy
 host-suffix, google.com.hk, proxy
+host-suffix, google.com.sg, proxy
+host-suffix, google.com.tw, proxy
 host-suffix, googleblog.com, proxy
 host-suffix, googledrive.com, proxy
 host-suffix, googlehosted.com, proxy
@@ -774,17 +785,18 @@ host-suffix, googleusercontent.com, proxy
 host-suffix, gstatic.com, proxy
 host-suffix, gvt1.com, proxy
 host-suffix, gvt2.com, proxy
-host-suffix, play.google.com, proxy
 host-suffix, run.app, proxy
 host-suffix, withgoogle.com, proxy
 
 # Infrastructure
+host-suffix, 17track.net, proxy
+host-suffix, airalo.com, proxy
+host-suffix, airalo.net, proxy
 host-suffix, akamai.net, proxy
 host-suffix, akamaiedge.net, proxy
 host-suffix, amazon.co.jp, proxy
 host-suffix, amazon.com, proxy
 host-suffix, amazonaws.com, proxy
-host-suffix, api.ip.sb, proxy
 host-suffix, archive.is, proxy
 host-suffix, archive.li, proxy
 host-suffix, archive.md, proxy
@@ -793,14 +805,18 @@ host-suffix, archive.ph, proxy
 host-suffix, archive.today, proxy
 host-suffix, archive.vn, proxy
 host-suffix, awsstatic.com, proxy
+host-suffix, b-cdn.net, proxy
 host-suffix, bgp.he.net, proxy
 host-suffix, bgp.tools, proxy
 host-suffix, bit.ly, proxy
 host-suffix, browserleaks.com, proxy
+host-suffix, bunny.net, proxy
+host-suffix, cdn77.com, proxy
+host-suffix, cdn77.net, proxy
 host-suffix, cdnjs.cloudflare.com, proxy
 host-suffix, challenges.cloudflare.com, proxy
-host-suffix, checkout.stripe.com, proxy
 host-suffix, cloudfront.net, proxy
+host-suffix, crisp.chat, proxy
 host-suffix, cutt.ly, proxy
 host-suffix, deepl.com, proxy
 host-suffix, dnsleaktest.com, proxy
@@ -808,13 +824,14 @@ host-suffix, edgecastcdn.net, proxy
 host-suffix, fastly.net, proxy
 host-suffix, fastlylb.net, proxy
 host-suffix, fonts.googleapis.com, proxy
-host-suffix, fonts.gstatic.com, proxy
 host-suffix, giphy.com, proxy
 host-suffix, gofile.io, proxy
 host-suffix, hcaptcha.com, proxy
 host-suffix, icanhazip.com, proxy
 host-suffix, ifconfig.co, proxy
 host-suffix, ifconfig.me, proxy
+host-suffix, intercom.io, proxy
+host-suffix, intercomcdn.com, proxy
 host-suffix, ip.gs, proxy
 host-suffix, ip.me, proxy
 host-suffix, ip.sb, proxy
@@ -824,6 +841,7 @@ host-suffix, ipinfo.io, proxy
 host-suffix, iplocation.net, proxy
 host-suffix, is.gd, proxy
 host-suffix, jsdelivr.net, proxy
+host-suffix, kuronekoyamato.co.jp, proxy
 host-suffix, link.com, proxy
 host-suffix, nxtrace.org, proxy
 host-suffix, ow.ly, proxy
@@ -831,18 +849,22 @@ host-suffix, pastebin.com, proxy
 host-suffix, paypal.com, proxy
 host-suffix, paypalobjects.com, proxy
 host-suffix, pixeldrain.com, proxy
+host-suffix, post.japanpost.jp, proxy
 host-suffix, rebrand.ly, proxy
 host-suffix, recaptcha.net, proxy
 host-suffix, rentry.co, proxy
 host-suffix, rentry.org, proxy
 host-suffix, rsshub.app, proxy
+host-suffix, sentry-cdn.com, proxy
 host-suffix, speedtest.net, proxy
 host-suffix, ssl-images-amazon.com, proxy
+host-suffix, statically.io, proxy
 host-suffix, stripecdn.com, proxy
 host-suffix, tinyurl.com, proxy
 host-suffix, typekit.net, proxy
 host-suffix, unpkg.com, proxy
 host-suffix, unsplash.com, proxy
+host-suffix, usps.com, proxy
 host-suffix, whatismyipaddress.com, proxy
 host-suffix, wise.com, proxy
 
@@ -854,6 +876,7 @@ host-suffix, live.com, proxy
 host-suffix, microsoft.com, proxy
 host-suffix, office.com, proxy
 host-suffix, office365.com, proxy
+host-suffix, onedrive.com, proxy
 host-suffix, sydneystorageextension.blob.core.windows.net, proxy
 
 # News
@@ -870,7 +893,6 @@ host-suffix, bbc.com, proxy
 host-suffix, bbci.co.uk, proxy
 host-suffix, bloomberg.com, proxy
 host-suffix, chinatimes.com, proxy
-host-suffix, cn.nikkei.com, proxy
 host-suffix, cna.com.tw, proxy
 host-suffix, cnbc.com, proxy
 host-suffix, cnn.com, proxy
@@ -882,6 +904,7 @@ host-suffix, dwnews.net, proxy
 host-suffix, economist.com, proxy
 host-suffix, engadget.com, proxy
 host-suffix, forbes.com, proxy
+host-suffix, foreignaffairs.com, proxy
 host-suffix, france24.com, proxy
 host-suffix, ft.com, proxy
 host-suffix, ftchinese.com, proxy
@@ -914,8 +937,10 @@ host-suffix, springer.com, proxy
 host-suffix, storm.mg, proxy
 host-suffix, substack.com, proxy
 host-suffix, techcrunch.com, proxy
+host-suffix, theatlantic.com, proxy
 host-suffix, theguardian.com, proxy
 host-suffix, theinitium.com, proxy
+host-suffix, thetimes.co.uk, proxy
 host-suffix, theverge.com, proxy
 host-suffix, time.com, proxy
 host-suffix, twreporter.org, proxy
@@ -951,6 +976,7 @@ host-suffix, dropboxapi.com, proxy
 host-suffix, dropboxstatic.com, proxy
 host-suffix, dropboxusercontent.com, proxy
 host-suffix, evernote.com, proxy
+host-suffix, fantia.jp, proxy
 host-suffix, feedly.com, proxy
 host-suffix, feedly.net, proxy
 host-suffix, feedlycdn.com, proxy
@@ -972,12 +998,15 @@ host-suffix, monday.com, proxy
 host-suffix, notion.new, proxy
 host-suffix, notion.site, proxy
 host-suffix, notion.so, proxy
-host-suffix, onedrive.live.com, proxy
 host-suffix, patreon.com, proxy
 host-suffix, patreonusercontent.com, proxy
 host-suffix, pcloud.com, proxy
+host-suffix, skyscanner.com, proxy
+host-suffix, skyscanner.net, proxy
 host-suffix, slack-edge.com, proxy
 host-suffix, slack.com, proxy
+host-suffix, terabox.com, proxy
+host-suffix, tripadvisor.com, proxy
 host-suffix, wetransfer.com, proxy
 host-suffix, zoom.com, proxy
 host-suffix, zoom.us, proxy
@@ -1010,10 +1039,13 @@ host-suffix, adguard.com, proxy
 host-suffix, bitwarden.com, proxy
 host-suffix, bitwarden.net, proxy
 host-suffix, censys.io, proxy
+host-suffix, clashverge.dev, proxy
 host-suffix, cock.li, proxy
 host-suffix, dashlane.com, proxy
+host-suffix, ente.io, proxy
 host-suffix, expressvpn.com, proxy
 host-keyword, hysteria, proxy
+host-suffix, keepassxc.org, proxy
 host-suffix, lastpass.com, proxy
 host-suffix, mailbox.org, proxy
 host-suffix, metacubex.one, proxy
@@ -1032,6 +1064,7 @@ host-suffix, riseup.net, proxy
 host-suffix, shadowsocks.org, proxy
 host-suffix, shodan.io, proxy
 host-suffix, simplelogin.io, proxy
+host-suffix, sing-box.net, proxy
 host-suffix, surfshark.com, proxy
 host-suffix, tailscale.com, proxy
 host-suffix, torproject.org, proxy
@@ -1101,9 +1134,12 @@ host-suffix, e-hentai.org, proxy
 host-suffix, everia.club, proxy
 host-suffix, exhentai.org, proxy
 host-suffix, fanza.com, proxy
+host-suffix, hitomi.la, proxy
 host-suffix, javbus.com, proxy
 host-suffix, javdb.com, proxy
+host-suffix, javlibrary.com, proxy
 host-keyword, missav, proxy
+host-suffix, nhentai.net, proxy
 host-suffix, onlyfans.com, proxy
 host-suffix, phncdn.com, proxy
 host-suffix, phprcdn.com, proxy

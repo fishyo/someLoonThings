@@ -3,5 +3,4 @@
 
 payload:
   # Midjourney
-  - DOMAIN-SUFFIX,cdn.midjourney.com
   - DOMAIN-SUFFIX,midjourney.com

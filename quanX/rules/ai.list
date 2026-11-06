@@ -52,7 +52,6 @@ host-suffix, runwayml.com, proxy
 host-suffix, stability.ai, proxy
 
 # Midjourney
-host-suffix, cdn.midjourney.com, proxy
 host-suffix, midjourney.com, proxy
 
 # AI Models
@@ -61,6 +60,7 @@ host-suffix, cohere.ai, proxy
 host-suffix, cohere.com, proxy
 host-suffix, fal.ai, proxy
 host-suffix, fireworks.ai, proxy
+host-suffix, hf.co, proxy
 host-suffix, hf.space, proxy
 host-suffix, huggingface.co, proxy
 host-suffix, mistral.ai, proxy
@@ -110,6 +110,7 @@ host-suffix, groq.com, proxy
 host-suffix, lovable.dev, proxy
 host-suffix, manus.im, proxy
 host-suffix, meta.ai, proxy
+host-suffix, ollama.com, proxy
 host-suffix, onorca.dev, proxy
 host-suffix, opencode.ai, proxy
 host-suffix, openrouter.ai, proxy
@@ -117,6 +118,7 @@ host-suffix, phind.com, proxy
 host-suffix, poe.com, proxy
 host-suffix, poecdn.net, proxy
 host-suffix, tavily.com, proxy
+host-suffix, wandb.ai, proxy
 host-suffix, windsurf.ai, proxy
 host-suffix, windsurf.com, proxy
 host-suffix, you.com, proxy

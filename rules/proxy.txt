@@ -21,6 +21,7 @@ reiobox.top
 uindex.org
 
 # Development
+alchemy.com
 alpinelinux.org
 anaconda.com
 anaconda.org
@@ -31,7 +32,6 @@ archlinux.org
 atl-paas.net
 atlassian.com
 atlassian.net
-aur.archlinux.org
 auth0.com
 bandwagonhost.com
 bitbucket.org
@@ -101,22 +101,19 @@ nixos.org
 npmjs.com
 npmjs.org
 nuget.org
-onorca.dev
 ovh.com
 ovhcloud.com
 packagecontrol.io
-pkg.go.dev
 planetscale.com
+posthog.com
 postman.com
 pub.dev
 pypi.org
 pythonhosted.org
 quay.io
 railway.app
-raw.githubusercontent.com
 raycast.com
 readme.io
-registry.k8s.io
 render.com
 replit.com
 replit.dev
@@ -153,6 +150,7 @@ zen-browser.app
 # Entertainment
 acg.rip
 anilist.co
+animate.co.jp
 ao3.org
 archiveofourown.org
 bangumi.tv
@@ -164,11 +162,16 @@ dmcdn.net
 donmai.us
 fanart.tv
 fanbox.cc
+gelbooru.com
 imdb.com
 kakuyomu.jp
+konachan.com
+konachan.net
 letterboxd.com
+mandarake.co.jp
 mangadex.org
 media-imdb.com
+melonbooks.co.jp
 myanimelist.net
 nyaa.net
 nyaa.si
@@ -183,12 +186,12 @@ rottentomatoes.com
 rumble.com
 subhd.me
 subscene.com
-sukebei.nyaa.si
 syosetu.com
 themoviedb.org
 thetvdb.com
 tinymediamanager.org
 tmdb.org
+toranoana.jp
 trakt.tv
 yande.re
 
@@ -201,6 +204,7 @@ binance.vision
 bitfinex.com
 bitget.com
 bnapp.net
+buyee.jp
 bybit.com
 coinbase.com
 coindesk.com
@@ -215,7 +219,6 @@ ebayimg.com
 etherscan.io
 gate.io
 investing.com
-jp.mercari.com
 kraken.com
 kucoin.com
 mercari.com
@@ -226,13 +229,17 @@ oklink.com
 okx.com
 onekey.so
 phantom.app
+rabby.io
 rakuten.co.jp
 rakuten.com
+redotpay.com
 revolut.com
 solscan.io
 stripe.com
 suruga-ya.jp
+tenso.com
 tradingview.com
+tronscan.org
 uniswap.org
 
 # Gaming
@@ -267,13 +274,14 @@ chromium.org
 firebase.com
 firebaseio.com
 g.co
-ggpht.com
 gmail.com
 goo.gl
 google.co.jp
 google.co.uk
 google.com
 google.com.hk
+google.com.sg
+google.com.tw
 googleblog.com
 googledrive.com
 googlehosted.com
@@ -282,17 +290,18 @@ googleusercontent.com
 gstatic.com
 gvt1.com
 gvt2.com
-play.google.com
 run.app
 withgoogle.com
 
 # Infrastructure
+17track.net
+airalo.com
+airalo.net
 akamai.net
 akamaiedge.net
 amazon.co.jp
 amazon.com
 amazonaws.com
-api.ip.sb
 archive.is
 archive.li
 archive.md
@@ -302,14 +311,18 @@ archive.today
 archive.vn
 arkoselabs.com
 awsstatic.com
+b-cdn.net
 bgp.he.net
 bgp.tools
 bit.ly
 browserleaks.com
+bunny.net
+cdn77.com
+cdn77.net
 cdnjs.cloudflare.com
 challenges.cloudflare.com
-checkout.stripe.com
 cloudfront.net
+crisp.chat
 cutt.ly
 deepl.com
 dnsleaktest.com
@@ -317,13 +330,14 @@ edgecastcdn.net
 fastly.net
 fastlylb.net
 fonts.googleapis.com
-fonts.gstatic.com
 giphy.com
 gofile.io
 hcaptcha.com
 icanhazip.com
 ifconfig.co
 ifconfig.me
+intercom.io
+intercomcdn.com
 ip.gs
 ip.me
 ip.sb
@@ -333,6 +347,7 @@ ipinfo.io
 iplocation.net
 is.gd
 jsdelivr.net
+kuronekoyamato.co.jp
 link.com
 nxtrace.org
 ow.ly
@@ -340,18 +355,22 @@ pastebin.com
 paypal.com
 paypalobjects.com
 pixeldrain.com
+post.japanpost.jp
 rebrand.ly
 recaptcha.net
 rentry.co
 rentry.org
 rsshub.app
+sentry-cdn.com
 speedtest.net
 ssl-images-amazon.com
+statically.io
 stripecdn.com
 tinyurl.com
 typekit.net
 unpkg.com
 unsplash.com
+usps.com
 whatismyipaddress.com
 wise.com
 
@@ -363,6 +382,7 @@ live.com
 microsoft.com
 office.com
 office365.com
+onedrive.com
 sydneystorageextension.blob.core.windows.net
 
 # News
@@ -379,7 +399,6 @@ bbc.com
 bbci.co.uk
 bloomberg.com
 chinatimes.com
-cn.nikkei.com
 cna.com.tw
 cnbc.com
 cnn.com
@@ -391,6 +410,7 @@ dwnews.net
 economist.com
 engadget.com
 forbes.com
+foreignaffairs.com
 france24.com
 ft.com
 ftchinese.com
@@ -423,8 +443,10 @@ springer.com
 storm.mg
 substack.com
 techcrunch.com
+theatlantic.com
 theguardian.com
 theinitium.com
+thetimes.co.uk
 theverge.com
 time.com
 twreporter.org
@@ -460,6 +482,7 @@ dropboxapi.com
 dropboxstatic.com
 dropboxusercontent.com
 evernote.com
+fantia.jp
 feedly.com
 feedly.net
 feedlycdn.com
@@ -481,12 +504,15 @@ monday.com
 notion.new
 notion.site
 notion.so
-onedrive.live.com
 patreon.com
 patreonusercontent.com
 pcloud.com
+skyscanner.com
+skyscanner.net
 slack-edge.com
 slack.com
+terabox.com
+tripadvisor.com
 wetransfer.com
 zoom.com
 zoom.us
@@ -519,10 +545,13 @@ adguard.com
 bitwarden.com
 bitwarden.net
 censys.io
+clashverge.dev
 cock.li
 dashlane.com
+ente.io
 expressvpn.com
 keyword: hysteria
+keepassxc.org
 lastpass.com
 mailbox.org
 metacubex.one
@@ -541,6 +570,7 @@ riseup.net
 shadowsocks.org
 shodan.io
 simplelogin.io
+sing-box.net
 surfshark.com
 tailscale.com
 torproject.org
@@ -610,9 +640,12 @@ e-hentai.org
 everia.club
 exhentai.org
 fanza.com
+hitomi.la
 javbus.com
 javdb.com
+javlibrary.com
 keyword: missav
+nhentai.net
 onlyfans.com
 phncdn.com
 phprcdn.com

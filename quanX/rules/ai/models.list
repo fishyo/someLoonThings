@@ -7,6 +7,7 @@ host-suffix, cohere.ai, proxy
 host-suffix, cohere.com, proxy
 host-suffix, fal.ai, proxy
 host-suffix, fireworks.ai, proxy
+host-suffix, hf.co, proxy
 host-suffix, hf.space, proxy
 host-suffix, huggingface.co, proxy
 host-suffix, mistral.ai, proxy

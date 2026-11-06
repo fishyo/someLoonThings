@@ -9,4 +9,3 @@ hulu.jp
 hulu.sc.omtrdc.net
 huluad.com
 hulustream.com
-play.hulu.com

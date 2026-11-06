@@ -16,6 +16,7 @@ groq.com
 lovable.dev
 manus.im
 meta.ai
+ollama.com
 onorca.dev
 opencode.ai
 openrouter.ai
@@ -23,6 +24,7 @@ phind.com
 poe.com
 poecdn.net
 tavily.com
+wandb.ai
 windsurf.ai
 windsurf.com
 you.com

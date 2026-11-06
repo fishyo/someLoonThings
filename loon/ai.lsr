@@ -52,7 +52,6 @@ DOMAIN-SUFFIX,runwayml.com
 DOMAIN-SUFFIX,stability.ai
 
 # Midjourney
-DOMAIN-SUFFIX,cdn.midjourney.com
 DOMAIN-SUFFIX,midjourney.com
 
 # AI Models
@@ -61,6 +60,7 @@ DOMAIN-SUFFIX,cohere.ai
 DOMAIN-SUFFIX,cohere.com
 DOMAIN-SUFFIX,fal.ai
 DOMAIN-SUFFIX,fireworks.ai
+DOMAIN-SUFFIX,hf.co
 DOMAIN-SUFFIX,hf.space
 DOMAIN-SUFFIX,huggingface.co
 DOMAIN-SUFFIX,mistral.ai
@@ -110,6 +110,7 @@ DOMAIN-SUFFIX,groq.com
 DOMAIN-SUFFIX,lovable.dev
 DOMAIN-SUFFIX,manus.im
 DOMAIN-SUFFIX,meta.ai
+DOMAIN-SUFFIX,ollama.com
 DOMAIN-SUFFIX,onorca.dev
 DOMAIN-SUFFIX,opencode.ai
 DOMAIN-SUFFIX,openrouter.ai
@@ -117,6 +118,7 @@ DOMAIN-SUFFIX,phind.com
 DOMAIN-SUFFIX,poe.com
 DOMAIN-SUFFIX,poecdn.net
 DOMAIN-SUFFIX,tavily.com
+DOMAIN-SUFFIX,wandb.ai
 DOMAIN-SUFFIX,windsurf.ai
 DOMAIN-SUFFIX,windsurf.com
 DOMAIN-SUFFIX,you.com

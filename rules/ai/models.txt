@@ -4,6 +4,7 @@ cohere.ai
 cohere.com
 fal.ai
 fireworks.ai
+hf.co
 hf.space
 huggingface.co
 mistral.ai

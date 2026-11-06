@@ -21,15 +21,18 @@
   - 同步更新 README.md 与相关文档订阅链接至最新标准子路径。
 - **游戏分流精简 (`rules/game/`)**：
   - 按需移除 `nintendo`、`playstation`、`xbox`、`twitch` 等独立规则，三端平台对应规则文件自动同步清理并从全量代理池中移除。
-- **全量通用代理规则系统性扩充与查漏补缺 (`rules/proxy.txt` & 子规则库)**：
-  - **AI 开发者与模型生态**：补齐 Cursor 后端及母公司鉴权（`cursorapi.com`, `anysphere.inc`）、Windsurf 官网（`windsurf.com`）、Cerebras 超低延迟推理（`cerebras.ai`）、Fireworks AI（`fireworks.ai`）及 Mistral（`mistral.com`）。
-  - **创作者支持与赞助**：新增 Patreon 官方与资源 CDN（`patreon.com`, `patreonusercontent.com`）、Gumroad（`gumroad.com`）、Ko-fi（`ko-fi.com`）。
-  - **影子图书馆与学术社群**：新增全球最大全能影子图书馆 Anna's Archive（`annas-archive.org`, `.li`, `.se`）、Z-Library 活跃登录镜像（`z-lib.id`, `singlelogin.re`）与 Goodreads 书评社区（`goodreads.com`）。
-  - **媒体中心与影音刮削**：新增 Infuse / Plex / Emby 剧集与海报刮削核心源（`thetvdb.com`, `fanart.tv`）、Subscene 字幕网（`subscene.com`）、Bangumi 番组计划（`bangumi.tv`, `bgm.tv`, `chii.in`）与 MyAnimeList（`myanimelist.net`）。
-  - **现代开发生态与包管理**：新增 CocoaPods（`cocoapods.org`）、Flutter 依赖仓库（`pub.dev`, `flutter.dev`）、JSR 注册表（`jsr.io`）、Kubernetes 镜像（`k8s.io`, `registry.k8s.io`）、Quay 容器源（`quay.io`）、Clerk 鉴权服务（`clerk.com`, `clerk.dev`）、Auth0（`auth0.com`）及 Serverless 数据库（`turso.tech`, `planetscale.com`, `upstash.com`）。
-  - **跨国金融与海淘**：补齐 Stripe 根域名（`stripe.com`）、海外数字银行 Revolut（`revolut.com`）、Monzo（`monzo.com`）、虚拟卡 Dupay（`dupay.one`）、OneKey 钱包（`onekey.so`）及日本亚马逊商城与图片 CDN（`amazon.co.jp`, `ssl-images-amazon.com`）。
-  - **网络诊断与出口指纹测试**：新增纯净出口 IP 查询（`ip.sb`, `api.ip.sb`, `ip.me`, `ip.gs`, `ifconfig.me`, `ifconfig.co`, `icanhazip.com`）与指纹/泄漏检测（`dnsleaktest.com`, `browserleaks.com`, `bgp.tools`）。
-  - **Apple 生态与播客**：新增 TestFlight 官方内测服务（`testflight.apple.com`）与 iOS 第一方热门播客 Overcast（`overcast.fm`）。
+- **全量通用代理与分流规则 5 轮深度检索与体检升级 (5-Pass Deep Audit & Clean-up)**：
+  - **盲区补全 (Coverage Additions)**：
+    - **前沿 AI 与模型生态**：新增 Hugging Face 官方模型短链（`hf.co`）、Ollama 官方网站（`ollama.com`）与 Weights & Biases 实验记录平台（`wandb.ai`）。
+    - **微软与海外网盘**：补齐 OneDrive 官方主域名（`onedrive.com`）、TeraBox 海外网盘（`terabox.com`）与 Fantia 日本创作者赞助平台（`fantia.jp`）。
+    - **Google 亚太跳转**：新增台湾与新加坡节点常用跳转分支（`google.com.tw`, `google.com.sg`）。
+    - **全球公共 CDN 与前端组件**：新增 BunnyCDN 全球网络（`bunny.net`, `b-cdn.net`）、CDN77（`cdn77.com`, `cdn77.net`）、Statically 静态源（`statically.io`）、PostHog 遥测（`posthog.com`）、Sentry JS SDK（`sentry-cdn.com`）及 Intercom / Crisp 在线客服（`intercom.io`, `intercomcdn.com`, `crisp.chat`）。
+    - **海淘转运、国际物流与出行**：新增 Buyee（`buyee.jp`）、Tenso 转运（`tenso.com`）、Mandarake 中古店（`mandarake.co.jp`）、虎之穴（`toranoana.jp`）、Melonbooks（`melonbooks.co.jp`）、Animate（`animate.co.jp`）；新增 17TRACK 跨国快递追踪（`17track.net`）、日本邮政（`post.japanpost.jp`）、黑猫宅急便（`kuronekoyamato.co.jp`）、美国邮政（`usps.com`）；新增 Airalo 境外旅游 eSIM（`airalo.com`, `airalo.net`）、RedotPay 加密卡（`redotpay.com`）与天巡（`skyscanner.com`, `skyscanner.net`）、猫途鹰（`tripadvisor.com`）。
+    - **开源隐私与代理工具**：新增 Ente 端到端加密相册与 2FA（`ente.io`）、Clash Verge Rev 官方发布页（`clashverge.dev`）、sing-box 官方主站（`sing-box.net`）与 KeePassXC（`keepassxc.org`）。
+    - **二次元与阅读**：新增 Gelbooru（`gelbooru.com`）、Konachan（`konachan.com`, `konachan.net`）、Hitomi（`hitomi.la`）、nHentai（`nhentai.net`）、JavLibrary（`javlibrary.com`）；新增大西洋月刊（`theatlantic.com`）、外交事务杂志（`foreignaffairs.com`）、泰晤士报（`thetimes.co.uk`）。
+  - **冗余消减与健康度体检 (Subdomain Subsumption & Clean-up)**：
+    - **`proxy.txt` 清理 14 处冗余**：剔除 12 处被父域名完全包含的子域名（如 `aur.archlinux.org`, `raw.githubusercontent.com`, `api.ip.sb`, `play.google.com`, `checkout.stripe.com` 等）；移除 2 处已在子规则中专项收录的跨文件重复（`onorca.dev`, `ggpht.com`）。
+    - **子规则集深层精简**：精简 `rules/ai/midjourney.txt` 中的 `cdn.midjourney.com`；精简 `rules/streaming/hulu.txt` 中的 `play.hulu.com`；精简 `rules/appstore.txt` 中已被 `itunes.apple.com` 与 `cdn-apple.com` 覆盖的 4 个子域名。
 
 ### 🚀 架构革新 (Architecture)
 - **主规则与次级原子文件夹装配架构 (Declarative Target Assembly Architecture)**：

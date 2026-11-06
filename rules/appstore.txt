@@ -6,10 +6,6 @@ mzstatic.com
 cdn-apple.com
 aaplimg.com
 apple-dns.net
-iosapps.itunes.apple.com
-osxapps.itunes.apple.com
 swcdn.apple.com
-updates-http.cdn-apple.com
-updates.cdn-apple.com
 apple.com.cn
 icloud.com.cn
