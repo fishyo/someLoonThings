@@ -1,0 +1,11 @@
+# Title: Twitch Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+payload:
+  # Twitch
+  - DOMAIN-SUFFIX,jtvnw.net
+  - DOMAIN-SUFFIX,live-video.net
+  - DOMAIN-SUFFIX,ttvnw.net
+  - DOMAIN-SUFFIX,twitch.tv
+  - DOMAIN-SUFFIX,twitchcdn.net
+  - DOMAIN-SUFFIX,twitchsvc.net

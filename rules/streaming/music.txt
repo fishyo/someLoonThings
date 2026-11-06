@@ -1,0 +1,20 @@
+# Streaming Music
+audiomack.com
+bandcamp.com
+cider.sh
+deezer.com
+dzcdn.net
+kfs.io
+kk.stream
+kkbox.com
+mixcloud.com
+pandora.com
+qobuz.com
+shazam.com
+sndcdn.com
+soundcloud.com
+tidal-cms.s3.amazonaws.com
+tidal.com
+tidalhifi.com
+tunein.com
+wimpmusic.com

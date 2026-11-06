@@ -1,0 +1,6 @@
+# Title: Peacock Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+# Peacock
+host-suffix, peacock.com, proxy
+host-suffix, peacocktv.com, proxy

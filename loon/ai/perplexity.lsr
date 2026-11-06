@@ -1,0 +1,6 @@
+# Title: Perplexity Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+# Perplexity
+DOMAIN-SUFFIX,perplexity.ai
+DOMAIN-SUFFIX,pplx.ai

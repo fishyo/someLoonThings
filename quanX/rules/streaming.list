@@ -1,0 +1,226 @@
+# Title: Streaming Media Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+# AbemaTV
+host-suffix, abema-tv.com, proxy
+host-suffix, abema.io, proxy
+host-suffix, abema.tv, proxy
+host-suffix, abematv.akamaized.net, proxy
+host-suffix, ameba.jp, proxy
+host-suffix, amebame.com, proxy
+host-suffix, amebaownd.com, proxy
+host-suffix, amebaowndme.com, proxy
+host-suffix, bucketeer.jp, proxy
+host-suffix, hayabusa.dev, proxy
+host-suffix, hayabusa.io, proxy
+host-suffix, hayabusa.media, proxy
+host-suffix, winticket.jp, proxy
+
+# Bahamut
+host-suffix, bahamut.akamaized.net, proxy
+host-suffix, bahamut.com.tw, proxy
+host-suffix, gamer.com.tw, proxy
+host-suffix, vibsl.akadns.net, proxy
+
+# Bilibili TV
+host-suffix, bilibili.tv, proxy
+host-suffix, biliintl.com, proxy
+host-suffix, bstarstatic.com, proxy
+
+# Crunchyroll
+host-suffix, crunchyroll.com, proxy
+host-suffix, crunchyrollsvc.com, proxy
+host-suffix, vrv.co, proxy
+
+# DAZN
+host-suffix, d151aohkq4wheq.cloudfront.net, proxy
+host-suffix, d1sgwhnao7452x.cloudfront.net, proxy
+host-suffix, dazn-api.com, proxy
+host-suffix, dazn.com, proxy
+host-suffix, dazndn.com, proxy
+host-suffix, indazn.com, proxy
+host-suffix, indaznlab.com, proxy
+host-suffix, innovid.com, proxy
+
+# Disney+
+host-suffix, bamgrid.com, proxy
+host-suffix, disney-plus.net, proxy
+host-suffix, disney-portal.my.onetrust.com, proxy
+host-suffix, disneyplus.bn5x.net, proxy
+host-suffix, disneyplus.com, proxy
+host-suffix, disneystreaming.com, proxy
+host-suffix, dssedge.com, proxy
+host-suffix, dssott.com, proxy
+host-suffix, hotstar.com, proxy
+host-suffix, hotstarext.com, proxy
+host-suffix, starott.com, proxy
+host-suffix, starplus.com, proxy
+
+# HBO Max
+host-suffix, cinemax.com, proxy
+host-suffix, discomax.com, proxy
+host-suffix, h264.io, proxy
+host-suffix, hbo.com, proxy
+host-suffix, hboasia.com, proxy
+host-suffix, hbogo.com, proxy
+host-suffix, hbogoasia.com, proxy
+host-suffix, hbogoasia.hk, proxy
+host-suffix, hbomax.com, proxy
+host-suffix, hbomaxcdn.com, proxy
+host-suffix, hbomaxdash.s.llnwi.net, proxy
+host-suffix, hbonow.com, proxy
+host-suffix, max.com, proxy
+host-suffix, maxgo.com, proxy
+host-suffix, warnermediacdn.com, proxy
+
+# Hulu
+host-suffix, callstats.io, proxy
+host-suffix, cws-hulu.conviva.com, proxy
+host-suffix, happyon.jp, proxy
+host-suffix, hjholdings.jp, proxy
+host-suffix, hulu.com, proxy
+host-suffix, hulu.hb.omtrdc.net, proxy
+host-suffix, hulu.jp, proxy
+host-suffix, hulu.sc.omtrdc.net, proxy
+host-suffix, huluad.com, proxy
+host-suffix, hulustream.com, proxy
+host-suffix, play.hulu.com, proxy
+
+# Japan TV
+host-suffix, dmc.nico, proxy
+host-suffix, fod.fujitv.co.jp, proxy
+host-suffix, nhk.or.jp, proxy
+host-suffix, nicovideo.jp, proxy
+host-suffix, nimg.jp, proxy
+host-suffix, nxtv.jp, proxy
+host-suffix, radiko.jp, proxy
+host-suffix, smartstream.ne.jp, proxy
+host-suffix, telasa.jp, proxy
+host-suffix, tver.jp, proxy
+host-suffix, unext.jp, proxy
+
+# Streaming Music
+host-suffix, audiomack.com, proxy
+host-suffix, bandcamp.com, proxy
+host-suffix, cider.sh, proxy
+host-suffix, deezer.com, proxy
+host-suffix, dzcdn.net, proxy
+host-suffix, kfs.io, proxy
+host-suffix, kk.stream, proxy
+host-suffix, kkbox.com, proxy
+host-suffix, mixcloud.com, proxy
+host-suffix, pandora.com, proxy
+host-suffix, qobuz.com, proxy
+host-suffix, shazam.com, proxy
+host-suffix, sndcdn.com, proxy
+host-suffix, soundcloud.com, proxy
+host-suffix, tidal-cms.s3.amazonaws.com, proxy
+host-suffix, tidal.com, proxy
+host-suffix, tidalhifi.com, proxy
+host-suffix, tunein.com, proxy
+host-suffix, wimpmusic.com, proxy
+
+# Netflix
+host-suffix, fast.com, proxy
+host-keyword, netflix, proxy
+host-suffix, netflix.ca, proxy
+host-suffix, netflix.com, proxy
+host-suffix, netflix.com.au, proxy
+host-suffix, netflix.com.edgesuite.net, proxy
+host-suffix, netflix.net, proxy
+host-suffix, netflixinvestor.com, proxy
+host-suffix, netflixstudios.com, proxy
+host-suffix, netflixtechblog.com, proxy
+host-suffix, nflxext.com, proxy
+host-suffix, nflximg.com, proxy
+host-suffix, nflximg.net, proxy
+host-suffix, nflxsearch.net, proxy
+host-suffix, nflxso.net, proxy
+host-suffix, nflxvideo.net, proxy
+
+# Paramount+
+host-suffix, cbs.com, proxy
+host-suffix, cbsaavideo.com, proxy
+host-suffix, cbsi.com, proxy
+host-suffix, cbsiam.com, proxy
+host-suffix, cbsig.net, proxy
+host-suffix, cbsivideo.com, proxy
+host-suffix, cbsnews.com, proxy
+host-suffix, cbspressexpress.com, proxy
+host-suffix, cbsplaylist.com, proxy
+host-suffix, cbsstat.com, proxy
+host-suffix, paramount.com, proxy
+host-suffix, paramountplus.com, proxy
+host-suffix, pplus.network, proxy
+host-suffix, pplusstatic.com, proxy
+
+# Peacock
+host-suffix, peacock.com, proxy
+host-suffix, peacocktv.com, proxy
+
+# Podcasts
+host-suffix, buzzsprout.com, proxy
+host-suffix, castbox.fm, proxy
+host-keyword, fireside, proxy
+host-suffix, libsyn.com, proxy
+host-suffix, megaphone.fm, proxy
+host-suffix, omny.fm, proxy
+host-suffix, pca.st, proxy
+host-suffix, pdst.fm, proxy
+host-suffix, pdst.io, proxy
+host-suffix, pocketcasts.com, proxy
+host-suffix, podtrac.com, proxy
+host-suffix, simplecast.com, proxy
+host-suffix, simplecastaudio.com, proxy
+host-suffix, transistor.fm, proxy
+
+# Prime Video
+host-suffix, aiv-cdn.net, proxy
+host-suffix, aiv-delivery.net, proxy
+host-suffix, amazonvideo.com, proxy
+host-suffix, atv-ps.amazon.com, proxy
+host-suffix, media-amazon.com, proxy
+host-suffix, prime-video.com, proxy
+host-suffix, primevideo.com, proxy
+host-suffix, pv-cdn.net, proxy
+
+# Spotify
+host-suffix, audio-ak-spotify-com.akamaized.net, proxy
+host-suffix, byspotify.com, proxy
+host-suffix, heads4-ak-spotify-com.akamaized.net, proxy
+host-suffix, pscdn.co, proxy
+host-suffix, scdn.co, proxy
+host-suffix, spoti.fi, proxy
+host-suffix, spotify.com, proxy
+host-suffix, spotify.design, proxy
+host-suffix, spotify.link, proxy
+host-suffix, spotifycdn.com, proxy
+host-suffix, spotifycdn.net, proxy
+host-suffix, spotifycharts.com, proxy
+host-suffix, spotifycodes.com, proxy
+host-suffix, spotifyforartists.com, proxy
+host-suffix, spotifystatus.com, proxy
+
+# Twitch
+host-suffix, jtvnw.net, proxy
+host-suffix, live-video.net, proxy
+host-suffix, ttvnw.net, proxy
+host-suffix, twitch.tv, proxy
+host-suffix, twitchcdn.net, proxy
+host-suffix, twitchsvc.net, proxy
+
+# YouTube
+host-suffix, ggpht.com, proxy
+host-suffix, googlevideo.com, proxy
+host-suffix, jnn-pa.googleapis.com, proxy
+host-keyword, youtube, proxy
+host-suffix, withyoutube.com, proxy
+host-suffix, youtu.be, proxy
+host-suffix, youtube-nocookie.com, proxy
+host-suffix, youtube.com, proxy
+host-suffix, youtubeembeddedplayer.googleapis.com, proxy
+host-suffix, youtubei.googleapis.com, proxy
+host-suffix, youtubego.com, proxy
+host-suffix, youtubekids.com, proxy
+host-suffix, yt.be, proxy
+host-suffix, ytimg.com, proxy

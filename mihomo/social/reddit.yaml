@@ -1,0 +1,11 @@
+# Title: Reddit Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+payload:
+  # Reddit
+  - DOMAIN-KEYWORD,reddit
+  - DOMAIN-SUFFIX,redd.it
+  - DOMAIN-SUFFIX,reddit.com
+  - DOMAIN-SUFFIX,reddithelp.com
+  - DOMAIN-SUFFIX,redditmedia.com
+  - DOMAIN-SUFFIX,redditstatic.com

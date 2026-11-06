@@ -1,0 +1,25 @@
+# AI Tools
+augmentcode.com
+bolt.new
+character.ai
+civitai.com
+codeium.com
+coze.com
+cursor.com
+cursor.sh
+cursorvm.com
+dify.ai
+genspark.ai
+groq.com
+lovable.dev
+manus.im
+meta.ai
+onorca.dev
+opencode.ai
+openrouter.ai
+phind.com
+poe.com
+poecdn.net
+tavily.com
+windsurf.ai
+you.com

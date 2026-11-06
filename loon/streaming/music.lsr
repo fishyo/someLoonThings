@@ -1,0 +1,23 @@
+# Title: Streaming Music Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+# Streaming Music
+DOMAIN-SUFFIX,audiomack.com
+DOMAIN-SUFFIX,bandcamp.com
+DOMAIN-SUFFIX,cider.sh
+DOMAIN-SUFFIX,deezer.com
+DOMAIN-SUFFIX,dzcdn.net
+DOMAIN-SUFFIX,kfs.io
+DOMAIN-SUFFIX,kk.stream
+DOMAIN-SUFFIX,kkbox.com
+DOMAIN-SUFFIX,mixcloud.com
+DOMAIN-SUFFIX,pandora.com
+DOMAIN-SUFFIX,qobuz.com
+DOMAIN-SUFFIX,shazam.com
+DOMAIN-SUFFIX,sndcdn.com
+DOMAIN-SUFFIX,soundcloud.com
+DOMAIN-SUFFIX,tidal-cms.s3.amazonaws.com
+DOMAIN-SUFFIX,tidal.com
+DOMAIN-SUFFIX,tidalhifi.com
+DOMAIN-SUFFIX,tunein.com
+DOMAIN-SUFFIX,wimpmusic.com

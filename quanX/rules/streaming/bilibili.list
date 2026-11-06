@@ -1,0 +1,7 @@
+# Title: Bilibili TV Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+# Bilibili TV
+host-suffix, bilibili.tv, proxy
+host-suffix, biliintl.com, proxy
+host-suffix, bstarstatic.com, proxy

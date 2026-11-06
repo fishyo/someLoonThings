@@ -1,0 +1,18 @@
+# Title: Podcast Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+# Podcasts
+host-suffix, buzzsprout.com, proxy
+host-suffix, castbox.fm, proxy
+host-keyword, fireside, proxy
+host-suffix, libsyn.com, proxy
+host-suffix, megaphone.fm, proxy
+host-suffix, omny.fm, proxy
+host-suffix, pca.st, proxy
+host-suffix, pdst.fm, proxy
+host-suffix, pdst.io, proxy
+host-suffix, pocketcasts.com, proxy
+host-suffix, podtrac.com, proxy
+host-suffix, simplecast.com, proxy
+host-suffix, simplecastaudio.com, proxy
+host-suffix, transistor.fm, proxy

@@ -1,0 +1,15 @@
+# Title: Japan TV Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+# Japan TV
+DOMAIN-SUFFIX,dmc.nico
+DOMAIN-SUFFIX,fod.fujitv.co.jp
+DOMAIN-SUFFIX,nhk.or.jp
+DOMAIN-SUFFIX,nicovideo.jp
+DOMAIN-SUFFIX,nimg.jp
+DOMAIN-SUFFIX,nxtv.jp
+DOMAIN-SUFFIX,radiko.jp
+DOMAIN-SUFFIX,smartstream.ne.jp
+DOMAIN-SUFFIX,telasa.jp
+DOMAIN-SUFFIX,tver.jp
+DOMAIN-SUFFIX,unext.jp

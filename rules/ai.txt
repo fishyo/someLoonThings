@@ -1,92 +1,58 @@
-# Gemini
-gemini.google.com
-bard.google.com
-aistudio.google.com
-makersuite.google.com
-generativeai.google
-generativeai.google.com
-generativelanguage.googleapis.com
-alkalimakersuite-pa.googleapis.com
-proactivebackend-pa.googleapis.com
-geller-pa.googleapis.com
-odin-pa.googleapis.com
-aiplatform.googleapis.com
-notebooklm.google
-notebooklm.google.com
-deepmind.google
-deepmind.com
-ai.google.dev
-gemini.google
-exact: waa-pa.clients6.google.com
-exact: alkali-pa.clients6.google.com
-googleapis.com
-
-# OpenAI
-chatgpt.com
-chatgpt.site
-openai.com
-chat.com
-oaistatic.com
-oaiusercontent.com
-sora.com
-openaiapi-site.azureedge.net
-openaicomproductionae4b.blob.core.windows.net
-openaicom.imgix.net
-featuregates.org
-stripe.com
-stripe.network
-
 # Claude
 anthropic.com
 claude.ai
 claude.com
 claudeusercontent.com
 
-# Grok
-x.ai
-grok.com
-
-# Perplexity
-perplexity.ai
-pplx.ai
-
 # Copilot
 copilot.microsoft.com
-sydney.bing.com
 exact: edgeservices.bing.com
+sydney.bing.com
+
+# Gemini
+ai.google.dev
+aiplatform.googleapis.com
+aistudio.google.com
+alkalimakersuite-pa.googleapis.com
+bard.google.com
+deepmind.com
+deepmind.google
+exact: alkali-pa.clients6.google.com
+exact: waa-pa.clients6.google.com
+gemini.google
+gemini.google.com
+generativeai.google
+generativeai.google.com
+generativelanguage.googleapis.com
+geller-pa.googleapis.com
+googleapis.com
+makersuite.google.com
+notebooklm.google
+notebooklm.google.com
+odin-pa.googleapis.com
+proactivebackend-pa.googleapis.com
+
+# Grok
+grok.com
+x.ai
+
+# AI Media
+blackforestlabs.ai
+clipdrop.co
+dreamstudio.ai
+ideogram.ai
+luma.ai
+lumalabs.ai
+pika.art
+runway.com
+runwayml.com
+stability.ai
 
 # Midjourney
-midjourney.com
 cdn.midjourney.com
+midjourney.com
 
-# Tools
-augmentcode.com
-character.ai
-civitai.com
-coze.com
-cursor.com
-cursor.sh
-cursorvm.com
-dify.ai
-genspark.ai
-groq.com
-meta.ai
-onorca.dev
-opencode.ai
-openrouter.ai
-phind.com
-poe.com
-poecdn.net
-tavily.com
-you.com
-
-# Audio
-suno.com
-suno.ai
-udio.com
-elevenlabs.io
-
-# Models
+# AI Models
 cohere.ai
 cohere.com
 fal.ai
@@ -100,12 +66,48 @@ together.ai
 together.xyz
 v0.dev
 
-# Media
-runwayml.com
-runway.com
-luma.ai
-lumalabs.ai
-pika.art
-stability.ai
-dreamstudio.ai
-clipdrop.co
+# OpenAI
+arkoselabs.com
+chat.com
+chatgpt.com
+chatgpt.site
+featuregates.org
+oaistatic.com
+oaiusercontent.com
+openai.com
+openaiapi-site.azureedge.net
+openaicom.imgix.net
+openaicomproductionae4b.blob.core.windows.net
+sora.com
+stripe.com
+stripe.network
+
+# Perplexity
+perplexity.ai
+pplx.ai
+
+# AI Tools
+augmentcode.com
+bolt.new
+character.ai
+civitai.com
+codeium.com
+coze.com
+cursor.com
+cursor.sh
+cursorvm.com
+dify.ai
+genspark.ai
+groq.com
+lovable.dev
+manus.im
+meta.ai
+onorca.dev
+opencode.ai
+openrouter.ai
+phind.com
+poe.com
+poecdn.net
+tavily.com
+windsurf.ai
+you.com

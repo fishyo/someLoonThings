@@ -1,0 +1,8 @@
+# Title: Bahamut Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+# Bahamut
+DOMAIN-SUFFIX,bahamut.akamaized.net
+DOMAIN-SUFFIX,bahamut.com.tw
+DOMAIN-SUFFIX,gamer.com.tw
+DOMAIN-SUFFIX,vibsl.akadns.net

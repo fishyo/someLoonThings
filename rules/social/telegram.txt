@@ -13,6 +13,7 @@ cdn-telegram.org
 # Services
 comments.app
 contest.com
+fragment.com
 graph.org
 quiz.directory
 stel.com

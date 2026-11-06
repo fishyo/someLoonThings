@@ -1,0 +1,15 @@
+# Title: Japan TV Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+# Japan TV
+host-suffix, dmc.nico, proxy
+host-suffix, fod.fujitv.co.jp, proxy
+host-suffix, nhk.or.jp, proxy
+host-suffix, nicovideo.jp, proxy
+host-suffix, nimg.jp, proxy
+host-suffix, nxtv.jp, proxy
+host-suffix, radiko.jp, proxy
+host-suffix, smartstream.ne.jp, proxy
+host-suffix, telasa.jp, proxy
+host-suffix, tver.jp, proxy
+host-suffix, unext.jp, proxy

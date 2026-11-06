@@ -1,0 +1,19 @@
+# Title: Podcast Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+payload:
+  # Podcasts
+  - DOMAIN-SUFFIX,buzzsprout.com
+  - DOMAIN-SUFFIX,castbox.fm
+  - DOMAIN-KEYWORD,fireside
+  - DOMAIN-SUFFIX,libsyn.com
+  - DOMAIN-SUFFIX,megaphone.fm
+  - DOMAIN-SUFFIX,omny.fm
+  - DOMAIN-SUFFIX,pca.st
+  - DOMAIN-SUFFIX,pdst.fm
+  - DOMAIN-SUFFIX,pdst.io
+  - DOMAIN-SUFFIX,pocketcasts.com
+  - DOMAIN-SUFFIX,podtrac.com
+  - DOMAIN-SUFFIX,simplecast.com
+  - DOMAIN-SUFFIX,simplecastaudio.com
+  - DOMAIN-SUFFIX,transistor.fm

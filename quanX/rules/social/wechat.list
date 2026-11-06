@@ -1,0 +1,25 @@
+# Title: WeChat Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+# WeChat
+host-suffix, weixin.com, direct
+host-suffix, wechat.com, direct
+host-suffix, wx.qq.com, direct
+host-suffix, wxs.qq.com, direct
+host-suffix, wechat.org, direct
+host-suffix, qpic.cn, direct
+host-suffix, qlogo.cn, direct
+host-suffix, wx.gtimg.com, direct
+host-suffix, servicewechat.com, direct
+host-suffix, wxapp.tc.qq.com, direct
+host-suffix, tenpay.com, direct
+host-suffix, wechatpay.cn, direct
+host-suffix, wechatpay.com, direct
+host-suffix, wechatpay.com.cn, direct
+host-suffix, weixinbridge.com, direct
+host-suffix, weixinaf.net, direct
+host-suffix, wechatlegal.net, direct
+host-suffix, wechatos.net, direct
+host-suffix, work.weixin.qq.com, direct
+host-suffix, workweixin.com, direct
+host-suffix, wecom.work, direct

@@ -1,0 +1,6 @@
+# Title: Grok xAI Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+# Grok
+host-suffix, grok.com, proxy
+host-suffix, x.ai, proxy

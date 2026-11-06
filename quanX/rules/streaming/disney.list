@@ -1,0 +1,16 @@
+# Title: Disney+ Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+# Disney+
+host-suffix, bamgrid.com, proxy
+host-suffix, disney-plus.net, proxy
+host-suffix, disney-portal.my.onetrust.com, proxy
+host-suffix, disneyplus.bn5x.net, proxy
+host-suffix, disneyplus.com, proxy
+host-suffix, disneystreaming.com, proxy
+host-suffix, dssedge.com, proxy
+host-suffix, dssott.com, proxy
+host-suffix, hotstar.com, proxy
+host-suffix, hotstarext.com, proxy
+host-suffix, starott.com, proxy
+host-suffix, starplus.com, proxy

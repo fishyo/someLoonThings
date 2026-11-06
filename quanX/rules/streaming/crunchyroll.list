@@ -1,0 +1,7 @@
+# Title: Crunchyroll Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+# Crunchyroll
+host-suffix, crunchyroll.com, proxy
+host-suffix, crunchyrollsvc.com, proxy
+host-suffix, vrv.co, proxy

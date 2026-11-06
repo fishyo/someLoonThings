@@ -1,0 +1,13 @@
+# Title: Game Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+# Supercell
+host-suffix, boombeachgame.com, proxy
+host-suffix, brawlstars.com, proxy
+host-suffix, brawlstarsgame.com, proxy
+host-suffix, clashofclans.com, proxy
+host-suffix, clashroyale.com, proxy
+host-suffix, clashroyaleapp.com, proxy
+host-suffix, haydaygame.com, proxy
+host-suffix, squadbustersgame.com, proxy
+host-suffix, supercell.com, proxy

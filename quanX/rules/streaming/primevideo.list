@@ -1,0 +1,12 @@
+# Title: Prime Video Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+# Prime Video
+host-suffix, aiv-cdn.net, proxy
+host-suffix, aiv-delivery.net, proxy
+host-suffix, amazonvideo.com, proxy
+host-suffix, atv-ps.amazon.com, proxy
+host-suffix, media-amazon.com, proxy
+host-suffix, prime-video.com, proxy
+host-suffix, primevideo.com, proxy
+host-suffix, pv-cdn.net, proxy

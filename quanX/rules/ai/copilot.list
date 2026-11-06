@@ -1,0 +1,7 @@
+# Title: Microsoft Copilot Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+# Copilot
+host-suffix, copilot.microsoft.com, proxy
+host, edgeservices.bing.com, proxy
+host-suffix, sydney.bing.com, proxy

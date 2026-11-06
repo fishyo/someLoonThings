@@ -1,0 +1,8 @@
+# Title: Bahamut Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+# Bahamut
+host-suffix, bahamut.akamaized.net, proxy
+host-suffix, bahamut.com.tw, proxy
+host-suffix, gamer.com.tw, proxy
+host-suffix, vibsl.akadns.net, proxy

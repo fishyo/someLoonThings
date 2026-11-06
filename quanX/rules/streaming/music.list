@@ -1,0 +1,23 @@
+# Title: Streaming Music Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+# Streaming Music
+host-suffix, audiomack.com, proxy
+host-suffix, bandcamp.com, proxy
+host-suffix, cider.sh, proxy
+host-suffix, deezer.com, proxy
+host-suffix, dzcdn.net, proxy
+host-suffix, kfs.io, proxy
+host-suffix, kk.stream, proxy
+host-suffix, kkbox.com, proxy
+host-suffix, mixcloud.com, proxy
+host-suffix, pandora.com, proxy
+host-suffix, qobuz.com, proxy
+host-suffix, shazam.com, proxy
+host-suffix, sndcdn.com, proxy
+host-suffix, soundcloud.com, proxy
+host-suffix, tidal-cms.s3.amazonaws.com, proxy
+host-suffix, tidal.com, proxy
+host-suffix, tidalhifi.com, proxy
+host-suffix, tunein.com, proxy
+host-suffix, wimpmusic.com, proxy

@@ -1,0 +1,15 @@
+# Podcasts
+buzzsprout.com
+castbox.fm
+keyword: fireside
+libsyn.com
+megaphone.fm
+omny.fm
+pca.st
+pdst.fm
+pdst.io
+pocketcasts.com
+podtrac.com
+simplecast.com
+simplecastaudio.com
+transistor.fm

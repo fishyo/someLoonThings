@@ -8,10 +8,10 @@
 
 ```mermaid
 flowchart TD
-    subgraph Layer1["1. 原子中间源 (rules/*.txt) - 人类维护"]
+    subgraph Layer1["1. 原子中间源 (rules/*.txt & 子目录) - 人类维护"]
         ai["ai.txt (专精 AI)"]
-        tw["twitter.txt (专精 Twitter)"]
-        tg["telegram.txt (专精 Telegram)"]
+        social["social/ (Meta, Twitter, Telegram, Discord, Reddit, TikTok)"]
+        streaming["streaming/ (YouTube, Netflix, Disney+, Spotify, ...)"]
         proxy["proxy.txt (专精通用代理)"]
         custom["*.txt (任意新增片段)"]
         direct["wechat / appstore / supercell (直连白名单)"]
@@ -20,14 +20,14 @@ flowchart TD
     subgraph Layer2["2. 编译与装配引擎 (.github/scripts/build-rules.js)"]
         discover["自动发现与自动声明 (Convention over Configuration)"]
         infer["智能语法推断 (Suffix / Keyword / Domain / CIDR)"]
-        assembly["主从装配: proxy.lsr = ai + twitter + telegram + proxy + ..."]
+        assembly["主从装配: proxy.lsr = ai + social/* + streaming/* + proxy + ..."]
         dedup["全局规范化去重 (Deduplication)"]
     end
 
     subgraph Layer3["3. 跨端交付订阅 (客户端订阅)"]
-        loon["Loon (loon/*.lsr)"]
-        qx["Quantumult X (quanX/rules/*.list)"]
-        mihomo["Mihomo (mihomo/*.yaml)"]
+        loon["Loon (loon/*.lsr & 子分类目录)"]
+        qx["Quantumult X (quanX/rules/*.list & 子分类目录)"]
+        mihomo["Mihomo (mihomo/*.yaml & 子分类目录)"]
     end
 
     Layer1 --> Layer2
@@ -67,32 +67,34 @@ flowchart TD
 ## 3. 日常维护使用说明
 
 ### 3.1 编辑已有规则片段 (99% 的场景)
-直接用编辑器打开对应的 `.txt` 文件，在相应分类下回车新增或删除域名，保存即可：
-- 修改 AI 规则 👉 编辑 [`rules/ai.txt`](ai.txt)
-- 修改 Twitter 规则 👉 编辑 [`rules/twitter.txt`](twitter.txt)
-- 修改 Telegram 规则 👉 编辑 [`rules/telegram.txt`](telegram.txt)
+直接用编辑器打开对应的原子 `.txt` 文件，在相应分类下回车新增或删除域名，保存即可：
+- 修改 AI 平台规则 👉 编辑对应原子文件，如 [`rules/ai/openai.txt`](ai/openai.txt) 或 [`rules/ai/tools.txt`](ai/tools.txt)
+- 修改社交网络规则 👉 编辑对应原子文件，如 [`rules/social/meta.txt`](social/meta.txt) 或 [`rules/social/twitter.txt`](social/twitter.txt)
+- 修改流媒体规则 👉 编辑对应原子文件，如 [`rules/streaming/youtube.txt`](streaming/youtube.txt) 或 [`rules/streaming/netflix.txt`](streaming/netflix.txt)
 - 修改通用翻墙黑名单 👉 编辑 [`rules/proxy.txt`](proxy.txt)
 
 **自动联动效果**：
-在 `rules/twitter.txt` 里添加了新域名，编译时不仅 `twitter.lsr` 拥有该规则，全量 `proxy.lsr` 也**自动同步收录**，无需双重维护！
+在 `rules/social/twitter.txt` 里添加了新域名，编译时不仅 `social/twitter.lsr`（及向后兼容的 `twitter.lsr`）拥有该规则，`social.lsr` 主规则与全量 `proxy.lsr` 也**自动同步收录**，无需双重维护！
 
 ---
 
 ### 3.2 新增全新规则片段 (0 配置自动声明)
 
-#### ① 新增走代理的专有片段 (如 `streaming`)
-想为流媒体单独做一个规则走专有节点分流：
-1. 直接在 `rules/` 目录下新建 `rules/streaming.txt`：
-   ```ini
-   # Streaming
-   netflix.com
-   disneyplus.com
-   max.com
-   ```
-2. 保存文件。
-3. **引擎自动处理**：
-   - 自动生成 `loon/streaming.lsr`、`quanX/rules/streaming.list`、`mihomo/streaming.yaml`。
-   - 自动将流媒体域名**合并汇聚进全量 `proxy.lsr`** 兜底。
+#### ① 新增走代理的专有分类或子文件夹分规则 (如 `streaming` / `social` / `ai`)
+想为流媒体、社交平台或 AI 建立“主规则 + 次级独立子规则”体系：
+1. **流媒体体系 (`rules/streaming/`)**：
+   - 包含 `youtube.txt`, `netflix.txt`, `disney.txt`, `spotify.txt`, `bahamut.txt`, `hbo.txt`, `bilibili.txt` 等 18 个独立平台。
+   - 自动生成独立规则 `loon/streaming/<platform>.lsr` 与全量主规则 `loon/streaming.lsr`。
+2. **社交网络体系 (`rules/social/`)**：
+   - 包含 `meta.txt` (Threads, Instagram, Facebook, WhatsApp 及官方 AS32934 IPv4/IPv6 CIDR)、`twitter.txt`, `telegram.txt`, `discord.txt`, `reddit.txt`, `tiktok.txt` 等。
+   - 自动生成独立规则 `loon/social/<platform>.lsr` 与全量主规则 `loon/social.lsr`（并向前兼容旧版 `loon/twitter.lsr` 等）。
+3. **AI 智能服务体系 (`rules/ai/`)**：
+   - 包含 `openai.txt`, `claude.txt`, `gemini.txt`, `copilot.txt`, `grok.txt`, `perplexity.txt`, `midjourney.txt`, `tools.txt`, `models.txt`, `media.txt` 等 10 个独立平台/模块。
+   - 自动生成独立规则 `loon/ai/<platform>.lsr` 与全量主规则 `loon/ai.lsr`（现有订阅 100% 向后兼容）。
+4. **引擎自动处理**：
+   - **次级独立规则**：自动生成对应平台的 `.lsr` / `.list` / `.yaml`，供精准分流。
+   - **主集合规则**：自动在内存与 `rules/*.txt` 生成全量集合规则，供策略组整体绑定。
+   - **全量代理兜底**：自动合并汇聚进全量 `proxy.lsr`，而 `rules/proxy.txt` 无需重复声明，保持绝对干净独立。
 
 #### ② 新增走直连的白名单片段 (如 `game`)
 想新增一个国内游戏直连规则：

@@ -1,0 +1,15 @@
+# Title: Hulu Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+# Hulu
+DOMAIN-SUFFIX,callstats.io
+DOMAIN-SUFFIX,cws-hulu.conviva.com
+DOMAIN-SUFFIX,happyon.jp
+DOMAIN-SUFFIX,hjholdings.jp
+DOMAIN-SUFFIX,hulu.com
+DOMAIN-SUFFIX,hulu.hb.omtrdc.net
+DOMAIN-SUFFIX,hulu.jp
+DOMAIN-SUFFIX,hulu.sc.omtrdc.net
+DOMAIN-SUFFIX,huluad.com
+DOMAIN-SUFFIX,hulustream.com
+DOMAIN-SUFFIX,play.hulu.com

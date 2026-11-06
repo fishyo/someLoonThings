@@ -1,0 +1,6 @@
+# Title: Midjourney Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+# Midjourney
+host-suffix, cdn.midjourney.com, proxy
+host-suffix, midjourney.com, proxy

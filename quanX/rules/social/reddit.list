@@ -1,0 +1,10 @@
+# Title: Reddit Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+# Reddit
+host-keyword, reddit, proxy
+host-suffix, redd.it, proxy
+host-suffix, reddit.com, proxy
+host-suffix, reddithelp.com, proxy
+host-suffix, redditmedia.com, proxy
+host-suffix, redditstatic.com, proxy

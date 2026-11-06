@@ -1,0 +1,22 @@
+# Gemini
+ai.google.dev
+aiplatform.googleapis.com
+aistudio.google.com
+alkalimakersuite-pa.googleapis.com
+bard.google.com
+deepmind.com
+deepmind.google
+exact: alkali-pa.clients6.google.com
+exact: waa-pa.clients6.google.com
+gemini.google
+gemini.google.com
+generativeai.google
+generativeai.google.com
+generativelanguage.googleapis.com
+geller-pa.googleapis.com
+googleapis.com
+makersuite.google.com
+notebooklm.google
+notebooklm.google.com
+odin-pa.googleapis.com
+proactivebackend-pa.googleapis.com

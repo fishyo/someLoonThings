@@ -1,0 +1,7 @@
+# Title: Peacock Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+payload:
+  # Peacock
+  - DOMAIN-SUFFIX,peacock.com
+  - DOMAIN-SUFFIX,peacocktv.com

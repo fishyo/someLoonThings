@@ -1,0 +1,165 @@
+# Title: Social Media Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+# Discord
+host-keyword, discord, proxy
+host-suffix, discord.com, proxy
+host-suffix, discord.gg, proxy
+host-suffix, discord.media, proxy
+host-suffix, discordapp.com, proxy
+host-suffix, discordapp.net, proxy
+host-suffix, discordcdn.com, proxy
+host-suffix, discordstatus.com, proxy
+
+# Threads
+host-suffix, threads.com, proxy
+host-suffix, threads.net, proxy
+
+# Instagram
+host-suffix, cdninstagram.com, proxy
+host-suffix, ig.me, proxy
+host-suffix, igsonar.com, proxy
+host-suffix, instagram.com, proxy
+host-suffix, instagr.am, proxy
+
+# Facebook
+host-suffix, accountkit.com, proxy
+host-suffix, facebook.com, proxy
+host-suffix, facebook.net, proxy
+host-suffix, facebook.org, proxy
+host-suffix, fb.com, proxy
+host-suffix, fb.me, proxy
+host-suffix, fb.watch, proxy
+host-suffix, fbcdn.net, proxy
+host-suffix, fbsbx.com, proxy
+host-suffix, m.me, proxy
+host-suffix, messenger.com, proxy
+host-suffix, meta.com, proxy
+host-suffix, oculus.com, proxy
+host-suffix, oculuscdn.com, proxy
+
+# WhatsApp
+host-suffix, wa.me, proxy
+host-suffix, whatsapp.biz, proxy
+host-suffix, whatsapp.com, proxy
+host-suffix, whatsapp.net, proxy
+
+# Meta IPv4
+ip-cidr, 31.13.24.0/21, proxy
+ip-cidr, 31.13.64.0/18, proxy
+ip-cidr, 45.64.40.0/22, proxy
+ip-cidr, 66.220.144.0/20, proxy
+ip-cidr, 69.63.176.0/20, proxy
+ip-cidr, 69.171.224.0/19, proxy
+ip-cidr, 74.119.76.0/22, proxy
+ip-cidr, 103.4.96.0/22, proxy
+ip-cidr, 129.134.0.0/17, proxy
+ip-cidr, 157.240.0.0/17, proxy
+ip-cidr, 173.252.64.0/18, proxy
+ip-cidr, 179.60.192.0/22, proxy
+ip-cidr, 185.60.216.0/22, proxy
+ip-cidr, 204.15.20.0/22, proxy
+
+# Meta IPv6
+ip-cidr6, 2a03:2880::/29, proxy
+ip-cidr6, 2620:0:1c00::/40, proxy
+ip-cidr6, 2620:10f:5000::/40, proxy
+
+# Reddit
+host-keyword, reddit, proxy
+host-suffix, redd.it, proxy
+host-suffix, reddit.com, proxy
+host-suffix, reddithelp.com, proxy
+host-suffix, redditmedia.com, proxy
+host-suffix, redditstatic.com, proxy
+
+# Telegram
+host-keyword, telegram, proxy
+host-suffix, telegram.org, proxy
+host-suffix, t.me, proxy
+host-suffix, telegra.ph, proxy
+host-suffix, telegram.me, proxy
+host-suffix, tx.me, proxy
+host-suffix, telegram.dog, proxy
+host-suffix, telesco.pe, proxy
+host-suffix, tdesktop.com, proxy
+host-suffix, cdn-telegram.org, proxy
+
+# Services
+host-suffix, comments.app, proxy
+host-suffix, contest.com, proxy
+host-suffix, fragment.com, proxy
+host-suffix, graph.org, proxy
+host-suffix, quiz.directory, proxy
+host-suffix, stel.com, proxy
+host-suffix, tchannels.me, proxy
+
+# IPv4
+ip-cidr, 91.108.4.0/22, proxy
+ip-cidr, 91.108.8.0/22, proxy
+ip-cidr, 91.108.12.0/22, proxy
+ip-cidr, 91.108.16.0/22, proxy
+ip-cidr, 91.108.20.0/22, proxy
+ip-cidr, 91.108.56.0/22, proxy
+ip-cidr, 149.154.160.0/20, proxy
+ip-cidr, 149.154.164.0/22, proxy
+ip-cidr, 149.154.172.0/22, proxy
+ip-cidr, 95.161.64.0/20, proxy
+
+# IPv6
+ip-cidr6, 2001:b28:f23d::/48, proxy
+ip-cidr6, 2001:b28:f23f::/48, proxy
+ip-cidr6, 2001:67c:4e8::/48, proxy
+
+# TikTok
+host-keyword, tiktok, proxy
+host-suffix, byteoversea.com, proxy
+host-suffix, ibytedtos.com, proxy
+host-suffix, musical.ly, proxy
+host-suffix, tiktok.com, proxy
+host-suffix, tiktokcdn.com, proxy
+host-suffix, tiktokv.com, proxy
+
+# Twitter
+host-keyword, twitter, proxy
+host-suffix, x.com, proxy
+host-suffix, twitter.com, proxy
+host-suffix, t.co, proxy
+host-suffix, twimg.com, proxy
+
+# Clients
+host-suffix, tweetdeck.com, proxy
+host-suffix, twitpic.com, proxy
+host-suffix, periscope.tv, proxy
+host-suffix, pscp.tv, proxy
+
+# Endpoints
+host-suffix, twttr.com, proxy
+host-suffix, twttr.net, proxy
+host-suffix, twitterinc.com, proxy
+host-suffix, twitteroauth.com, proxy
+host-suffix, twitterstat.us, proxy
+host-suffix, cms-twdigitalassets.com, proxy
+
+# WeChat
+host-suffix, weixin.com, proxy
+host-suffix, wechat.com, proxy
+host-suffix, wx.qq.com, proxy
+host-suffix, wxs.qq.com, proxy
+host-suffix, wechat.org, proxy
+host-suffix, qpic.cn, proxy
+host-suffix, qlogo.cn, proxy
+host-suffix, wx.gtimg.com, proxy
+host-suffix, servicewechat.com, proxy
+host-suffix, wxapp.tc.qq.com, proxy
+host-suffix, tenpay.com, proxy
+host-suffix, wechatpay.cn, proxy
+host-suffix, wechatpay.com, proxy
+host-suffix, wechatpay.com.cn, proxy
+host-suffix, weixinbridge.com, proxy
+host-suffix, weixinaf.net, proxy
+host-suffix, wechatlegal.net, proxy
+host-suffix, wechatos.net, proxy
+host-suffix, work.weixin.qq.com, proxy
+host-suffix, workweixin.com, proxy
+host-suffix, wecom.work, proxy

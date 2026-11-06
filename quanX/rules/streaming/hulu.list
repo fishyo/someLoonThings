@@ -1,0 +1,15 @@
+# Title: Hulu Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+# Hulu
+host-suffix, callstats.io, proxy
+host-suffix, cws-hulu.conviva.com, proxy
+host-suffix, happyon.jp, proxy
+host-suffix, hjholdings.jp, proxy
+host-suffix, hulu.com, proxy
+host-suffix, hulu.hb.omtrdc.net, proxy
+host-suffix, hulu.jp, proxy
+host-suffix, hulu.sc.omtrdc.net, proxy
+host-suffix, huluad.com, proxy
+host-suffix, hulustream.com, proxy
+host-suffix, play.hulu.com, proxy

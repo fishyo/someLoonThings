@@ -1,0 +1,8 @@
+# Title: Claude Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+# Claude
+host-suffix, anthropic.com, proxy
+host-suffix, claude.ai, proxy
+host-suffix, claude.com, proxy
+host-suffix, claudeusercontent.com, proxy

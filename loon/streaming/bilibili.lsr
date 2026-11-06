@@ -1,0 +1,7 @@
+# Title: Bilibili TV Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+# Bilibili TV
+DOMAIN-SUFFIX,bilibili.tv
+DOMAIN-SUFFIX,biliintl.com
+DOMAIN-SUFFIX,bstarstatic.com

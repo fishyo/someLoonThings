@@ -1,0 +1,8 @@
+# Title: Microsoft Copilot Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+payload:
+  # Copilot
+  - DOMAIN-SUFFIX,copilot.microsoft.com
+  - DOMAIN,edgeservices.bing.com
+  - DOMAIN-SUFFIX,sydney.bing.com

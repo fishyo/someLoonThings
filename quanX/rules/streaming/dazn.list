@@ -1,0 +1,12 @@
+# Title: DAZN Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+# DAZN
+host-suffix, d151aohkq4wheq.cloudfront.net, proxy
+host-suffix, d1sgwhnao7452x.cloudfront.net, proxy
+host-suffix, dazn-api.com, proxy
+host-suffix, dazn.com, proxy
+host-suffix, dazndn.com, proxy
+host-suffix, indazn.com, proxy
+host-suffix, indaznlab.com, proxy
+host-suffix, innovid.com, proxy

@@ -1,0 +1,7 @@
+# Title: Midjourney Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+payload:
+  # Midjourney
+  - DOMAIN-SUFFIX,cdn.midjourney.com
+  - DOMAIN-SUFFIX,midjourney.com

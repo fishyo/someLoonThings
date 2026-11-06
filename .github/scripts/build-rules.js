@@ -22,41 +22,117 @@ function formatTitle(key, content, policy) {
   const titleMap = {
     proxy: 'Custom Proxy Ruleset',
     ai: 'AI Services Ruleset',
+    'ai/openai': 'OpenAI Ruleset',
+    'ai/claude': 'Claude Ruleset',
+    'ai/gemini': 'Google Gemini Ruleset',
+    'ai/copilot': 'Microsoft Copilot Ruleset',
+    'ai/grok': 'Grok xAI Ruleset',
+    'ai/perplexity': 'Perplexity Ruleset',
+    'ai/midjourney': 'Midjourney Ruleset',
+    'ai/tools': 'AI Tools Ruleset',
+    'ai/models': 'AI Models Ruleset',
+    'ai/media': 'AI Media Generation Ruleset',
     twitter: 'Twitter Ruleset',
     telegram: 'Telegram Ruleset',
     direct: 'Direct Whitelist Ruleset',
     appstore: 'App Store Direct Ruleset',
     wechat: 'WeChat Direct Ruleset',
-    supercell: 'Supercell Direct Ruleset'
+    supercell: 'Supercell Direct Ruleset',
+    streaming: 'Streaming Media Ruleset',
+    'streaming/youtube': 'YouTube Ruleset',
+    'streaming/netflix': 'Netflix Ruleset',
+    'streaming/disney': 'Disney+ Ruleset',
+    'streaming/spotify': 'Spotify Ruleset',
+    'streaming/bilibili': 'Bilibili TV Ruleset',
+    'streaming/bahamut': 'Bahamut Ruleset',
+    'streaming/hbo': 'HBO Max Ruleset',
+    'streaming/primevideo': 'Prime Video Ruleset',
+    'streaming/hulu': 'Hulu Ruleset',
+    'streaming/twitch': 'Twitch Ruleset',
+    'streaming/abema': 'AbemaTV Ruleset',
+    'streaming/dazn': 'DAZN Ruleset',
+    'streaming/paramount': 'Paramount+ Ruleset',
+    'streaming/peacock': 'Peacock Ruleset',
+    'streaming/crunchyroll': 'Crunchyroll Ruleset',
+    'streaming/music': 'Streaming Music Ruleset',
+    'streaming/japan': 'Japan TV Ruleset',
+    'streaming/podcast': 'Podcast Ruleset',
+    social: 'Social Media Ruleset',
+    'social/meta': 'Meta Services Ruleset',
+    'social/twitter': 'Twitter Ruleset',
+    'social/telegram': 'Telegram Ruleset',
+    'social/discord': 'Discord Ruleset',
+    'social/reddit': 'Reddit Ruleset',
+    'social/tiktok': 'TikTok Ruleset'
   };
   if (titleMap[key]) return titleMap[key];
 
-  const firstLine = content.split('\n')[0].trim();
-  if (firstLine.startsWith('#')) {
-    const clean = firstLine.replace(/^#\s*/, '').replace(/^(policy:\s*direct|direct)\s*/i, '').trim();
-    if (clean) return `${clean} Ruleset`;
+  if (content) {
+    const firstLine = content.split('\n')[0].trim();
+    if (firstLine.startsWith('#')) {
+      const clean = firstLine.replace(/^#\s*/, '').replace(/^(policy:\s*direct|direct)\s*/i, '').trim();
+      if (clean) return `${clean} Ruleset`;
+    }
   }
 
-  const capitalized = key.charAt(0).toUpperCase() + key.slice(1);
+  const base = path.basename(key);
+  const capitalized = base.charAt(0).toUpperCase() + base.slice(1);
   return `${capitalized} ${policy === 'direct' ? 'Direct ' : ''}Ruleset`;
 }
 
-// Automatically discover targets from rules/*.txt (Convention over Configuration)
+// Helper to recursively find all .txt files in a directory
+function findRuleFiles(dir, baseDir = dir) {
+  if (!fs.existsSync(dir)) return [];
+  let results = [];
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      results = results.concat(findRuleFiles(fullPath, baseDir));
+    } else if (entry.isFile() && entry.name.endsWith('.txt')) {
+      const rel = path.relative(baseDir, fullPath).replace(/\\/g, '/');
+      results.push(rel);
+    }
+  }
+  return results.sort();
+}
+
+// Automatically discover targets from rules/ (supporting subfolders like rules/streaming/)
 function getTargets() {
   if (!fs.existsSync(RULES_DIR)) return {};
 
-  const files = fs.readdirSync(RULES_DIR).filter(f => f.endsWith('.txt')).sort();
+  const allFiles = findRuleFiles(RULES_DIR);
   const targets = {};
   const proxySources = [];
+  const subfolderMap = {};
 
-  for (const file of files) {
-    const key = path.basename(file, '.txt').toLowerCase();
+  // 1. Identify subfolders first
+  for (const file of allFiles) {
+    if (file.includes('/')) {
+      const folder = file.split('/')[0].toLowerCase();
+      if (!subfolderMap[folder]) subfolderMap[folder] = [];
+      subfolderMap[folder].push(file);
+    }
+  }
+
+  // 2. Discover targets
+  for (const file of allFiles) {
+    const isSub = file.includes('/');
+    const subfolder = isSub ? file.split('/')[0].toLowerCase() : null;
+    const baseName = path.basename(file, '.txt').toLowerCase();
+    const key = isSub ? `${subfolder}/${baseName}` : baseName;
+
+    // Skip top-level file if it is an auto-aggregated master file (e.g. rules/streaming.txt)
+    if (!isSub && subfolderMap[baseName]) {
+      continue;
+    }
+
     const filePath = path.join(RULES_DIR, file);
     const content = fs.readFileSync(filePath, 'utf8');
 
     // Any snippet with "# policy: direct" or "# direct" (or known direct lists) is direct
     const isDirect = /^\s*#\s*(policy:\s*direct|direct)\b/im.test(content) ||
-                     ['appstore', 'wechat', 'supercell', 'direct'].includes(key);
+                     ['appstore', 'wechat', 'supercell', 'direct'].includes(baseName);
 
     const policy = isDirect ? 'direct' : 'proxy';
     const title = formatTitle(key, content, policy);
@@ -77,6 +153,24 @@ function getTargets() {
         loon: path.join(ROOT_DIR, `loon/${key}.lsr`),
         qx: path.join(ROOT_DIR, `quanX/rules/${key}.list`),
         mihomo: mihomoPath
+      }
+    };
+  }
+
+  // Synthesize Subfolder Master Rules (e.g. streaming master rule aggregating all streaming/*.txt)
+  for (const [folder, sources] of Object.entries(subfolderMap)) {
+    const masterKey = folder;
+    const title = formatTitle(masterKey, '', 'proxy');
+    targets[masterKey] = {
+      key: masterKey,
+      title,
+      policy: 'proxy',
+      sources: sources,
+      outputs: {
+        loon: path.join(ROOT_DIR, `loon/${masterKey}.lsr`),
+        qx: path.join(ROOT_DIR, `quanX/rules/${masterKey}.list`),
+        mihomo: path.join(ROOT_DIR, `mihomo/${masterKey}.yaml`),
+        txt: path.join(RULES_DIR, `${masterKey}.txt`)
       }
     };
   }
@@ -156,14 +250,69 @@ function compileTarget(targetKey, targets) {
     '',
     'payload:'
   ];
+  const txtLines = target.outputs.txt ? [] : null;
+
+  // Defensive absorption: Check if synthesized master file already exists on disk
+  // and contains orphan rules not yet present in any atomic sub-source files.
+  if (target.outputs.txt && fs.existsSync(target.outputs.txt)) {
+    const defaultAbsorbFile = {
+      'ai': 'ai/tools.txt',
+      'social': 'social/meta.txt',
+      'streaming': 'streaming/youtube.txt',
+      'game': 'game/supercell.txt'
+    }[targetKey] || target.sources[0];
+
+    if (defaultAbsorbFile) {
+      const sourceRules = new Set();
+      for (const src of target.sources) {
+        const p = path.join(RULES_DIR, src);
+        if (fs.existsSync(p)) {
+          for (const line of fs.readFileSync(p, 'utf8').split(/\r?\n/)) {
+            const item = parseRuleLine(line);
+            if (item.type !== 'EMPTY' && item.type !== 'COMMENT') {
+              sourceRules.add(`${item.type}:${item.val.toLowerCase()}`);
+            }
+          }
+        }
+      }
+
+      const orphanLines = [];
+      for (const line of fs.readFileSync(target.outputs.txt, 'utf8').split(/\r?\n/)) {
+        const item = parseRuleLine(line);
+        if (item.type !== 'EMPTY' && item.type !== 'COMMENT') {
+          const k = `${item.type}:${item.val.toLowerCase()}`;
+          if (!sourceRules.has(k)) {
+            orphanLines.push(line.trim());
+            sourceRules.add(k);
+          }
+        }
+      }
+
+      if (orphanLines.length > 0) {
+        const absorbPath = path.join(RULES_DIR, defaultAbsorbFile);
+        const appendContent = '\n# Absorbed rules from master file\n' + orphanLines.join('\n') + '\n';
+        fs.appendFileSync(absorbPath, appendContent, 'utf8');
+        console.log(`[DEFENSIVE] Absorbed ${orphanLines.length} orphan rules from ${path.basename(target.outputs.txt)} into ${defaultAbsorbFile}`);
+      }
+    }
+  }
 
   const seenRules = new Set();
   const seenComments = new Set();
   let prevWasEmpty = false;
 
-  for (const srcFileName of target.sources) {
+  for (let sIdx = 0; sIdx < target.sources.length; sIdx++) {
+    const srcFileName = target.sources[sIdx];
     const srcPath = path.join(RULES_DIR, srcFileName);
     if (!fs.existsSync(srcPath)) continue;
+
+    if (sIdx > 0 && !prevWasEmpty) {
+      loonLines.push('');
+      qxLines.push('');
+      mihomoLines.push('');
+      if (txtLines) txtLines.push('');
+      prevWasEmpty = true;
+    }
 
     const rawLines = fs.readFileSync(srcPath, 'utf8').split(/\r?\n/);
     for (const rawLine of rawLines) {
@@ -174,6 +323,7 @@ function compileTarget(targetKey, targets) {
           loonLines.push('');
           qxLines.push('');
           mihomoLines.push('');
+          if (txtLines) txtLines.push('');
           prevWasEmpty = true;
         }
         continue;
@@ -187,6 +337,7 @@ function compileTarget(targetKey, targets) {
         loonLines.push(item.raw);
         qxLines.push(item.raw);
         mihomoLines.push(`  ${item.raw}`);
+        if (txtLines) txtLines.push(item.raw);
         prevWasEmpty = false;
         continue;
       }
@@ -196,33 +347,40 @@ function compileTarget(targetKey, targets) {
       seenRules.add(ruleKey);
       prevWasEmpty = false;
 
+      let txtVal = item.val;
       switch (item.type) {
         case 'DOMAIN-SUFFIX':
           loonLines.push(`DOMAIN-SUFFIX,${item.val}`);
           qxLines.push(`host-suffix, ${item.val}, ${target.policy}`);
           mihomoLines.push(`  - DOMAIN-SUFFIX,${item.val}`);
+          txtVal = item.val;
           break;
         case 'KEYWORD':
           loonLines.push(`DOMAIN-KEYWORD,${item.val}`);
           qxLines.push(`host-keyword, ${item.val}, ${target.policy}`);
           mihomoLines.push(`  - DOMAIN-KEYWORD,${item.val}`);
+          txtVal = item.val.includes('.') ? `keyword: ${item.val}` : item.val;
           break;
         case 'DOMAIN':
           loonLines.push(`DOMAIN,${item.val}`);
           qxLines.push(`host, ${item.val}, ${target.policy}`);
           mihomoLines.push(`  - DOMAIN,${item.val}`);
+          txtVal = `exact: ${item.val}`;
           break;
         case 'IP-CIDR':
           loonLines.push(`IP-CIDR,${item.val},no-resolve`);
           qxLines.push(`ip-cidr, ${item.val}, ${target.policy}`);
           mihomoLines.push(`  - IP-CIDR,${item.val}`);
+          txtVal = `cidr: ${item.val}`;
           break;
         case 'IP-CIDR6':
           loonLines.push(`IP-CIDR6,${item.val},no-resolve`);
           qxLines.push(`ip-cidr6, ${item.val}, ${target.policy}`);
           mihomoLines.push(`  - IP-CIDR6,${item.val}`);
+          txtVal = `IP-CIDR6,${item.val}`;
           break;
       }
+      if (txtLines) txtLines.push(txtVal);
     }
   }
 
@@ -234,7 +392,36 @@ function compileTarget(targetKey, targets) {
   fs.writeFileSync(target.outputs.qx, qxLines.join('\n').trimEnd() + '\n', 'utf8');
   fs.writeFileSync(target.outputs.mihomo, mihomoLines.join('\n').trimEnd() + '\n', 'utf8');
 
-  console.log(`✔ [${targetKey}] Generated: Loon (${loonLines.length}), QX (${qxLines.length}), Mihomo (${mihomoLines.length})`);
+  // Legacy aliases for backward-compatible subscriptions
+  const legacyAliases = {
+    'social/twitter': {
+      loon: path.join(ROOT_DIR, 'loon/twitter.lsr'),
+      qx: path.join(ROOT_DIR, 'quanX/rules/twitter.list'),
+      mihomo: path.join(ROOT_DIR, 'mihomo/twitter.yaml')
+    },
+    'social/telegram': {
+      loon: path.join(ROOT_DIR, 'loon/telegram.lsr'),
+      qx: path.join(ROOT_DIR, 'quanX/rules/telegram.list'),
+      mihomo: path.join(ROOT_DIR, 'mihomo/telegram.yaml')
+    }
+  };
+
+  if (legacyAliases[targetKey]) {
+    const alias = legacyAliases[targetKey];
+    fs.mkdirSync(path.dirname(alias.loon), { recursive: true });
+    fs.mkdirSync(path.dirname(alias.qx), { recursive: true });
+    fs.mkdirSync(path.dirname(alias.mihomo), { recursive: true });
+    fs.writeFileSync(alias.loon, loonLines.join('\n').trimEnd() + '\n', 'utf8');
+    fs.writeFileSync(alias.qx, qxLines.join('\n').trimEnd() + '\n', 'utf8');
+    fs.writeFileSync(alias.mihomo, mihomoLines.join('\n').trimEnd() + '\n', 'utf8');
+  }
+
+  if (target.outputs.txt) {
+    fs.mkdirSync(path.dirname(target.outputs.txt), { recursive: true });
+    fs.writeFileSync(target.outputs.txt, txtLines.join('\n').trimEnd() + '\n', 'utf8');
+  }
+
+  console.log(`✔ [${targetKey}] Generated: Loon (${loonLines.length}), QX (${qxLines.length}), Mihomo (${mihomoLines.length})${target.outputs.txt ? `, TXT (${txtLines.length})` : ''}`);
 }
 
 // Compile all targets
@@ -289,11 +476,11 @@ function addToSource(items, targetKey = 'proxy') {
 
 // Watch mode for instant hot reload
 function watchRules() {
-  console.log('Watching rules/*.txt for changes... (Press Ctrl+C to stop)');
+  console.log('Watching rules/ for changes... (Press Ctrl+C to stop)');
   compileAll();
 
   let debounceTimer = null;
-  fs.watch(RULES_DIR, (eventType, filename) => {
+  fs.watch(RULES_DIR, { recursive: true }, (eventType, filename) => {
     if (!filename || !filename.endsWith('.txt')) return;
     clearTimeout(debounceTimer);
     debounceTimer = setTimeout(() => {

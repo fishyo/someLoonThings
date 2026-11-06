@@ -24,6 +24,22 @@ function logWarn(msg) {
   console.warn(`\x1b[33m▲ [WARN]\x1b[0m ${msg}`);
 }
 
+// Helper to recursively find files with extension
+function findFilesRecursive(dir, ext) {
+  if (!fs.existsSync(dir)) return [];
+  let results = [];
+  const list = fs.readdirSync(dir, { withFileTypes: true });
+  for (const item of list) {
+    const fullPath = path.join(dir, item.name);
+    if (item.isDirectory()) {
+      results = results.concat(findFilesRecursive(fullPath, ext));
+    } else if (item.isFile() && item.name.endsWith(ext)) {
+      results.push(fullPath);
+    }
+  }
+  return results.sort();
+}
+
 // ==========================================
 // 1. Loon 插件与扩展校验 (.plugin / .lpx)
 // ==========================================
@@ -87,9 +103,9 @@ const validRuleTypesLoon = new Set([
 ]);
 
 if (fs.existsSync(loonDir)) {
-  const lsrFiles = fs.readdirSync(loonDir).filter(f => f.endsWith('.lsr'));
-  for (const file of lsrFiles) {
-    const fullPath = path.join(loonDir, file);
+  const lsrFiles = findFilesRecursive(loonDir, '.lsr');
+  for (const fullPath of lsrFiles) {
+    const relFile = path.relative(root, fullPath).replace(/\\/g, '/');
     const lines = fs.readFileSync(fullPath, 'utf8').split('\n');
     let lineIdx = 0;
     let fileValid = true;
@@ -101,15 +117,15 @@ if (fs.existsSync(loonDir)) {
       const parts = line.split(',');
       const type = parts[0].trim().toUpperCase();
       if (!validRuleTypesLoon.has(type)) {
-        logFail(`${file} (第 ${lineIdx} 行): 未知或非法的 Loon 规则类型 [${type}]`);
+        logFail(`${relFile} (第 ${lineIdx} 行): 未知或非法的 Loon 规则类型 [${type}]`);
         fileValid = false;
       } else if (type === 'DOMAIN-SUFFIX' && parts[1] && !parts[1].trim().includes('.')) {
-        logFail(`${file} (第 ${lineIdx} 行): DOMAIN-SUFFIX 规则缺少点号，必须是有效域名后缀 [${rawLine.trim()}]`);
+        logFail(`${relFile} (第 ${lineIdx} 行): DOMAIN-SUFFIX 规则缺少点号，必须是有效域名后缀 [${rawLine.trim()}]`);
         fileValid = false;
       }
     }
     if (fileValid) {
-      logPass(`${file}: Loon 规则集语法校验通过 (${lines.length} 行)`);
+      logPass(`${relFile}: Loon 规则集语法校验通过 (${lines.length} 行)`);
     }
   }
 }
@@ -144,12 +160,13 @@ if (fs.existsSync(qxDir)) {
     }
   }
 
-  // 3.2 验证 rules/*.list
+  // 3.2 验证 rules/**/*.list
   const qxRulesDir = path.join(qxDir, 'rules');
   if (fs.existsSync(qxRulesDir)) {
-    const listFiles = fs.readdirSync(qxRulesDir).filter(f => f.endsWith('.list'));
-    for (const file of listFiles) {
-      const lines = fs.readFileSync(path.join(qxRulesDir, file), 'utf8').split('\n');
+    const listFiles = findFilesRecursive(qxRulesDir, '.list');
+    for (const fullPath of listFiles) {
+      const relFile = path.relative(root, fullPath).replace(/\\/g, '/');
+      const lines = fs.readFileSync(fullPath, 'utf8').split('\n');
       let lineIdx = 0;
       let fileValid = true;
 
@@ -161,18 +178,18 @@ if (fs.existsSync(qxDir)) {
         const parts = cleanLine.split(',').map(s => s.trim());
         const type = parts[0].toUpperCase();
         if (!validRuleTypesQX.has(type)) {
-          logFail(`quanX/rules/${file} (第 ${lineIdx} 行): 非法或不支持的 QX 分流规则类型 [${type}]`);
+          logFail(`${relFile} (第 ${lineIdx} 行): 非法或不支持的 QX 分流规则类型 [${type}]`);
           fileValid = false;
         } else if (type !== 'FINAL' && parts.length < 3) {
-          logFail(`quanX/rules/${file} (第 ${lineIdx} 行): QX 分流规则缺少策略字段，必须形如 [${type}, target, policy]`);
+          logFail(`${relFile} (第 ${lineIdx} 行): QX 分流规则缺少策略字段，必须形如 [${type}, target, policy]`);
           fileValid = false;
         } else if (type === 'HOST-SUFFIX' && parts[1] && !parts[1].includes('.')) {
-          logFail(`quanX/rules/${file} (第 ${lineIdx} 行): host-suffix 规则缺少点号，必须是有效域名后缀 [${rawLine.trim()}]`);
+          logFail(`${relFile} (第 ${lineIdx} 行): host-suffix 规则缺少点号，必须是有效域名后缀 [${rawLine.trim()}]`);
           fileValid = false;
         }
       }
       if (fileValid) {
-        logPass(`quanX/rules/${file}: Quantumult X 规则集语法校验通过 (${lines.length} 行)`);
+        logPass(`${relFile}: Quantumult X 规则集语法校验通过 (${lines.length} 行)`);
       }
     }
   }
@@ -204,13 +221,14 @@ if (fs.existsSync(qxDir)) {
 console.log('\n--- 4. 验证 Mihomo / Clash 规则集与 BoxJS ---');
 const mihomoDir = path.join(root, 'mihomo');
 if (fs.existsSync(mihomoDir)) {
-  const yamlFiles = fs.readdirSync(mihomoDir).filter(f => f.endsWith('.yaml') || f.endsWith('.yml'));
-  for (const file of yamlFiles) {
-    const content = fs.readFileSync(path.join(mihomoDir, file), 'utf8');
+  const yamlFiles = findFilesRecursive(mihomoDir, '.yaml').concat(findFilesRecursive(mihomoDir, '.yml'));
+  for (const fullPath of yamlFiles) {
+    const relFile = path.relative(root, fullPath).replace(/\\/g, '/');
+    const content = fs.readFileSync(fullPath, 'utf8');
     if (!content.includes('payload:')) {
-      logFail(`${file}: 缺少 payload 根字段`);
+      logFail(`${relFile}: 缺少 payload 根字段`);
     } else {
-      logPass(`${file}: Mihomo 规则集格式规范校验通过`);
+      logPass(`${relFile}: Mihomo 规则集格式规范校验通过`);
     }
   }
 }

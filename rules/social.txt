@@ -1,0 +1,162 @@
+# Discord
+discord
+discord.com
+discord.gg
+discord.media
+discordapp.com
+discordapp.net
+discordcdn.com
+discordstatus.com
+
+# Threads
+threads.com
+threads.net
+
+# Instagram
+cdninstagram.com
+ig.me
+igsonar.com
+instagram.com
+instagr.am
+
+# Facebook
+accountkit.com
+facebook.com
+facebook.net
+facebook.org
+fb.com
+fb.me
+fb.watch
+fbcdn.net
+fbsbx.com
+m.me
+messenger.com
+meta.com
+oculus.com
+oculuscdn.com
+
+# WhatsApp
+wa.me
+whatsapp.biz
+whatsapp.com
+whatsapp.net
+
+# Meta IPv4
+cidr: 31.13.24.0/21
+cidr: 31.13.64.0/18
+cidr: 45.64.40.0/22
+cidr: 66.220.144.0/20
+cidr: 69.63.176.0/20
+cidr: 69.171.224.0/19
+cidr: 74.119.76.0/22
+cidr: 103.4.96.0/22
+cidr: 129.134.0.0/17
+cidr: 157.240.0.0/17
+cidr: 173.252.64.0/18
+cidr: 179.60.192.0/22
+cidr: 185.60.216.0/22
+cidr: 204.15.20.0/22
+
+# Meta IPv6
+IP-CIDR6,2a03:2880::/29
+IP-CIDR6,2620:0:1c00::/40
+IP-CIDR6,2620:10f:5000::/40
+
+# Reddit
+reddit
+redd.it
+reddit.com
+reddithelp.com
+redditmedia.com
+redditstatic.com
+
+# Telegram
+telegram
+telegram.org
+t.me
+telegra.ph
+telegram.me
+tx.me
+telegram.dog
+telesco.pe
+tdesktop.com
+cdn-telegram.org
+
+# Services
+comments.app
+contest.com
+fragment.com
+graph.org
+quiz.directory
+stel.com
+tchannels.me
+
+# IPv4
+cidr: 91.108.4.0/22
+cidr: 91.108.8.0/22
+cidr: 91.108.12.0/22
+cidr: 91.108.16.0/22
+cidr: 91.108.20.0/22
+cidr: 91.108.56.0/22
+cidr: 149.154.160.0/20
+cidr: 149.154.164.0/22
+cidr: 149.154.172.0/22
+cidr: 95.161.64.0/20
+
+# IPv6
+IP-CIDR6,2001:b28:f23d::/48
+IP-CIDR6,2001:b28:f23f::/48
+IP-CIDR6,2001:67c:4e8::/48
+
+# TikTok
+tiktok
+byteoversea.com
+ibytedtos.com
+musical.ly
+tiktok.com
+tiktokcdn.com
+tiktokv.com
+
+# Twitter
+twitter
+x.com
+twitter.com
+t.co
+twimg.com
+
+# Clients
+tweetdeck.com
+twitpic.com
+periscope.tv
+pscp.tv
+
+# Endpoints
+twttr.com
+twttr.net
+twitterinc.com
+twitteroauth.com
+twitterstat.us
+cms-twdigitalassets.com
+
+# WeChat
+weixin.com
+wechat.com
+wx.qq.com
+wxs.qq.com
+wechat.org
+qpic.cn
+qlogo.cn
+wx.gtimg.com
+servicewechat.com
+wxapp.tc.qq.com
+tenpay.com
+wechatpay.cn
+wechatpay.com
+wechatpay.com.cn
+weixinbridge.com
+weixinaf.net
+wechatlegal.net
+wechatos.net
+work.weixin.qq.com
+workweixin.com
+wecom.work

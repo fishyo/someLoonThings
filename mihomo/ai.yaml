@@ -2,95 +2,61 @@
 # Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
 
 payload:
-  # Gemini
-  - DOMAIN-SUFFIX,gemini.google.com
-  - DOMAIN-SUFFIX,bard.google.com
-  - DOMAIN-SUFFIX,aistudio.google.com
-  - DOMAIN-SUFFIX,makersuite.google.com
-  - DOMAIN-SUFFIX,generativeai.google
-  - DOMAIN-SUFFIX,generativeai.google.com
-  - DOMAIN-SUFFIX,generativelanguage.googleapis.com
-  - DOMAIN-SUFFIX,alkalimakersuite-pa.googleapis.com
-  - DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com
-  - DOMAIN-SUFFIX,geller-pa.googleapis.com
-  - DOMAIN-SUFFIX,odin-pa.googleapis.com
-  - DOMAIN-SUFFIX,aiplatform.googleapis.com
-  - DOMAIN-SUFFIX,notebooklm.google
-  - DOMAIN-SUFFIX,notebooklm.google.com
-  - DOMAIN-SUFFIX,deepmind.google
-  - DOMAIN-SUFFIX,deepmind.com
-  - DOMAIN-SUFFIX,ai.google.dev
-  - DOMAIN-SUFFIX,gemini.google
-  - DOMAIN,waa-pa.clients6.google.com
-  - DOMAIN,alkali-pa.clients6.google.com
-  - DOMAIN-SUFFIX,googleapis.com
-
-  # OpenAI
-  - DOMAIN-SUFFIX,chatgpt.com
-  - DOMAIN-SUFFIX,chatgpt.site
-  - DOMAIN-SUFFIX,openai.com
-  - DOMAIN-SUFFIX,chat.com
-  - DOMAIN-SUFFIX,oaistatic.com
-  - DOMAIN-SUFFIX,oaiusercontent.com
-  - DOMAIN-SUFFIX,sora.com
-  - DOMAIN-SUFFIX,openaiapi-site.azureedge.net
-  - DOMAIN-SUFFIX,openaicomproductionae4b.blob.core.windows.net
-  - DOMAIN-SUFFIX,openaicom.imgix.net
-  - DOMAIN-SUFFIX,featuregates.org
-  - DOMAIN-SUFFIX,stripe.com
-  - DOMAIN-SUFFIX,stripe.network
-
   # Claude
   - DOMAIN-SUFFIX,anthropic.com
   - DOMAIN-SUFFIX,claude.ai
   - DOMAIN-SUFFIX,claude.com
   - DOMAIN-SUFFIX,claudeusercontent.com
 
-  # Grok
-  - DOMAIN-SUFFIX,x.ai
-  - DOMAIN-SUFFIX,grok.com
-
-  # Perplexity
-  - DOMAIN-SUFFIX,perplexity.ai
-  - DOMAIN-SUFFIX,pplx.ai
-
   # Copilot
   - DOMAIN-SUFFIX,copilot.microsoft.com
-  - DOMAIN-SUFFIX,sydney.bing.com
   - DOMAIN,edgeservices.bing.com
+  - DOMAIN-SUFFIX,sydney.bing.com
+
+  # Gemini
+  - DOMAIN-SUFFIX,ai.google.dev
+  - DOMAIN-SUFFIX,aiplatform.googleapis.com
+  - DOMAIN-SUFFIX,aistudio.google.com
+  - DOMAIN-SUFFIX,alkalimakersuite-pa.googleapis.com
+  - DOMAIN-SUFFIX,bard.google.com
+  - DOMAIN-SUFFIX,deepmind.com
+  - DOMAIN-SUFFIX,deepmind.google
+  - DOMAIN,alkali-pa.clients6.google.com
+  - DOMAIN,waa-pa.clients6.google.com
+  - DOMAIN-SUFFIX,gemini.google
+  - DOMAIN-SUFFIX,gemini.google.com
+  - DOMAIN-SUFFIX,generativeai.google
+  - DOMAIN-SUFFIX,generativeai.google.com
+  - DOMAIN-SUFFIX,generativelanguage.googleapis.com
+  - DOMAIN-SUFFIX,geller-pa.googleapis.com
+  - DOMAIN-SUFFIX,googleapis.com
+  - DOMAIN-SUFFIX,makersuite.google.com
+  - DOMAIN-SUFFIX,notebooklm.google
+  - DOMAIN-SUFFIX,notebooklm.google.com
+  - DOMAIN-SUFFIX,odin-pa.googleapis.com
+  - DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com
+
+  # Grok
+  - DOMAIN-SUFFIX,grok.com
+  - DOMAIN-SUFFIX,x.ai
+
+  # AI Media
+  - DOMAIN-SUFFIX,blackforestlabs.ai
+  - DOMAIN-SUFFIX,clipdrop.co
+  - DOMAIN-SUFFIX,dreamstudio.ai
+  - DOMAIN-SUFFIX,ideogram.ai
+  - DOMAIN-SUFFIX,luma.ai
+  - DOMAIN-SUFFIX,lumalabs.ai
+  - DOMAIN-SUFFIX,pika.art
+  - DOMAIN-SUFFIX,runway.com
+  - DOMAIN-SUFFIX,runwayml.com
+  - DOMAIN-SUFFIX,stability.ai
 
   # Midjourney
-  - DOMAIN-SUFFIX,midjourney.com
   - DOMAIN-SUFFIX,cdn.midjourney.com
+  - DOMAIN-SUFFIX,midjourney.com
 
-  # Tools
-  - DOMAIN-SUFFIX,augmentcode.com
-  - DOMAIN-SUFFIX,character.ai
-  - DOMAIN-SUFFIX,civitai.com
-  - DOMAIN-SUFFIX,coze.com
-  - DOMAIN-SUFFIX,cursor.com
-  - DOMAIN-SUFFIX,cursor.sh
-  - DOMAIN-SUFFIX,cursorvm.com
-  - DOMAIN-SUFFIX,dify.ai
-  - DOMAIN-SUFFIX,genspark.ai
-  - DOMAIN-SUFFIX,groq.com
-  - DOMAIN-SUFFIX,meta.ai
-  - DOMAIN-SUFFIX,onorca.dev
-  - DOMAIN-SUFFIX,opencode.ai
-  - DOMAIN-SUFFIX,openrouter.ai
-  - DOMAIN-SUFFIX,phind.com
-  - DOMAIN-SUFFIX,poe.com
-  - DOMAIN-SUFFIX,poecdn.net
-  - DOMAIN-SUFFIX,tavily.com
-  - DOMAIN-SUFFIX,you.com
-
-  # Audio
-  - DOMAIN-SUFFIX,suno.com
-  - DOMAIN-SUFFIX,suno.ai
-  - DOMAIN-SUFFIX,udio.com
-  - DOMAIN-SUFFIX,elevenlabs.io
-
-  # Models
+  # AI Models
   - DOMAIN-SUFFIX,cohere.ai
   - DOMAIN-SUFFIX,cohere.com
   - DOMAIN-SUFFIX,fal.ai
@@ -104,12 +70,48 @@ payload:
   - DOMAIN-SUFFIX,together.xyz
   - DOMAIN-SUFFIX,v0.dev
 
-  # Media
-  - DOMAIN-SUFFIX,runwayml.com
-  - DOMAIN-SUFFIX,runway.com
-  - DOMAIN-SUFFIX,luma.ai
-  - DOMAIN-SUFFIX,lumalabs.ai
-  - DOMAIN-SUFFIX,pika.art
-  - DOMAIN-SUFFIX,stability.ai
-  - DOMAIN-SUFFIX,dreamstudio.ai
-  - DOMAIN-SUFFIX,clipdrop.co
+  # OpenAI
+  - DOMAIN-SUFFIX,arkoselabs.com
+  - DOMAIN-SUFFIX,chat.com
+  - DOMAIN-SUFFIX,chatgpt.com
+  - DOMAIN-SUFFIX,chatgpt.site
+  - DOMAIN-SUFFIX,featuregates.org
+  - DOMAIN-SUFFIX,oaistatic.com
+  - DOMAIN-SUFFIX,oaiusercontent.com
+  - DOMAIN-SUFFIX,openai.com
+  - DOMAIN-SUFFIX,openaiapi-site.azureedge.net
+  - DOMAIN-SUFFIX,openaicom.imgix.net
+  - DOMAIN-SUFFIX,openaicomproductionae4b.blob.core.windows.net
+  - DOMAIN-SUFFIX,sora.com
+  - DOMAIN-SUFFIX,stripe.com
+  - DOMAIN-SUFFIX,stripe.network
+
+  # Perplexity
+  - DOMAIN-SUFFIX,perplexity.ai
+  - DOMAIN-SUFFIX,pplx.ai
+
+  # AI Tools
+  - DOMAIN-SUFFIX,augmentcode.com
+  - DOMAIN-SUFFIX,bolt.new
+  - DOMAIN-SUFFIX,character.ai
+  - DOMAIN-SUFFIX,civitai.com
+  - DOMAIN-SUFFIX,codeium.com
+  - DOMAIN-SUFFIX,coze.com
+  - DOMAIN-SUFFIX,cursor.com
+  - DOMAIN-SUFFIX,cursor.sh
+  - DOMAIN-SUFFIX,cursorvm.com
+  - DOMAIN-SUFFIX,dify.ai
+  - DOMAIN-SUFFIX,genspark.ai
+  - DOMAIN-SUFFIX,groq.com
+  - DOMAIN-SUFFIX,lovable.dev
+  - DOMAIN-SUFFIX,manus.im
+  - DOMAIN-SUFFIX,meta.ai
+  - DOMAIN-SUFFIX,onorca.dev
+  - DOMAIN-SUFFIX,opencode.ai
+  - DOMAIN-SUFFIX,openrouter.ai
+  - DOMAIN-SUFFIX,phind.com
+  - DOMAIN-SUFFIX,poe.com
+  - DOMAIN-SUFFIX,poecdn.net
+  - DOMAIN-SUFFIX,tavily.com
+  - DOMAIN-SUFFIX,windsurf.ai
+  - DOMAIN-SUFFIX,you.com

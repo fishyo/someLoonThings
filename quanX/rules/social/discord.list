@@ -1,0 +1,12 @@
+# Title: Discord Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+# Discord
+host-keyword, discord, proxy
+host-suffix, discord.com, proxy
+host-suffix, discord.gg, proxy
+host-suffix, discord.media, proxy
+host-suffix, discordapp.com, proxy
+host-suffix, discordapp.net, proxy
+host-suffix, discordcdn.com, proxy
+host-suffix, discordstatus.com, proxy

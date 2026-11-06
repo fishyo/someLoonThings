@@ -1,0 +1,16 @@
+# Title: AI Models Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+# AI Models
+DOMAIN-SUFFIX,cohere.ai
+DOMAIN-SUFFIX,cohere.com
+DOMAIN-SUFFIX,fal.ai
+DOMAIN-SUFFIX,hf.space
+DOMAIN-SUFFIX,huggingface.co
+DOMAIN-SUFFIX,mistral.ai
+DOMAIN-SUFFIX,models.dev
+DOMAIN-SUFFIX,replicate.com
+DOMAIN-SUFFIX,replicate.delivery
+DOMAIN-SUFFIX,together.ai
+DOMAIN-SUFFIX,together.xyz
+DOMAIN-SUFFIX,v0.dev

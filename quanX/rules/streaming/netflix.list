@@ -1,0 +1,20 @@
+# Title: Netflix Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+# Netflix
+host-suffix, fast.com, proxy
+host-keyword, netflix, proxy
+host-suffix, netflix.ca, proxy
+host-suffix, netflix.com, proxy
+host-suffix, netflix.com.au, proxy
+host-suffix, netflix.com.edgesuite.net, proxy
+host-suffix, netflix.net, proxy
+host-suffix, netflixinvestor.com, proxy
+host-suffix, netflixstudios.com, proxy
+host-suffix, netflixtechblog.com, proxy
+host-suffix, nflxext.com, proxy
+host-suffix, nflximg.com, proxy
+host-suffix, nflximg.net, proxy
+host-suffix, nflxsearch.net, proxy
+host-suffix, nflxso.net, proxy
+host-suffix, nflxvideo.net, proxy

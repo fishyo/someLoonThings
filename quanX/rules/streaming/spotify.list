@@ -1,0 +1,19 @@
+# Title: Spotify Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+# Spotify
+host-suffix, audio-ak-spotify-com.akamaized.net, proxy
+host-suffix, byspotify.com, proxy
+host-suffix, heads4-ak-spotify-com.akamaized.net, proxy
+host-suffix, pscdn.co, proxy
+host-suffix, scdn.co, proxy
+host-suffix, spoti.fi, proxy
+host-suffix, spotify.com, proxy
+host-suffix, spotify.design, proxy
+host-suffix, spotify.link, proxy
+host-suffix, spotifycdn.com, proxy
+host-suffix, spotifycdn.net, proxy
+host-suffix, spotifycharts.com, proxy
+host-suffix, spotifycodes.com, proxy
+host-suffix, spotifyforartists.com, proxy
+host-suffix, spotifystatus.com, proxy

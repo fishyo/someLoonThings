@@ -1,0 +1,8 @@
+# Title: Crunchyroll Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+payload:
+  # Crunchyroll
+  - DOMAIN-SUFFIX,crunchyroll.com
+  - DOMAIN-SUFFIX,crunchyrollsvc.com
+  - DOMAIN-SUFFIX,vrv.co

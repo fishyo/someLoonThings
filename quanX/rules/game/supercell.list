@@ -1,0 +1,13 @@
+# Title: Supercell Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+# Supercell
+host-suffix, boombeachgame.com, direct
+host-suffix, brawlstars.com, direct
+host-suffix, brawlstarsgame.com, direct
+host-suffix, clashofclans.com, direct
+host-suffix, clashroyale.com, direct
+host-suffix, clashroyaleapp.com, direct
+host-suffix, haydaygame.com, direct
+host-suffix, squadbustersgame.com, direct
+host-suffix, supercell.com, direct

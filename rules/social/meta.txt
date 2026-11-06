@@ -1,0 +1,53 @@
+# Threads
+threads.com
+threads.net
+
+# Instagram
+cdninstagram.com
+ig.me
+igsonar.com
+instagram.com
+instagr.am
+
+# Facebook
+accountkit.com
+facebook.com
+facebook.net
+facebook.org
+fb.com
+fb.me
+fb.watch
+fbcdn.net
+fbsbx.com
+m.me
+messenger.com
+meta.com
+oculus.com
+oculuscdn.com
+
+# WhatsApp
+wa.me
+whatsapp.biz
+whatsapp.com
+whatsapp.net
+
+# Meta IPv4
+31.13.24.0/21
+31.13.64.0/18
+45.64.40.0/22
+66.220.144.0/20
+69.63.176.0/20
+69.171.224.0/19
+74.119.76.0/22
+103.4.96.0/22
+129.134.0.0/17
+157.240.0.0/17
+173.252.64.0/18
+179.60.192.0/22
+185.60.216.0/22
+204.15.20.0/22
+
+# Meta IPv6
+2a03:2880::/29
+2620:0:1c00::/40
+2620:10f:5000::/40

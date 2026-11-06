@@ -1,0 +1,18 @@
+# Title: YouTube Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+# YouTube
+host-suffix, ggpht.com, proxy
+host-suffix, googlevideo.com, proxy
+host-suffix, jnn-pa.googleapis.com, proxy
+host-keyword, youtube, proxy
+host-suffix, withyoutube.com, proxy
+host-suffix, youtu.be, proxy
+host-suffix, youtube-nocookie.com, proxy
+host-suffix, youtube.com, proxy
+host-suffix, youtubeembeddedplayer.googleapis.com, proxy
+host-suffix, youtubei.googleapis.com, proxy
+host-suffix, youtubego.com, proxy
+host-suffix, youtubekids.com, proxy
+host-suffix, yt.be, proxy
+host-suffix, ytimg.com, proxy

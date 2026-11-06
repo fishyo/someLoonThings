@@ -1,0 +1,6 @@
+# Title: Perplexity Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+# Perplexity
+host-suffix, perplexity.ai, proxy
+host-suffix, pplx.ai, proxy

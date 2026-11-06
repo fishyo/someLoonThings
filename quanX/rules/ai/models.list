@@ -1,0 +1,16 @@
+# Title: AI Models Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+# AI Models
+host-suffix, cohere.ai, proxy
+host-suffix, cohere.com, proxy
+host-suffix, fal.ai, proxy
+host-suffix, hf.space, proxy
+host-suffix, huggingface.co, proxy
+host-suffix, mistral.ai, proxy
+host-suffix, models.dev, proxy
+host-suffix, replicate.com, proxy
+host-suffix, replicate.delivery, proxy
+host-suffix, together.ai, proxy
+host-suffix, together.xyz, proxy
+host-suffix, v0.dev, proxy

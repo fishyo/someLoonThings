@@ -94,6 +94,7 @@ nixos.org
 npmjs.com
 npmjs.org
 nuget.org
+onorca.dev
 ovh.com
 ovhcloud.com
 packagecontrol.io
@@ -136,110 +137,38 @@ zeabur.com
 zen-browser.app
 
 # Entertainment
-abema-tv.com
-abema.tv
 acg.rip
-ameba.jp
 ao3.org
 archiveofourown.org
-audiomack.com
-bahamut.com.tw
-bamgrid.com
-bandcamp.com
-bilibili.tv
 booth.pm
-buzzsprout.com
-cider.sh
-crunchyroll.com
 dailymotion.com
-deezer.com
-disneyplus.com
-disneystreaming.com
-dmc.nico
 dmcdn.net
 donmai.us
-dssott.com
-dzcdn.net
 fanbox.cc
-gamer.com.tw
-googlevideo.com
-hbo.com
-hbomax.com
-hulu.com
 imdb.com
-jtvnw.net
 kakuyomu.jp
-keyword: fireside
-keyword: netflix
-keyword: youtube
 letterboxd.com
 mangadex.org
-max.com
 media-imdb.com
-megaphone.fm
-mixcloud.com
-netflix.com
-netflix.net
-nflxext.com
-nflximg.net
-nflxso.net
-nflxvideo.net
-nhk.or.jp
-nicovideo.jp
-nimg.jp
 nyaa.net
 nyaa.si
 odysee.com
 opensubtitles.com
 opensubtitles.org
-pandora.com
-paramountplus.com
-pca.st
-pdst.fm
-pdst.io
-peacocktv.com
 pixiv.me
 pixiv.net
 pixiv.org
-pocketcasts.com
-podtrac.com
-primevideo.com
-pv-cdn.net
 pximg.net
-radiko.jp
 rottentomatoes.com
 rumble.com
-scdn.co
-shazam.com
-simplecast.com
-simplecastaudio.com
-sndcdn.com
-soundcloud.com
-spoti.fi
-spotify.com
-spotifycdn.com
-spotifycharts.com
 subhd.me
 sukebei.nyaa.si
 syosetu.com
 themoviedb.org
-tidal.com
 tinymediamanager.org
 tmdb.org
 trakt.tv
-transistor.fm
-ttvnw.net
-tunein.com
-tver.jp
-twitch.tv
-twitchcdn.net
 yande.re
-youtu.be
-youtube-nocookie.com
-youtube.com
-youtubekids.com
-yt.be
-ytimg.com
 
 # Finance
 amiami.com
@@ -305,6 +234,7 @@ steam-chat.com
 steamcommunity.com
 steamcontent.com
 steampowered.com
+steamserver.net
 steamstatic.com
 ubisoft.com
 unrealengine.com
@@ -345,6 +275,7 @@ withgoogle.com
 # Infrastructure
 akamai.net
 akamaiedge.net
+arkoselabs.com
 amazon.com
 amazonaws.com
 archive.is
@@ -364,7 +295,6 @@ cloudfront.net
 cutt.ly
 deepl.com
 edgecastcdn.net
-fast.com
 fastly.net
 fastlylb.net
 fonts.googleapis.com
@@ -448,6 +378,7 @@ nature.com
 news.ycombinator.com
 nikkei.com
 nikkei.jp
+nyt.com
 nytimes.com
 researchgate.net
 reuters.com
@@ -497,8 +428,14 @@ dropboxapi.com
 dropboxstatic.com
 dropboxusercontent.com
 evernote.com
+feedly.com
+feedly.net
+feedlycdn.com
+feedlylabs.com
 figma.com
 grammarly.com
+inoreader.com
+inoreader.net
 instapaper.com
 lucid.app
 lucidchart.com
@@ -586,36 +523,21 @@ zerotier.com
 500px.org
 5ch.net
 bsky.app
+bsky.network
 bsky.social
-byteoversea.com
-cdninstagram.com
 clubhouse.com
-discord.com
-discord.gg
-discord.media
-discordapp.com
-discordapp.net
-discordcdn.com
-discordstatus.com
 disqus.com
 disquscdn.com
 element.io
-facebook.com
-fbcdn.net
 flickr.com
 gravatar.com
-ibytedtos.com
-instagram.com
 joinclubhouse.com
 kakao.com
 kakaocdn.net
 kakaotalk.com
 keyword: blogimg
-keyword: discord
 keyword: ldblog
 keyword: livedoor
-keyword: reddit
-keyword: tiktok
 line-apps.com
 line-scdn.net
 line.me
@@ -624,37 +546,23 @@ mastodon.social
 matrix.org
 matters.news
 matters.town
-messenger.com
-meta.com
-musical.ly
 pincong.rocks
 pinimg.com
 pinterest.com
 quora.com
 quoracdn.net
-redd.it
-reddit.com
-reddithelp.com
-redditmedia.com
-redditstatic.com
 sc-cdn.net
 session.org
 signal.org
 snap.com
 snapchat.com
 staticflickr.com
-threads.net
-tiktok.com
-tiktokcdn.com
-tiktokv.com
 tumblr.com
 v2ex.com
 vimeo.com
 vimeocdn.com
 vk.com
 vk.me
-whatsapp.com
-whatsapp.net
 wordpress.com
 wp.com
 
@@ -669,6 +577,7 @@ fanza.com
 javbus.com
 javdb.com
 keyword: missav
+keyword: thepiratebay
 onlyfans.com
 phncdn.com
 phprcdn.com
@@ -678,14 +587,3 @@ surrit.com
 t66y.com
 xnxx.com
 xvideos.com
-keyword: thepiratebay
-feedly.com
-feedlylabs.com
-feedly.net
-feedlycdn.com
-inoreader.com
-inoreader.net
-nyt.com
-listennotes.com
-threads.com
-onorca.dev

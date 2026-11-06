@@ -16,6 +16,7 @@ host-suffix, cdn-telegram.org, proxy
 # Services
 host-suffix, comments.app, proxy
 host-suffix, contest.com, proxy
+host-suffix, fragment.com, proxy
 host-suffix, graph.org, proxy
 host-suffix, quiz.directory, proxy
 host-suffix, stel.com, proxy

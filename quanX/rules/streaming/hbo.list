@@ -1,0 +1,19 @@
+# Title: HBO Max Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+# HBO Max
+host-suffix, cinemax.com, proxy
+host-suffix, discomax.com, proxy
+host-suffix, h264.io, proxy
+host-suffix, hbo.com, proxy
+host-suffix, hboasia.com, proxy
+host-suffix, hbogo.com, proxy
+host-suffix, hbogoasia.com, proxy
+host-suffix, hbogoasia.hk, proxy
+host-suffix, hbomax.com, proxy
+host-suffix, hbomaxcdn.com, proxy
+host-suffix, hbomaxdash.s.llnwi.net, proxy
+host-suffix, hbonow.com, proxy
+host-suffix, max.com, proxy
+host-suffix, maxgo.com, proxy
+host-suffix, warnermediacdn.com, proxy

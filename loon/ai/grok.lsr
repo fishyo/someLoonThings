@@ -1,0 +1,6 @@
+# Title: Grok xAI Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+# Grok
+DOMAIN-SUFFIX,grok.com
+DOMAIN-SUFFIX,x.ai

@@ -1,95 +1,61 @@
 # Title: Custom Proxy Ruleset
 # Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
 
-# Gemini
-DOMAIN-SUFFIX,gemini.google.com
-DOMAIN-SUFFIX,bard.google.com
-DOMAIN-SUFFIX,aistudio.google.com
-DOMAIN-SUFFIX,makersuite.google.com
-DOMAIN-SUFFIX,generativeai.google
-DOMAIN-SUFFIX,generativeai.google.com
-DOMAIN-SUFFIX,generativelanguage.googleapis.com
-DOMAIN-SUFFIX,alkalimakersuite-pa.googleapis.com
-DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com
-DOMAIN-SUFFIX,geller-pa.googleapis.com
-DOMAIN-SUFFIX,odin-pa.googleapis.com
-DOMAIN-SUFFIX,aiplatform.googleapis.com
-DOMAIN-SUFFIX,notebooklm.google
-DOMAIN-SUFFIX,notebooklm.google.com
-DOMAIN-SUFFIX,deepmind.google
-DOMAIN-SUFFIX,deepmind.com
-DOMAIN-SUFFIX,ai.google.dev
-DOMAIN-SUFFIX,gemini.google
-DOMAIN,waa-pa.clients6.google.com
-DOMAIN,alkali-pa.clients6.google.com
-DOMAIN-SUFFIX,googleapis.com
-
-# OpenAI
-DOMAIN-SUFFIX,chatgpt.com
-DOMAIN-SUFFIX,chatgpt.site
-DOMAIN-SUFFIX,openai.com
-DOMAIN-SUFFIX,chat.com
-DOMAIN-SUFFIX,oaistatic.com
-DOMAIN-SUFFIX,oaiusercontent.com
-DOMAIN-SUFFIX,sora.com
-DOMAIN-SUFFIX,openaiapi-site.azureedge.net
-DOMAIN-SUFFIX,openaicomproductionae4b.blob.core.windows.net
-DOMAIN-SUFFIX,openaicom.imgix.net
-DOMAIN-SUFFIX,featuregates.org
-DOMAIN-SUFFIX,stripe.com
-DOMAIN-SUFFIX,stripe.network
-
 # Claude
 DOMAIN-SUFFIX,anthropic.com
 DOMAIN-SUFFIX,claude.ai
 DOMAIN-SUFFIX,claude.com
 DOMAIN-SUFFIX,claudeusercontent.com
 
-# Grok
-DOMAIN-SUFFIX,x.ai
-DOMAIN-SUFFIX,grok.com
-
-# Perplexity
-DOMAIN-SUFFIX,perplexity.ai
-DOMAIN-SUFFIX,pplx.ai
-
 # Copilot
 DOMAIN-SUFFIX,copilot.microsoft.com
-DOMAIN-SUFFIX,sydney.bing.com
 DOMAIN,edgeservices.bing.com
+DOMAIN-SUFFIX,sydney.bing.com
+
+# Gemini
+DOMAIN-SUFFIX,ai.google.dev
+DOMAIN-SUFFIX,aiplatform.googleapis.com
+DOMAIN-SUFFIX,aistudio.google.com
+DOMAIN-SUFFIX,alkalimakersuite-pa.googleapis.com
+DOMAIN-SUFFIX,bard.google.com
+DOMAIN-SUFFIX,deepmind.com
+DOMAIN-SUFFIX,deepmind.google
+DOMAIN,alkali-pa.clients6.google.com
+DOMAIN,waa-pa.clients6.google.com
+DOMAIN-SUFFIX,gemini.google
+DOMAIN-SUFFIX,gemini.google.com
+DOMAIN-SUFFIX,generativeai.google
+DOMAIN-SUFFIX,generativeai.google.com
+DOMAIN-SUFFIX,generativelanguage.googleapis.com
+DOMAIN-SUFFIX,geller-pa.googleapis.com
+DOMAIN-SUFFIX,googleapis.com
+DOMAIN-SUFFIX,makersuite.google.com
+DOMAIN-SUFFIX,notebooklm.google
+DOMAIN-SUFFIX,notebooklm.google.com
+DOMAIN-SUFFIX,odin-pa.googleapis.com
+DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com
+
+# Grok
+DOMAIN-SUFFIX,grok.com
+DOMAIN-SUFFIX,x.ai
+
+# AI Media
+DOMAIN-SUFFIX,blackforestlabs.ai
+DOMAIN-SUFFIX,clipdrop.co
+DOMAIN-SUFFIX,dreamstudio.ai
+DOMAIN-SUFFIX,ideogram.ai
+DOMAIN-SUFFIX,luma.ai
+DOMAIN-SUFFIX,lumalabs.ai
+DOMAIN-SUFFIX,pika.art
+DOMAIN-SUFFIX,runway.com
+DOMAIN-SUFFIX,runwayml.com
+DOMAIN-SUFFIX,stability.ai
 
 # Midjourney
-DOMAIN-SUFFIX,midjourney.com
 DOMAIN-SUFFIX,cdn.midjourney.com
+DOMAIN-SUFFIX,midjourney.com
 
-# Tools
-DOMAIN-SUFFIX,augmentcode.com
-DOMAIN-SUFFIX,character.ai
-DOMAIN-SUFFIX,civitai.com
-DOMAIN-SUFFIX,coze.com
-DOMAIN-SUFFIX,cursor.com
-DOMAIN-SUFFIX,cursor.sh
-DOMAIN-SUFFIX,cursorvm.com
-DOMAIN-SUFFIX,dify.ai
-DOMAIN-SUFFIX,genspark.ai
-DOMAIN-SUFFIX,groq.com
-DOMAIN-SUFFIX,meta.ai
-DOMAIN-SUFFIX,onorca.dev
-DOMAIN-SUFFIX,opencode.ai
-DOMAIN-SUFFIX,openrouter.ai
-DOMAIN-SUFFIX,phind.com
-DOMAIN-SUFFIX,poe.com
-DOMAIN-SUFFIX,poecdn.net
-DOMAIN-SUFFIX,tavily.com
-DOMAIN-SUFFIX,you.com
-
-# Audio
-DOMAIN-SUFFIX,suno.com
-DOMAIN-SUFFIX,suno.ai
-DOMAIN-SUFFIX,udio.com
-DOMAIN-SUFFIX,elevenlabs.io
-
-# Models
+# AI Models
 DOMAIN-SUFFIX,cohere.ai
 DOMAIN-SUFFIX,cohere.com
 DOMAIN-SUFFIX,fal.ai
@@ -103,15 +69,123 @@ DOMAIN-SUFFIX,together.ai
 DOMAIN-SUFFIX,together.xyz
 DOMAIN-SUFFIX,v0.dev
 
-# Media
-DOMAIN-SUFFIX,runwayml.com
-DOMAIN-SUFFIX,runway.com
-DOMAIN-SUFFIX,luma.ai
-DOMAIN-SUFFIX,lumalabs.ai
-DOMAIN-SUFFIX,pika.art
-DOMAIN-SUFFIX,stability.ai
-DOMAIN-SUFFIX,dreamstudio.ai
-DOMAIN-SUFFIX,clipdrop.co
+# OpenAI
+DOMAIN-SUFFIX,arkoselabs.com
+DOMAIN-SUFFIX,chat.com
+DOMAIN-SUFFIX,chatgpt.com
+DOMAIN-SUFFIX,chatgpt.site
+DOMAIN-SUFFIX,featuregates.org
+DOMAIN-SUFFIX,oaistatic.com
+DOMAIN-SUFFIX,oaiusercontent.com
+DOMAIN-SUFFIX,openai.com
+DOMAIN-SUFFIX,openaiapi-site.azureedge.net
+DOMAIN-SUFFIX,openaicom.imgix.net
+DOMAIN-SUFFIX,openaicomproductionae4b.blob.core.windows.net
+DOMAIN-SUFFIX,sora.com
+DOMAIN-SUFFIX,stripe.com
+DOMAIN-SUFFIX,stripe.network
+
+# Perplexity
+DOMAIN-SUFFIX,perplexity.ai
+DOMAIN-SUFFIX,pplx.ai
+
+# AI Tools
+DOMAIN-SUFFIX,augmentcode.com
+DOMAIN-SUFFIX,bolt.new
+DOMAIN-SUFFIX,character.ai
+DOMAIN-SUFFIX,civitai.com
+DOMAIN-SUFFIX,codeium.com
+DOMAIN-SUFFIX,coze.com
+DOMAIN-SUFFIX,cursor.com
+DOMAIN-SUFFIX,cursor.sh
+DOMAIN-SUFFIX,cursorvm.com
+DOMAIN-SUFFIX,dify.ai
+DOMAIN-SUFFIX,genspark.ai
+DOMAIN-SUFFIX,groq.com
+DOMAIN-SUFFIX,lovable.dev
+DOMAIN-SUFFIX,manus.im
+DOMAIN-SUFFIX,meta.ai
+DOMAIN-SUFFIX,onorca.dev
+DOMAIN-SUFFIX,opencode.ai
+DOMAIN-SUFFIX,openrouter.ai
+DOMAIN-SUFFIX,phind.com
+DOMAIN-SUFFIX,poe.com
+DOMAIN-SUFFIX,poecdn.net
+DOMAIN-SUFFIX,tavily.com
+DOMAIN-SUFFIX,windsurf.ai
+DOMAIN-SUFFIX,you.com
+
+# Discord
+DOMAIN-KEYWORD,discord
+DOMAIN-SUFFIX,discord.com
+DOMAIN-SUFFIX,discord.gg
+DOMAIN-SUFFIX,discord.media
+DOMAIN-SUFFIX,discordapp.com
+DOMAIN-SUFFIX,discordapp.net
+DOMAIN-SUFFIX,discordcdn.com
+DOMAIN-SUFFIX,discordstatus.com
+
+# Threads
+DOMAIN-SUFFIX,threads.com
+DOMAIN-SUFFIX,threads.net
+
+# Instagram
+DOMAIN-SUFFIX,cdninstagram.com
+DOMAIN-SUFFIX,ig.me
+DOMAIN-SUFFIX,igsonar.com
+DOMAIN-SUFFIX,instagram.com
+DOMAIN-SUFFIX,instagr.am
+
+# Facebook
+DOMAIN-SUFFIX,accountkit.com
+DOMAIN-SUFFIX,facebook.com
+DOMAIN-SUFFIX,facebook.net
+DOMAIN-SUFFIX,facebook.org
+DOMAIN-SUFFIX,fb.com
+DOMAIN-SUFFIX,fb.me
+DOMAIN-SUFFIX,fb.watch
+DOMAIN-SUFFIX,fbcdn.net
+DOMAIN-SUFFIX,fbsbx.com
+DOMAIN-SUFFIX,m.me
+DOMAIN-SUFFIX,messenger.com
+DOMAIN-SUFFIX,meta.com
+DOMAIN-SUFFIX,oculus.com
+DOMAIN-SUFFIX,oculuscdn.com
+
+# WhatsApp
+DOMAIN-SUFFIX,wa.me
+DOMAIN-SUFFIX,whatsapp.biz
+DOMAIN-SUFFIX,whatsapp.com
+DOMAIN-SUFFIX,whatsapp.net
+
+# Meta IPv4
+IP-CIDR,31.13.24.0/21,no-resolve
+IP-CIDR,31.13.64.0/18,no-resolve
+IP-CIDR,45.64.40.0/22,no-resolve
+IP-CIDR,66.220.144.0/20,no-resolve
+IP-CIDR,69.63.176.0/20,no-resolve
+IP-CIDR,69.171.224.0/19,no-resolve
+IP-CIDR,74.119.76.0/22,no-resolve
+IP-CIDR,103.4.96.0/22,no-resolve
+IP-CIDR,129.134.0.0/17,no-resolve
+IP-CIDR,157.240.0.0/17,no-resolve
+IP-CIDR,173.252.64.0/18,no-resolve
+IP-CIDR,179.60.192.0/22,no-resolve
+IP-CIDR,185.60.216.0/22,no-resolve
+IP-CIDR,204.15.20.0/22,no-resolve
+
+# Meta IPv6
+IP-CIDR6,2a03:2880::/29,no-resolve
+IP-CIDR6,2620:0:1c00::/40,no-resolve
+IP-CIDR6,2620:10f:5000::/40,no-resolve
+
+# Reddit
+DOMAIN-KEYWORD,reddit
+DOMAIN-SUFFIX,redd.it
+DOMAIN-SUFFIX,reddit.com
+DOMAIN-SUFFIX,reddithelp.com
+DOMAIN-SUFFIX,redditmedia.com
+DOMAIN-SUFFIX,redditstatic.com
 
 # Telegram
 DOMAIN-KEYWORD,telegram
@@ -128,6 +202,7 @@ DOMAIN-SUFFIX,cdn-telegram.org
 # Services
 DOMAIN-SUFFIX,comments.app
 DOMAIN-SUFFIX,contest.com
+DOMAIN-SUFFIX,fragment.com
 DOMAIN-SUFFIX,graph.org
 DOMAIN-SUFFIX,quiz.directory
 DOMAIN-SUFFIX,stel.com
@@ -150,6 +225,15 @@ IP-CIDR6,2001:b28:f23d::/48,no-resolve
 IP-CIDR6,2001:b28:f23f::/48,no-resolve
 IP-CIDR6,2001:67c:4e8::/48,no-resolve
 
+# TikTok
+DOMAIN-KEYWORD,tiktok
+DOMAIN-SUFFIX,byteoversea.com
+DOMAIN-SUFFIX,ibytedtos.com
+DOMAIN-SUFFIX,musical.ly
+DOMAIN-SUFFIX,tiktok.com
+DOMAIN-SUFFIX,tiktokcdn.com
+DOMAIN-SUFFIX,tiktokv.com
+
 # Twitter
 DOMAIN-KEYWORD,twitter
 DOMAIN-SUFFIX,x.com
@@ -170,6 +254,230 @@ DOMAIN-SUFFIX,twitterinc.com
 DOMAIN-SUFFIX,twitteroauth.com
 DOMAIN-SUFFIX,twitterstat.us
 DOMAIN-SUFFIX,cms-twdigitalassets.com
+
+# AbemaTV
+DOMAIN-SUFFIX,abema-tv.com
+DOMAIN-SUFFIX,abema.io
+DOMAIN-SUFFIX,abema.tv
+DOMAIN-SUFFIX,abematv.akamaized.net
+DOMAIN-SUFFIX,ameba.jp
+DOMAIN-SUFFIX,amebame.com
+DOMAIN-SUFFIX,amebaownd.com
+DOMAIN-SUFFIX,amebaowndme.com
+DOMAIN-SUFFIX,bucketeer.jp
+DOMAIN-SUFFIX,hayabusa.dev
+DOMAIN-SUFFIX,hayabusa.io
+DOMAIN-SUFFIX,hayabusa.media
+DOMAIN-SUFFIX,winticket.jp
+
+# Bahamut
+DOMAIN-SUFFIX,bahamut.akamaized.net
+DOMAIN-SUFFIX,bahamut.com.tw
+DOMAIN-SUFFIX,gamer.com.tw
+DOMAIN-SUFFIX,vibsl.akadns.net
+
+# Bilibili TV
+DOMAIN-SUFFIX,bilibili.tv
+DOMAIN-SUFFIX,biliintl.com
+DOMAIN-SUFFIX,bstarstatic.com
+
+# Crunchyroll
+DOMAIN-SUFFIX,crunchyroll.com
+DOMAIN-SUFFIX,crunchyrollsvc.com
+DOMAIN-SUFFIX,vrv.co
+
+# DAZN
+DOMAIN-SUFFIX,d151aohkq4wheq.cloudfront.net
+DOMAIN-SUFFIX,d1sgwhnao7452x.cloudfront.net
+DOMAIN-SUFFIX,dazn-api.com
+DOMAIN-SUFFIX,dazn.com
+DOMAIN-SUFFIX,dazndn.com
+DOMAIN-SUFFIX,indazn.com
+DOMAIN-SUFFIX,indaznlab.com
+DOMAIN-SUFFIX,innovid.com
+
+# Disney+
+DOMAIN-SUFFIX,bamgrid.com
+DOMAIN-SUFFIX,disney-plus.net
+DOMAIN-SUFFIX,disney-portal.my.onetrust.com
+DOMAIN-SUFFIX,disneyplus.bn5x.net
+DOMAIN-SUFFIX,disneyplus.com
+DOMAIN-SUFFIX,disneystreaming.com
+DOMAIN-SUFFIX,dssedge.com
+DOMAIN-SUFFIX,dssott.com
+DOMAIN-SUFFIX,hotstar.com
+DOMAIN-SUFFIX,hotstarext.com
+DOMAIN-SUFFIX,starott.com
+DOMAIN-SUFFIX,starplus.com
+
+# HBO Max
+DOMAIN-SUFFIX,cinemax.com
+DOMAIN-SUFFIX,discomax.com
+DOMAIN-SUFFIX,h264.io
+DOMAIN-SUFFIX,hbo.com
+DOMAIN-SUFFIX,hboasia.com
+DOMAIN-SUFFIX,hbogo.com
+DOMAIN-SUFFIX,hbogoasia.com
+DOMAIN-SUFFIX,hbogoasia.hk
+DOMAIN-SUFFIX,hbomax.com
+DOMAIN-SUFFIX,hbomaxcdn.com
+DOMAIN-SUFFIX,hbomaxdash.s.llnwi.net
+DOMAIN-SUFFIX,hbonow.com
+DOMAIN-SUFFIX,max.com
+DOMAIN-SUFFIX,maxgo.com
+DOMAIN-SUFFIX,warnermediacdn.com
+
+# Hulu
+DOMAIN-SUFFIX,callstats.io
+DOMAIN-SUFFIX,cws-hulu.conviva.com
+DOMAIN-SUFFIX,happyon.jp
+DOMAIN-SUFFIX,hjholdings.jp
+DOMAIN-SUFFIX,hulu.com
+DOMAIN-SUFFIX,hulu.hb.omtrdc.net
+DOMAIN-SUFFIX,hulu.jp
+DOMAIN-SUFFIX,hulu.sc.omtrdc.net
+DOMAIN-SUFFIX,huluad.com
+DOMAIN-SUFFIX,hulustream.com
+DOMAIN-SUFFIX,play.hulu.com
+
+# Japan TV
+DOMAIN-SUFFIX,dmc.nico
+DOMAIN-SUFFIX,fod.fujitv.co.jp
+DOMAIN-SUFFIX,nhk.or.jp
+DOMAIN-SUFFIX,nicovideo.jp
+DOMAIN-SUFFIX,nimg.jp
+DOMAIN-SUFFIX,nxtv.jp
+DOMAIN-SUFFIX,radiko.jp
+DOMAIN-SUFFIX,smartstream.ne.jp
+DOMAIN-SUFFIX,telasa.jp
+DOMAIN-SUFFIX,tver.jp
+DOMAIN-SUFFIX,unext.jp
+
+# Streaming Music
+DOMAIN-SUFFIX,audiomack.com
+DOMAIN-SUFFIX,bandcamp.com
+DOMAIN-SUFFIX,cider.sh
+DOMAIN-SUFFIX,deezer.com
+DOMAIN-SUFFIX,dzcdn.net
+DOMAIN-SUFFIX,kfs.io
+DOMAIN-SUFFIX,kk.stream
+DOMAIN-SUFFIX,kkbox.com
+DOMAIN-SUFFIX,mixcloud.com
+DOMAIN-SUFFIX,pandora.com
+DOMAIN-SUFFIX,qobuz.com
+DOMAIN-SUFFIX,shazam.com
+DOMAIN-SUFFIX,sndcdn.com
+DOMAIN-SUFFIX,soundcloud.com
+DOMAIN-SUFFIX,tidal-cms.s3.amazonaws.com
+DOMAIN-SUFFIX,tidal.com
+DOMAIN-SUFFIX,tidalhifi.com
+DOMAIN-SUFFIX,tunein.com
+DOMAIN-SUFFIX,wimpmusic.com
+
+# Netflix
+DOMAIN-SUFFIX,fast.com
+DOMAIN-KEYWORD,netflix
+DOMAIN-SUFFIX,netflix.ca
+DOMAIN-SUFFIX,netflix.com
+DOMAIN-SUFFIX,netflix.com.au
+DOMAIN-SUFFIX,netflix.com.edgesuite.net
+DOMAIN-SUFFIX,netflix.net
+DOMAIN-SUFFIX,netflixinvestor.com
+DOMAIN-SUFFIX,netflixstudios.com
+DOMAIN-SUFFIX,netflixtechblog.com
+DOMAIN-SUFFIX,nflxext.com
+DOMAIN-SUFFIX,nflximg.com
+DOMAIN-SUFFIX,nflximg.net
+DOMAIN-SUFFIX,nflxsearch.net
+DOMAIN-SUFFIX,nflxso.net
+DOMAIN-SUFFIX,nflxvideo.net
+
+# Paramount+
+DOMAIN-SUFFIX,cbs.com
+DOMAIN-SUFFIX,cbsaavideo.com
+DOMAIN-SUFFIX,cbsi.com
+DOMAIN-SUFFIX,cbsiam.com
+DOMAIN-SUFFIX,cbsig.net
+DOMAIN-SUFFIX,cbsivideo.com
+DOMAIN-SUFFIX,cbsnews.com
+DOMAIN-SUFFIX,cbspressexpress.com
+DOMAIN-SUFFIX,cbsplaylist.com
+DOMAIN-SUFFIX,cbsstat.com
+DOMAIN-SUFFIX,paramount.com
+DOMAIN-SUFFIX,paramountplus.com
+DOMAIN-SUFFIX,pplus.network
+DOMAIN-SUFFIX,pplusstatic.com
+
+# Peacock
+DOMAIN-SUFFIX,peacock.com
+DOMAIN-SUFFIX,peacocktv.com
+
+# Podcasts
+DOMAIN-SUFFIX,buzzsprout.com
+DOMAIN-SUFFIX,castbox.fm
+DOMAIN-KEYWORD,fireside
+DOMAIN-SUFFIX,libsyn.com
+DOMAIN-SUFFIX,megaphone.fm
+DOMAIN-SUFFIX,omny.fm
+DOMAIN-SUFFIX,pca.st
+DOMAIN-SUFFIX,pdst.fm
+DOMAIN-SUFFIX,pdst.io
+DOMAIN-SUFFIX,pocketcasts.com
+DOMAIN-SUFFIX,podtrac.com
+DOMAIN-SUFFIX,simplecast.com
+DOMAIN-SUFFIX,simplecastaudio.com
+DOMAIN-SUFFIX,transistor.fm
+
+# Prime Video
+DOMAIN-SUFFIX,aiv-cdn.net
+DOMAIN-SUFFIX,aiv-delivery.net
+DOMAIN-SUFFIX,amazonvideo.com
+DOMAIN-SUFFIX,atv-ps.amazon.com
+DOMAIN-SUFFIX,media-amazon.com
+DOMAIN-SUFFIX,prime-video.com
+DOMAIN-SUFFIX,primevideo.com
+DOMAIN-SUFFIX,pv-cdn.net
+
+# Spotify
+DOMAIN-SUFFIX,audio-ak-spotify-com.akamaized.net
+DOMAIN-SUFFIX,byspotify.com
+DOMAIN-SUFFIX,heads4-ak-spotify-com.akamaized.net
+DOMAIN-SUFFIX,pscdn.co
+DOMAIN-SUFFIX,scdn.co
+DOMAIN-SUFFIX,spoti.fi
+DOMAIN-SUFFIX,spotify.com
+DOMAIN-SUFFIX,spotify.design
+DOMAIN-SUFFIX,spotify.link
+DOMAIN-SUFFIX,spotifycdn.com
+DOMAIN-SUFFIX,spotifycdn.net
+DOMAIN-SUFFIX,spotifycharts.com
+DOMAIN-SUFFIX,spotifycodes.com
+DOMAIN-SUFFIX,spotifyforartists.com
+DOMAIN-SUFFIX,spotifystatus.com
+
+# Twitch
+DOMAIN-SUFFIX,jtvnw.net
+DOMAIN-SUFFIX,live-video.net
+DOMAIN-SUFFIX,ttvnw.net
+DOMAIN-SUFFIX,twitch.tv
+DOMAIN-SUFFIX,twitchcdn.net
+DOMAIN-SUFFIX,twitchsvc.net
+
+# YouTube
+DOMAIN-SUFFIX,ggpht.com
+DOMAIN-SUFFIX,googlevideo.com
+DOMAIN-SUFFIX,jnn-pa.googleapis.com
+DOMAIN-KEYWORD,youtube
+DOMAIN-SUFFIX,withyoutube.com
+DOMAIN-SUFFIX,youtu.be
+DOMAIN-SUFFIX,youtube-nocookie.com
+DOMAIN-SUFFIX,youtube.com
+DOMAIN-SUFFIX,youtubeembeddedplayer.googleapis.com
+DOMAIN-SUFFIX,youtubei.googleapis.com
+DOMAIN-SUFFIX,youtubego.com
+DOMAIN-SUFFIX,youtubekids.com
+DOMAIN-SUFFIX,yt.be
+DOMAIN-SUFFIX,ytimg.com
 
 # Apple
 DOMAIN-SUFFIX,apple.news
@@ -309,110 +617,38 @@ DOMAIN-SUFFIX,zeabur.com
 DOMAIN-SUFFIX,zen-browser.app
 
 # Entertainment
-DOMAIN-SUFFIX,abema-tv.com
-DOMAIN-SUFFIX,abema.tv
 DOMAIN-SUFFIX,acg.rip
-DOMAIN-SUFFIX,ameba.jp
 DOMAIN-SUFFIX,ao3.org
 DOMAIN-SUFFIX,archiveofourown.org
-DOMAIN-SUFFIX,audiomack.com
-DOMAIN-SUFFIX,bahamut.com.tw
-DOMAIN-SUFFIX,bamgrid.com
-DOMAIN-SUFFIX,bandcamp.com
-DOMAIN-SUFFIX,bilibili.tv
 DOMAIN-SUFFIX,booth.pm
-DOMAIN-SUFFIX,buzzsprout.com
-DOMAIN-SUFFIX,cider.sh
-DOMAIN-SUFFIX,crunchyroll.com
 DOMAIN-SUFFIX,dailymotion.com
-DOMAIN-SUFFIX,deezer.com
-DOMAIN-SUFFIX,disneyplus.com
-DOMAIN-SUFFIX,disneystreaming.com
-DOMAIN-SUFFIX,dmc.nico
 DOMAIN-SUFFIX,dmcdn.net
 DOMAIN-SUFFIX,donmai.us
-DOMAIN-SUFFIX,dssott.com
-DOMAIN-SUFFIX,dzcdn.net
 DOMAIN-SUFFIX,fanbox.cc
-DOMAIN-SUFFIX,gamer.com.tw
-DOMAIN-SUFFIX,googlevideo.com
-DOMAIN-SUFFIX,hbo.com
-DOMAIN-SUFFIX,hbomax.com
-DOMAIN-SUFFIX,hulu.com
 DOMAIN-SUFFIX,imdb.com
-DOMAIN-SUFFIX,jtvnw.net
 DOMAIN-SUFFIX,kakuyomu.jp
-DOMAIN-KEYWORD,fireside
-DOMAIN-KEYWORD,netflix
-DOMAIN-KEYWORD,youtube
 DOMAIN-SUFFIX,letterboxd.com
 DOMAIN-SUFFIX,mangadex.org
-DOMAIN-SUFFIX,max.com
 DOMAIN-SUFFIX,media-imdb.com
-DOMAIN-SUFFIX,megaphone.fm
-DOMAIN-SUFFIX,mixcloud.com
-DOMAIN-SUFFIX,netflix.com
-DOMAIN-SUFFIX,netflix.net
-DOMAIN-SUFFIX,nflxext.com
-DOMAIN-SUFFIX,nflximg.net
-DOMAIN-SUFFIX,nflxso.net
-DOMAIN-SUFFIX,nflxvideo.net
-DOMAIN-SUFFIX,nhk.or.jp
-DOMAIN-SUFFIX,nicovideo.jp
-DOMAIN-SUFFIX,nimg.jp
 DOMAIN-SUFFIX,nyaa.net
 DOMAIN-SUFFIX,nyaa.si
 DOMAIN-SUFFIX,odysee.com
 DOMAIN-SUFFIX,opensubtitles.com
 DOMAIN-SUFFIX,opensubtitles.org
-DOMAIN-SUFFIX,pandora.com
-DOMAIN-SUFFIX,paramountplus.com
-DOMAIN-SUFFIX,pca.st
-DOMAIN-SUFFIX,pdst.fm
-DOMAIN-SUFFIX,pdst.io
-DOMAIN-SUFFIX,peacocktv.com
 DOMAIN-SUFFIX,pixiv.me
 DOMAIN-SUFFIX,pixiv.net
 DOMAIN-SUFFIX,pixiv.org
-DOMAIN-SUFFIX,pocketcasts.com
-DOMAIN-SUFFIX,podtrac.com
-DOMAIN-SUFFIX,primevideo.com
-DOMAIN-SUFFIX,pv-cdn.net
 DOMAIN-SUFFIX,pximg.net
-DOMAIN-SUFFIX,radiko.jp
 DOMAIN-SUFFIX,rottentomatoes.com
 DOMAIN-SUFFIX,rumble.com
-DOMAIN-SUFFIX,scdn.co
-DOMAIN-SUFFIX,shazam.com
-DOMAIN-SUFFIX,simplecast.com
-DOMAIN-SUFFIX,simplecastaudio.com
-DOMAIN-SUFFIX,sndcdn.com
-DOMAIN-SUFFIX,soundcloud.com
-DOMAIN-SUFFIX,spoti.fi
-DOMAIN-SUFFIX,spotify.com
-DOMAIN-SUFFIX,spotifycdn.com
-DOMAIN-SUFFIX,spotifycharts.com
 DOMAIN-SUFFIX,subhd.me
 DOMAIN-SUFFIX,sukebei.nyaa.si
 DOMAIN-SUFFIX,syosetu.com
 DOMAIN-SUFFIX,themoviedb.org
-DOMAIN-SUFFIX,tidal.com
 DOMAIN-SUFFIX,tinymediamanager.org
 DOMAIN-SUFFIX,tmdb.org
 DOMAIN-SUFFIX,trakt.tv
-DOMAIN-SUFFIX,transistor.fm
-DOMAIN-SUFFIX,ttvnw.net
-DOMAIN-SUFFIX,tunein.com
-DOMAIN-SUFFIX,tver.jp
-DOMAIN-SUFFIX,twitch.tv
-DOMAIN-SUFFIX,twitchcdn.net
 DOMAIN-SUFFIX,yande.re
-DOMAIN-SUFFIX,youtu.be
-DOMAIN-SUFFIX,youtube-nocookie.com
-DOMAIN-SUFFIX,youtube.com
-DOMAIN-SUFFIX,youtubekids.com
-DOMAIN-SUFFIX,yt.be
-DOMAIN-SUFFIX,ytimg.com
 
 # Finance
 DOMAIN-SUFFIX,amiami.com
@@ -478,6 +714,7 @@ DOMAIN-SUFFIX,steam-chat.com
 DOMAIN-SUFFIX,steamcommunity.com
 DOMAIN-SUFFIX,steamcontent.com
 DOMAIN-SUFFIX,steampowered.com
+DOMAIN-SUFFIX,steamserver.net
 DOMAIN-SUFFIX,steamstatic.com
 DOMAIN-SUFFIX,ubisoft.com
 DOMAIN-SUFFIX,unrealengine.com
@@ -496,7 +733,6 @@ DOMAIN-SUFFIX,chromium.org
 DOMAIN-SUFFIX,firebase.com
 DOMAIN-SUFFIX,firebaseio.com
 DOMAIN-SUFFIX,g.co
-DOMAIN-SUFFIX,ggpht.com
 DOMAIN-SUFFIX,gmail.com
 DOMAIN-SUFFIX,goo.gl
 DOMAIN-SUFFIX,google.co.jp
@@ -537,7 +773,6 @@ DOMAIN-SUFFIX,cloudfront.net
 DOMAIN-SUFFIX,cutt.ly
 DOMAIN-SUFFIX,deepl.com
 DOMAIN-SUFFIX,edgecastcdn.net
-DOMAIN-SUFFIX,fast.com
 DOMAIN-SUFFIX,fastly.net
 DOMAIN-SUFFIX,fastlylb.net
 DOMAIN-SUFFIX,fonts.googleapis.com
@@ -621,6 +856,7 @@ DOMAIN-SUFFIX,nature.com
 DOMAIN-SUFFIX,news.ycombinator.com
 DOMAIN-SUFFIX,nikkei.com
 DOMAIN-SUFFIX,nikkei.jp
+DOMAIN-SUFFIX,nyt.com
 DOMAIN-SUFFIX,nytimes.com
 DOMAIN-SUFFIX,researchgate.net
 DOMAIN-SUFFIX,reuters.com
@@ -670,8 +906,14 @@ DOMAIN-SUFFIX,dropboxapi.com
 DOMAIN-SUFFIX,dropboxstatic.com
 DOMAIN-SUFFIX,dropboxusercontent.com
 DOMAIN-SUFFIX,evernote.com
+DOMAIN-SUFFIX,feedly.com
+DOMAIN-SUFFIX,feedly.net
+DOMAIN-SUFFIX,feedlycdn.com
+DOMAIN-SUFFIX,feedlylabs.com
 DOMAIN-SUFFIX,figma.com
 DOMAIN-SUFFIX,grammarly.com
+DOMAIN-SUFFIX,inoreader.com
+DOMAIN-SUFFIX,inoreader.net
 DOMAIN-SUFFIX,instapaper.com
 DOMAIN-SUFFIX,lucid.app
 DOMAIN-SUFFIX,lucidchart.com
@@ -759,36 +1001,21 @@ DOMAIN-SUFFIX,500px.net
 DOMAIN-SUFFIX,500px.org
 DOMAIN-SUFFIX,5ch.net
 DOMAIN-SUFFIX,bsky.app
+DOMAIN-SUFFIX,bsky.network
 DOMAIN-SUFFIX,bsky.social
-DOMAIN-SUFFIX,byteoversea.com
-DOMAIN-SUFFIX,cdninstagram.com
 DOMAIN-SUFFIX,clubhouse.com
-DOMAIN-SUFFIX,discord.com
-DOMAIN-SUFFIX,discord.gg
-DOMAIN-SUFFIX,discord.media
-DOMAIN-SUFFIX,discordapp.com
-DOMAIN-SUFFIX,discordapp.net
-DOMAIN-SUFFIX,discordcdn.com
-DOMAIN-SUFFIX,discordstatus.com
 DOMAIN-SUFFIX,disqus.com
 DOMAIN-SUFFIX,disquscdn.com
 DOMAIN-SUFFIX,element.io
-DOMAIN-SUFFIX,facebook.com
-DOMAIN-SUFFIX,fbcdn.net
 DOMAIN-SUFFIX,flickr.com
 DOMAIN-SUFFIX,gravatar.com
-DOMAIN-SUFFIX,ibytedtos.com
-DOMAIN-SUFFIX,instagram.com
 DOMAIN-SUFFIX,joinclubhouse.com
 DOMAIN-SUFFIX,kakao.com
 DOMAIN-SUFFIX,kakaocdn.net
 DOMAIN-SUFFIX,kakaotalk.com
 DOMAIN-KEYWORD,blogimg
-DOMAIN-KEYWORD,discord
 DOMAIN-KEYWORD,ldblog
 DOMAIN-KEYWORD,livedoor
-DOMAIN-KEYWORD,reddit
-DOMAIN-KEYWORD,tiktok
 DOMAIN-SUFFIX,line-apps.com
 DOMAIN-SUFFIX,line-scdn.net
 DOMAIN-SUFFIX,line.me
@@ -797,37 +1024,23 @@ DOMAIN-SUFFIX,mastodon.social
 DOMAIN-SUFFIX,matrix.org
 DOMAIN-SUFFIX,matters.news
 DOMAIN-SUFFIX,matters.town
-DOMAIN-SUFFIX,messenger.com
-DOMAIN-SUFFIX,meta.com
-DOMAIN-SUFFIX,musical.ly
 DOMAIN-SUFFIX,pincong.rocks
 DOMAIN-SUFFIX,pinimg.com
 DOMAIN-SUFFIX,pinterest.com
 DOMAIN-SUFFIX,quora.com
 DOMAIN-SUFFIX,quoracdn.net
-DOMAIN-SUFFIX,redd.it
-DOMAIN-SUFFIX,reddit.com
-DOMAIN-SUFFIX,reddithelp.com
-DOMAIN-SUFFIX,redditmedia.com
-DOMAIN-SUFFIX,redditstatic.com
 DOMAIN-SUFFIX,sc-cdn.net
 DOMAIN-SUFFIX,session.org
 DOMAIN-SUFFIX,signal.org
 DOMAIN-SUFFIX,snap.com
 DOMAIN-SUFFIX,snapchat.com
 DOMAIN-SUFFIX,staticflickr.com
-DOMAIN-SUFFIX,threads.net
-DOMAIN-SUFFIX,tiktok.com
-DOMAIN-SUFFIX,tiktokcdn.com
-DOMAIN-SUFFIX,tiktokv.com
 DOMAIN-SUFFIX,tumblr.com
 DOMAIN-SUFFIX,v2ex.com
 DOMAIN-SUFFIX,vimeo.com
 DOMAIN-SUFFIX,vimeocdn.com
 DOMAIN-SUFFIX,vk.com
 DOMAIN-SUFFIX,vk.me
-DOMAIN-SUFFIX,whatsapp.com
-DOMAIN-SUFFIX,whatsapp.net
 DOMAIN-SUFFIX,wordpress.com
 DOMAIN-SUFFIX,wp.com
 
@@ -842,6 +1055,7 @@ DOMAIN-SUFFIX,fanza.com
 DOMAIN-SUFFIX,javbus.com
 DOMAIN-SUFFIX,javdb.com
 DOMAIN-KEYWORD,missav
+DOMAIN-KEYWORD,thepiratebay
 DOMAIN-SUFFIX,onlyfans.com
 DOMAIN-SUFFIX,phncdn.com
 DOMAIN-SUFFIX,phprcdn.com
@@ -851,13 +1065,3 @@ DOMAIN-SUFFIX,surrit.com
 DOMAIN-SUFFIX,t66y.com
 DOMAIN-SUFFIX,xnxx.com
 DOMAIN-SUFFIX,xvideos.com
-DOMAIN-KEYWORD,thepiratebay
-DOMAIN-SUFFIX,feedly.com
-DOMAIN-SUFFIX,feedlylabs.com
-DOMAIN-SUFFIX,feedly.net
-DOMAIN-SUFFIX,feedlycdn.com
-DOMAIN-SUFFIX,inoreader.com
-DOMAIN-SUFFIX,inoreader.net
-DOMAIN-SUFFIX,nyt.com
-DOMAIN-SUFFIX,listennotes.com
-DOMAIN-SUFFIX,threads.com

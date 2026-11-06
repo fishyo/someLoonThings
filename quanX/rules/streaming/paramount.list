@@ -1,0 +1,18 @@
+# Title: Paramount+ Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+# Paramount+
+host-suffix, cbs.com, proxy
+host-suffix, cbsaavideo.com, proxy
+host-suffix, cbsi.com, proxy
+host-suffix, cbsiam.com, proxy
+host-suffix, cbsig.net, proxy
+host-suffix, cbsivideo.com, proxy
+host-suffix, cbsnews.com, proxy
+host-suffix, cbspressexpress.com, proxy
+host-suffix, cbsplaylist.com, proxy
+host-suffix, cbsstat.com, proxy
+host-suffix, paramount.com, proxy
+host-suffix, paramountplus.com, proxy
+host-suffix, pplus.network, proxy
+host-suffix, pplusstatic.com, proxy

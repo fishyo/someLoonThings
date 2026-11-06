@@ -1,0 +1,12 @@
+# Title: DAZN Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+# DAZN
+DOMAIN-SUFFIX,d151aohkq4wheq.cloudfront.net
+DOMAIN-SUFFIX,d1sgwhnao7452x.cloudfront.net
+DOMAIN-SUFFIX,dazn-api.com
+DOMAIN-SUFFIX,dazn.com
+DOMAIN-SUFFIX,dazndn.com
+DOMAIN-SUFFIX,indazn.com
+DOMAIN-SUFFIX,indaznlab.com
+DOMAIN-SUFFIX,innovid.com
