@@ -91,16 +91,21 @@ flowchart TD
 3. **AI 智能服务体系 (`rules/ai/`)**：
    - 包含 `openai.txt`, `claude.txt`, `gemini.txt`, `copilot.txt`, `grok.txt`, `perplexity.txt`, `midjourney.txt`, `tools.txt`, `models.txt`, `media.txt` 等 10 个独立平台/模块。
    - 自动生成独立规则 `loon/ai/<platform>.lsr` 与全量主规则 `loon/ai.lsr`（现有订阅 100% 向后兼容）。
-4. **引擎自动处理**：
+4. **游戏专区体系 (`rules/game/`)**：
+   - 包含 `steam.txt` (Steam 商店/社区/聊天)、`nintendo.txt` (Switch / eShop 各区服务)、`playstation.txt` (PSN 登录与商店)、`xbox.txt` (Xbox Live 与 Game Pass) 与 `twitch.txt` (游戏直播流)。
+   - 包含游戏直连白名单 `supercell.txt`（Supercell 全系游戏保持直连独立分流）。
+   - 自动生成独立规则 `loon/game/<platform>.lsr` 与游戏代理主规则 `loon/game.lsr`。
+5. **引擎自动处理**：
    - **次级独立规则**：自动生成对应平台的 `.lsr` / `.list` / `.yaml`，供精准分流。
    - **主集合规则**：自动在内存与 `rules/*.txt` 生成全量集合规则，供策略组整体绑定。
    - **全量代理兜底**：自动合并汇聚进全量 `proxy.lsr`，而 `rules/proxy.txt` 无需重复声明，保持绝对干净独立。
 
-#### ② 新增走直连的白名单片段 (如 `game`)
-想新增一个国内游戏直连规则：
-1. 新建 `rules/game.txt`，在**第一行注明 `# direct`**：
+#### ② 新增走直连的白名单片段 (如 `epic`)
+想新增一个国内直连白名单规则：
+1. 新建 `rules/epic.txt`，在**第一行注明 `# policy: direct`**：
    ```ini
-   # direct
+   # policy: direct
+   # Epic Direct Ruleset
    epicgames.com
    unrealengine.com
    ```

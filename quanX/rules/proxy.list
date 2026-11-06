@@ -115,6 +115,66 @@ host-suffix, tavily.com, proxy
 host-suffix, windsurf.ai, proxy
 host-suffix, you.com, proxy
 
+# Nintendo
+host-suffix, nintendo-europe.com, proxy
+host-suffix, nintendo.be, proxy
+host-suffix, nintendo.co.jp, proxy
+host-suffix, nintendo.co.uk, proxy
+host-suffix, nintendo.com, proxy
+host-suffix, nintendo.com.au, proxy
+host-suffix, nintendo.de, proxy
+host-suffix, nintendo.es, proxy
+host-suffix, nintendo.eu, proxy
+host-suffix, nintendo.fr, proxy
+host-suffix, nintendo.it, proxy
+host-suffix, nintendo.jp, proxy
+host-suffix, nintendo.net, proxy
+host-suffix, nintendo.nl, proxy
+host-suffix, nintendo.pt, proxy
+host-suffix, nintendonetwork.net, proxy
+host-suffix, nintendostore.com, proxy
+host-suffix, nintendoswitch.com, proxy
+
+# PlayStation
+host-suffix, playstation.com, proxy
+host-suffix, playstation.net, proxy
+host-suffix, playstation.org, proxy
+host-suffix, playstationnetwork.com, proxy
+host-suffix, sie.com, proxy
+host-suffix, sonyentertainmentnetwork.com, proxy
+
+# Steam
+host-suffix, steam-chat.com, proxy
+host-suffix, steambroadcast.com, proxy
+host-suffix, steamcardexchange.net, proxy
+host-suffix, steamcommunity.com, proxy
+host-suffix, steamcontent.com, proxy
+host-suffix, steamdeck.com, proxy
+host-suffix, steamgames.com, proxy
+host-suffix, steampowered.com, proxy
+host-suffix, steamserver.net, proxy
+host-suffix, steamstat.us, proxy
+host-suffix, steamstatic.com, proxy
+host-suffix, steamusercontent.com, proxy
+host-suffix, valvesoftware.com, proxy
+
+# Twitch
+host-suffix, jtvnw.net, proxy
+host-suffix, live-video.net, proxy
+host-suffix, ttvnw.net, proxy
+host-suffix, twitch.tv, proxy
+host-suffix, twitchcdn.net, proxy
+host-suffix, twitchsvc.net, proxy
+
+# Xbox
+host-suffix, forzamotorsport.net, proxy
+host-suffix, gamepass.com, proxy
+host-suffix, xbox.com, proxy
+host-suffix, xboxab.com, proxy
+host-suffix, xboxgamestudios.com, proxy
+host-suffix, xboxlive.com, proxy
+host-suffix, xboxservices.com, proxy
+
 # Discord
 host-keyword, discord, proxy
 host-suffix, discord.com, proxy
@@ -455,14 +515,6 @@ host-suffix, spotifycodes.com, proxy
 host-suffix, spotifyforartists.com, proxy
 host-suffix, spotifystatus.com, proxy
 
-# Twitch
-host-suffix, jtvnw.net, proxy
-host-suffix, live-video.net, proxy
-host-suffix, ttvnw.net, proxy
-host-suffix, twitch.tv, proxy
-host-suffix, twitchcdn.net, proxy
-host-suffix, twitchsvc.net, proxy
-
 # YouTube
 host-suffix, ggpht.com, proxy
 host-suffix, googlevideo.com, proxy
@@ -700,28 +752,15 @@ host-suffix, leagueoflegends.com, proxy
 host-suffix, minecraft.net, proxy
 host-suffix, mojang.com, proxy
 host-suffix, nexusmods.com, proxy
-host-suffix, nintendo.com, proxy
-host-suffix, nintendo.net, proxy
 host-suffix, origin.com, proxy
-host-suffix, playstation.com, proxy
-host-suffix, playstation.net, proxy
 host-suffix, rbxcdn.com, proxy
 host-suffix, riotgames.com, proxy
 host-suffix, roblox.com, proxy
 host-suffix, royaleapi.com, proxy
-host-suffix, sonyentertainmentnetwork.com, proxy
-host-suffix, steam-chat.com, proxy
-host-suffix, steamcommunity.com, proxy
-host-suffix, steamcontent.com, proxy
-host-suffix, steampowered.com, proxy
-host-suffix, steamserver.net, proxy
-host-suffix, steamstatic.com, proxy
 host-suffix, ubisoft.com, proxy
 host-suffix, unrealengine.com, proxy
 host-suffix, uplay.com, proxy
 host-suffix, vrchat.com, proxy
-host-suffix, xbox.com, proxy
-host-suffix, xboxlive.com, proxy
 
 # Google
 host-suffix, 1e100.net, proxy

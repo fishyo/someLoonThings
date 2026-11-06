@@ -137,26 +137,3 @@ twitterinc.com
 twitteroauth.com
 twitterstat.us
 cms-twdigitalassets.com
-
-# WeChat
-weixin.com
-wechat.com
-wx.qq.com
-wxs.qq.com
-wechat.org
-qpic.cn
-qlogo.cn
-wx.gtimg.com
-servicewechat.com
-wxapp.tc.qq.com
-tenpay.com
-wechatpay.cn
-wechatpay.com
-wechatpay.com.cn
-weixinbridge.com
-weixinaf.net
-wechatlegal.net
-wechatos.net
-work.weixin.qq.com
-workweixin.com
-wecom.work

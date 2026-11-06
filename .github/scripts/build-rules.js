@@ -160,12 +160,21 @@ function getTargets() {
   // Synthesize Subfolder Master Rules (e.g. streaming master rule aggregating all streaming/*.txt)
   for (const [folder, sources] of Object.entries(subfolderMap)) {
     const masterKey = folder;
+    // Only aggregate sources whose policy is 'proxy' for the proxy master rule
+    const proxySubSources = sources.filter(srcFile => {
+      const srcKey = srcFile.replace(/\.txt$/, '');
+      const srcTarget = targets[srcKey];
+      return srcTarget && srcTarget.policy === 'proxy';
+    });
+
+    if (proxySubSources.length === 0) continue;
+
     const title = formatTitle(masterKey, '', 'proxy');
     targets[masterKey] = {
       key: masterKey,
       title,
       policy: 'proxy',
-      sources: sources,
+      sources: proxySubSources,
       outputs: {
         loon: path.join(ROOT_DIR, `loon/${masterKey}.lsr`),
         qx: path.join(ROOT_DIR, `quanX/rules/${masterKey}.list`),
@@ -173,6 +182,11 @@ function getTargets() {
         txt: path.join(RULES_DIR, `${masterKey}.txt`)
       }
     };
+  }
+
+  // Ensure streaming master rule also aggregates Twitch from game/
+  if (targets.streaming && !targets.streaming.sources.includes('game/twitch.txt')) {
+    targets.streaming.sources.push('game/twitch.txt');
   }
 
   // Master proxy aggregates all discovered proxy snippets + proxy.txt
@@ -259,12 +273,14 @@ function compileTarget(targetKey, targets) {
       'ai': 'ai/tools.txt',
       'social': 'social/meta.txt',
       'streaming': 'streaming/youtube.txt',
-      'game': 'game/supercell.txt'
+      'game': 'game/steam.txt'
     }[targetKey] || target.sources[0];
 
     if (defaultAbsorbFile) {
       const sourceRules = new Set();
-      for (const src of target.sources) {
+      const allAtomicFiles = findRuleFiles(RULES_DIR)
+        .filter(f => f.endsWith('.txt') && !['ai.txt', 'social.txt', 'streaming.txt', 'game.txt'].includes(path.basename(f)));
+      for (const src of allAtomicFiles) {
         const p = path.join(RULES_DIR, src);
         if (fs.existsSync(p)) {
           for (const line of fs.readFileSync(p, 'utf8').split(/\r?\n/)) {
@@ -403,6 +419,21 @@ function compileTarget(targetKey, targets) {
       loon: path.join(ROOT_DIR, 'loon/telegram.lsr'),
       qx: path.join(ROOT_DIR, 'quanX/rules/telegram.list'),
       mihomo: path.join(ROOT_DIR, 'mihomo/telegram.yaml')
+    },
+    'social/wechat': {
+      loon: path.join(ROOT_DIR, 'loon/wechat.lsr'),
+      qx: path.join(ROOT_DIR, 'quanX/rules/wechat.list'),
+      mihomo: path.join(ROOT_DIR, 'mihomo/wechat.yaml')
+    },
+    'game/supercell': {
+      loon: path.join(ROOT_DIR, 'loon/supercell.lsr'),
+      qx: path.join(ROOT_DIR, 'quanX/rules/supercell.list'),
+      mihomo: path.join(ROOT_DIR, 'mihomo/supercell.yaml')
+    },
+    'game/twitch': {
+      loon: path.join(ROOT_DIR, 'loon/streaming/twitch.lsr'),
+      qx: path.join(ROOT_DIR, 'quanX/rules/streaming/twitch.list'),
+      mihomo: path.join(ROOT_DIR, 'mihomo/streaming/twitch.yaml')
     }
   };
 

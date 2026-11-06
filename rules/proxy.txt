@@ -220,28 +220,15 @@ leagueoflegends.com
 minecraft.net
 mojang.com
 nexusmods.com
-nintendo.com
-nintendo.net
 origin.com
-playstation.com
-playstation.net
 rbxcdn.com
 riotgames.com
 roblox.com
 royaleapi.com
-sonyentertainmentnetwork.com
-steam-chat.com
-steamcommunity.com
-steamcontent.com
-steampowered.com
-steamserver.net
-steamstatic.com
 ubisoft.com
 unrealengine.com
 uplay.com
 vrchat.com
-xbox.com
-xboxlive.com
 
 # Google
 1e100.net

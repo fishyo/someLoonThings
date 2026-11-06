@@ -29,8 +29,12 @@
 - **AI 智能服务体系 (`rules/ai/`)**：
   - 细化拆分为 10 个独立平台/模块：`openai`, `claude`, `gemini`, `copilot`, `grok`, `perplexity`, `midjourney`, `tools`, `models`, `media`。
   - 紧跟 2026 年最新生态，补充 Cursor, Windsurf, Bolt, Lovable, Manus, Poe, Dify 等 AI 开发工具，以及 FLUX, Ideogram, Runway, Luma 等媒体生成平台。
-- **游戏专区 (`rules/game/supercell.txt`)**：
-  - 扩充 Supercell 旗下全系游戏支持（Clash of Clans, Squad Busters, Hay Day, Boom Beach）。
+- **游戏专区体系升级 (`rules/game/`)**：
+  - 新增 5 大游戏平台原子规则：`steam.txt`（Steam 商店/社区/聊天/广播）、`nintendo.txt`（Switch / eShop 全球各区服务）、`playstation.txt`（PSN 登录与商店）、`xbox.txt`（Xbox Live、Game Pass 服务）与 `twitch.txt`（游戏直播流）。
+  - 从通用代理 `rules/proxy.txt` 中完全解耦剥离，源文件保持单一真理来源（SSOT），自动在编译层汇聚进 Master 全量代理 `proxy.lsr`。
+  - 自动合成游戏代理 Master 规则 `rules/game.txt` / `loon/game.lsr`（覆盖 5 大主流平台），且与白名单 `game/supercell.txt` 严格隔离，互不干扰。
+  - 流媒体 Master 规则 `streaming.lsr` 跨体系装配 Twitch，向后兼容别名 `loon/streaming/twitch.lsr` 永久有效。
+  - 保留并扩充 Supercell 旗下全系游戏直连支持（Clash of Clans, Squad Busters, Hay Day, Boom Beach）。
 
 ### 🤖 管理机器人协同升级 (`someLoonBot`)
 - **方案 B 协同重构**：

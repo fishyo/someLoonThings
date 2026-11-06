@@ -140,26 +140,3 @@ host-suffix, twitterinc.com, proxy
 host-suffix, twitteroauth.com, proxy
 host-suffix, twitterstat.us, proxy
 host-suffix, cms-twdigitalassets.com, proxy
-
-# WeChat
-host-suffix, weixin.com, proxy
-host-suffix, wechat.com, proxy
-host-suffix, wx.qq.com, proxy
-host-suffix, wxs.qq.com, proxy
-host-suffix, wechat.org, proxy
-host-suffix, qpic.cn, proxy
-host-suffix, qlogo.cn, proxy
-host-suffix, wx.gtimg.com, proxy
-host-suffix, servicewechat.com, proxy
-host-suffix, wxapp.tc.qq.com, proxy
-host-suffix, tenpay.com, proxy
-host-suffix, wechatpay.cn, proxy
-host-suffix, wechatpay.com, proxy
-host-suffix, wechatpay.com.cn, proxy
-host-suffix, weixinbridge.com, proxy
-host-suffix, weixinaf.net, proxy
-host-suffix, wechatlegal.net, proxy
-host-suffix, wechatos.net, proxy
-host-suffix, work.weixin.qq.com, proxy
-host-suffix, workweixin.com, proxy
-host-suffix, wecom.work, proxy

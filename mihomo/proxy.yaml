@@ -116,6 +116,66 @@ payload:
   - DOMAIN-SUFFIX,windsurf.ai
   - DOMAIN-SUFFIX,you.com
 
+  # Nintendo
+  - DOMAIN-SUFFIX,nintendo-europe.com
+  - DOMAIN-SUFFIX,nintendo.be
+  - DOMAIN-SUFFIX,nintendo.co.jp
+  - DOMAIN-SUFFIX,nintendo.co.uk
+  - DOMAIN-SUFFIX,nintendo.com
+  - DOMAIN-SUFFIX,nintendo.com.au
+  - DOMAIN-SUFFIX,nintendo.de
+  - DOMAIN-SUFFIX,nintendo.es
+  - DOMAIN-SUFFIX,nintendo.eu
+  - DOMAIN-SUFFIX,nintendo.fr
+  - DOMAIN-SUFFIX,nintendo.it
+  - DOMAIN-SUFFIX,nintendo.jp
+  - DOMAIN-SUFFIX,nintendo.net
+  - DOMAIN-SUFFIX,nintendo.nl
+  - DOMAIN-SUFFIX,nintendo.pt
+  - DOMAIN-SUFFIX,nintendonetwork.net
+  - DOMAIN-SUFFIX,nintendostore.com
+  - DOMAIN-SUFFIX,nintendoswitch.com
+
+  # PlayStation
+  - DOMAIN-SUFFIX,playstation.com
+  - DOMAIN-SUFFIX,playstation.net
+  - DOMAIN-SUFFIX,playstation.org
+  - DOMAIN-SUFFIX,playstationnetwork.com
+  - DOMAIN-SUFFIX,sie.com
+  - DOMAIN-SUFFIX,sonyentertainmentnetwork.com
+
+  # Steam
+  - DOMAIN-SUFFIX,steam-chat.com
+  - DOMAIN-SUFFIX,steambroadcast.com
+  - DOMAIN-SUFFIX,steamcardexchange.net
+  - DOMAIN-SUFFIX,steamcommunity.com
+  - DOMAIN-SUFFIX,steamcontent.com
+  - DOMAIN-SUFFIX,steamdeck.com
+  - DOMAIN-SUFFIX,steamgames.com
+  - DOMAIN-SUFFIX,steampowered.com
+  - DOMAIN-SUFFIX,steamserver.net
+  - DOMAIN-SUFFIX,steamstat.us
+  - DOMAIN-SUFFIX,steamstatic.com
+  - DOMAIN-SUFFIX,steamusercontent.com
+  - DOMAIN-SUFFIX,valvesoftware.com
+
+  # Twitch
+  - DOMAIN-SUFFIX,jtvnw.net
+  - DOMAIN-SUFFIX,live-video.net
+  - DOMAIN-SUFFIX,ttvnw.net
+  - DOMAIN-SUFFIX,twitch.tv
+  - DOMAIN-SUFFIX,twitchcdn.net
+  - DOMAIN-SUFFIX,twitchsvc.net
+
+  # Xbox
+  - DOMAIN-SUFFIX,forzamotorsport.net
+  - DOMAIN-SUFFIX,gamepass.com
+  - DOMAIN-SUFFIX,xbox.com
+  - DOMAIN-SUFFIX,xboxab.com
+  - DOMAIN-SUFFIX,xboxgamestudios.com
+  - DOMAIN-SUFFIX,xboxlive.com
+  - DOMAIN-SUFFIX,xboxservices.com
+
   # Discord
   - DOMAIN-KEYWORD,discord
   - DOMAIN-SUFFIX,discord.com
@@ -456,14 +516,6 @@ payload:
   - DOMAIN-SUFFIX,spotifyforartists.com
   - DOMAIN-SUFFIX,spotifystatus.com
 
-  # Twitch
-  - DOMAIN-SUFFIX,jtvnw.net
-  - DOMAIN-SUFFIX,live-video.net
-  - DOMAIN-SUFFIX,ttvnw.net
-  - DOMAIN-SUFFIX,twitch.tv
-  - DOMAIN-SUFFIX,twitchcdn.net
-  - DOMAIN-SUFFIX,twitchsvc.net
-
   # YouTube
   - DOMAIN-SUFFIX,ggpht.com
   - DOMAIN-SUFFIX,googlevideo.com
@@ -701,28 +753,15 @@ payload:
   - DOMAIN-SUFFIX,minecraft.net
   - DOMAIN-SUFFIX,mojang.com
   - DOMAIN-SUFFIX,nexusmods.com
-  - DOMAIN-SUFFIX,nintendo.com
-  - DOMAIN-SUFFIX,nintendo.net
   - DOMAIN-SUFFIX,origin.com
-  - DOMAIN-SUFFIX,playstation.com
-  - DOMAIN-SUFFIX,playstation.net
   - DOMAIN-SUFFIX,rbxcdn.com
   - DOMAIN-SUFFIX,riotgames.com
   - DOMAIN-SUFFIX,roblox.com
   - DOMAIN-SUFFIX,royaleapi.com
-  - DOMAIN-SUFFIX,sonyentertainmentnetwork.com
-  - DOMAIN-SUFFIX,steam-chat.com
-  - DOMAIN-SUFFIX,steamcommunity.com
-  - DOMAIN-SUFFIX,steamcontent.com
-  - DOMAIN-SUFFIX,steampowered.com
-  - DOMAIN-SUFFIX,steamserver.net
-  - DOMAIN-SUFFIX,steamstatic.com
   - DOMAIN-SUFFIX,ubisoft.com
   - DOMAIN-SUFFIX,unrealengine.com
   - DOMAIN-SUFFIX,uplay.com
   - DOMAIN-SUFFIX,vrchat.com
-  - DOMAIN-SUFFIX,xbox.com
-  - DOMAIN-SUFFIX,xboxlive.com
 
   # Google
   - DOMAIN-SUFFIX,1e100.net

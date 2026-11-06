@@ -198,14 +198,6 @@ spotifycodes.com
 spotifyforartists.com
 spotifystatus.com
 
-# Twitch
-jtvnw.net
-live-video.net
-ttvnw.net
-twitch.tv
-twitchcdn.net
-twitchsvc.net
-
 # YouTube
 ggpht.com
 googlevideo.com
@@ -221,3 +213,11 @@ youtubego.com
 youtubekids.com
 yt.be
 ytimg.com
+
+# Twitch
+jtvnw.net
+live-video.net
+ttvnw.net
+twitch.tv
+twitchcdn.net
+twitchsvc.net

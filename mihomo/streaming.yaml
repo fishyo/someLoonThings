@@ -202,14 +202,6 @@ payload:
   - DOMAIN-SUFFIX,spotifyforartists.com
   - DOMAIN-SUFFIX,spotifystatus.com
 
-  # Twitch
-  - DOMAIN-SUFFIX,jtvnw.net
-  - DOMAIN-SUFFIX,live-video.net
-  - DOMAIN-SUFFIX,ttvnw.net
-  - DOMAIN-SUFFIX,twitch.tv
-  - DOMAIN-SUFFIX,twitchcdn.net
-  - DOMAIN-SUFFIX,twitchsvc.net
-
   # YouTube
   - DOMAIN-SUFFIX,ggpht.com
   - DOMAIN-SUFFIX,googlevideo.com
@@ -225,3 +217,11 @@ payload:
   - DOMAIN-SUFFIX,youtubekids.com
   - DOMAIN-SUFFIX,yt.be
   - DOMAIN-SUFFIX,ytimg.com
+
+  # Twitch
+  - DOMAIN-SUFFIX,jtvnw.net
+  - DOMAIN-SUFFIX,live-video.net
+  - DOMAIN-SUFFIX,ttvnw.net
+  - DOMAIN-SUFFIX,twitch.tv
+  - DOMAIN-SUFFIX,twitchcdn.net
+  - DOMAIN-SUFFIX,twitchsvc.net
