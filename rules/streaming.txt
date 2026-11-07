@@ -213,3 +213,7 @@ youtubego.com
 youtubekids.com
 yt.be
 ytimg.com
+acast.com
+aca.st
+podchaser.com
+pippa.io
