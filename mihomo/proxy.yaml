@@ -108,6 +108,7 @@ payload:
   - DOMAIN-SUFFIX,dify.ai
   - DOMAIN-SUFFIX,genspark.ai
   - DOMAIN-SUFFIX,groq.com
+  - DOMAIN-SUFFIX,langchain.com
   - DOMAIN-SUFFIX,lovable.dev
   - DOMAIN-SUFFIX,manus.im
   - DOMAIN-SUFFIX,meta.ai
@@ -120,6 +121,7 @@ payload:
   - DOMAIN-SUFFIX,poecdn.net
   - DOMAIN-SUFFIX,tavily.com
   - DOMAIN-SUFFIX,wandb.ai
+  - DOMAIN-SUFFIX,weights.bi
   - DOMAIN-SUFFIX,windsurf.ai
   - DOMAIN-SUFFIX,windsurf.com
   - DOMAIN-SUFFIX,you.com
@@ -558,6 +560,7 @@ payload:
   - DOMAIN-SUFFIX,fly.dev
   - DOMAIN-SUFFIX,fly.io
   - DOMAIN-SUFFIX,gallery.vsassets.io
+  - DOMAIN-SUFFIX,getcomposer.org
   - DOMAIN-SUFFIX,ghcr.io
   - DOMAIN-SUFFIX,git-scm.com
   - DOMAIN-SUFFIX,git.io
@@ -601,6 +604,7 @@ payload:
   - DOMAIN-SUFFIX,ovh.com
   - DOMAIN-SUFFIX,ovhcloud.com
   - DOMAIN-SUFFIX,packagecontrol.io
+  - DOMAIN-SUFFIX,packagist.org
   - DOMAIN-SUFFIX,planetscale.com
   - DOMAIN-SUFFIX,posthog.com
   - DOMAIN-SUFFIX,postman.com
@@ -647,7 +651,6 @@ payload:
   # Entertainment
   - DOMAIN-SUFFIX,acg.rip
   - DOMAIN-SUFFIX,anilist.co
-  - DOMAIN-SUFFIX,animate.co.jp
   - DOMAIN-SUFFIX,ao3.org
   - DOMAIN-SUFFIX,archiveofourown.org
   - DOMAIN-SUFFIX,bangumi.tv
@@ -665,10 +668,8 @@ payload:
   - DOMAIN-SUFFIX,konachan.com
   - DOMAIN-SUFFIX,konachan.net
   - DOMAIN-SUFFIX,letterboxd.com
-  - DOMAIN-SUFFIX,mandarake.co.jp
   - DOMAIN-SUFFIX,mangadex.org
   - DOMAIN-SUFFIX,media-imdb.com
-  - DOMAIN-SUFFIX,melonbooks.co.jp
   - DOMAIN-SUFFIX,myanimelist.net
   - DOMAIN-SUFFIX,nyaa.net
   - DOMAIN-SUFFIX,nyaa.si
@@ -688,12 +689,10 @@ payload:
   - DOMAIN-SUFFIX,thetvdb.com
   - DOMAIN-SUFFIX,tinymediamanager.org
   - DOMAIN-SUFFIX,tmdb.org
-  - DOMAIN-SUFFIX,toranoana.jp
   - DOMAIN-SUFFIX,trakt.tv
   - DOMAIN-SUFFIX,yande.re
 
   # Finance
-  - DOMAIN-SUFFIX,amiami.com
   - DOMAIN-SUFFIX,binance.charity
   - DOMAIN-SUFFIX,binance.cloud
   - DOMAIN-SUFFIX,binance.com
@@ -701,7 +700,6 @@ payload:
   - DOMAIN-SUFFIX,bitfinex.com
   - DOMAIN-SUFFIX,bitget.com
   - DOMAIN-SUFFIX,bnapp.net
-  - DOMAIN-SUFFIX,buyee.jp
   - DOMAIN-SUFFIX,bybit.com
   - DOMAIN-SUFFIX,coinbase.com
   - DOMAIN-SUFFIX,coindesk.com
@@ -732,8 +730,6 @@ payload:
   - DOMAIN-SUFFIX,redotpay.com
   - DOMAIN-SUFFIX,revolut.com
   - DOMAIN-SUFFIX,solscan.io
-  - DOMAIN-SUFFIX,suruga-ya.jp
-  - DOMAIN-SUFFIX,tenso.com
   - DOMAIN-SUFFIX,tradingview.com
   - DOMAIN-SUFFIX,tronscan.org
   - DOMAIN-SUFFIX,uniswap.org
@@ -790,12 +786,10 @@ payload:
   - DOMAIN-SUFFIX,withgoogle.com
 
   # Infrastructure
-  - DOMAIN-SUFFIX,17track.net
   - DOMAIN-SUFFIX,airalo.com
   - DOMAIN-SUFFIX,airalo.net
   - DOMAIN-SUFFIX,akamai.net
   - DOMAIN-SUFFIX,akamaiedge.net
-  - DOMAIN-SUFFIX,amazon.co.jp
   - DOMAIN-SUFFIX,amazon.com
   - DOMAIN-SUFFIX,amazonaws.com
   - DOMAIN-SUFFIX,archive.is
@@ -842,7 +836,6 @@ payload:
   - DOMAIN-SUFFIX,iplocation.net
   - DOMAIN-SUFFIX,is.gd
   - DOMAIN-SUFFIX,jsdelivr.net
-  - DOMAIN-SUFFIX,kuronekoyamato.co.jp
   - DOMAIN-SUFFIX,link.com
   - DOMAIN-SUFFIX,nxtrace.org
   - DOMAIN-SUFFIX,ow.ly
@@ -850,7 +843,6 @@ payload:
   - DOMAIN-SUFFIX,paypal.com
   - DOMAIN-SUFFIX,paypalobjects.com
   - DOMAIN-SUFFIX,pixeldrain.com
-  - DOMAIN-SUFFIX,post.japanpost.jp
   - DOMAIN-SUFFIX,rebrand.ly
   - DOMAIN-SUFFIX,recaptcha.net
   - DOMAIN-SUFFIX,rentry.co
@@ -858,14 +850,12 @@ payload:
   - DOMAIN-SUFFIX,rsshub.app
   - DOMAIN-SUFFIX,sentry-cdn.com
   - DOMAIN-SUFFIX,speedtest.net
-  - DOMAIN-SUFFIX,ssl-images-amazon.com
   - DOMAIN-SUFFIX,statically.io
   - DOMAIN-SUFFIX,stripecdn.com
   - DOMAIN-SUFFIX,tinyurl.com
   - DOMAIN-SUFFIX,typekit.net
   - DOMAIN-SUFFIX,unpkg.com
   - DOMAIN-SUFFIX,unsplash.com
-  - DOMAIN-SUFFIX,usps.com
   - DOMAIN-SUFFIX,whatismyipaddress.com
   - DOMAIN-SUFFIX,wise.com
 
@@ -893,6 +883,7 @@ payload:
   - DOMAIN-SUFFIX,bbc.com
   - DOMAIN-SUFFIX,bbci.co.uk
   - DOMAIN-SUFFIX,bloomberg.com
+  - DOMAIN-SUFFIX,cfr.org
   - DOMAIN-SUFFIX,chinatimes.com
   - DOMAIN-SUFFIX,cna.com.tw
   - DOMAIN-SUFFIX,cnbc.com
@@ -906,12 +897,14 @@ payload:
   - DOMAIN-SUFFIX,engadget.com
   - DOMAIN-SUFFIX,forbes.com
   - DOMAIN-SUFFIX,foreignaffairs.com
+  - DOMAIN-SUFFIX,foreignpolicy.com
   - DOMAIN-SUFFIX,france24.com
   - DOMAIN-SUFFIX,ft.com
   - DOMAIN-SUFFIX,ftchinese.com
   - DOMAIN-SUFFIX,goodreads.com
   - DOMAIN-SUFFIX,guardianapis.com
   - DOMAIN-SUFFIX,guim.co.uk
+  - DOMAIN-SUFFIX,ieee.org
   - DOMAIN-SUFFIX,jstor.org
   - DOMAIN-SUFFIX,latimes.com
   - DOMAIN-SUFFIX,libgen.is
@@ -920,6 +913,7 @@ payload:
   - DOMAIN-SUFFIX,medium.com
   - DOMAIN-SUFFIX,mingpao.com
   - DOMAIN-SUFFIX,nature.com
+  - DOMAIN-SUFFIX,ncbi.nlm.nih.gov
   - DOMAIN-SUFFIX,news.ycombinator.com
   - DOMAIN-SUFFIX,nikkei.com
   - DOMAIN-SUFFIX,nikkei.jp
@@ -931,7 +925,9 @@ payload:
   - DOMAIN-SUFFIX,rfi.fr
   - DOMAIN-SUFFIX,sci-hub.se
   - DOMAIN-SUFFIX,sci-hub.st
+  - DOMAIN-SUFFIX,science.org
   - DOMAIN-SUFFIX,sciencedirect.com
+  - DOMAIN-SUFFIX,sciencemag.org
   - DOMAIN-SUFFIX,scmp.com
   - DOMAIN-SUFFIX,singlelogin.re
   - DOMAIN-SUFFIX,springer.com

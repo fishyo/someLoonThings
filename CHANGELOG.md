@@ -21,6 +21,11 @@
   - 同步更新 README.md 与相关文档订阅链接至最新标准子路径。
 - **游戏分流精简 (`rules/game/`)**：
   - 按需移除 `nintendo`、`playstation`、`xbox`、`twitch` 等独立规则，三端平台对应规则文件自动同步清理并从全量代理池中移除。
+- **十轮深度检索落地：第 1~3 轮重点增补与海淘转运域名剔除 (10-Pass Audit: Rounds 1-3 & Shopping Pruning)**：
+  - **增补第 1 轮（国际新闻、战略智库与学术顶刊）**：新增《外交政策》杂志（`foreignpolicy.com`）、美国外交关系协会 CFR（`cfr.org`）、《科学》杂志（`science.org`, `sciencemag.org`）、IEEE 电子电气工程师学会（`ieee.org`）、美国生物技术信息中心/PubMed（`ncbi.nlm.nih.gov`）。
+  - **增补第 2 轮（前沿 AI 与大模型开发工具链）**：在 [`rules/ai/tools.txt`](file:///D:/Documents/code/someLoonThings/rules/ai/tools.txt) 中新增 LangChain 官方及调试平台（`langchain.com`）、Weights & Biases 资源（`weights.bi`）。
+  - **增补第 3 轮（现代开发者生态与包管理）**：在 [`rules/proxy.txt`](file:///D:/Documents/code/someLoonThings/rules/proxy.txt) 中新增 PHP Composer 官方依赖仓与主站（`packagist.org`, `getcomposer.org`）。
+  - **全面剔除海淘转运与国际物流域名**：彻底移除之前添加的日淘代购、中古店、同人店、国际转运与跨国物流查询域名共 14 条（`buyee.jp`, `tenso.com`, `mandarake.co.jp`, `toranoana.jp`, `melonbooks.co.jp`, `animate.co.jp`, `17track.net`, `post.japanpost.jp`, `kuronekoyamato.co.jp`, `usps.com`, `amazon.co.jp`, `ssl-images-amazon.com`, `amiami.com`, `suruga-ya.jp`）。
 - **全量通用代理与分流规则 5 轮深度检索与体检升级 (5-Pass Deep Audit & Clean-up)**：
   - **盲区补全 (Coverage Additions)**：
     - **前沿 AI 与模型生态**：新增 Hugging Face 官方模型短链（`hf.co`）、Ollama 官方网站（`ollama.com`）与 Weights & Biases 实验记录平台（`wandb.ai`）。

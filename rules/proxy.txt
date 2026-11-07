@@ -61,6 +61,7 @@ flutter.dev
 fly.dev
 fly.io
 gallery.vsassets.io
+getcomposer.org
 ghcr.io
 git-scm.com
 git.io
@@ -104,6 +105,7 @@ nuget.org
 ovh.com
 ovhcloud.com
 packagecontrol.io
+packagist.org
 planetscale.com
 posthog.com
 postman.com
@@ -150,7 +152,6 @@ zen-browser.app
 # Entertainment
 acg.rip
 anilist.co
-animate.co.jp
 ao3.org
 archiveofourown.org
 bangumi.tv
@@ -168,10 +169,8 @@ kakuyomu.jp
 konachan.com
 konachan.net
 letterboxd.com
-mandarake.co.jp
 mangadex.org
 media-imdb.com
-melonbooks.co.jp
 myanimelist.net
 nyaa.net
 nyaa.si
@@ -191,12 +190,10 @@ themoviedb.org
 thetvdb.com
 tinymediamanager.org
 tmdb.org
-toranoana.jp
 trakt.tv
 yande.re
 
 # Finance
-amiami.com
 binance.charity
 binance.cloud
 binance.com
@@ -204,7 +201,6 @@ binance.vision
 bitfinex.com
 bitget.com
 bnapp.net
-buyee.jp
 bybit.com
 coinbase.com
 coindesk.com
@@ -236,8 +232,6 @@ redotpay.com
 revolut.com
 solscan.io
 stripe.com
-suruga-ya.jp
-tenso.com
 tradingview.com
 tronscan.org
 uniswap.org
@@ -294,12 +288,10 @@ run.app
 withgoogle.com
 
 # Infrastructure
-17track.net
 airalo.com
 airalo.net
 akamai.net
 akamaiedge.net
-amazon.co.jp
 amazon.com
 amazonaws.com
 archive.is
@@ -347,7 +339,6 @@ ipinfo.io
 iplocation.net
 is.gd
 jsdelivr.net
-kuronekoyamato.co.jp
 link.com
 nxtrace.org
 ow.ly
@@ -355,7 +346,6 @@ pastebin.com
 paypal.com
 paypalobjects.com
 pixeldrain.com
-post.japanpost.jp
 rebrand.ly
 recaptcha.net
 rentry.co
@@ -363,14 +353,12 @@ rentry.org
 rsshub.app
 sentry-cdn.com
 speedtest.net
-ssl-images-amazon.com
 statically.io
 stripecdn.com
 tinyurl.com
 typekit.net
 unpkg.com
 unsplash.com
-usps.com
 whatismyipaddress.com
 wise.com
 
@@ -398,6 +386,7 @@ arxiv.org
 bbc.com
 bbci.co.uk
 bloomberg.com
+cfr.org
 chinatimes.com
 cna.com.tw
 cnbc.com
@@ -411,12 +400,14 @@ economist.com
 engadget.com
 forbes.com
 foreignaffairs.com
+foreignpolicy.com
 france24.com
 ft.com
 ftchinese.com
 goodreads.com
 guardianapis.com
 guim.co.uk
+ieee.org
 jstor.org
 latimes.com
 libgen.is
@@ -425,6 +416,7 @@ ltn.com.tw
 medium.com
 mingpao.com
 nature.com
+ncbi.nlm.nih.gov
 news.ycombinator.com
 nikkei.com
 nikkei.jp
@@ -436,7 +428,9 @@ rfa.org
 rfi.fr
 sci-hub.se
 sci-hub.st
+science.org
 sciencedirect.com
+sciencemag.org
 scmp.com
 singlelogin.re
 springer.com

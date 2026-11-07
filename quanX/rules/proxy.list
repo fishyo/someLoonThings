@@ -107,6 +107,7 @@ host-suffix, cursorvm.com, proxy
 host-suffix, dify.ai, proxy
 host-suffix, genspark.ai, proxy
 host-suffix, groq.com, proxy
+host-suffix, langchain.com, proxy
 host-suffix, lovable.dev, proxy
 host-suffix, manus.im, proxy
 host-suffix, meta.ai, proxy
@@ -119,6 +120,7 @@ host-suffix, poe.com, proxy
 host-suffix, poecdn.net, proxy
 host-suffix, tavily.com, proxy
 host-suffix, wandb.ai, proxy
+host-suffix, weights.bi, proxy
 host-suffix, windsurf.ai, proxy
 host-suffix, windsurf.com, proxy
 host-suffix, you.com, proxy
@@ -557,6 +559,7 @@ host-suffix, flutter.dev, proxy
 host-suffix, fly.dev, proxy
 host-suffix, fly.io, proxy
 host-suffix, gallery.vsassets.io, proxy
+host-suffix, getcomposer.org, proxy
 host-suffix, ghcr.io, proxy
 host-suffix, git-scm.com, proxy
 host-suffix, git.io, proxy
@@ -600,6 +603,7 @@ host-suffix, nuget.org, proxy
 host-suffix, ovh.com, proxy
 host-suffix, ovhcloud.com, proxy
 host-suffix, packagecontrol.io, proxy
+host-suffix, packagist.org, proxy
 host-suffix, planetscale.com, proxy
 host-suffix, posthog.com, proxy
 host-suffix, postman.com, proxy
@@ -646,7 +650,6 @@ host-suffix, zen-browser.app, proxy
 # Entertainment
 host-suffix, acg.rip, proxy
 host-suffix, anilist.co, proxy
-host-suffix, animate.co.jp, proxy
 host-suffix, ao3.org, proxy
 host-suffix, archiveofourown.org, proxy
 host-suffix, bangumi.tv, proxy
@@ -664,10 +667,8 @@ host-suffix, kakuyomu.jp, proxy
 host-suffix, konachan.com, proxy
 host-suffix, konachan.net, proxy
 host-suffix, letterboxd.com, proxy
-host-suffix, mandarake.co.jp, proxy
 host-suffix, mangadex.org, proxy
 host-suffix, media-imdb.com, proxy
-host-suffix, melonbooks.co.jp, proxy
 host-suffix, myanimelist.net, proxy
 host-suffix, nyaa.net, proxy
 host-suffix, nyaa.si, proxy
@@ -687,12 +688,10 @@ host-suffix, themoviedb.org, proxy
 host-suffix, thetvdb.com, proxy
 host-suffix, tinymediamanager.org, proxy
 host-suffix, tmdb.org, proxy
-host-suffix, toranoana.jp, proxy
 host-suffix, trakt.tv, proxy
 host-suffix, yande.re, proxy
 
 # Finance
-host-suffix, amiami.com, proxy
 host-suffix, binance.charity, proxy
 host-suffix, binance.cloud, proxy
 host-suffix, binance.com, proxy
@@ -700,7 +699,6 @@ host-suffix, binance.vision, proxy
 host-suffix, bitfinex.com, proxy
 host-suffix, bitget.com, proxy
 host-suffix, bnapp.net, proxy
-host-suffix, buyee.jp, proxy
 host-suffix, bybit.com, proxy
 host-suffix, coinbase.com, proxy
 host-suffix, coindesk.com, proxy
@@ -731,8 +729,6 @@ host-suffix, rakuten.com, proxy
 host-suffix, redotpay.com, proxy
 host-suffix, revolut.com, proxy
 host-suffix, solscan.io, proxy
-host-suffix, suruga-ya.jp, proxy
-host-suffix, tenso.com, proxy
 host-suffix, tradingview.com, proxy
 host-suffix, tronscan.org, proxy
 host-suffix, uniswap.org, proxy
@@ -789,12 +785,10 @@ host-suffix, run.app, proxy
 host-suffix, withgoogle.com, proxy
 
 # Infrastructure
-host-suffix, 17track.net, proxy
 host-suffix, airalo.com, proxy
 host-suffix, airalo.net, proxy
 host-suffix, akamai.net, proxy
 host-suffix, akamaiedge.net, proxy
-host-suffix, amazon.co.jp, proxy
 host-suffix, amazon.com, proxy
 host-suffix, amazonaws.com, proxy
 host-suffix, archive.is, proxy
@@ -841,7 +835,6 @@ host-suffix, ipinfo.io, proxy
 host-suffix, iplocation.net, proxy
 host-suffix, is.gd, proxy
 host-suffix, jsdelivr.net, proxy
-host-suffix, kuronekoyamato.co.jp, proxy
 host-suffix, link.com, proxy
 host-suffix, nxtrace.org, proxy
 host-suffix, ow.ly, proxy
@@ -849,7 +842,6 @@ host-suffix, pastebin.com, proxy
 host-suffix, paypal.com, proxy
 host-suffix, paypalobjects.com, proxy
 host-suffix, pixeldrain.com, proxy
-host-suffix, post.japanpost.jp, proxy
 host-suffix, rebrand.ly, proxy
 host-suffix, recaptcha.net, proxy
 host-suffix, rentry.co, proxy
@@ -857,14 +849,12 @@ host-suffix, rentry.org, proxy
 host-suffix, rsshub.app, proxy
 host-suffix, sentry-cdn.com, proxy
 host-suffix, speedtest.net, proxy
-host-suffix, ssl-images-amazon.com, proxy
 host-suffix, statically.io, proxy
 host-suffix, stripecdn.com, proxy
 host-suffix, tinyurl.com, proxy
 host-suffix, typekit.net, proxy
 host-suffix, unpkg.com, proxy
 host-suffix, unsplash.com, proxy
-host-suffix, usps.com, proxy
 host-suffix, whatismyipaddress.com, proxy
 host-suffix, wise.com, proxy
 
@@ -892,6 +882,7 @@ host-suffix, arxiv.org, proxy
 host-suffix, bbc.com, proxy
 host-suffix, bbci.co.uk, proxy
 host-suffix, bloomberg.com, proxy
+host-suffix, cfr.org, proxy
 host-suffix, chinatimes.com, proxy
 host-suffix, cna.com.tw, proxy
 host-suffix, cnbc.com, proxy
@@ -905,12 +896,14 @@ host-suffix, economist.com, proxy
 host-suffix, engadget.com, proxy
 host-suffix, forbes.com, proxy
 host-suffix, foreignaffairs.com, proxy
+host-suffix, foreignpolicy.com, proxy
 host-suffix, france24.com, proxy
 host-suffix, ft.com, proxy
 host-suffix, ftchinese.com, proxy
 host-suffix, goodreads.com, proxy
 host-suffix, guardianapis.com, proxy
 host-suffix, guim.co.uk, proxy
+host-suffix, ieee.org, proxy
 host-suffix, jstor.org, proxy
 host-suffix, latimes.com, proxy
 host-suffix, libgen.is, proxy
@@ -919,6 +912,7 @@ host-suffix, ltn.com.tw, proxy
 host-suffix, medium.com, proxy
 host-suffix, mingpao.com, proxy
 host-suffix, nature.com, proxy
+host-suffix, ncbi.nlm.nih.gov, proxy
 host-suffix, news.ycombinator.com, proxy
 host-suffix, nikkei.com, proxy
 host-suffix, nikkei.jp, proxy
@@ -930,7 +924,9 @@ host-suffix, rfa.org, proxy
 host-suffix, rfi.fr, proxy
 host-suffix, sci-hub.se, proxy
 host-suffix, sci-hub.st, proxy
+host-suffix, science.org, proxy
 host-suffix, sciencedirect.com, proxy
+host-suffix, sciencemag.org, proxy
 host-suffix, scmp.com, proxy
 host-suffix, singlelogin.re, proxy
 host-suffix, springer.com, proxy

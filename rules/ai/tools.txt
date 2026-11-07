@@ -13,6 +13,7 @@ cursorvm.com
 dify.ai
 genspark.ai
 groq.com
+langchain.com
 lovable.dev
 manus.im
 meta.ai
@@ -25,6 +26,7 @@ poe.com
 poecdn.net
 tavily.com
 wandb.ai
+weights.bi
 windsurf.ai
 windsurf.com
 you.com

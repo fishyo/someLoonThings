@@ -108,6 +108,7 @@ payload:
   - DOMAIN-SUFFIX,dify.ai
   - DOMAIN-SUFFIX,genspark.ai
   - DOMAIN-SUFFIX,groq.com
+  - DOMAIN-SUFFIX,langchain.com
   - DOMAIN-SUFFIX,lovable.dev
   - DOMAIN-SUFFIX,manus.im
   - DOMAIN-SUFFIX,meta.ai
@@ -120,6 +121,7 @@ payload:
   - DOMAIN-SUFFIX,poecdn.net
   - DOMAIN-SUFFIX,tavily.com
   - DOMAIN-SUFFIX,wandb.ai
+  - DOMAIN-SUFFIX,weights.bi
   - DOMAIN-SUFFIX,windsurf.ai
   - DOMAIN-SUFFIX,windsurf.com
   - DOMAIN-SUFFIX,you.com
