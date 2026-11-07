@@ -216,3 +216,9 @@ host-suffix, youtubego.com, proxy
 host-suffix, youtubekids.com, proxy
 host-suffix, yt.be, proxy
 host-suffix, ytimg.com, proxy
+
+# General
+host-suffix, acast.com, proxy
+host-suffix, aca.st, proxy
+host-suffix, podchaser.com, proxy
+host-suffix, pippa.io, proxy

@@ -217,3 +217,9 @@ payload:
   - DOMAIN-SUFFIX,youtubekids.com
   - DOMAIN-SUFFIX,yt.be
   - DOMAIN-SUFFIX,ytimg.com
+
+  # General
+  - DOMAIN-SUFFIX,acast.com
+  - DOMAIN-SUFFIX,aca.st
+  - DOMAIN-SUFFIX,podchaser.com
+  - DOMAIN-SUFFIX,pippa.io

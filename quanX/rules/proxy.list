@@ -1151,3 +1151,10 @@ host-keyword, thepiratebay, proxy
 host-suffix, xnxx.com, proxy
 host-suffix, xvideos.com, proxy
 host-suffix, adrules.top, proxy
+
+
+# Streaming - General
+host-suffix, acast.com, proxy
+host-suffix, aca.st, proxy
+host-suffix, podchaser.com, proxy
+host-suffix, pippa.io, proxy
