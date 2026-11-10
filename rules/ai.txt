@@ -18,19 +18,22 @@ bard.google.com
 deepmind.com
 deepmind.google
 exact: alkali-pa.clients6.google.com
+exact: alkalicore-pa.clients6.google.com
+exact: geminiweb-pa.clients6.google.com
+exact: signaler-pa.clients6.google.com
 exact: waa-pa.clients6.google.com
+geller-pa.googleapis.com
 gemini.google
 gemini.google.com
 generativeai.google
 generativeai.google.com
 generativelanguage.googleapis.com
-geller-pa.googleapis.com
-googleapis.com
 makersuite.google.com
 notebooklm.google
 notebooklm.google.com
 odin-pa.googleapis.com
 proactivebackend-pa.googleapis.com
+robinfrontend-pa.googleapis.com
 
 # Grok
 grok.com
@@ -40,13 +43,18 @@ x.ai
 blackforestlabs.ai
 clipdrop.co
 dreamstudio.ai
+elevenlabs.io
 ideogram.ai
 luma.ai
 lumalabs.ai
 pika.art
+recraft.ai
 runway.com
 runwayml.com
 stability.ai
+suno.ai
+suno.com
+udio.com
 
 # Midjourney
 midjourney.com
@@ -60,6 +68,7 @@ fireworks.ai
 hf.co
 hf.space
 huggingface.co
+lmarena.ai
 mistral.ai
 mistral.com
 models.dev
@@ -70,7 +79,6 @@ together.xyz
 v0.dev
 
 # OpenAI
-arkoselabs.com
 chat.com
 chatgpt.com
 chatgpt.site
@@ -82,8 +90,6 @@ openaiapi-site.azureedge.net
 openaicom.imgix.net
 openaicomproductionae4b.blob.core.windows.net
 sora.com
-stripe.com
-stripe.network
 
 # Perplexity
 perplexity.ai
@@ -102,6 +108,7 @@ cursor.sh
 cursorapi.com
 cursorvm.com
 dify.ai
+gamma.app
 genspark.ai
 groq.com
 langchain.com
@@ -121,3 +128,9 @@ weights.bi
 windsurf.ai
 windsurf.com
 you.com
+
+# General
+googleapis.com
+arkoselabs.com
+stripe.com
+stripe.network

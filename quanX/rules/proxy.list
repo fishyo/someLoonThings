@@ -21,19 +21,22 @@ host-suffix, bard.google.com, proxy
 host-suffix, deepmind.com, proxy
 host-suffix, deepmind.google, proxy
 host, alkali-pa.clients6.google.com, proxy
+host, alkalicore-pa.clients6.google.com, proxy
+host, geminiweb-pa.clients6.google.com, proxy
+host, signaler-pa.clients6.google.com, proxy
 host, waa-pa.clients6.google.com, proxy
+host-suffix, geller-pa.googleapis.com, proxy
 host-suffix, gemini.google, proxy
 host-suffix, gemini.google.com, proxy
 host-suffix, generativeai.google, proxy
 host-suffix, generativeai.google.com, proxy
 host-suffix, generativelanguage.googleapis.com, proxy
-host-suffix, geller-pa.googleapis.com, proxy
-host-suffix, googleapis.com, proxy
 host-suffix, makersuite.google.com, proxy
 host-suffix, notebooklm.google, proxy
 host-suffix, notebooklm.google.com, proxy
 host-suffix, odin-pa.googleapis.com, proxy
 host-suffix, proactivebackend-pa.googleapis.com, proxy
+host-suffix, robinfrontend-pa.googleapis.com, proxy
 
 # Grok
 host-suffix, grok.com, proxy
@@ -43,13 +46,18 @@ host-suffix, x.ai, proxy
 host-suffix, blackforestlabs.ai, proxy
 host-suffix, clipdrop.co, proxy
 host-suffix, dreamstudio.ai, proxy
+host-suffix, elevenlabs.io, proxy
 host-suffix, ideogram.ai, proxy
 host-suffix, luma.ai, proxy
 host-suffix, lumalabs.ai, proxy
 host-suffix, pika.art, proxy
+host-suffix, recraft.ai, proxy
 host-suffix, runway.com, proxy
 host-suffix, runwayml.com, proxy
 host-suffix, stability.ai, proxy
+host-suffix, suno.ai, proxy
+host-suffix, suno.com, proxy
+host-suffix, udio.com, proxy
 
 # Midjourney
 host-suffix, midjourney.com, proxy
@@ -63,6 +71,7 @@ host-suffix, fireworks.ai, proxy
 host-suffix, hf.co, proxy
 host-suffix, hf.space, proxy
 host-suffix, huggingface.co, proxy
+host-suffix, lmarena.ai, proxy
 host-suffix, mistral.ai, proxy
 host-suffix, mistral.com, proxy
 host-suffix, models.dev, proxy
@@ -73,7 +82,6 @@ host-suffix, together.xyz, proxy
 host-suffix, v0.dev, proxy
 
 # OpenAI
-host-suffix, arkoselabs.com, proxy
 host-suffix, chat.com, proxy
 host-suffix, chatgpt.com, proxy
 host-suffix, chatgpt.site, proxy
@@ -85,8 +93,6 @@ host-suffix, openaiapi-site.azureedge.net, proxy
 host-suffix, openaicom.imgix.net, proxy
 host-suffix, openaicomproductionae4b.blob.core.windows.net, proxy
 host-suffix, sora.com, proxy
-host-suffix, stripe.com, proxy
-host-suffix, stripe.network, proxy
 
 # Perplexity
 host-suffix, perplexity.ai, proxy
@@ -105,6 +111,7 @@ host-suffix, cursor.sh, proxy
 host-suffix, cursorapi.com, proxy
 host-suffix, cursorvm.com, proxy
 host-suffix, dify.ai, proxy
+host-suffix, gamma.app, proxy
 host-suffix, genspark.ai, proxy
 host-suffix, groq.com, proxy
 host-suffix, langchain.com, proxy
@@ -499,6 +506,9 @@ host-suffix, ytimg.com, proxy
 # Apple
 host-suffix, apple.news, proxy
 host-suffix, books.apple.com, proxy
+host-suffix, mask-api.icloud.com, proxy
+host-suffix, mask-h2.icloud.com, proxy
+host-suffix, mask.icloud.com, proxy
 host-suffix, news.apple.com, proxy
 host-suffix, testflight.apple.com, proxy
 host-suffix, tv.apple.com, proxy
@@ -527,13 +537,16 @@ host-suffix, apkmirror.com, proxy
 host-suffix, apkpure.com, proxy
 host-suffix, aptoide.com, proxy
 host-suffix, archlinux.org, proxy
+host-suffix, astral.sh, proxy
 host-suffix, atl-paas.net, proxy
 host-suffix, atlassian.com, proxy
 host-suffix, atlassian.net, proxy
 host-suffix, auth0.com, proxy
 host-suffix, bandwagonhost.com, proxy
+host-suffix, biomejs.dev, proxy
 host-suffix, bitbucket.org, proxy
 host-suffix, brew.sh, proxy
+host-suffix, bun.sh, proxy
 host-suffix, chocolatey.org, proxy
 host-suffix, clerk.com, proxy
 host-suffix, clerk.dev, proxy
@@ -554,6 +567,8 @@ host-suffix, distrowatch.com, proxy
 host-suffix, do.co, proxy
 host-suffix, docker.com, proxy
 host-suffix, docker.io, proxy
+host-suffix, expo.dev, proxy
+host-suffix, expo.io, proxy
 host-suffix, f-droid.org, proxy
 host-suffix, flutter.dev, proxy
 host-suffix, fly.dev, proxy
@@ -596,6 +611,8 @@ host-suffix, maven.org, proxy
 host-suffix, neon.tech, proxy
 host-suffix, netlify.app, proxy
 host-suffix, netlify.com, proxy
+host-suffix, ngrok.com, proxy
+host-suffix, ngrok.io, proxy
 host-suffix, nixos.org, proxy
 host-suffix, npmjs.com, proxy
 host-suffix, npmjs.org, proxy
@@ -607,6 +624,7 @@ host-suffix, packagist.org, proxy
 host-suffix, planetscale.com, proxy
 host-suffix, posthog.com, proxy
 host-suffix, postman.com, proxy
+host-suffix, prisma.io, proxy
 host-suffix, pub.dev, proxy
 host-suffix, pypi.org, proxy
 host-suffix, pythonhosted.org, proxy
@@ -617,6 +635,7 @@ host-suffix, readme.io, proxy
 host-suffix, render.com, proxy
 host-suffix, replit.com, proxy
 host-suffix, replit.dev, proxy
+host-suffix, resend.com, proxy
 host-suffix, rubygems.org, proxy
 host-suffix, rust-lang.org, proxy
 host-suffix, scaleway.com, proxy
@@ -712,7 +731,9 @@ host-suffix, ebay.com, proxy
 host-suffix, ebayimg.com, proxy
 host-suffix, etherscan.io, proxy
 host-suffix, gate.io, proxy
+host-suffix, gmgn.ai, proxy
 host-suffix, investing.com, proxy
+host-suffix, jup.ag, proxy
 host-suffix, kraken.com, proxy
 host-suffix, kucoin.com, proxy
 host-suffix, mercari.com, proxy
@@ -723,12 +744,15 @@ host-suffix, oklink.com, proxy
 host-suffix, okx.com, proxy
 host-suffix, onekey.so, proxy
 host-suffix, phantom.app, proxy
+host-suffix, pump.fun, proxy
 host-suffix, rabby.io, proxy
 host-suffix, rakuten.co.jp, proxy
 host-suffix, rakuten.com, proxy
 host-suffix, redotpay.com, proxy
 host-suffix, revolut.com, proxy
 host-suffix, solscan.io, proxy
+host-suffix, stripe.com, proxy
+host-suffix, stripe.network, proxy
 host-suffix, tradingview.com, proxy
 host-suffix, tronscan.org, proxy
 host-suffix, uniswap.org, proxy
@@ -798,6 +822,7 @@ host-suffix, archive.org, proxy
 host-suffix, archive.ph, proxy
 host-suffix, archive.today, proxy
 host-suffix, archive.vn, proxy
+host-suffix, arkoselabs.com, proxy
 host-suffix, awsstatic.com, proxy
 host-suffix, b-cdn.net, proxy
 host-suffix, bgp.he.net, proxy
@@ -967,6 +992,7 @@ host-suffix, box.com, proxy
 host-suffix, canva.com, proxy
 host-suffix, clickup.com, proxy
 host-suffix, coda.io, proxy
+host-suffix, craft.do, proxy
 host-suffix, dropbox.com, proxy
 host-suffix, dropboxapi.com, proxy
 host-suffix, dropboxstatic.com, proxy
@@ -994,9 +1020,12 @@ host-suffix, monday.com, proxy
 host-suffix, notion.new, proxy
 host-suffix, notion.site, proxy
 host-suffix, notion.so, proxy
+host-suffix, obsidian.md, proxy
 host-suffix, patreon.com, proxy
 host-suffix, patreonusercontent.com, proxy
 host-suffix, pcloud.com, proxy
+host-suffix, raindrop.io, proxy
+host-suffix, readwise.io, proxy
 host-suffix, skyscanner.com, proxy
 host-suffix, skyscanner.net, proxy
 host-suffix, slack-edge.com, proxy
@@ -1032,6 +1061,7 @@ host-suffix, 1password.eu, proxy
 host-suffix, 1passwordservices.com, proxy
 host-suffix, adguard-dns.io, proxy
 host-suffix, adguard.com, proxy
+host-suffix, adrules.top, proxy
 host-suffix, bitwarden.com, proxy
 host-suffix, bitwarden.net, proxy
 host-suffix, censys.io, proxy
@@ -1146,8 +1176,10 @@ host-suffix, t66y.com, proxy
 host-keyword, thepiratebay, proxy
 host-suffix, xnxx.com, proxy
 host-suffix, xvideos.com, proxy
-host-suffix, adrules.top, proxy
 
+
+# Ai - General
+host-suffix, googleapis.com, proxy
 
 # Streaming - General
 host-suffix, acast.com, proxy

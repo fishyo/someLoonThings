@@ -21,19 +21,22 @@ host-suffix, bard.google.com, proxy
 host-suffix, deepmind.com, proxy
 host-suffix, deepmind.google, proxy
 host, alkali-pa.clients6.google.com, proxy
+host, alkalicore-pa.clients6.google.com, proxy
+host, geminiweb-pa.clients6.google.com, proxy
+host, signaler-pa.clients6.google.com, proxy
 host, waa-pa.clients6.google.com, proxy
+host-suffix, geller-pa.googleapis.com, proxy
 host-suffix, gemini.google, proxy
 host-suffix, gemini.google.com, proxy
 host-suffix, generativeai.google, proxy
 host-suffix, generativeai.google.com, proxy
 host-suffix, generativelanguage.googleapis.com, proxy
-host-suffix, geller-pa.googleapis.com, proxy
-host-suffix, googleapis.com, proxy
 host-suffix, makersuite.google.com, proxy
 host-suffix, notebooklm.google, proxy
 host-suffix, notebooklm.google.com, proxy
 host-suffix, odin-pa.googleapis.com, proxy
 host-suffix, proactivebackend-pa.googleapis.com, proxy
+host-suffix, robinfrontend-pa.googleapis.com, proxy
 
 # Grok
 host-suffix, grok.com, proxy
@@ -43,13 +46,18 @@ host-suffix, x.ai, proxy
 host-suffix, blackforestlabs.ai, proxy
 host-suffix, clipdrop.co, proxy
 host-suffix, dreamstudio.ai, proxy
+host-suffix, elevenlabs.io, proxy
 host-suffix, ideogram.ai, proxy
 host-suffix, luma.ai, proxy
 host-suffix, lumalabs.ai, proxy
 host-suffix, pika.art, proxy
+host-suffix, recraft.ai, proxy
 host-suffix, runway.com, proxy
 host-suffix, runwayml.com, proxy
 host-suffix, stability.ai, proxy
+host-suffix, suno.ai, proxy
+host-suffix, suno.com, proxy
+host-suffix, udio.com, proxy
 
 # Midjourney
 host-suffix, midjourney.com, proxy
@@ -63,6 +71,7 @@ host-suffix, fireworks.ai, proxy
 host-suffix, hf.co, proxy
 host-suffix, hf.space, proxy
 host-suffix, huggingface.co, proxy
+host-suffix, lmarena.ai, proxy
 host-suffix, mistral.ai, proxy
 host-suffix, mistral.com, proxy
 host-suffix, models.dev, proxy
@@ -73,7 +82,6 @@ host-suffix, together.xyz, proxy
 host-suffix, v0.dev, proxy
 
 # OpenAI
-host-suffix, arkoselabs.com, proxy
 host-suffix, chat.com, proxy
 host-suffix, chatgpt.com, proxy
 host-suffix, chatgpt.site, proxy
@@ -85,8 +93,6 @@ host-suffix, openaiapi-site.azureedge.net, proxy
 host-suffix, openaicom.imgix.net, proxy
 host-suffix, openaicomproductionae4b.blob.core.windows.net, proxy
 host-suffix, sora.com, proxy
-host-suffix, stripe.com, proxy
-host-suffix, stripe.network, proxy
 
 # Perplexity
 host-suffix, perplexity.ai, proxy
@@ -105,6 +111,7 @@ host-suffix, cursor.sh, proxy
 host-suffix, cursorapi.com, proxy
 host-suffix, cursorvm.com, proxy
 host-suffix, dify.ai, proxy
+host-suffix, gamma.app, proxy
 host-suffix, genspark.ai, proxy
 host-suffix, groq.com, proxy
 host-suffix, langchain.com, proxy
@@ -124,3 +131,9 @@ host-suffix, weights.bi, proxy
 host-suffix, windsurf.ai, proxy
 host-suffix, windsurf.com, proxy
 host-suffix, you.com, proxy
+
+# General
+host-suffix, googleapis.com, proxy
+host-suffix, arkoselabs.com, proxy
+host-suffix, stripe.com, proxy
+host-suffix, stripe.network, proxy

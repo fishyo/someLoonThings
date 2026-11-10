@@ -21,19 +21,22 @@ DOMAIN-SUFFIX,bard.google.com
 DOMAIN-SUFFIX,deepmind.com
 DOMAIN-SUFFIX,deepmind.google
 DOMAIN,alkali-pa.clients6.google.com
+DOMAIN,alkalicore-pa.clients6.google.com
+DOMAIN,geminiweb-pa.clients6.google.com
+DOMAIN,signaler-pa.clients6.google.com
 DOMAIN,waa-pa.clients6.google.com
+DOMAIN-SUFFIX,geller-pa.googleapis.com
 DOMAIN-SUFFIX,gemini.google
 DOMAIN-SUFFIX,gemini.google.com
 DOMAIN-SUFFIX,generativeai.google
 DOMAIN-SUFFIX,generativeai.google.com
 DOMAIN-SUFFIX,generativelanguage.googleapis.com
-DOMAIN-SUFFIX,geller-pa.googleapis.com
-DOMAIN-SUFFIX,googleapis.com
 DOMAIN-SUFFIX,makersuite.google.com
 DOMAIN-SUFFIX,notebooklm.google
 DOMAIN-SUFFIX,notebooklm.google.com
 DOMAIN-SUFFIX,odin-pa.googleapis.com
 DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com
+DOMAIN-SUFFIX,robinfrontend-pa.googleapis.com
 
 # Grok
 DOMAIN-SUFFIX,grok.com
@@ -43,13 +46,18 @@ DOMAIN-SUFFIX,x.ai
 DOMAIN-SUFFIX,blackforestlabs.ai
 DOMAIN-SUFFIX,clipdrop.co
 DOMAIN-SUFFIX,dreamstudio.ai
+DOMAIN-SUFFIX,elevenlabs.io
 DOMAIN-SUFFIX,ideogram.ai
 DOMAIN-SUFFIX,luma.ai
 DOMAIN-SUFFIX,lumalabs.ai
 DOMAIN-SUFFIX,pika.art
+DOMAIN-SUFFIX,recraft.ai
 DOMAIN-SUFFIX,runway.com
 DOMAIN-SUFFIX,runwayml.com
 DOMAIN-SUFFIX,stability.ai
+DOMAIN-SUFFIX,suno.ai
+DOMAIN-SUFFIX,suno.com
+DOMAIN-SUFFIX,udio.com
 
 # Midjourney
 DOMAIN-SUFFIX,midjourney.com
@@ -63,6 +71,7 @@ DOMAIN-SUFFIX,fireworks.ai
 DOMAIN-SUFFIX,hf.co
 DOMAIN-SUFFIX,hf.space
 DOMAIN-SUFFIX,huggingface.co
+DOMAIN-SUFFIX,lmarena.ai
 DOMAIN-SUFFIX,mistral.ai
 DOMAIN-SUFFIX,mistral.com
 DOMAIN-SUFFIX,models.dev
@@ -73,7 +82,6 @@ DOMAIN-SUFFIX,together.xyz
 DOMAIN-SUFFIX,v0.dev
 
 # OpenAI
-DOMAIN-SUFFIX,arkoselabs.com
 DOMAIN-SUFFIX,chat.com
 DOMAIN-SUFFIX,chatgpt.com
 DOMAIN-SUFFIX,chatgpt.site
@@ -85,8 +93,6 @@ DOMAIN-SUFFIX,openaiapi-site.azureedge.net
 DOMAIN-SUFFIX,openaicom.imgix.net
 DOMAIN-SUFFIX,openaicomproductionae4b.blob.core.windows.net
 DOMAIN-SUFFIX,sora.com
-DOMAIN-SUFFIX,stripe.com
-DOMAIN-SUFFIX,stripe.network
 
 # Perplexity
 DOMAIN-SUFFIX,perplexity.ai
@@ -105,6 +111,7 @@ DOMAIN-SUFFIX,cursor.sh
 DOMAIN-SUFFIX,cursorapi.com
 DOMAIN-SUFFIX,cursorvm.com
 DOMAIN-SUFFIX,dify.ai
+DOMAIN-SUFFIX,gamma.app
 DOMAIN-SUFFIX,genspark.ai
 DOMAIN-SUFFIX,groq.com
 DOMAIN-SUFFIX,langchain.com
@@ -124,3 +131,9 @@ DOMAIN-SUFFIX,weights.bi
 DOMAIN-SUFFIX,windsurf.ai
 DOMAIN-SUFFIX,windsurf.com
 DOMAIN-SUFFIX,you.com
+
+# General
+DOMAIN-SUFFIX,googleapis.com
+DOMAIN-SUFFIX,arkoselabs.com
+DOMAIN-SUFFIX,stripe.com
+DOMAIN-SUFFIX,stripe.network

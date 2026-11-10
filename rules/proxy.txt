@@ -1,6 +1,9 @@
 # Apple
 apple.news
 books.apple.com
+mask-api.icloud.com
+mask-h2.icloud.com
+mask.icloud.com
 news.apple.com
 testflight.apple.com
 tv.apple.com
@@ -29,13 +32,16 @@ apkmirror.com
 apkpure.com
 aptoide.com
 archlinux.org
+astral.sh
 atl-paas.net
 atlassian.com
 atlassian.net
 auth0.com
 bandwagonhost.com
+biomejs.dev
 bitbucket.org
 brew.sh
+bun.sh
 chocolatey.org
 clerk.com
 clerk.dev
@@ -56,6 +62,8 @@ distrowatch.com
 do.co
 docker.com
 docker.io
+expo.dev
+expo.io
 f-droid.org
 flutter.dev
 fly.dev
@@ -98,6 +106,8 @@ maven.org
 neon.tech
 netlify.app
 netlify.com
+ngrok.com
+ngrok.io
 nixos.org
 npmjs.com
 npmjs.org
@@ -109,6 +119,7 @@ packagist.org
 planetscale.com
 posthog.com
 postman.com
+prisma.io
 pub.dev
 pypi.org
 pythonhosted.org
@@ -119,6 +130,7 @@ readme.io
 render.com
 replit.com
 replit.dev
+resend.com
 rubygems.org
 rust-lang.org
 scaleway.com
@@ -214,7 +226,9 @@ ebay.com
 ebayimg.com
 etherscan.io
 gate.io
+gmgn.ai
 investing.com
+jup.ag
 kraken.com
 kucoin.com
 mercari.com
@@ -225,6 +239,7 @@ oklink.com
 okx.com
 onekey.so
 phantom.app
+pump.fun
 rabby.io
 rakuten.co.jp
 rakuten.com
@@ -232,6 +247,7 @@ redotpay.com
 revolut.com
 solscan.io
 stripe.com
+stripe.network
 tradingview.com
 tronscan.org
 uniswap.org
@@ -471,6 +487,7 @@ box.com
 canva.com
 clickup.com
 coda.io
+craft.do
 dropbox.com
 dropboxapi.com
 dropboxstatic.com
@@ -498,9 +515,12 @@ monday.com
 notion.new
 notion.site
 notion.so
+obsidian.md
 patreon.com
 patreonusercontent.com
 pcloud.com
+raindrop.io
+readwise.io
 skyscanner.com
 skyscanner.net
 slack-edge.com
@@ -536,6 +556,7 @@ yandex.ru
 1passwordservices.com
 adguard-dns.io
 adguard.com
+adrules.top
 bitwarden.com
 bitwarden.net
 censys.io
@@ -650,4 +671,3 @@ t66y.com
 keyword: thepiratebay
 xnxx.com
 xvideos.com
-adrules.top

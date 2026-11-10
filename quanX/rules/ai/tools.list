@@ -14,6 +14,7 @@ host-suffix, cursor.sh, proxy
 host-suffix, cursorapi.com, proxy
 host-suffix, cursorvm.com, proxy
 host-suffix, dify.ai, proxy
+host-suffix, gamma.app, proxy
 host-suffix, genspark.ai, proxy
 host-suffix, groq.com, proxy
 host-suffix, langchain.com, proxy

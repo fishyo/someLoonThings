@@ -11,6 +11,7 @@ cursor.sh
 cursorapi.com
 cursorvm.com
 dify.ai
+gamma.app
 genspark.ai
 groq.com
 langchain.com

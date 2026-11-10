@@ -10,6 +10,7 @@ host-suffix, fireworks.ai, proxy
 host-suffix, hf.co, proxy
 host-suffix, hf.space, proxy
 host-suffix, huggingface.co, proxy
+host-suffix, lmarena.ai, proxy
 host-suffix, mistral.ai, proxy
 host-suffix, mistral.com, proxy
 host-suffix, models.dev, proxy
