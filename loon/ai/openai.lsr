@@ -2,7 +2,6 @@
 # Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
 
 # OpenAI
-DOMAIN-SUFFIX,arkoselabs.com
 DOMAIN-SUFFIX,chat.com
 DOMAIN-SUFFIX,chatgpt.com
 DOMAIN-SUFFIX,chatgpt.livekit.cloud
@@ -17,5 +16,3 @@ DOMAIN-SUFFIX,openaicomproductionae4b.blob.core.windows.net
 DOMAIN-SUFFIX,searchgpt.com
 DOMAIN-SUFFIX,sora.com
 DOMAIN-SUFFIX,statsigapi.net
-DOMAIN-SUFFIX,stripe.com
-DOMAIN-SUFFIX,stripe.network

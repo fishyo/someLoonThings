@@ -30,4 +30,7 @@ payload:
 
   # Endpoints
   - DOMAIN,alkali-pa.clients6.google.com
+  - DOMAIN,alkalicore-pa.clients6.google.com
+  - DOMAIN,geminiweb-pa.clients6.google.com
+  - DOMAIN,signaler-pa.clients6.google.com
   - DOMAIN,waa-pa.clients6.google.com

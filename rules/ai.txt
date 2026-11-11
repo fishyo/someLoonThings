@@ -39,6 +39,9 @@ robinfrontend-pa.googleapis.com
 
 # Endpoints
 exact: alkali-pa.clients6.google.com
+exact: alkalicore-pa.clients6.google.com
+exact: geminiweb-pa.clients6.google.com
+exact: signaler-pa.clients6.google.com
 exact: waa-pa.clients6.google.com
 
 # Grok
@@ -56,6 +59,7 @@ klingai.com
 luma.ai
 lumalabs.ai
 pika.art
+recraft.ai
 runway.com
 runwayml.com
 stability.ai
@@ -75,6 +79,7 @@ fireworks.ai
 hf.co
 hf.space
 huggingface.co
+lmarena.ai
 mistral.ai
 mistral.com
 models.dev
@@ -86,7 +91,6 @@ v0.app
 v0.dev
 
 # OpenAI
-arkoselabs.com
 chat.com
 chatgpt.com
 chatgpt.livekit.cloud
@@ -101,8 +105,6 @@ openaicomproductionae4b.blob.core.windows.net
 searchgpt.com
 sora.com
 statsigapi.net
-stripe.com
-stripe.network
 
 # Perplexity
 perplexity.ai
@@ -121,6 +123,7 @@ cursor.sh
 cursorapi.com
 cursorvm.com
 dify.ai
+gamma.app
 genspark.ai
 groq.com
 langchain.com
@@ -141,6 +144,3 @@ weights.bi
 windsurf.ai
 windsurf.com
 you.com
-
-# General
-googleapis.com

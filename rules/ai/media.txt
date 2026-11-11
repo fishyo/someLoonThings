@@ -9,6 +9,7 @@ klingai.com
 luma.ai
 lumalabs.ai
 pika.art
+recraft.ai
 runway.com
 runwayml.com
 stability.ai

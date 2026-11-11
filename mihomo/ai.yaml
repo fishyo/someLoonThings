@@ -43,6 +43,9 @@ payload:
 
   # Endpoints
   - DOMAIN,alkali-pa.clients6.google.com
+  - DOMAIN,alkalicore-pa.clients6.google.com
+  - DOMAIN,geminiweb-pa.clients6.google.com
+  - DOMAIN,signaler-pa.clients6.google.com
   - DOMAIN,waa-pa.clients6.google.com
 
   # Grok
@@ -60,6 +63,7 @@ payload:
   - DOMAIN-SUFFIX,luma.ai
   - DOMAIN-SUFFIX,lumalabs.ai
   - DOMAIN-SUFFIX,pika.art
+  - DOMAIN-SUFFIX,recraft.ai
   - DOMAIN-SUFFIX,runway.com
   - DOMAIN-SUFFIX,runwayml.com
   - DOMAIN-SUFFIX,stability.ai
@@ -79,6 +83,7 @@ payload:
   - DOMAIN-SUFFIX,hf.co
   - DOMAIN-SUFFIX,hf.space
   - DOMAIN-SUFFIX,huggingface.co
+  - DOMAIN-SUFFIX,lmarena.ai
   - DOMAIN-SUFFIX,mistral.ai
   - DOMAIN-SUFFIX,mistral.com
   - DOMAIN-SUFFIX,models.dev
@@ -90,7 +95,6 @@ payload:
   - DOMAIN-SUFFIX,v0.dev
 
   # OpenAI
-  - DOMAIN-SUFFIX,arkoselabs.com
   - DOMAIN-SUFFIX,chat.com
   - DOMAIN-SUFFIX,chatgpt.com
   - DOMAIN-SUFFIX,chatgpt.livekit.cloud
@@ -105,8 +109,6 @@ payload:
   - DOMAIN-SUFFIX,searchgpt.com
   - DOMAIN-SUFFIX,sora.com
   - DOMAIN-SUFFIX,statsigapi.net
-  - DOMAIN-SUFFIX,stripe.com
-  - DOMAIN-SUFFIX,stripe.network
 
   # Perplexity
   - DOMAIN-SUFFIX,perplexity.ai
@@ -125,6 +127,7 @@ payload:
   - DOMAIN-SUFFIX,cursorapi.com
   - DOMAIN-SUFFIX,cursorvm.com
   - DOMAIN-SUFFIX,dify.ai
+  - DOMAIN-SUFFIX,gamma.app
   - DOMAIN-SUFFIX,genspark.ai
   - DOMAIN-SUFFIX,groq.com
   - DOMAIN-SUFFIX,langchain.com
@@ -145,6 +148,3 @@ payload:
   - DOMAIN-SUFFIX,windsurf.ai
   - DOMAIN-SUFFIX,windsurf.com
   - DOMAIN-SUFFIX,you.com
-
-  # General
-  - DOMAIN-SUFFIX,googleapis.com

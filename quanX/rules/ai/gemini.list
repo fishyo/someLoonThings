@@ -29,4 +29,7 @@ host-suffix, robinfrontend-pa.googleapis.com, proxy
 
 # Endpoints
 host, alkali-pa.clients6.google.com, proxy
+host, alkalicore-pa.clients6.google.com, proxy
+host, geminiweb-pa.clients6.google.com, proxy
+host, signaler-pa.clients6.google.com, proxy
 host, waa-pa.clients6.google.com, proxy

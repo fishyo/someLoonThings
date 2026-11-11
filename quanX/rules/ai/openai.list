@@ -2,7 +2,6 @@
 # Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
 
 # OpenAI
-host-suffix, arkoselabs.com, proxy
 host-suffix, chat.com, proxy
 host-suffix, chatgpt.com, proxy
 host-suffix, chatgpt.livekit.cloud, proxy
@@ -17,5 +16,3 @@ host-suffix, openaicomproductionae4b.blob.core.windows.net, proxy
 host-suffix, searchgpt.com, proxy
 host-suffix, sora.com, proxy
 host-suffix, statsigapi.net, proxy
-host-suffix, stripe.com, proxy
-host-suffix, stripe.network, proxy

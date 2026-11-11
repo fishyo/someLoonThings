@@ -12,6 +12,7 @@ host-suffix, klingai.com, proxy
 host-suffix, luma.ai, proxy
 host-suffix, lumalabs.ai, proxy
 host-suffix, pika.art, proxy
+host-suffix, recraft.ai, proxy
 host-suffix, runway.com, proxy
 host-suffix, runwayml.com, proxy
 host-suffix, stability.ai, proxy

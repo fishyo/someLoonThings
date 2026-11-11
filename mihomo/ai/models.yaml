@@ -11,6 +11,7 @@ payload:
   - DOMAIN-SUFFIX,hf.co
   - DOMAIN-SUFFIX,hf.space
   - DOMAIN-SUFFIX,huggingface.co
+  - DOMAIN-SUFFIX,lmarena.ai
   - DOMAIN-SUFFIX,mistral.ai
   - DOMAIN-SUFFIX,mistral.com
   - DOMAIN-SUFFIX,models.dev

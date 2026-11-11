@@ -26,4 +26,7 @@ robinfrontend-pa.googleapis.com
 
 # Endpoints
 exact: alkali-pa.clients6.google.com
+exact: alkalicore-pa.clients6.google.com
+exact: geminiweb-pa.clients6.google.com
+exact: signaler-pa.clients6.google.com
 exact: waa-pa.clients6.google.com

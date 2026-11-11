@@ -15,6 +15,7 @@ payload:
   - DOMAIN-SUFFIX,cursorapi.com
   - DOMAIN-SUFFIX,cursorvm.com
   - DOMAIN-SUFFIX,dify.ai
+  - DOMAIN-SUFFIX,gamma.app
   - DOMAIN-SUFFIX,genspark.ai
   - DOMAIN-SUFFIX,groq.com
   - DOMAIN-SUFFIX,langchain.com

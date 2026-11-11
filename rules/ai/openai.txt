@@ -1,5 +1,4 @@
 # OpenAI
-arkoselabs.com
 chat.com
 chatgpt.com
 chatgpt.livekit.cloud
@@ -14,5 +13,3 @@ openaicomproductionae4b.blob.core.windows.net
 searchgpt.com
 sora.com
 statsigapi.net
-stripe.com
-stripe.network
