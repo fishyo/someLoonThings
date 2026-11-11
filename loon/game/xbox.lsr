@@ -1,0 +1,8 @@
+# Title: Xbox Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+# Xbox
+DOMAIN-SUFFIX,gamepass.com
+DOMAIN-SUFFIX,xbox.com
+DOMAIN-SUFFIX,xboxab.com
+DOMAIN-SUFFIX,xboxlive.com

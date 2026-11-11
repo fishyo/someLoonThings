@@ -1,0 +1,9 @@
+# Title: Twitch Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+# Twitch
+host-suffix, jtvnw.net, proxy
+host-suffix, ttvnw.net, proxy
+host-suffix, twitch.tv, proxy
+host-suffix, twitchcdn.net, proxy
+host-suffix, twitchsvc.net, proxy

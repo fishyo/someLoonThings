@@ -1,14 +1,20 @@
 # Title: AI Media Generation Ruleset
 # Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
 
-# AI Media
+# Media
 DOMAIN-SUFFIX,blackforestlabs.ai
 DOMAIN-SUFFIX,clipdrop.co
 DOMAIN-SUFFIX,dreamstudio.ai
+DOMAIN-SUFFIX,elevenlabs.io
+DOMAIN-SUFFIX,heygen.com
 DOMAIN-SUFFIX,ideogram.ai
+DOMAIN-SUFFIX,klingai.com
 DOMAIN-SUFFIX,luma.ai
 DOMAIN-SUFFIX,lumalabs.ai
 DOMAIN-SUFFIX,pika.art
 DOMAIN-SUFFIX,runway.com
 DOMAIN-SUFFIX,runwayml.com
 DOMAIN-SUFFIX,stability.ai
+DOMAIN-SUFFIX,suno.ai
+DOMAIN-SUFFIX,suno.com
+DOMAIN-SUFFIX,udio.com

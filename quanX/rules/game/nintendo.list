@@ -1,0 +1,10 @@
+# Title: Nintendo Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+# Nintendo
+host-suffix, nintendo-europe.com, proxy
+host-suffix, nintendo.com, proxy
+host-suffix, nintendo.jp, proxy
+host-suffix, nintendo.net, proxy
+host-suffix, nintendoswitch.com, proxy
+host-suffix, nintendowifi.net, proxy

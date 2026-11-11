@@ -1,4 +1,5 @@
 # Copilot
 copilot.microsoft.com
 exact: edgeservices.bing.com
+githubcopilot.com
 sydney.bing.com

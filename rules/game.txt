@@ -1,3 +1,17 @@
+# Nintendo
+nintendo-europe.com
+nintendo.com
+nintendo.jp
+nintendo.net
+nintendoswitch.com
+nintendowifi.net
+
+# PlayStation
+playstation.com
+playstation.net
+playstationnetwork.com
+sonyentertainmentnetwork.com
+
 # Steam
 steam-chat.com
 steambroadcast.com
@@ -12,3 +26,16 @@ steamstat.us
 steamstatic.com
 steamusercontent.com
 valvesoftware.com
+
+# Twitch
+jtvnw.net
+ttvnw.net
+twitch.tv
+twitchcdn.net
+twitchsvc.net
+
+# Xbox
+gamepass.com
+xbox.com
+xboxab.com
+xboxlive.com

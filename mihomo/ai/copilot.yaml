@@ -5,4 +5,5 @@ payload:
   # Copilot
   - DOMAIN-SUFFIX,copilot.microsoft.com
   - DOMAIN,edgeservices.bing.com
+  - DOMAIN-SUFFIX,githubcopilot.com
   - DOMAIN-SUFFIX,sydney.bing.com

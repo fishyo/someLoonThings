@@ -214,6 +214,13 @@ youtubekids.com
 yt.be
 ytimg.com
 
+# Twitch
+jtvnw.net
+ttvnw.net
+twitch.tv
+twitchcdn.net
+twitchsvc.net
+
 # General
 acast.com
 aca.st

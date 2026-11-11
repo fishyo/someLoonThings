@@ -28,6 +28,7 @@ host-suffix, phind.com, proxy
 host-suffix, poe.com, proxy
 host-suffix, poecdn.net, proxy
 host-suffix, tavily.com, proxy
+host-suffix, trae.ai, proxy
 host-suffix, wandb.ai, proxy
 host-suffix, weights.bi, proxy
 host-suffix, windsurf.ai, proxy

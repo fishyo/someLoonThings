@@ -1,0 +1,8 @@
+# Title: Xbox Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+# Xbox
+host-suffix, gamepass.com, proxy
+host-suffix, xbox.com, proxy
+host-suffix, xboxab.com, proxy
+host-suffix, xboxlive.com, proxy

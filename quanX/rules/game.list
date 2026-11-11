@@ -1,6 +1,20 @@
 # Title: Game Services Ruleset
 # Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
 
+# Nintendo
+host-suffix, nintendo-europe.com, proxy
+host-suffix, nintendo.com, proxy
+host-suffix, nintendo.jp, proxy
+host-suffix, nintendo.net, proxy
+host-suffix, nintendoswitch.com, proxy
+host-suffix, nintendowifi.net, proxy
+
+# PlayStation
+host-suffix, playstation.com, proxy
+host-suffix, playstation.net, proxy
+host-suffix, playstationnetwork.com, proxy
+host-suffix, sonyentertainmentnetwork.com, proxy
+
 # Steam
 host-suffix, steam-chat.com, proxy
 host-suffix, steambroadcast.com, proxy
@@ -15,3 +29,16 @@ host-suffix, steamstat.us, proxy
 host-suffix, steamstatic.com, proxy
 host-suffix, steamusercontent.com, proxy
 host-suffix, valvesoftware.com, proxy
+
+# Twitch
+host-suffix, jtvnw.net, proxy
+host-suffix, ttvnw.net, proxy
+host-suffix, twitch.tv, proxy
+host-suffix, twitchcdn.net, proxy
+host-suffix, twitchsvc.net, proxy
+
+# Xbox
+host-suffix, gamepass.com, proxy
+host-suffix, xbox.com, proxy
+host-suffix, xboxab.com, proxy
+host-suffix, xboxlive.com, proxy

@@ -2,6 +2,7 @@
 # Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
 
 # Claude
+host-suffix, anthropic.cdn.cloudflare.net, proxy
 host-suffix, anthropic.com, proxy
 host-suffix, claude.ai, proxy
 host-suffix, claude.com, proxy

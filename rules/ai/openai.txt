@@ -2,6 +2,7 @@
 arkoselabs.com
 chat.com
 chatgpt.com
+chatgpt.livekit.cloud
 chatgpt.site
 featuregates.org
 oaistatic.com
@@ -10,6 +11,8 @@ openai.com
 openaiapi-site.azureedge.net
 openaicom.imgix.net
 openaicomproductionae4b.blob.core.windows.net
+searchgpt.com
 sora.com
+statsigapi.net
 stripe.com
 stripe.network

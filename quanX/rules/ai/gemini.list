@@ -3,23 +3,30 @@
 
 # Gemini
 host-suffix, ai.google.dev, proxy
-host-suffix, aiplatform.googleapis.com, proxy
 host-suffix, aistudio.google.com, proxy
-host-suffix, alkalimakersuite-pa.googleapis.com, proxy
 host-suffix, bard.google.com, proxy
 host-suffix, deepmind.com, proxy
 host-suffix, deepmind.google, proxy
-host, alkali-pa.clients6.google.com, proxy
-host, waa-pa.clients6.google.com, proxy
 host-suffix, gemini.google, proxy
 host-suffix, gemini.google.com, proxy
 host-suffix, generativeai.google, proxy
 host-suffix, generativeai.google.com, proxy
-host-suffix, generativelanguage.googleapis.com, proxy
-host-suffix, geller-pa.googleapis.com, proxy
-host-suffix, googleapis.com, proxy
 host-suffix, makersuite.google.com, proxy
 host-suffix, notebooklm.google, proxy
 host-suffix, notebooklm.google.com, proxy
+
+# APIs
+host-suffix, aida.googleapis.com, proxy
+host-suffix, aiplatform.googleapis.com, proxy
+host-suffix, alkalimakersuite-pa.googleapis.com, proxy
+host-suffix, cloudaicompanion.googleapis.com, proxy
+host-suffix, cloudcode-pa.googleapis.com, proxy
+host-suffix, geller-pa.googleapis.com, proxy
+host-suffix, generativelanguage.googleapis.com, proxy
 host-suffix, odin-pa.googleapis.com, proxy
 host-suffix, proactivebackend-pa.googleapis.com, proxy
+host-suffix, robinfrontend-pa.googleapis.com, proxy
+
+# Endpoints
+host, alkali-pa.clients6.google.com, proxy
+host, waa-pa.clients6.google.com, proxy

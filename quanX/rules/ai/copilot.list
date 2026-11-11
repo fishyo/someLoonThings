@@ -4,4 +4,5 @@
 # Copilot
 host-suffix, copilot.microsoft.com, proxy
 host, edgeservices.bing.com, proxy
+host-suffix, githubcopilot.com, proxy
 host-suffix, sydney.bing.com, proxy

@@ -2,6 +2,20 @@
 # Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
 
 payload:
+  # Nintendo
+  - DOMAIN-SUFFIX,nintendo-europe.com
+  - DOMAIN-SUFFIX,nintendo.com
+  - DOMAIN-SUFFIX,nintendo.jp
+  - DOMAIN-SUFFIX,nintendo.net
+  - DOMAIN-SUFFIX,nintendoswitch.com
+  - DOMAIN-SUFFIX,nintendowifi.net
+
+  # PlayStation
+  - DOMAIN-SUFFIX,playstation.com
+  - DOMAIN-SUFFIX,playstation.net
+  - DOMAIN-SUFFIX,playstationnetwork.com
+  - DOMAIN-SUFFIX,sonyentertainmentnetwork.com
+
   # Steam
   - DOMAIN-SUFFIX,steam-chat.com
   - DOMAIN-SUFFIX,steambroadcast.com
@@ -16,3 +30,16 @@ payload:
   - DOMAIN-SUFFIX,steamstatic.com
   - DOMAIN-SUFFIX,steamusercontent.com
   - DOMAIN-SUFFIX,valvesoftware.com
+
+  # Twitch
+  - DOMAIN-SUFFIX,jtvnw.net
+  - DOMAIN-SUFFIX,ttvnw.net
+  - DOMAIN-SUFFIX,twitch.tv
+  - DOMAIN-SUFFIX,twitchcdn.net
+  - DOMAIN-SUFFIX,twitchsvc.net
+
+  # Xbox
+  - DOMAIN-SUFFIX,gamepass.com
+  - DOMAIN-SUFFIX,xbox.com
+  - DOMAIN-SUFFIX,xboxab.com
+  - DOMAIN-SUFFIX,xboxlive.com

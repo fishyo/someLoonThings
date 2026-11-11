@@ -6,6 +6,7 @@ payload:
   - DOMAIN-SUFFIX,arkoselabs.com
   - DOMAIN-SUFFIX,chat.com
   - DOMAIN-SUFFIX,chatgpt.com
+  - DOMAIN-SUFFIX,chatgpt.livekit.cloud
   - DOMAIN-SUFFIX,chatgpt.site
   - DOMAIN-SUFFIX,featuregates.org
   - DOMAIN-SUFFIX,oaistatic.com
@@ -14,6 +15,8 @@ payload:
   - DOMAIN-SUFFIX,openaiapi-site.azureedge.net
   - DOMAIN-SUFFIX,openaicom.imgix.net
   - DOMAIN-SUFFIX,openaicomproductionae4b.blob.core.windows.net
+  - DOMAIN-SUFFIX,searchgpt.com
   - DOMAIN-SUFFIX,sora.com
+  - DOMAIN-SUFFIX,statsigapi.net
   - DOMAIN-SUFFIX,stripe.com
   - DOMAIN-SUFFIX,stripe.network

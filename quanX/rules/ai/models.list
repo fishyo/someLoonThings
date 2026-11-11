@@ -17,4 +17,5 @@ host-suffix, replicate.com, proxy
 host-suffix, replicate.delivery, proxy
 host-suffix, together.ai, proxy
 host-suffix, together.xyz, proxy
+host-suffix, v0.app, proxy
 host-suffix, v0.dev, proxy

@@ -25,6 +25,7 @@ phind.com
 poe.com
 poecdn.net
 tavily.com
+trae.ai
 wandb.ai
 weights.bi
 windsurf.ai

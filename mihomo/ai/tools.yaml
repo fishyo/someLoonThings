@@ -29,6 +29,7 @@ payload:
   - DOMAIN-SUFFIX,poe.com
   - DOMAIN-SUFFIX,poecdn.net
   - DOMAIN-SUFFIX,tavily.com
+  - DOMAIN-SUFFIX,trae.ai
   - DOMAIN-SUFFIX,wandb.ai
   - DOMAIN-SUFFIX,weights.bi
   - DOMAIN-SUFFIX,windsurf.ai

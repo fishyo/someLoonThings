@@ -3,6 +3,7 @@
 
 payload:
   # Claude
+  - DOMAIN-SUFFIX,anthropic.cdn.cloudflare.net
   - DOMAIN-SUFFIX,anthropic.com
   - DOMAIN-SUFFIX,claude.ai
   - DOMAIN-SUFFIX,claude.com
@@ -11,46 +12,60 @@ payload:
   # Copilot
   - DOMAIN-SUFFIX,copilot.microsoft.com
   - DOMAIN,edgeservices.bing.com
+  - DOMAIN-SUFFIX,githubcopilot.com
   - DOMAIN-SUFFIX,sydney.bing.com
 
   # Gemini
   - DOMAIN-SUFFIX,ai.google.dev
-  - DOMAIN-SUFFIX,aiplatform.googleapis.com
   - DOMAIN-SUFFIX,aistudio.google.com
-  - DOMAIN-SUFFIX,alkalimakersuite-pa.googleapis.com
   - DOMAIN-SUFFIX,bard.google.com
   - DOMAIN-SUFFIX,deepmind.com
   - DOMAIN-SUFFIX,deepmind.google
-  - DOMAIN,alkali-pa.clients6.google.com
-  - DOMAIN,waa-pa.clients6.google.com
   - DOMAIN-SUFFIX,gemini.google
   - DOMAIN-SUFFIX,gemini.google.com
   - DOMAIN-SUFFIX,generativeai.google
   - DOMAIN-SUFFIX,generativeai.google.com
-  - DOMAIN-SUFFIX,generativelanguage.googleapis.com
-  - DOMAIN-SUFFIX,geller-pa.googleapis.com
-  - DOMAIN-SUFFIX,googleapis.com
   - DOMAIN-SUFFIX,makersuite.google.com
   - DOMAIN-SUFFIX,notebooklm.google
   - DOMAIN-SUFFIX,notebooklm.google.com
+
+  # APIs
+  - DOMAIN-SUFFIX,aida.googleapis.com
+  - DOMAIN-SUFFIX,aiplatform.googleapis.com
+  - DOMAIN-SUFFIX,alkalimakersuite-pa.googleapis.com
+  - DOMAIN-SUFFIX,cloudaicompanion.googleapis.com
+  - DOMAIN-SUFFIX,cloudcode-pa.googleapis.com
+  - DOMAIN-SUFFIX,geller-pa.googleapis.com
+  - DOMAIN-SUFFIX,generativelanguage.googleapis.com
   - DOMAIN-SUFFIX,odin-pa.googleapis.com
   - DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com
+  - DOMAIN-SUFFIX,robinfrontend-pa.googleapis.com
+
+  # Endpoints
+  - DOMAIN,alkali-pa.clients6.google.com
+  - DOMAIN,waa-pa.clients6.google.com
 
   # Grok
   - DOMAIN-SUFFIX,grok.com
   - DOMAIN-SUFFIX,x.ai
 
-  # AI Media
+  # Media
   - DOMAIN-SUFFIX,blackforestlabs.ai
   - DOMAIN-SUFFIX,clipdrop.co
   - DOMAIN-SUFFIX,dreamstudio.ai
+  - DOMAIN-SUFFIX,elevenlabs.io
+  - DOMAIN-SUFFIX,heygen.com
   - DOMAIN-SUFFIX,ideogram.ai
+  - DOMAIN-SUFFIX,klingai.com
   - DOMAIN-SUFFIX,luma.ai
   - DOMAIN-SUFFIX,lumalabs.ai
   - DOMAIN-SUFFIX,pika.art
   - DOMAIN-SUFFIX,runway.com
   - DOMAIN-SUFFIX,runwayml.com
   - DOMAIN-SUFFIX,stability.ai
+  - DOMAIN-SUFFIX,suno.ai
+  - DOMAIN-SUFFIX,suno.com
+  - DOMAIN-SUFFIX,udio.com
 
   # Midjourney
   - DOMAIN-SUFFIX,midjourney.com
@@ -71,12 +86,14 @@ payload:
   - DOMAIN-SUFFIX,replicate.delivery
   - DOMAIN-SUFFIX,together.ai
   - DOMAIN-SUFFIX,together.xyz
+  - DOMAIN-SUFFIX,v0.app
   - DOMAIN-SUFFIX,v0.dev
 
   # OpenAI
   - DOMAIN-SUFFIX,arkoselabs.com
   - DOMAIN-SUFFIX,chat.com
   - DOMAIN-SUFFIX,chatgpt.com
+  - DOMAIN-SUFFIX,chatgpt.livekit.cloud
   - DOMAIN-SUFFIX,chatgpt.site
   - DOMAIN-SUFFIX,featuregates.org
   - DOMAIN-SUFFIX,oaistatic.com
@@ -85,7 +102,9 @@ payload:
   - DOMAIN-SUFFIX,openaiapi-site.azureedge.net
   - DOMAIN-SUFFIX,openaicom.imgix.net
   - DOMAIN-SUFFIX,openaicomproductionae4b.blob.core.windows.net
+  - DOMAIN-SUFFIX,searchgpt.com
   - DOMAIN-SUFFIX,sora.com
+  - DOMAIN-SUFFIX,statsigapi.net
   - DOMAIN-SUFFIX,stripe.com
   - DOMAIN-SUFFIX,stripe.network
 
@@ -120,11 +139,26 @@ payload:
   - DOMAIN-SUFFIX,poe.com
   - DOMAIN-SUFFIX,poecdn.net
   - DOMAIN-SUFFIX,tavily.com
+  - DOMAIN-SUFFIX,trae.ai
   - DOMAIN-SUFFIX,wandb.ai
   - DOMAIN-SUFFIX,weights.bi
   - DOMAIN-SUFFIX,windsurf.ai
   - DOMAIN-SUFFIX,windsurf.com
   - DOMAIN-SUFFIX,you.com
+
+  # Nintendo
+  - DOMAIN-SUFFIX,nintendo-europe.com
+  - DOMAIN-SUFFIX,nintendo.com
+  - DOMAIN-SUFFIX,nintendo.jp
+  - DOMAIN-SUFFIX,nintendo.net
+  - DOMAIN-SUFFIX,nintendoswitch.com
+  - DOMAIN-SUFFIX,nintendowifi.net
+
+  # PlayStation
+  - DOMAIN-SUFFIX,playstation.com
+  - DOMAIN-SUFFIX,playstation.net
+  - DOMAIN-SUFFIX,playstationnetwork.com
+  - DOMAIN-SUFFIX,sonyentertainmentnetwork.com
 
   # Steam
   - DOMAIN-SUFFIX,steam-chat.com
@@ -140,6 +174,19 @@ payload:
   - DOMAIN-SUFFIX,steamstatic.com
   - DOMAIN-SUFFIX,steamusercontent.com
   - DOMAIN-SUFFIX,valvesoftware.com
+
+  # Twitch
+  - DOMAIN-SUFFIX,jtvnw.net
+  - DOMAIN-SUFFIX,ttvnw.net
+  - DOMAIN-SUFFIX,twitch.tv
+  - DOMAIN-SUFFIX,twitchcdn.net
+  - DOMAIN-SUFFIX,twitchsvc.net
+
+  # Xbox
+  - DOMAIN-SUFFIX,gamepass.com
+  - DOMAIN-SUFFIX,xbox.com
+  - DOMAIN-SUFFIX,xboxab.com
+  - DOMAIN-SUFFIX,xboxlive.com
 
   # Discord
   - DOMAIN-KEYWORD,discord
@@ -273,7 +320,6 @@ payload:
   - DOMAIN-SUFFIX,periscope.tv
   - DOMAIN-SUFFIX,pscp.tv
 
-  # Endpoints
   - DOMAIN-SUFFIX,twttr.com
   - DOMAIN-SUFFIX,twttr.net
   - DOMAIN-SUFFIX,twitterinc.com
@@ -583,6 +629,7 @@ payload:
   - DOMAIN-SUFFIX,hetzner.cloud
   - DOMAIN-SUFFIX,hetzner.com
   - DOMAIN-SUFFIX,iconify.design
+  - DOMAIN-SUFFIX,insomnia.rest
   - DOMAIN-SUFFIX,jetbrains.com
   - DOMAIN-SUFFIX,jira.com
   - DOMAIN-SUFFIX,jitpack.io
@@ -778,6 +825,7 @@ payload:
   - DOMAIN-SUFFIX,googledrive.com
   - DOMAIN-SUFFIX,googlehosted.com
   - DOMAIN-SUFFIX,googlemail.com
+  - DOMAIN-SUFFIX,googleapis.com
   - DOMAIN-SUFFIX,googleusercontent.com
   - DOMAIN-SUFFIX,gstatic.com
   - DOMAIN-SUFFIX,gvt1.com
@@ -998,6 +1046,7 @@ payload:
   - DOMAIN-SUFFIX,patreon.com
   - DOMAIN-SUFFIX,patreonusercontent.com
   - DOMAIN-SUFFIX,pcloud.com
+  - DOMAIN-SUFFIX,producthunt.com
   - DOMAIN-SUFFIX,skyscanner.com
   - DOMAIN-SUFFIX,skyscanner.net
   - DOMAIN-SUFFIX,slack-edge.com
@@ -1111,6 +1160,7 @@ payload:
   - DOMAIN-SUFFIX,sc-cdn.net
   - DOMAIN-SUFFIX,session.org
   - DOMAIN-SUFFIX,signal.org
+  - DOMAIN-SUFFIX,whispersystems.org
   - DOMAIN-SUFFIX,snap.com
   - DOMAIN-SUFFIX,snapchat.com
   - DOMAIN-SUFFIX,staticflickr.com
@@ -1149,6 +1199,8 @@ payload:
   - DOMAIN-SUFFIX,xvideos.com
   - DOMAIN-SUFFIX,adrules.top
 
+
+  # Ai - General
 
   # Streaming - General
   - DOMAIN-SUFFIX,acast.com

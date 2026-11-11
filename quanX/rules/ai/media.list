@@ -1,14 +1,20 @@
 # Title: AI Media Generation Ruleset
 # Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
 
-# AI Media
+# Media
 host-suffix, blackforestlabs.ai, proxy
 host-suffix, clipdrop.co, proxy
 host-suffix, dreamstudio.ai, proxy
+host-suffix, elevenlabs.io, proxy
+host-suffix, heygen.com, proxy
 host-suffix, ideogram.ai, proxy
+host-suffix, klingai.com, proxy
 host-suffix, luma.ai, proxy
 host-suffix, lumalabs.ai, proxy
 host-suffix, pika.art, proxy
 host-suffix, runway.com, proxy
 host-suffix, runwayml.com, proxy
 host-suffix, stability.ai, proxy
+host-suffix, suno.ai, proxy
+host-suffix, suno.com, proxy
+host-suffix, udio.com, proxy

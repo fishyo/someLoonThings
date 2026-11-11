@@ -1,4 +1,5 @@
 # Claude
+anthropic.cdn.cloudflare.net
 anthropic.com
 claude.ai
 claude.com

@@ -3,6 +3,7 @@
 
 payload:
   # Claude
+  - DOMAIN-SUFFIX,anthropic.cdn.cloudflare.net
   - DOMAIN-SUFFIX,anthropic.com
   - DOMAIN-SUFFIX,claude.ai
   - DOMAIN-SUFFIX,claude.com

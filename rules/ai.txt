@@ -1,4 +1,5 @@
 # Claude
+anthropic.cdn.cloudflare.net
 anthropic.com
 claude.ai
 claude.com
@@ -7,46 +8,60 @@ claudeusercontent.com
 # Copilot
 copilot.microsoft.com
 exact: edgeservices.bing.com
+githubcopilot.com
 sydney.bing.com
 
 # Gemini
 ai.google.dev
-aiplatform.googleapis.com
 aistudio.google.com
-alkalimakersuite-pa.googleapis.com
 bard.google.com
 deepmind.com
 deepmind.google
-exact: alkali-pa.clients6.google.com
-exact: waa-pa.clients6.google.com
 gemini.google
 gemini.google.com
 generativeai.google
 generativeai.google.com
-generativelanguage.googleapis.com
-geller-pa.googleapis.com
-googleapis.com
 makersuite.google.com
 notebooklm.google
 notebooklm.google.com
+
+# APIs
+aida.googleapis.com
+aiplatform.googleapis.com
+alkalimakersuite-pa.googleapis.com
+cloudaicompanion.googleapis.com
+cloudcode-pa.googleapis.com
+geller-pa.googleapis.com
+generativelanguage.googleapis.com
 odin-pa.googleapis.com
 proactivebackend-pa.googleapis.com
+robinfrontend-pa.googleapis.com
+
+# Endpoints
+exact: alkali-pa.clients6.google.com
+exact: waa-pa.clients6.google.com
 
 # Grok
 grok.com
 x.ai
 
-# AI Media
+# Media
 blackforestlabs.ai
 clipdrop.co
 dreamstudio.ai
+elevenlabs.io
+heygen.com
 ideogram.ai
+klingai.com
 luma.ai
 lumalabs.ai
 pika.art
 runway.com
 runwayml.com
 stability.ai
+suno.ai
+suno.com
+udio.com
 
 # Midjourney
 midjourney.com
@@ -67,12 +82,14 @@ replicate.com
 replicate.delivery
 together.ai
 together.xyz
+v0.app
 v0.dev
 
 # OpenAI
 arkoselabs.com
 chat.com
 chatgpt.com
+chatgpt.livekit.cloud
 chatgpt.site
 featuregates.org
 oaistatic.com
@@ -81,7 +98,9 @@ openai.com
 openaiapi-site.azureedge.net
 openaicom.imgix.net
 openaicomproductionae4b.blob.core.windows.net
+searchgpt.com
 sora.com
+statsigapi.net
 stripe.com
 stripe.network
 
@@ -116,8 +135,12 @@ phind.com
 poe.com
 poecdn.net
 tavily.com
+trae.ai
 wandb.ai
 weights.bi
 windsurf.ai
 windsurf.com
 you.com
+
+# General
+googleapis.com

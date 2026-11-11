@@ -84,6 +84,7 @@ heroku.com
 hetzner.cloud
 hetzner.com
 iconify.design
+insomnia.rest
 jetbrains.com
 jira.com
 jitpack.io
@@ -231,7 +232,6 @@ rakuten.com
 redotpay.com
 revolut.com
 solscan.io
-stripe.com
 tradingview.com
 tronscan.org
 uniswap.org
@@ -280,6 +280,7 @@ googleblog.com
 googledrive.com
 googlehosted.com
 googlemail.com
+googleapis.com
 googleusercontent.com
 gstatic.com
 gvt1.com
@@ -301,7 +302,6 @@ archive.org
 archive.ph
 archive.today
 archive.vn
-arkoselabs.com
 awsstatic.com
 b-cdn.net
 bgp.he.net
@@ -501,6 +501,7 @@ notion.so
 patreon.com
 patreonusercontent.com
 pcloud.com
+producthunt.com
 skyscanner.com
 skyscanner.net
 slack-edge.com
@@ -614,6 +615,7 @@ quoracdn.net
 sc-cdn.net
 session.org
 signal.org
+whispersystems.org
 snap.com
 snapchat.com
 staticflickr.com
