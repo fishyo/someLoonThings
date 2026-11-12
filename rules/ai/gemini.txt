@@ -1,6 +1,7 @@
 # Gemini
 ai.google.dev
 aistudio.google.com
+antigravity.google
 bard.google.com
 deepmind.com
 deepmind.google
@@ -13,11 +14,13 @@ notebooklm.google
 notebooklm.google.com
 
 # APIs
+aicode.googleapis.com
 aida.googleapis.com
 aiplatform.googleapis.com
 alkalimakersuite-pa.googleapis.com
 cloudaicompanion.googleapis.com
 cloudcode-pa.googleapis.com
+daily-cloudcode-pa.googleapis.com
 geller-pa.googleapis.com
 generativelanguage.googleapis.com
 odin-pa.googleapis.com

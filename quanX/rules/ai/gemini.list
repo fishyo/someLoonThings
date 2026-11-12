@@ -4,6 +4,7 @@
 # Gemini
 host-suffix, ai.google.dev, proxy
 host-suffix, aistudio.google.com, proxy
+host-suffix, antigravity.google, proxy
 host-suffix, bard.google.com, proxy
 host-suffix, deepmind.com, proxy
 host-suffix, deepmind.google, proxy
@@ -16,11 +17,13 @@ host-suffix, notebooklm.google, proxy
 host-suffix, notebooklm.google.com, proxy
 
 # APIs
+host-suffix, aicode.googleapis.com, proxy
 host-suffix, aida.googleapis.com, proxy
 host-suffix, aiplatform.googleapis.com, proxy
 host-suffix, alkalimakersuite-pa.googleapis.com, proxy
 host-suffix, cloudaicompanion.googleapis.com, proxy
 host-suffix, cloudcode-pa.googleapis.com, proxy
+host-suffix, daily-cloudcode-pa.googleapis.com, proxy
 host-suffix, geller-pa.googleapis.com, proxy
 host-suffix, generativelanguage.googleapis.com, proxy
 host-suffix, odin-pa.googleapis.com, proxy
