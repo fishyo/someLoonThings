@@ -95,7 +95,12 @@ flowchart TD
    - 包含 `steam.txt` (Steam 商店/社区/聊天游戏服务)。
    - 包含游戏直连白名单 `supercell.txt`（Supercell 全系游戏保持直连独立分流）。
    - 自动生成独立规则 `loon/game/<platform>.lsr` 与游戏代理主规则 `loon/game.lsr`。
-5. **引擎自动处理**：
+5. **微软生态体系 (`rules/microsoft/`)**：
+   - 包含 `onedrive.txt`（OneDrive 个人与商业云存储、SharePoint 等独立子规则）。
+   - 包含 `github.txt`（GitHub 代码平台、Assets、NPM、Dependabot 等开发者生态独立子规则）。
+   - 包含 `microsoft.txt`（Azure、Office 365、Bing、MSN、Windows 等基础生态服务子规则）。
+   - 自动生成独立子规则 `loon/microsoft/<platform>.lsr` 与全量主规则 `loon/microsoft.lsr`。
+6. **引擎自动处理**：
    - **次级独立规则**：自动生成对应平台的 `.lsr` / `.list` / `.yaml`，供精准分流。
    - **主集合规则**：自动在内存与 `rules/*.txt` 生成全量集合规则，供策略组整体绑定。
    - **全量代理兜底**：自动合并汇聚进全量 `proxy.lsr`，而 `rules/proxy.txt` 无需重复声明，保持绝对干净独立。

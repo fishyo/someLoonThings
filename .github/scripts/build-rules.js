@@ -66,7 +66,12 @@ function formatTitle(key, content, policy) {
     'social/discord': 'Discord Ruleset',
     'social/reddit': 'Reddit Ruleset',
     'social/tiktok': 'TikTok Ruleset',
-    'social/wechat': 'WeChat Direct Ruleset'
+    'social/wechat': 'WeChat Direct Ruleset',
+    microsoft: 'Microsoft Services Ruleset',
+    'microsoft/microsoft': 'Microsoft Core Ruleset',
+    'microsoft/services': 'Microsoft Services Ruleset',
+    'microsoft/onedrive': 'OneDrive Ruleset',
+    'microsoft/github': 'GitHub Ruleset'
   };
   if (titleMap[key]) return titleMap[key];
 

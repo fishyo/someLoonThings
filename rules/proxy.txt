@@ -68,18 +68,9 @@ f-droid.org
 flutter.dev
 fly.dev
 fly.io
-gallery.vsassets.io
 getcomposer.org
-ghcr.io
 git-scm.com
-git.io
 gitbook.io
-github.blog
-github.com
-github.io
-githubassets.com
-githubstatus.com
-githubusercontent.com
 gitkraken.com
 gitlab.com
 gitlab.io
@@ -379,17 +370,6 @@ unpkg.com
 unsplash.com
 whatismyipaddress.com
 wise.com
-
-# Microsoft
-azure.com
-azureedge.net
-bing.com
-live.com
-microsoft.com
-office.com
-office365.com
-onedrive.com
-sydneystorageextension.blob.core.windows.net
 
 # News
 abc.net.au
