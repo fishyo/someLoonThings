@@ -1,0 +1,6 @@
+# Title: Other Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+payload:
+  # Other
+  - DOMAIN-SUFFIX,olevod.com

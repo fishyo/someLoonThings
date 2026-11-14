@@ -300,6 +300,9 @@ DOMAIN-SUFFIX,spoprod-a.akamaihd.net
 DOMAIN-SUFFIX,storage.live.com
 DOMAIN-SUFFIX,storage.msn.com
 
+# Other
+DOMAIN-SUFFIX,olevod.com
+
 # Discord
 DOMAIN-KEYWORD,discord
 DOMAIN-SUFFIX,discord.com
@@ -1333,7 +1336,6 @@ DOMAIN-KEYWORD,thepiratebay
 DOMAIN-SUFFIX,xnxx.com
 DOMAIN-SUFFIX,xvideos.com
 DOMAIN-SUFFIX,kelee.one
-DOMAIN-SUFFIX,olevod.com
 
 
 # Streaming - General

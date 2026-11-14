@@ -300,6 +300,9 @@ host-suffix, spoprod-a.akamaihd.net, proxy
 host-suffix, storage.live.com, proxy
 host-suffix, storage.msn.com, proxy
 
+# Other
+host-suffix, olevod.com, proxy
+
 # Discord
 host-keyword, discord, proxy
 host-suffix, discord.com, proxy
@@ -1333,7 +1336,6 @@ host-keyword, thepiratebay, proxy
 host-suffix, xnxx.com, proxy
 host-suffix, xvideos.com, proxy
 host-suffix, kelee.one, proxy
-host-suffix, olevod.com, proxy
 
 
 # Streaming - General
