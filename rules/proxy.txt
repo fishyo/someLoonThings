@@ -169,6 +169,7 @@ fanart.tv
 fanbox.cc
 gelbooru.com
 imdb.com
+imgur.com
 kakuyomu.jp
 konachan.com
 konachan.net

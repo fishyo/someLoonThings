@@ -824,6 +824,7 @@ payload:
   - DOMAIN-SUFFIX,fanbox.cc
   - DOMAIN-SUFFIX,gelbooru.com
   - DOMAIN-SUFFIX,imdb.com
+  - DOMAIN-SUFFIX,imgur.com
   - DOMAIN-SUFFIX,kakuyomu.jp
   - DOMAIN-SUFFIX,konachan.com
   - DOMAIN-SUFFIX,konachan.net

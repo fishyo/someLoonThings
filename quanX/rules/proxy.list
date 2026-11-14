@@ -823,6 +823,7 @@ host-suffix, fanart.tv, proxy
 host-suffix, fanbox.cc, proxy
 host-suffix, gelbooru.com, proxy
 host-suffix, imdb.com, proxy
+host-suffix, imgur.com, proxy
 host-suffix, kakuyomu.jp, proxy
 host-suffix, konachan.com, proxy
 host-suffix, konachan.net, proxy
