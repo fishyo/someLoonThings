@@ -1311,6 +1311,7 @@ host-suffix, xnxx.com, proxy
 host-suffix, xvideos.com, proxy
 host-suffix, kelee.one, proxy
 host-suffix, firefox.com, proxy
+host-suffix, mozilla.org, proxy
 
 
 # Streaming - General
