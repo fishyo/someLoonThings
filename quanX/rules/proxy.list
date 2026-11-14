@@ -950,6 +950,28 @@ host-suffix, gvt2.com, proxy
 host-suffix, run.app, proxy
 host-suffix, withgoogle.com, proxy
 
+# Mozilla
+host-suffix, bugzilla.org, proxy
+host-suffix, firefox.com, proxy
+host-suffix, firefox.com.cn, proxy
+host-suffix, firefoxusercontent.com, proxy
+host-suffix, getpocket.com, proxy
+host-keyword, firefox, proxy
+host-suffix, moz.dev, proxy
+host-suffix, mozilla.com, proxy
+host-suffix, mozilla.net, proxy
+host-suffix, mozilla.org, proxy
+host-suffix, mozillafoundation.org, proxy
+host-suffix, mozillastatic.com, proxy
+host-suffix, mozillavpn.com, proxy
+host-suffix, mozillians.org, proxy
+host-suffix, mozphab.dev, proxy
+host-suffix, mozaws.net, proxy
+host-suffix, mozflare.net, proxy
+host-suffix, mzl.la, proxy
+host-suffix, pocket.com, proxy
+host-suffix, thunderbird.net, proxy
+
 # Infrastructure
 host-suffix, airalo.com, proxy
 host-suffix, airalo.net, proxy
@@ -1310,8 +1332,6 @@ host-keyword, thepiratebay, proxy
 host-suffix, xnxx.com, proxy
 host-suffix, xvideos.com, proxy
 host-suffix, kelee.one, proxy
-host-suffix, firefox.com, proxy
-host-suffix, mozilla.org, proxy
 
 
 # Streaming - General

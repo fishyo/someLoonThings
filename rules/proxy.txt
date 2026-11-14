@@ -296,6 +296,28 @@ gvt2.com
 run.app
 withgoogle.com
 
+# Mozilla
+bugzilla.org
+firefox.com
+firefox.com.cn
+firefoxusercontent.com
+getpocket.com
+keyword: firefox
+moz.dev
+mozilla.com
+mozilla.net
+mozilla.org
+mozillafoundation.org
+mozillastatic.com
+mozillavpn.com
+mozillians.org
+mozphab.dev
+mozaws.net
+mozflare.net
+mzl.la
+pocket.com
+thunderbird.net
+
 # Infrastructure
 airalo.com
 airalo.net
@@ -656,5 +678,3 @@ keyword: thepiratebay
 xnxx.com
 xvideos.com
 kelee.one
-firefox.com
-mozilla.org

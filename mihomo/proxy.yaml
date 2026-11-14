@@ -951,6 +951,28 @@ payload:
   - DOMAIN-SUFFIX,run.app
   - DOMAIN-SUFFIX,withgoogle.com
 
+  # Mozilla
+  - DOMAIN-SUFFIX,bugzilla.org
+  - DOMAIN-SUFFIX,firefox.com
+  - DOMAIN-SUFFIX,firefox.com.cn
+  - DOMAIN-SUFFIX,firefoxusercontent.com
+  - DOMAIN-SUFFIX,getpocket.com
+  - DOMAIN-KEYWORD,firefox
+  - DOMAIN-SUFFIX,moz.dev
+  - DOMAIN-SUFFIX,mozilla.com
+  - DOMAIN-SUFFIX,mozilla.net
+  - DOMAIN-SUFFIX,mozilla.org
+  - DOMAIN-SUFFIX,mozillafoundation.org
+  - DOMAIN-SUFFIX,mozillastatic.com
+  - DOMAIN-SUFFIX,mozillavpn.com
+  - DOMAIN-SUFFIX,mozillians.org
+  - DOMAIN-SUFFIX,mozphab.dev
+  - DOMAIN-SUFFIX,mozaws.net
+  - DOMAIN-SUFFIX,mozflare.net
+  - DOMAIN-SUFFIX,mzl.la
+  - DOMAIN-SUFFIX,pocket.com
+  - DOMAIN-SUFFIX,thunderbird.net
+
   # Infrastructure
   - DOMAIN-SUFFIX,airalo.com
   - DOMAIN-SUFFIX,airalo.net
@@ -1311,8 +1333,6 @@ payload:
   - DOMAIN-SUFFIX,xnxx.com
   - DOMAIN-SUFFIX,xvideos.com
   - DOMAIN-SUFFIX,kelee.one
-  - DOMAIN-SUFFIX,firefox.com
-  - DOMAIN-SUFFIX,mozilla.org
 
 
   # Streaming - General
