@@ -56,6 +56,15 @@ host-suffix, hotstarext.com, proxy
 host-suffix, starott.com, proxy
 host-suffix, starplus.com, proxy
 
+# General
+host-suffix, bbc.co.uk, proxy
+host-suffix, bbc.com, proxy
+host-suffix, bbci.co.uk, proxy
+host-suffix, bbcmedia.co.uk, proxy
+host-suffix, bbc.in, proxy
+host-suffix, bbcfmt.s.llnwi.net, proxy
+host-suffix, bbcfmt.vo.llnwd.net, proxy
+
 # HBO Max
 host-suffix, cinemax.com, proxy
 host-suffix, discomax.com, proxy
@@ -224,7 +233,6 @@ host-suffix, twitch.tv, proxy
 host-suffix, twitchcdn.net, proxy
 host-suffix, twitchsvc.net, proxy
 
-# General
 host-suffix, acast.com, proxy
 host-suffix, aca.st, proxy
 host-suffix, podchaser.com, proxy

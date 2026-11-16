@@ -1,0 +1,11 @@
+# Title: General Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+# General
+host-suffix, bbc.co.uk, proxy
+host-suffix, bbc.com, proxy
+host-suffix, bbci.co.uk, proxy
+host-suffix, bbcmedia.co.uk, proxy
+host-suffix, bbc.in, proxy
+host-suffix, bbcfmt.s.llnwi.net, proxy
+host-suffix, bbcfmt.vo.llnwd.net, proxy

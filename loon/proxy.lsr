@@ -497,6 +497,15 @@ DOMAIN-SUFFIX,hotstarext.com
 DOMAIN-SUFFIX,starott.com
 DOMAIN-SUFFIX,starplus.com
 
+# General
+DOMAIN-SUFFIX,bbc.co.uk
+DOMAIN-SUFFIX,bbc.com
+DOMAIN-SUFFIX,bbci.co.uk
+DOMAIN-SUFFIX,bbcmedia.co.uk
+DOMAIN-SUFFIX,bbc.in
+DOMAIN-SUFFIX,bbcfmt.s.llnwi.net
+DOMAIN-SUFFIX,bbcfmt.vo.llnwd.net
+
 # HBO Max
 DOMAIN-SUFFIX,cinemax.com
 DOMAIN-SUFFIX,discomax.com
@@ -1061,8 +1070,6 @@ DOMAIN-SUFFIX,annas-archive.se
 DOMAIN-SUFFIX,apnews.com
 DOMAIN-SUFFIX,arstechnica.com
 DOMAIN-SUFFIX,arxiv.org
-DOMAIN-SUFFIX,bbc.com
-DOMAIN-SUFFIX,bbci.co.uk
 DOMAIN-SUFFIX,bloomberg.com
 DOMAIN-SUFFIX,cfr.org
 DOMAIN-SUFFIX,chinatimes.com

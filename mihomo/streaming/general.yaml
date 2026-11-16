@@ -1,0 +1,12 @@
+# Title: General Ruleset
+# Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
+
+payload:
+  # General
+  - DOMAIN-SUFFIX,bbc.co.uk
+  - DOMAIN-SUFFIX,bbc.com
+  - DOMAIN-SUFFIX,bbci.co.uk
+  - DOMAIN-SUFFIX,bbcmedia.co.uk
+  - DOMAIN-SUFFIX,bbc.in
+  - DOMAIN-SUFFIX,bbcfmt.s.llnwi.net
+  - DOMAIN-SUFFIX,bbcfmt.vo.llnwd.net

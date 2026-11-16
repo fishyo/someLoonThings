@@ -53,6 +53,15 @@ hotstarext.com
 starott.com
 starplus.com
 
+# General
+bbc.co.uk
+bbc.com
+bbci.co.uk
+bbcmedia.co.uk
+bbc.in
+bbcfmt.s.llnwi.net
+bbcfmt.vo.llnwd.net
+
 # HBO Max
 cinemax.com
 discomax.com
@@ -221,7 +230,6 @@ twitch.tv
 twitchcdn.net
 twitchsvc.net
 
-# General
 acast.com
 aca.st
 podchaser.com
