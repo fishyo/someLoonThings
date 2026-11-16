@@ -130,3 +130,4 @@ host-suffix, media-amazon.com, proxy
 host-suffix, prime-video.com, proxy
 host-suffix, primevideo.com, proxy
 host-suffix, pv-cdn.net, proxy
+host-keyword, bbc, proxy

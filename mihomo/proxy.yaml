@@ -569,6 +569,7 @@ payload:
   - DOMAIN-SUFFIX,prime-video.com
   - DOMAIN-SUFFIX,primevideo.com
   - DOMAIN-SUFFIX,pv-cdn.net
+  - DOMAIN-KEYWORD,bbc
 
   # Streaming Music
   - DOMAIN-SUFFIX,audiomack.com

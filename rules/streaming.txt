@@ -127,6 +127,7 @@ media-amazon.com
 prime-video.com
 primevideo.com
 pv-cdn.net
+bbc
 
 # Streaming Music
 audiomack.com
