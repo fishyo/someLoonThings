@@ -1,6 +1,16 @@
 # Title: Streaming Media Ruleset
 # Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
 
+# General
+host-suffix, bbc.co.uk, proxy
+host-suffix, bbc.com, proxy
+host-suffix, bbci.co.uk, proxy
+host-suffix, bbcmedia.co.uk, proxy
+host-suffix, bbc.in, proxy
+host-suffix, bbcfmt.s.llnwi.net, proxy
+host-suffix, bbcfmt.vo.llnwd.net, proxy
+host-suffix, tritondigital.com, proxy
+
 # AbemaTV
 host-suffix, abema-tv.com, proxy
 host-suffix, abema.io, proxy
@@ -56,15 +66,6 @@ host-suffix, hotstarext.com, proxy
 host-suffix, starott.com, proxy
 host-suffix, starplus.com, proxy
 
-# General
-host-suffix, bbc.co.uk, proxy
-host-suffix, bbc.com, proxy
-host-suffix, bbci.co.uk, proxy
-host-suffix, bbcmedia.co.uk, proxy
-host-suffix, bbc.in, proxy
-host-suffix, bbcfmt.s.llnwi.net, proxy
-host-suffix, bbcfmt.vo.llnwd.net, proxy
-
 # HBO Max
 host-suffix, cinemax.com, proxy
 host-suffix, discomax.com, proxy
@@ -107,6 +108,36 @@ host-suffix, telasa.jp, proxy
 host-suffix, tver.jp, proxy
 host-suffix, unext.jp, proxy
 
+# Paramount+
+host-suffix, cbs.com, proxy
+host-suffix, cbsaavideo.com, proxy
+host-suffix, cbsi.com, proxy
+host-suffix, cbsiam.com, proxy
+host-suffix, cbsig.net, proxy
+host-suffix, cbsivideo.com, proxy
+host-suffix, cbsnews.com, proxy
+host-suffix, cbspressexpress.com, proxy
+host-suffix, cbsplaylist.com, proxy
+host-suffix, cbsstat.com, proxy
+host-suffix, paramount.com, proxy
+host-suffix, paramountplus.com, proxy
+host-suffix, pplus.network, proxy
+host-suffix, pplusstatic.com, proxy
+
+# Peacock
+host-suffix, peacock.com, proxy
+host-suffix, peacocktv.com, proxy
+
+# Prime Video
+host-suffix, aiv-cdn.net, proxy
+host-suffix, aiv-delivery.net, proxy
+host-suffix, amazonvideo.com, proxy
+host-suffix, atv-ps.amazon.com, proxy
+host-suffix, media-amazon.com, proxy
+host-suffix, prime-video.com, proxy
+host-suffix, primevideo.com, proxy
+host-suffix, pv-cdn.net, proxy
+
 # Streaming Music
 host-suffix, audiomack.com, proxy
 host-suffix, bandcamp.com, proxy
@@ -146,26 +177,6 @@ host-suffix, nflxsearch.net, proxy
 host-suffix, nflxso.net, proxy
 host-suffix, nflxvideo.net, proxy
 
-# Paramount+
-host-suffix, cbs.com, proxy
-host-suffix, cbsaavideo.com, proxy
-host-suffix, cbsi.com, proxy
-host-suffix, cbsiam.com, proxy
-host-suffix, cbsig.net, proxy
-host-suffix, cbsivideo.com, proxy
-host-suffix, cbsnews.com, proxy
-host-suffix, cbspressexpress.com, proxy
-host-suffix, cbsplaylist.com, proxy
-host-suffix, cbsstat.com, proxy
-host-suffix, paramount.com, proxy
-host-suffix, paramountplus.com, proxy
-host-suffix, pplus.network, proxy
-host-suffix, pplusstatic.com, proxy
-
-# Peacock
-host-suffix, peacock.com, proxy
-host-suffix, peacocktv.com, proxy
-
 # Podcasts
 host-suffix, buzzsprout.com, proxy
 host-suffix, castbox.fm, proxy
@@ -182,16 +193,6 @@ host-suffix, podtrac.com, proxy
 host-suffix, simplecast.com, proxy
 host-suffix, simplecastaudio.com, proxy
 host-suffix, transistor.fm, proxy
-
-# Prime Video
-host-suffix, aiv-cdn.net, proxy
-host-suffix, aiv-delivery.net, proxy
-host-suffix, amazonvideo.com, proxy
-host-suffix, atv-ps.amazon.com, proxy
-host-suffix, media-amazon.com, proxy
-host-suffix, prime-video.com, proxy
-host-suffix, primevideo.com, proxy
-host-suffix, pv-cdn.net, proxy
 
 # Spotify
 host-suffix, audio-ak-spotify-com.akamaized.net, proxy

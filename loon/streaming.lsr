@@ -1,6 +1,16 @@
 # Title: Streaming Media Ruleset
 # Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
 
+# General
+DOMAIN-SUFFIX,bbc.co.uk
+DOMAIN-SUFFIX,bbc.com
+DOMAIN-SUFFIX,bbci.co.uk
+DOMAIN-SUFFIX,bbcmedia.co.uk
+DOMAIN-SUFFIX,bbc.in
+DOMAIN-SUFFIX,bbcfmt.s.llnwi.net
+DOMAIN-SUFFIX,bbcfmt.vo.llnwd.net
+DOMAIN-SUFFIX,tritondigital.com
+
 # AbemaTV
 DOMAIN-SUFFIX,abema-tv.com
 DOMAIN-SUFFIX,abema.io
@@ -56,15 +66,6 @@ DOMAIN-SUFFIX,hotstarext.com
 DOMAIN-SUFFIX,starott.com
 DOMAIN-SUFFIX,starplus.com
 
-# General
-DOMAIN-SUFFIX,bbc.co.uk
-DOMAIN-SUFFIX,bbc.com
-DOMAIN-SUFFIX,bbci.co.uk
-DOMAIN-SUFFIX,bbcmedia.co.uk
-DOMAIN-SUFFIX,bbc.in
-DOMAIN-SUFFIX,bbcfmt.s.llnwi.net
-DOMAIN-SUFFIX,bbcfmt.vo.llnwd.net
-
 # HBO Max
 DOMAIN-SUFFIX,cinemax.com
 DOMAIN-SUFFIX,discomax.com
@@ -107,6 +108,36 @@ DOMAIN-SUFFIX,telasa.jp
 DOMAIN-SUFFIX,tver.jp
 DOMAIN-SUFFIX,unext.jp
 
+# Paramount+
+DOMAIN-SUFFIX,cbs.com
+DOMAIN-SUFFIX,cbsaavideo.com
+DOMAIN-SUFFIX,cbsi.com
+DOMAIN-SUFFIX,cbsiam.com
+DOMAIN-SUFFIX,cbsig.net
+DOMAIN-SUFFIX,cbsivideo.com
+DOMAIN-SUFFIX,cbsnews.com
+DOMAIN-SUFFIX,cbspressexpress.com
+DOMAIN-SUFFIX,cbsplaylist.com
+DOMAIN-SUFFIX,cbsstat.com
+DOMAIN-SUFFIX,paramount.com
+DOMAIN-SUFFIX,paramountplus.com
+DOMAIN-SUFFIX,pplus.network
+DOMAIN-SUFFIX,pplusstatic.com
+
+# Peacock
+DOMAIN-SUFFIX,peacock.com
+DOMAIN-SUFFIX,peacocktv.com
+
+# Prime Video
+DOMAIN-SUFFIX,aiv-cdn.net
+DOMAIN-SUFFIX,aiv-delivery.net
+DOMAIN-SUFFIX,amazonvideo.com
+DOMAIN-SUFFIX,atv-ps.amazon.com
+DOMAIN-SUFFIX,media-amazon.com
+DOMAIN-SUFFIX,prime-video.com
+DOMAIN-SUFFIX,primevideo.com
+DOMAIN-SUFFIX,pv-cdn.net
+
 # Streaming Music
 DOMAIN-SUFFIX,audiomack.com
 DOMAIN-SUFFIX,bandcamp.com
@@ -146,26 +177,6 @@ DOMAIN-SUFFIX,nflxsearch.net
 DOMAIN-SUFFIX,nflxso.net
 DOMAIN-SUFFIX,nflxvideo.net
 
-# Paramount+
-DOMAIN-SUFFIX,cbs.com
-DOMAIN-SUFFIX,cbsaavideo.com
-DOMAIN-SUFFIX,cbsi.com
-DOMAIN-SUFFIX,cbsiam.com
-DOMAIN-SUFFIX,cbsig.net
-DOMAIN-SUFFIX,cbsivideo.com
-DOMAIN-SUFFIX,cbsnews.com
-DOMAIN-SUFFIX,cbspressexpress.com
-DOMAIN-SUFFIX,cbsplaylist.com
-DOMAIN-SUFFIX,cbsstat.com
-DOMAIN-SUFFIX,paramount.com
-DOMAIN-SUFFIX,paramountplus.com
-DOMAIN-SUFFIX,pplus.network
-DOMAIN-SUFFIX,pplusstatic.com
-
-# Peacock
-DOMAIN-SUFFIX,peacock.com
-DOMAIN-SUFFIX,peacocktv.com
-
 # Podcasts
 DOMAIN-SUFFIX,buzzsprout.com
 DOMAIN-SUFFIX,castbox.fm
@@ -182,16 +193,6 @@ DOMAIN-SUFFIX,podtrac.com
 DOMAIN-SUFFIX,simplecast.com
 DOMAIN-SUFFIX,simplecastaudio.com
 DOMAIN-SUFFIX,transistor.fm
-
-# Prime Video
-DOMAIN-SUFFIX,aiv-cdn.net
-DOMAIN-SUFFIX,aiv-delivery.net
-DOMAIN-SUFFIX,amazonvideo.com
-DOMAIN-SUFFIX,atv-ps.amazon.com
-DOMAIN-SUFFIX,media-amazon.com
-DOMAIN-SUFFIX,prime-video.com
-DOMAIN-SUFFIX,primevideo.com
-DOMAIN-SUFFIX,pv-cdn.net
 
 # Spotify
 DOMAIN-SUFFIX,audio-ak-spotify-com.akamaized.net

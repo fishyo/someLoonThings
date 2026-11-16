@@ -1,4 +1,0 @@
-# Bilibili TV
-bilibili.tv
-biliintl.com
-bstarstatic.com

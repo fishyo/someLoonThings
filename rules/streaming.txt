@@ -1,3 +1,13 @@
+# General
+bbc.co.uk
+bbc.com
+bbci.co.uk
+bbcmedia.co.uk
+bbc.in
+bbcfmt.s.llnwi.net
+bbcfmt.vo.llnwd.net
+tritondigital.com
+
 # AbemaTV
 abema-tv.com
 abema.io
@@ -53,15 +63,6 @@ hotstarext.com
 starott.com
 starplus.com
 
-# General
-bbc.co.uk
-bbc.com
-bbci.co.uk
-bbcmedia.co.uk
-bbc.in
-bbcfmt.s.llnwi.net
-bbcfmt.vo.llnwd.net
-
 # HBO Max
 cinemax.com
 discomax.com
@@ -104,6 +105,36 @@ telasa.jp
 tver.jp
 unext.jp
 
+# Paramount+
+cbs.com
+cbsaavideo.com
+cbsi.com
+cbsiam.com
+cbsig.net
+cbsivideo.com
+cbsnews.com
+cbspressexpress.com
+cbsplaylist.com
+cbsstat.com
+paramount.com
+paramountplus.com
+pplus.network
+pplusstatic.com
+
+# Peacock
+peacock.com
+peacocktv.com
+
+# Prime Video
+aiv-cdn.net
+aiv-delivery.net
+amazonvideo.com
+atv-ps.amazon.com
+media-amazon.com
+prime-video.com
+primevideo.com
+pv-cdn.net
+
 # Streaming Music
 audiomack.com
 bandcamp.com
@@ -143,26 +174,6 @@ nflxsearch.net
 nflxso.net
 nflxvideo.net
 
-# Paramount+
-cbs.com
-cbsaavideo.com
-cbsi.com
-cbsiam.com
-cbsig.net
-cbsivideo.com
-cbsnews.com
-cbspressexpress.com
-cbsplaylist.com
-cbsstat.com
-paramount.com
-paramountplus.com
-pplus.network
-pplusstatic.com
-
-# Peacock
-peacock.com
-peacocktv.com
-
 # Podcasts
 buzzsprout.com
 castbox.fm
@@ -179,16 +190,6 @@ podtrac.com
 simplecast.com
 simplecastaudio.com
 transistor.fm
-
-# Prime Video
-aiv-cdn.net
-aiv-delivery.net
-amazonvideo.com
-atv-ps.amazon.com
-media-amazon.com
-prime-video.com
-primevideo.com
-pv-cdn.net
 
 # Spotify
 audio-ak-spotify-com.akamaized.net

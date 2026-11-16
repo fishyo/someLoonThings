@@ -6,3 +6,131 @@ bbcmedia.co.uk
 bbc.in
 bbcfmt.s.llnwi.net
 bbcfmt.vo.llnwd.net
+tritondigital.com
+
+# AbemaTV
+abema-tv.com
+abema.io
+abema.tv
+abematv.akamaized.net
+ameba.jp
+amebame.com
+amebaownd.com
+amebaowndme.com
+bucketeer.jp
+hayabusa.dev
+hayabusa.io
+hayabusa.media
+winticket.jp
+
+# Bahamut
+bahamut.akamaized.net
+bahamut.com.tw
+gamer.com.tw
+vibsl.akadns.net
+
+# Bilibili TV
+bilibili.tv
+biliintl.com
+bstarstatic.com
+
+# Crunchyroll
+crunchyroll.com
+crunchyrollsvc.com
+vrv.co
+
+# DAZN
+d151aohkq4wheq.cloudfront.net
+d1sgwhnao7452x.cloudfront.net
+dazn-api.com
+dazn.com
+dazndn.com
+indazn.com
+indaznlab.com
+innovid.com
+
+# Disney+
+bamgrid.com
+disney-plus.net
+disney-portal.my.onetrust.com
+disneyplus.bn5x.net
+disneyplus.com
+disneystreaming.com
+dssedge.com
+dssott.com
+hotstar.com
+hotstarext.com
+starott.com
+starplus.com
+
+# HBO Max
+cinemax.com
+discomax.com
+h264.io
+hbo.com
+hboasia.com
+hbogo.com
+hbogoasia.com
+hbogoasia.hk
+hbomax.com
+hbomaxcdn.com
+hbomaxdash.s.llnwi.net
+hbonow.com
+max.com
+maxgo.com
+warnermediacdn.com
+
+# Hulu
+callstats.io
+cws-hulu.conviva.com
+happyon.jp
+hjholdings.jp
+hulu.com
+hulu.hb.omtrdc.net
+hulu.jp
+hulu.sc.omtrdc.net
+huluad.com
+hulustream.com
+
+# Japan TV
+dmc.nico
+fod.fujitv.co.jp
+nhk.or.jp
+nicovideo.jp
+nimg.jp
+nxtv.jp
+radiko.jp
+smartstream.ne.jp
+telasa.jp
+tver.jp
+unext.jp
+
+# Paramount+
+cbs.com
+cbsaavideo.com
+cbsi.com
+cbsiam.com
+cbsig.net
+cbsivideo.com
+cbsnews.com
+cbspressexpress.com
+cbsplaylist.com
+cbsstat.com
+paramount.com
+paramountplus.com
+pplus.network
+pplusstatic.com
+
+# Peacock
+peacock.com
+peacocktv.com
+
+# Prime Video
+aiv-cdn.net
+aiv-delivery.net
+amazonvideo.com
+atv-ps.amazon.com
+media-amazon.com
+prime-video.com
+primevideo.com
+pv-cdn.net
