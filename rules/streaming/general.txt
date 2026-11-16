@@ -1,0 +1,8 @@
+# General
+bbc.co.uk
+bbc.com
+bbci.co.uk
+bbcmedia.co.uk
+bbc.in
+bbcfmt.s.llnwi.net
+bbcfmt.vo.llnwd.net
