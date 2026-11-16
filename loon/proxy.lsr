@@ -440,13 +440,6 @@ DOMAIN-SUFFIX,twitterstat.us
 DOMAIN-SUFFIX,cms-twdigitalassets.com
 
 # General
-DOMAIN-SUFFIX,bbc.co.uk
-DOMAIN-SUFFIX,bbc.com
-DOMAIN-SUFFIX,bbci.co.uk
-DOMAIN-SUFFIX,bbcmedia.co.uk
-DOMAIN-SUFFIX,bbc.in
-DOMAIN-SUFFIX,bbcfmt.s.llnwi.net
-DOMAIN-SUFFIX,bbcfmt.vo.llnwd.net
 DOMAIN-SUFFIX,tritondigital.com
 
 # AbemaTV
@@ -1068,6 +1061,8 @@ DOMAIN-SUFFIX,annas-archive.se
 DOMAIN-SUFFIX,apnews.com
 DOMAIN-SUFFIX,arstechnica.com
 DOMAIN-SUFFIX,arxiv.org
+DOMAIN-SUFFIX,bbc.com
+DOMAIN-SUFFIX,bbci.co.uk
 DOMAIN-SUFFIX,bloomberg.com
 DOMAIN-SUFFIX,cfr.org
 DOMAIN-SUFFIX,chinatimes.com
@@ -1346,6 +1341,11 @@ DOMAIN-SUFFIX,spaceship.com
 
 
 # Streaming - General
+DOMAIN-SUFFIX,bbc.co.uk
+DOMAIN-SUFFIX,bbcmedia.co.uk
+DOMAIN-SUFFIX,bbc.in
+DOMAIN-SUFFIX,bbcfmt.s.llnwi.net
+DOMAIN-SUFFIX,bbcfmt.vo.llnwd.net
 DOMAIN-SUFFIX,acast.com
 DOMAIN-SUFFIX,aca.st
 DOMAIN-SUFFIX,podchaser.com
