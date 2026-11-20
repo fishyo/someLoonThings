@@ -78,9 +78,11 @@ payload:
   - DOMAIN-SUFFIX,midjourney.com
 
   # AI Models
+  - DOMAIN-SUFFIX,baseten.co
   - DOMAIN-SUFFIX,cerebras.ai
   - DOMAIN-SUFFIX,cohere.ai
   - DOMAIN-SUFFIX,cohere.com
+  - DOMAIN-SUFFIX,deepinfra.com
   - DOMAIN-SUFFIX,fal.ai
   - DOMAIN-SUFFIX,fireworks.ai
   - DOMAIN-SUFFIX,hf.co
@@ -89,13 +91,17 @@ payload:
   - DOMAIN-SUFFIX,lmarena.ai
   - DOMAIN-SUFFIX,mistral.ai
   - DOMAIN-SUFFIX,mistral.com
+  - DOMAIN-SUFFIX,modal.com
   - DOMAIN-SUFFIX,models.dev
   - DOMAIN-SUFFIX,replicate.com
   - DOMAIN-SUFFIX,replicate.delivery
+  - DOMAIN-SUFFIX,runpod.io
+  - DOMAIN-SUFFIX,runpod.net
   - DOMAIN-SUFFIX,together.ai
   - DOMAIN-SUFFIX,together.xyz
   - DOMAIN-SUFFIX,v0.app
   - DOMAIN-SUFFIX,v0.dev
+  - DOMAIN-SUFFIX,vast.ai
 
   # OpenAI
   - DOMAIN-SUFFIX,chat.com

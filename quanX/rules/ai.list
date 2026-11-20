@@ -77,9 +77,11 @@ host-suffix, udio.com, proxy
 host-suffix, midjourney.com, proxy
 
 # AI Models
+host-suffix, baseten.co, proxy
 host-suffix, cerebras.ai, proxy
 host-suffix, cohere.ai, proxy
 host-suffix, cohere.com, proxy
+host-suffix, deepinfra.com, proxy
 host-suffix, fal.ai, proxy
 host-suffix, fireworks.ai, proxy
 host-suffix, hf.co, proxy
@@ -88,13 +90,17 @@ host-suffix, huggingface.co, proxy
 host-suffix, lmarena.ai, proxy
 host-suffix, mistral.ai, proxy
 host-suffix, mistral.com, proxy
+host-suffix, modal.com, proxy
 host-suffix, models.dev, proxy
 host-suffix, replicate.com, proxy
 host-suffix, replicate.delivery, proxy
+host-suffix, runpod.io, proxy
+host-suffix, runpod.net, proxy
 host-suffix, together.ai, proxy
 host-suffix, together.xyz, proxy
 host-suffix, v0.app, proxy
 host-suffix, v0.dev, proxy
+host-suffix, vast.ai, proxy
 
 # OpenAI
 host-suffix, chat.com, proxy

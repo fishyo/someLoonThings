@@ -10,10 +10,10 @@ tv.apple.com
 
 # Cloudflare
 cf-ipfs.com
-keyword: cloudflare
 cloudflarestream.com
 cloudflareworkers.com
 exact: one.one.one.one
+keyword: cloudflare
 pages.dev
 videodelivery.net
 warp.plus
@@ -33,6 +33,7 @@ apkpure.com
 aptoide.com
 archlinux.org
 astral.sh
+astro.build
 atl-paas.net
 atlassian.com
 atlassian.net
@@ -62,6 +63,7 @@ distrowatch.com
 do.co
 docker.com
 docker.io
+drizzle.team
 expo.dev
 expo.io
 f-droid.org
@@ -69,11 +71,15 @@ flutter.dev
 fly.dev
 fly.io
 getcomposer.org
+ghostty.org
 git-scm.com
 gitbook.io
 gitkraken.com
 gitlab.com
 gitlab.io
+gitpod.io
+glitch.com
+glitch.me
 go.dev
 golang.org
 gradle.org
@@ -92,18 +98,24 @@ jsr.io
 k8s.io
 kaggle.com
 kernel.org
+keyword: vercel
+koyeb.com
 linear.app
 linode.com
+lucide.dev
 maven.org
 neon.tech
 netlify.app
 netlify.com
+nextjs.org
 ngrok.com
 ngrok.io
 nixos.org
 npmjs.com
 npmjs.org
 nuget.org
+opentofu.org
+orbstack.dev
 ovh.com
 ovhcloud.com
 packagecontrol.io
@@ -116,6 +128,7 @@ pub.dev
 pypi.org
 pythonhosted.org
 quay.io
+radix-ui.com
 railway.app
 raycast.com
 readme.io
@@ -128,6 +141,10 @@ rust-lang.org
 scaleway.com
 sentry.io
 serverfault.com
+shadcn.com
+snyk.io
+solidjs.com
+sonarcloud.io
 sourcegraph.com
 stackblitz.com
 stackexchange.com
@@ -136,21 +153,25 @@ sublimetext.com
 supabase.co
 supabase.com
 superuser.com
+svelte.dev
+tailwindcss.com
 tampermonkey.net
+termius.com
 terraform.io
 trello.com
 turso.tech
 typora.io
 upstash.com
-keyword: vercel
 vercel.app
 vercel.com
 visualstudio.com
 vscode-cdn.net
 vscode-unpkg.net
 vultr.com
+warp.dev
 yarnpkg.com
 zeabur.com
+zed.dev
 zen-browser.app
 
 # Entertainment
@@ -285,39 +306,17 @@ google.com
 google.com.hk
 google.com.sg
 google.com.tw
+googleapis.com
 googleblog.com
 googledrive.com
 googlehosted.com
 googlemail.com
-googleapis.com
 googleusercontent.com
 gstatic.com
 gvt1.com
 gvt2.com
 run.app
 withgoogle.com
-
-# Mozilla
-bugzilla.org
-firefox.com
-firefox.com.cn
-firefoxusercontent.com
-getpocket.com
-keyword: firefox
-moz.dev
-mozilla.com
-mozilla.net
-mozilla.org
-mozillafoundation.org
-mozillastatic.com
-mozillavpn.com
-mozillians.org
-mozphab.dev
-mozaws.net
-mozflare.net
-mzl.la
-pocket.com
-thunderbird.net
 
 # Infrastructure
 airalo.com
@@ -356,6 +355,7 @@ fastlylb.net
 fonts.googleapis.com
 giphy.com
 gofile.io
+grafana.com
 hcaptcha.com
 icanhazip.com
 ifconfig.co
@@ -372,12 +372,14 @@ iplocation.net
 is.gd
 jsdelivr.net
 link.com
+namesilo.com
 nxtrace.org
 ow.ly
 pastebin.com
 paypal.com
 paypalobjects.com
 pixeldrain.com
+porkbun.com
 rebrand.ly
 recaptcha.net
 rentry.co
@@ -393,6 +395,28 @@ unpkg.com
 unsplash.com
 whatismyipaddress.com
 wise.com
+
+# Mozilla
+bugzilla.org
+firefox.com
+firefox.com.cn
+firefoxusercontent.com
+getpocket.com
+keyword: firefox
+moz.dev
+mozaws.net
+mozflare.net
+mozilla.com
+mozilla.net
+mozilla.org
+mozillafoundation.org
+mozillastatic.com
+mozillavpn.com
+mozillians.org
+mozphab.dev
+mzl.la
+pocket.com
+thunderbird.net
 
 # News
 abc.net.au
@@ -412,7 +436,6 @@ chinatimes.com
 cna.com.tw
 cnbc.com
 cnn.com
-keyword: deutschewelle
 dw-world.de
 dw.com
 dw.de
@@ -430,6 +453,7 @@ guardianapis.com
 guim.co.uk
 ieee.org
 jstor.org
+keyword: deutschewelle
 latimes.com
 libgen.is
 libgen.li
@@ -488,7 +512,10 @@ zaobao.com.sg
 # Productivity
 airtable.com
 asana.com
+basecamp.com
 box.com
+cal.com
+calendly.com
 canva.com
 clickup.com
 coda.io
@@ -498,18 +525,23 @@ dropboxapi.com
 dropboxstatic.com
 dropboxusercontent.com
 evernote.com
+excalidraw.com
 fantia.jp
 feedly.com
 feedly.net
 feedlycdn.com
 feedlylabs.com
 figma.com
+folo.is
+framer.com
+framermedia.com
 grammarly.com
 gumroad.com
 inoreader.com
 inoreader.net
 instapaper.com
 ko-fi.com
+loom.com
 lucid.app
 lucidchart.com
 mediafire.com
@@ -531,9 +563,14 @@ skyscanner.com
 skyscanner.net
 slack-edge.com
 slack.com
+superlist.com
+tally.so
 terabox.com
+todoist.com
 tripadvisor.com
+webflow.com
 wetransfer.com
+whimsical.com
 zoom.com
 zoom.us
 
@@ -560,23 +597,29 @@ yandex.ru
 1password.com
 1password.eu
 1passwordservices.com
+abuseipdb.com
 adguard-dns.io
 adguard.com
 adrules.top
 bitwarden.com
 bitwarden.net
+brave-software.com
+brave.com
 censys.io
 clashverge.dev
 cock.li
+controld.com
 dashlane.com
 ente.io
 expressvpn.com
-keyword: hysteria
+haveibeenpwned.com
 keepassxc.org
+keyword: hysteria
 lastpass.com
 mailbox.org
 metacubex.one
 mullvad.net
+netbird.io
 nextdns.io
 nordvpn.com
 nsloon.app
@@ -597,10 +640,12 @@ tailscale.com
 torproject.org
 tuta.com
 tutanota.com
+urlscan.io
 v2fly.org
 v2ray.com
 virustotal.com
 wireguard.com
+yubico.com
 zerotier.com
 
 # Social
@@ -609,7 +654,6 @@ zerotier.com
 500px.net
 500px.org
 5ch.net
-keyword: blogimg
 bsky.app
 bsky.network
 bsky.social
@@ -623,12 +667,13 @@ joinclubhouse.com
 kakao.com
 kakaocdn.net
 kakaotalk.com
+keyword: blogimg
 keyword: ldblog
+keyword: livedoor
 line-apps.com
 line-scdn.net
 line.me
 linktr.ee
-keyword: livedoor
 mastodon.social
 matrix.org
 matters.news
@@ -641,7 +686,6 @@ quoracdn.net
 sc-cdn.net
 session.org
 signal.org
-whispersystems.org
 snap.com
 snapchat.com
 staticflickr.com
@@ -651,6 +695,7 @@ vimeo.com
 vimeocdn.com
 vk.com
 vk.me
+whispersystems.org
 wordpress.com
 wp.com
 
@@ -666,20 +711,18 @@ hitomi.la
 javbus.com
 javdb.com
 javlibrary.com
+kelee.one
 keyword: missav
+keyword: thepiratebay
 nhentai.net
+olevod.com
 onlyfans.com
 phncdn.com
 phprcdn.com
 pornhub.com
 pornhubpremium.com
+spaceship.com
 surrit.com
 t66y.com
-keyword: thepiratebay
 xnxx.com
 xvideos.com
-kelee.one
-olevod.com
-spaceship.com
-superlist.com
-folo.is
