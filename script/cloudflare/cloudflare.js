@@ -1,20 +1,20 @@
 /**
- * Cloudflare Workers 免费额度与用量定时监控
+ * Cloudflare Workers free quota and usage monitor.
  * 
- * 适用于 Loon 与 Quantumult X 双端
+ * Compatible with Loon and Quantumult X.
  * 
- * 配置优先级:
- * 1. BoxJS / 本地持久化存储 (cloudflare.accountTag & cloudflare.apiToken)
- * 2. Loon 插件参数 ($argument)
+ * Configuration priority:
+ * 1. BoxJS / local persistent storage (cloudflare.accountTag & cloudflare.apiToken)
+ * 2. Loon plugin argument ($argument)
  * 
- * 监控指标:
- * - 每日请求总数 (免费额度 100,000 次/天，UTC 00:00 重置)
- * - 剩余可用请求数、已用百分比进度条
- * - 子请求数 (Sub-requests)
- * - 运行时异常数 (Errors)
+ * Monitored metrics:
+ * - Daily request count (Free tier 100,000 requests/day, reset at UTC 00:00)
+ * - Remaining requests and usage progress bar
+ * - Sub-requests count
+ * - Runtime errors count
  */
 
-// 跨平台环境适配层 (遵循 someLoonThings 规范)
+// Cross-platform environment adapter
 const $ = {
   read: (key) => {
     if (typeof $persistentStore !== "undefined") return $persistentStore.read(key);
@@ -56,7 +56,7 @@ const $ = {
   }
 };
 
-// 解析插件参数 ($argument)
+// Parse plugin arguments ($argument)
 function parseArgument() {
   if (typeof $argument === "undefined" || !$argument) return {};
   if (typeof $argument === "object") return $argument;
@@ -77,7 +77,7 @@ function parseArgument() {
   return {};
 }
 
-// 获取配置信息 (优先 BoxJS)
+// Retrieve configuration (BoxJS first)
 function getConfig() {
   const arg = parseArgument();
 
@@ -105,14 +105,14 @@ function getConfig() {
   };
 }
 
-// 敏感凭据掩码
+// Mask sensitive credentials
 function maskToken(str) {
   if (!str) return "";
   if (str.length <= 8) return "****";
   return str.substring(0, 4) + "...." + str.substring(str.length - 4);
 }
 
-// 进度条渲染
+// Render progress bar
 function makeProgressBar(percent, length = 8) {
   const p = Math.max(0, Math.min(100, percent));
   const filled = Math.round((p / 100) * length);
@@ -120,7 +120,7 @@ function makeProgressBar(percent, length = 8) {
   return "[" + "■".repeat(filled) + "·".repeat(empty) + "]";
 }
 
-// 数字千分位格式化
+// Format numbers with thousand separators
 function formatNumber(num) {
   return Number(num || 0).toLocaleString("en-US");
 }
@@ -150,7 +150,7 @@ function main() {
   console.log(`[配置] 告警阈值: ${config.alertThreshold}%`);
 
   const now = new Date();
-  // UTC 当天 00:00:00 开始
+  // Start at UTC 00:00:00
   const startUtc = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 0, 0, 0));
   console.log(`[统计区间] UTC ${startUtc.toISOString()} ~ ${now.toISOString()}`);
   console.log(`[请求] 正在查询 Cloudflare Workers GraphQL API...`);
@@ -209,8 +209,6 @@ function main() {
         const errMsg = json.errors.map(e => e.message).join("; ") || "GraphQL Error";
         console.error("❌ [API 报错]:", errMsg);
         $.notify(APP_TITLE, "❌ API 报错", errMsg);
-        console.log("==================================================");
-        $.done({});
         return;
       }
 
@@ -218,8 +216,6 @@ function main() {
       if (accounts.length === 0) {
         console.warn("⚠️ [未找到账户] 请核对配置的 Account ID 是否正确。");
         $.notify(APP_TITLE, "❌ 未找到对应账户", "请核对配置的 Account ID 是否正确。");
-        console.log("==================================================");
-        $.done({});
         return;
       }
 

@@ -1,12 +1,12 @@
 /**
- * 搬瓦工 (BandwagonHost) VPS 状态与流量查询
+ * BandwagonHost VPS status and traffic query script.
  * 
- * 配置优先级:
- * 1. BoxJS / 本地持久化存储 (bandwagon.veid & bandwagon.apiKey)
- * 2. Loon 插件参数 ($argument)
+ * Configuration priority:
+ * 1. BoxJS / local persistent storage (bandwagon.veid & bandwagon.apiKey)
+ * 2. Loon plugin argument ($argument)
  */
 
-// 跨平台环境适配
+// Cross-platform environment adapter
 const $ = {
   read: (key) => {
     if (typeof $persistentStore !== "undefined") return $persistentStore.read(key);
@@ -42,7 +42,7 @@ const $ = {
   }
 };
 
-// 解析插件参数 ($argument)
+// Parse plugin arguments ($argument)
 function parseArgument() {
   if (typeof $argument === "undefined" || !$argument) return {};
   if (typeof $argument === "object") return $argument;
@@ -63,16 +63,16 @@ function parseArgument() {
   return {};
 }
 
-// 获取配置信息 (优先 BoxJS)
+// Retrieve configuration (BoxJS first)
 function getConfig() {
   let apiKey = "";
   let veid = "";
 
-  // 1. 优先读取 BoxJS / 本地持久化存储 ($persistentStore / $prefs)
+  // 1. Read BoxJS / local persistent store ($persistentStore / $prefs) first
   apiKey = $.read("bandwagon.apiKey") || "";
   veid = $.read("bandwagon.veid") || "";
 
-  // 2. 回退读取 Loon 插件参数 ($argument)
+  // 2. Fallback to Loon plugin argument ($argument)
   if (!apiKey || !veid) {
     const arg = parseArgument();
     if (!apiKey && arg.apiKey && String(arg.apiKey).trim()) apiKey = String(arg.apiKey).trim();
@@ -84,7 +84,7 @@ function getConfig() {
   return { apiKey, veid };
 }
 
-// 查询 VPS 服务状态
+// Query VPS service info
 function getServiceInfo() {
   console.log("▶️ Starting Bandwagon Service Info Query...");
   const config = getConfig();
@@ -131,7 +131,7 @@ function getServiceInfo() {
         return;
       }
 
-      // 提取用量与状态
+      // Extract usage and status metrics
       const dataCounter = Number(jsonData.data_counter) || 0;
       const planMonthlyData = Number(jsonData.plan_monthly_data) || 0;
       const monthlyDataMultiplier = Number(jsonData.monthly_data_multiplier) || 1;
@@ -140,7 +140,7 @@ function getServiceInfo() {
         : "未知";
       const location = jsonData.node_location || "";
 
-      // 提取并分类 IPv4 / IPv6
+      // Extract and classify IPv4 / IPv6 addresses
       const rawIps = Array.isArray(jsonData.ip_addresses)
         ? jsonData.ip_addresses
         : (jsonData.ip_addresses ? String(jsonData.ip_addresses).split(",") : []);
@@ -153,7 +153,7 @@ function getServiceInfo() {
         else if (trimmed.includes(".")) ipv4List.push(trimmed);
       });
 
-      // 带宽与进度条计算 (防御除零与 NaN 隐患)
+      // Calculate bandwidth and progress bar
       const usedBandwidthGB = ((dataCounter * monthlyDataMultiplier) / (1024 * 1024 * 1024)).toFixed(2);
       const totalBandwidthGB = ((planMonthlyData * monthlyDataMultiplier) / (1024 * 1024 * 1024)).toFixed(2);
       const usageRatio = planMonthlyData > 0 ? (dataCounter / planMonthlyData) : 0;

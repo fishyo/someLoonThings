@@ -1,12 +1,12 @@
 /**
- * RackNerd VPS 运行状态与流量查询
+ * RackNerd VPS status and traffic query script.
  * 
- * 配置优先级:
- * 1. BoxJS / 本地持久化存储 (racknerd.apiKey & racknerd.apiHash)
- * 2. Loon 插件参数 ($argument)
+ * Configuration priority:
+ * 1. BoxJS / local persistent storage (racknerd.apiKey & racknerd.apiHash)
+ * 2. Loon plugin argument ($argument)
  */
 
-// 跨平台环境适配
+// Cross-platform environment adapter
 const $ = {
   read: (key) => {
     if (typeof $persistentStore !== "undefined") return $persistentStore.read(key);
@@ -42,7 +42,7 @@ const $ = {
   },
 };
 
-// 解析插件参数 ($argument)
+// Parse plugin arguments ($argument)
 function parseArgument() {
   if (typeof $argument === "undefined" || !$argument) return {};
   if (typeof $argument === "object") return $argument;
@@ -63,16 +63,16 @@ function parseArgument() {
   return {};
 }
 
-// 获取配置信息 (优先 BoxJS)
+// Retrieve configuration (BoxJS first)
 function getConfig() {
   let apiKey = "";
   let apiHash = "";
 
-  // 1. 优先读取 BoxJS / 本地持久化存储 ($persistentStore / $prefs)
+  // 1. Read BoxJS / local persistent store ($persistentStore / $prefs) first
   apiKey = $.read("racknerd.apiKey") || "";
   apiHash = $.read("racknerd.apiHash") || "";
 
-  // 2. 回退读取 Loon 插件参数 ($argument)
+  // 2. Fallback to Loon plugin argument ($argument)
   if (!apiKey || !apiHash) {
     const arg = parseArgument();
     if (!apiKey && arg.apiKey && String(arg.apiKey).trim()) apiKey = String(arg.apiKey).trim();
@@ -83,7 +83,7 @@ function getConfig() {
   return { apiKey, apiHash };
 }
 
-// 解析 XML 备用解析器
+// Fallback XML parser
 function parseXML(xmlString) {
   const result = {};
   if (!xmlString || typeof xmlString !== "string") return result;
@@ -95,7 +95,7 @@ function parseXML(xmlString) {
   return result;
 }
 
-// 查询 VPS 服务状态
+// Query VPS service info
 function getServiceInfo() {
   console.log("▶️ Starting RackNerd Service Info Query...");
   const config = getConfig();
@@ -167,7 +167,7 @@ function getServiceInfo() {
         return;
       }
 
-      // 资源指标解析 (total, used, free, percent)
+      // Parse resource metrics (total, used, free, percent)
       const parseResource = (str) => {
         if (!str) return { total: 0, used: 0, free: 0, percent: "0.00" };
         const parts = str.split(",").map(s => s.trim());
@@ -188,7 +188,7 @@ function getServiceInfo() {
         return { total, used, free, percent };
       };
 
-      // 字节单位格式化
+      // Format byte units
       const formatBytes = (bytes, decimals = 2) => {
         if (!bytes || bytes <= 0 || isNaN(bytes)) return "0 B";
         const k = 1024;
@@ -202,7 +202,7 @@ function getServiceInfo() {
       const memInfo = parseResource(resData.mem);
       const hddInfo = parseResource(resData.hdd);
 
-      // 提取并分类 IPv4 / IPv6
+      // Extract and classify IPv4 / IPv6 addresses
       const rawIpStr = resData.ipaddress || resData.ipaddr || resData.ip_address || "";
       const rawIps = String(rawIpStr).split(",").map((s) => s.trim()).filter(Boolean);
       const ipv4List = [];
@@ -216,7 +216,7 @@ function getServiceInfo() {
       const vmStatus = resData.vmstat || resData.statusmsg || "Unknown";
       const statusText = String(vmStatus).toLowerCase() === "online" ? "正常运行" : vmStatus;
 
-      // 进度条渲染
+      // Render progress bar
       const getProgressBar = (percent) => {
         const len = 10;
         const p = parseFloat(percent) || 0;

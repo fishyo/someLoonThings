@@ -1,12 +1,12 @@
 /**
- * 9bot - 每日自动签到
+ * 9bot daily automatic check-in script.
  * 
- * 依赖 9bot_cookie.js 获取的持久化 Cookie 数据。
- * 兼容支持 Loon 与 Quantumult X。
+ * Depends on persistent cookie data captured by 9bot_cookie.js.
+ * Compatible with Loon and Quantumult X.
  */
 
 ;(function () {
-  // 跨平台环境适配层 (Loon & Quantumult X)
+  // Cross-platform environment adapter (Loon & Quantumult X)
   const $ = {
     read: (key) => {
       if (typeof $persistentStore !== "undefined") return $persistentStore.read(key);
@@ -102,7 +102,7 @@
     return;
   }
 
-  // 通用请求头构建
+  // Build common request headers
   function getHeaders(withAuth = true) {
     const headers = {
       accept: "application/json, text/plain, */*",
@@ -116,7 +116,7 @@
     return headers;
   }
 
-  // 查询签到状态
+  // Query check-in status
   function querySignStatus(callback) {
     const finalUrl = `${APP.statusApi}?t=${Date.now()}`;
     const options = {
@@ -146,7 +146,7 @@
     });
   }
 
-  // 构建通知内容（遵循单色极简灰度风格）
+  // Build notification body
   function buildNotifyBody(statusData) {
     const parts = [];
     const days = statusData?.consecutiveDays || 0;
@@ -166,7 +166,7 @@
     return parts.join("\n");
   }
 
-  // 执行签到
+  // Execute check-in
   function sign(retryCount = 0) {
     const deviceId = cookieData.deviceId || "";
     const options = {
@@ -234,6 +234,6 @@
     });
   }
 
-  // 启动
+  // Start
   sign();
 })();

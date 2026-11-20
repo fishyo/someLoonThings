@@ -1,8 +1,8 @@
 /**
- * 9bot - Token / Cookie 捕获脚本
+ * 9bot token / cookie capture script.
  * 
- * 配合 ninebot.plugin 插件使用：开启【获取Cookie】开关后，打开 App 签到页即可自动捕获。
- * 兼容支持 Loon 与 Quantumult X。
+ * Works with ninebot.plugin: capture cookie on check-in page.
+ * Compatible with Loon and Quantumult X.
  */
 
 const $ = {
@@ -27,7 +27,7 @@ const $ = {
 const cookieKey = "9bot_cookie_data";
 const legacyCookieKey = "ninebot_cookie_data";
 
-// 仅在签到接口请求时进行捕获
+// Capture only on user-sign request
 if (typeof $request !== "undefined" && $request.url && /\/user-sign\/v\d+\/sign/.test($request.url)) {
   const headers = $request.headers || {};
   const authorization = headers["authorization"] || headers["Authorization"];

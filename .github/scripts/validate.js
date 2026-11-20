@@ -1,6 +1,6 @@
 /**
  * CI Validation Script for Loon & Quantumult X
- * 针对 Loon 与 Quantumult X 规则、插件、脚本与配置的自动化验证
+ * Automated validation for rules, plugins, scripts, and configurations.
  */
 
 const fs = require('fs');
@@ -41,7 +41,7 @@ function findFilesRecursive(dir, ext) {
 }
 
 // ==========================================
-// 1. Loon 插件与扩展校验 (.plugin / .lpx)
+// 1. Loon plugin and extension validation (.plugin / .lpx)
 // ==========================================
 console.log('\n--- 1. 验证 Loon 插件与扩展 (.plugin / .lpx) ---');
 const pluginDir = path.join(root, 'plugin');
@@ -51,13 +51,13 @@ if (fs.existsSync(pluginDir)) {
     const fullPath = path.join(pluginDir, file);
     const content = fs.readFileSync(fullPath, 'utf8');
 
-    // 检查元数据指令
+    // Check metadata directives
     const hasName = /^#!name\s*=/m.test(content);
     const hasDesc = /^#!desc\s*=/m.test(content);
     if (!hasName) logFail(`${file}: 缺少 #!name 元数据指令`);
     if (!hasDesc) logFail(`${file}: 缺少 #!desc 元数据指令`);
 
-    // 检查 MITM 与 Rewrite 闭环
+    // Check MITM and Rewrite closed loop
     const rewriteSection = content.match(/\[Rewrite\]([\s\S]*?)(?=\n\[|$)/i);
     const mitmSection = content.match(/\[Mitm\][\s\S]*?hostname\s*=\s*([^\r\n]+)/i);
     const mitmHosts = mitmSection ? mitmSection[1].split(',').map(s => s.trim()) : [];
@@ -92,7 +92,7 @@ if (fs.existsSync(pluginDir)) {
 }
 
 // ==========================================
-// 2. Loon 规则集校验 (.lsr)
+// 2. Loon ruleset validation (.lsr)
 // ==========================================
 console.log('\n--- 2. 验证 Loon 规则集 (.lsr) ---');
 const loonDir = path.join(root, 'loon');
@@ -131,7 +131,7 @@ if (fs.existsSync(loonDir)) {
 }
 
 // ==========================================
-// 3. Quantumult X 片段与规则校验 (quanX/)
+// 3. Quantumult X snippet and rule validation (quanX/)
 // ==========================================
 console.log('\n--- 3. 验证 Quantumult X 片段与规则 (quanX/) ---');
 const qxDir = path.join(root, 'quanX');
@@ -141,7 +141,7 @@ const validRuleTypesQX = new Set([
 ]);
 
 if (fs.existsSync(qxDir)) {
-  // 3.1 验证 .snippet（Quantumult X 原生远程复写片段规范）
+  // 3.1 Validate .snippet (Quantumult X remote rewrite snippet standard)
   const snippetFiles = fs.readdirSync(qxDir).filter(f => f.endsWith('.snippet'));
   for (const file of snippetFiles) {
     const lines = fs.readFileSync(path.join(qxDir, file), 'utf8').split('\n');
@@ -149,7 +149,7 @@ if (fs.existsSync(qxDir)) {
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i].trim();
       if (!line || line.startsWith('#') || line.startsWith(';')) continue;
-      // QX rewrite_remote 片段不能包含 [rewrite_local]、[task_local] 或 [mitm]，否则 QX 会报 invalid line
+      // QX rewrite_remote snippet cannot contain [rewrite_local], [task_local], or [mitm]
       if (/^\[(rewrite_local|task_local|mitm)\]/i.test(line)) {
         logFail(`quanX/${file} (第 ${i + 1} 行): 包含违规的分节符 [${line}]，QX 远程片段中不能包含此标签，必须直接编写规则或 hostname`);
         hasInvalidSection = true;
@@ -160,7 +160,7 @@ if (fs.existsSync(qxDir)) {
     }
   }
 
-  // 3.2 验证 rules/**/*.list
+  // 3.2 Validate rules/**/*.list
   const qxRulesDir = path.join(qxDir, 'rules');
   if (fs.existsSync(qxRulesDir)) {
     const listFiles = findFilesRecursive(qxRulesDir, '.list');
@@ -174,7 +174,7 @@ if (fs.existsSync(qxDir)) {
         lineIdx++;
         const line = rawLine.trim();
         if (!line || line.startsWith('#') || line.startsWith(';')) continue;
-        const cleanLine = line.replace(/^\{#[^#]+#\}\s*/, ''); // 兼容 QX Build 950+ 前置备注
+        const cleanLine = line.replace(/^\{#[^#]+#\}\s*/, ''); // Support QX Build 950+ prefix comment
         const parts = cleanLine.split(',').map(s => s.trim());
         const type = parts[0].toUpperCase();
         if (!validRuleTypesQX.has(type)) {
@@ -194,7 +194,7 @@ if (fs.existsSync(qxDir)) {
     }
   }
 
-  // 3.3 验证 gallery.json (Quantumult X 任务画廊)
+  // 3.3 Validate gallery.json (Quantumult X task gallery)
   const galleryPath = path.join(qxDir, 'gallery.json');
   if (fs.existsSync(galleryPath)) {
     try {
@@ -216,7 +216,7 @@ if (fs.existsSync(qxDir)) {
 }
 
 // ==========================================
-// 4. Mihomo 规则与 BoxJS 订阅校验
+// 4. Mihomo ruleset and BoxJS validation
 // ==========================================
 console.log('\n--- 4. 验证 Mihomo / Clash 规则集与 BoxJS ---');
 const mihomoDir = path.join(root, 'mihomo');
@@ -248,7 +248,7 @@ if (fs.existsSync(boxjsPath)) {
 }
 
 // ==========================================
-// 5. 跨端契约沙盒仿真 (Loon vs Quantumult X)
+// 5. Cross-platform sandbox simulation (Loon vs Quantumult X)
 // ==========================================
 console.log('\n--- 5. 跨端沙盒契约仿真与本地 $prefs 持久化验证 ---');
 
@@ -342,7 +342,7 @@ for (const rel of scriptsToVerify) {
   }
   const code = fs.readFileSync(scriptPath, 'utf8');
 
-  // 1. 语法检查
+  // 1. Syntax check
   try {
     new vm.Script(code, { filename: rel });
   } catch (err) {
@@ -350,7 +350,7 @@ for (const rel of scriptsToVerify) {
     continue;
   }
 
-  // 2. Loon 纯净环境沙盒验证
+  // 2. Loon sandbox verification
   try {
     const loonCtx = createLoonContext(mockReq);
     vm.runInContext(code, loonCtx, { filename: rel, timeout: 1000 });
@@ -359,7 +359,7 @@ for (const rel of scriptsToVerify) {
     logFail(`${rel}: Loon 沙盒异常`, err.message);
   }
 
-  // 3. Quantumult X 纯净环境沙盒 (验证优先读取 BoxJS $prefs 配置)
+  // 3. Quantumult X sandbox verification (verify BoxJS $prefs priority)
   try {
     const { ctx, prefs } = createQXContext(mockReq);
     vm.runInContext(code, ctx, { filename: rel, timeout: 1000 });
