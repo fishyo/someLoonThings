@@ -157,6 +157,7 @@ payload:
   - DOMAIN-SUFFIX,windsurf.ai
   - DOMAIN-SUFFIX,windsurf.com
   - DOMAIN-SUFFIX,you.com
+  - DOMAIN-SUFFIX,agentmail.to
 
   # Nintendo
   - DOMAIN-SUFFIX,nintendo-europe.com
