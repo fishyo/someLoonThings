@@ -1,11 +1,16 @@
-# App Store
-itunes.apple.com
-apps.apple.com
-appsto.re
+# policy: direct
+# App Store & Apple Services
+
+# Core domains (suffix match covers all subdomains)
+apple.com
+apple.com.cn
+icloud.com
+icloud.com.cn
+icloud-content.com
 mzstatic.com
 cdn-apple.com
 aaplimg.com
 apple-dns.net
-swcdn.apple.com
-apple.com.cn
-icloud.com.cn
+
+# App Store links
+appsto.re

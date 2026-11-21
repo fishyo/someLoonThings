@@ -1,14 +1,19 @@
 # Title: App Store Direct Ruleset
 # Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
 
-# App Store
-host-suffix, itunes.apple.com, direct
-host-suffix, apps.apple.com, direct
-host-suffix, appsto.re, direct
+# policy: direct
+# App Store & Apple Services
+
+# Core domains (suffix match covers all subdomains)
+host-suffix, apple.com, direct
+host-suffix, apple.com.cn, direct
+host-suffix, icloud.com, direct
+host-suffix, icloud.com.cn, direct
+host-suffix, icloud-content.com, direct
 host-suffix, mzstatic.com, direct
 host-suffix, cdn-apple.com, direct
 host-suffix, aaplimg.com, direct
 host-suffix, apple-dns.net, direct
-host-suffix, swcdn.apple.com, direct
-host-suffix, apple.com.cn, direct
-host-suffix, icloud.com.cn, direct
+
+# App Store links
+host-suffix, appsto.re, direct

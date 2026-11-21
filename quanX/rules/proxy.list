@@ -666,15 +666,10 @@ host-suffix, youtubekids.com, proxy
 host-suffix, yt.be, proxy
 host-suffix, ytimg.com, proxy
 
-# Apple
-host-suffix, apple.news, proxy
-host-suffix, books.apple.com, proxy
-host-suffix, mask-api.icloud.com, proxy
-host-suffix, mask-h2.icloud.com, proxy
-host-suffix, mask.icloud.com, proxy
-host-suffix, news.apple.com, proxy
-host-suffix, testflight.apple.com, proxy
+# Apple Region-Locked Services (unavailable in mainland China, need proxy)
 host-suffix, tv.apple.com, proxy
+host-suffix, apple.news, proxy
+host-suffix, news.apple.com, proxy
 
 # Cloudflare
 host-suffix, cf-ipfs.com, proxy

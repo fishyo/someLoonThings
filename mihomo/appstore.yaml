@@ -2,14 +2,19 @@
 # Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
 
 payload:
-  # App Store
-  - DOMAIN-SUFFIX,itunes.apple.com
-  - DOMAIN-SUFFIX,apps.apple.com
-  - DOMAIN-SUFFIX,appsto.re
+  # policy: direct
+  # App Store & Apple Services
+
+  # Core domains (suffix match covers all subdomains)
+  - DOMAIN-SUFFIX,apple.com
+  - DOMAIN-SUFFIX,apple.com.cn
+  - DOMAIN-SUFFIX,icloud.com
+  - DOMAIN-SUFFIX,icloud.com.cn
+  - DOMAIN-SUFFIX,icloud-content.com
   - DOMAIN-SUFFIX,mzstatic.com
   - DOMAIN-SUFFIX,cdn-apple.com
   - DOMAIN-SUFFIX,aaplimg.com
   - DOMAIN-SUFFIX,apple-dns.net
-  - DOMAIN-SUFFIX,swcdn.apple.com
-  - DOMAIN-SUFFIX,apple.com.cn
-  - DOMAIN-SUFFIX,icloud.com.cn
+
+  # App Store links
+  - DOMAIN-SUFFIX,appsto.re

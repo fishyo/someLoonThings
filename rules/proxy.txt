@@ -1,12 +1,7 @@
-# Apple
-apple.news
-books.apple.com
-mask-api.icloud.com
-mask-h2.icloud.com
-mask.icloud.com
-news.apple.com
-testflight.apple.com
+# Apple Region-Locked Services (unavailable in mainland China, need proxy)
 tv.apple.com
+apple.news
+news.apple.com
 
 # Cloudflare
 cf-ipfs.com

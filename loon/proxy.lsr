@@ -666,15 +666,10 @@ DOMAIN-SUFFIX,youtubekids.com
 DOMAIN-SUFFIX,yt.be
 DOMAIN-SUFFIX,ytimg.com
 
-# Apple
-DOMAIN-SUFFIX,apple.news
-DOMAIN-SUFFIX,books.apple.com
-DOMAIN-SUFFIX,mask-api.icloud.com
-DOMAIN-SUFFIX,mask-h2.icloud.com
-DOMAIN-SUFFIX,mask.icloud.com
-DOMAIN-SUFFIX,news.apple.com
-DOMAIN-SUFFIX,testflight.apple.com
+# Apple Region-Locked Services (unavailable in mainland China, need proxy)
 DOMAIN-SUFFIX,tv.apple.com
+DOMAIN-SUFFIX,apple.news
+DOMAIN-SUFFIX,news.apple.com
 
 # Cloudflare
 DOMAIN-SUFFIX,cf-ipfs.com
