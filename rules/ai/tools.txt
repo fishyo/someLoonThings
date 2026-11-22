@@ -33,3 +33,4 @@ windsurf.ai
 windsurf.com
 you.com
 agentmail.to
+open.bot
