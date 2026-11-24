@@ -35,3 +35,4 @@ you.com
 agentmail.to
 open.bot
 mausbot.com
+openbot.run
