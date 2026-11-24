@@ -159,3 +159,4 @@ host-suffix, you.com, proxy
 host-suffix, agentmail.to, proxy
 host-suffix, open.bot, proxy
 host-suffix, mausbot.com, proxy
+host-suffix, openbot.run, proxy

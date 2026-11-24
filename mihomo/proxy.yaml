@@ -160,6 +160,7 @@ payload:
   - DOMAIN-SUFFIX,agentmail.to
   - DOMAIN-SUFFIX,open.bot
   - DOMAIN-SUFFIX,mausbot.com
+  - DOMAIN-SUFFIX,openbot.run
 
   # Nintendo
   - DOMAIN-SUFFIX,nintendo-europe.com
