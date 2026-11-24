@@ -34,3 +34,4 @@ windsurf.com
 you.com
 agentmail.to
 open.bot
+mausbot.com
