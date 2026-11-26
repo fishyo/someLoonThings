@@ -1,6 +1,28 @@
 # Title: Game Services Ruleset
 # Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
 
+# General
+host-suffix, battle.net, proxy
+host-suffix, blizzard.com, proxy
+host-suffix, curseforge.com, proxy
+host-suffix, ea.com, proxy
+host-suffix, epicgames.com, proxy
+host-suffix, gog.com, proxy
+host-suffix, itch.io, proxy
+host-suffix, leagueoflegends.com, proxy
+host-suffix, minecraft.net, proxy
+host-suffix, mojang.com, proxy
+host-suffix, nexusmods.com, proxy
+host-suffix, origin.com, proxy
+host-suffix, rbxcdn.com, proxy
+host-suffix, riotgames.com, proxy
+host-suffix, roblox.com, proxy
+host-suffix, royaleapi.com, proxy
+host-suffix, ubisoft.com, proxy
+host-suffix, unrealengine.com, proxy
+host-suffix, uplay.com, proxy
+host-suffix, vrchat.com, proxy
+
 # Nintendo
 host-suffix, nintendo-europe.com, proxy
 host-suffix, nintendo.com, proxy

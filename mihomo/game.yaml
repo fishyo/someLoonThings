@@ -2,6 +2,28 @@
 # Maintainer: fishyo (https://github.com/fishyo/someLoonThings)
 
 payload:
+  # General
+  - DOMAIN-SUFFIX,battle.net
+  - DOMAIN-SUFFIX,blizzard.com
+  - DOMAIN-SUFFIX,curseforge.com
+  - DOMAIN-SUFFIX,ea.com
+  - DOMAIN-SUFFIX,epicgames.com
+  - DOMAIN-SUFFIX,gog.com
+  - DOMAIN-SUFFIX,itch.io
+  - DOMAIN-SUFFIX,leagueoflegends.com
+  - DOMAIN-SUFFIX,minecraft.net
+  - DOMAIN-SUFFIX,mojang.com
+  - DOMAIN-SUFFIX,nexusmods.com
+  - DOMAIN-SUFFIX,origin.com
+  - DOMAIN-SUFFIX,rbxcdn.com
+  - DOMAIN-SUFFIX,riotgames.com
+  - DOMAIN-SUFFIX,roblox.com
+  - DOMAIN-SUFFIX,royaleapi.com
+  - DOMAIN-SUFFIX,ubisoft.com
+  - DOMAIN-SUFFIX,unrealengine.com
+  - DOMAIN-SUFFIX,uplay.com
+  - DOMAIN-SUFFIX,vrchat.com
+
   # Nintendo
   - DOMAIN-SUFFIX,nintendo-europe.com
   - DOMAIN-SUFFIX,nintendo.com

@@ -5,10 +5,10 @@ news.apple.com
 
 # Cloudflare
 cf-ipfs.com
+cloudflare.com
 cloudflarestream.com
 cloudflareworkers.com
 exact: one.one.one.one
-keyword: cloudflare
 pages.dev
 videodelivery.net
 warp.plus
@@ -47,6 +47,7 @@ codeberg.org
 codepen.io
 codesandbox.io
 contabo.com
+continue.dev
 convex.dev
 crates.io
 datadoghq.com
@@ -93,7 +94,6 @@ jsr.io
 k8s.io
 kaggle.com
 kernel.org
-keyword: vercel
 koyeb.com
 linear.app
 linode.com
@@ -106,8 +106,6 @@ nextjs.org
 ngrok.com
 ngrok.io
 nixos.org
-npmjs.com
-npmjs.org
 nuget.org
 opentofu.org
 orbstack.dev
@@ -159,7 +157,6 @@ typora.io
 upstash.com
 vercel.app
 vercel.com
-visualstudio.com
 vscode-cdn.net
 vscode-unpkg.net
 vultr.com
@@ -240,6 +237,7 @@ investing.com
 jup.ag
 kraken.com
 kucoin.com
+lemonsqueezy.com
 mercari.com
 metamask.io
 mexc.com
@@ -247,7 +245,9 @@ monzo.com
 oklink.com
 okx.com
 onekey.so
+paddle.com
 phantom.app
+polar.sh
 pump.fun
 rabby.io
 rakuten.co.jp
@@ -260,28 +260,6 @@ stripe.network
 tradingview.com
 tronscan.org
 uniswap.org
-
-# Gaming
-battle.net
-blizzard.com
-curseforge.com
-ea.com
-epicgames.com
-gog.com
-itch.io
-leagueoflegends.com
-minecraft.net
-mojang.com
-nexusmods.com
-origin.com
-rbxcdn.com
-riotgames.com
-roblox.com
-royaleapi.com
-ubisoft.com
-unrealengine.com
-uplay.com
-vrchat.com
 
 # Google
 1e100.net
@@ -337,8 +315,6 @@ browserleaks.com
 bunny.net
 cdn77.com
 cdn77.net
-cdnjs.cloudflare.com
-challenges.cloudflare.com
 cloudfront.net
 crisp.chat
 cutt.ly
@@ -347,7 +323,6 @@ dnsleaktest.com
 edgecastcdn.net
 fastly.net
 fastlylb.net
-fonts.googleapis.com
 giphy.com
 gofile.io
 grafana.com
@@ -368,6 +343,7 @@ is.gd
 jsdelivr.net
 link.com
 namesilo.com
+nsloon.com
 nxtrace.org
 ow.ly
 pastebin.com
@@ -384,6 +360,7 @@ sentry-cdn.com
 speedtest.net
 statically.io
 stripecdn.com
+surge.run
 tinyurl.com
 typekit.net
 unpkg.com
@@ -448,7 +425,6 @@ guardianapis.com
 guim.co.uk
 ieee.org
 jstor.org
-keyword: deutschewelle
 latimes.com
 libgen.is
 libgen.li
@@ -577,7 +553,6 @@ ecosia.org
 kagi.com
 naver.com
 qwant.com
-search.brave.com
 startpage.com
 wolfram.com
 wolframalpha.com
@@ -608,8 +583,8 @@ dashlane.com
 ente.io
 expressvpn.com
 haveibeenpwned.com
+hysteria.network
 keepassxc.org
-keyword: hysteria
 lastpass.com
 mailbox.org
 metacubex.one
@@ -626,6 +601,7 @@ quad9.net
 quantumult.app
 racknerd.com
 riseup.net
+sagernet.org
 shadowsocks.org
 shodan.io
 simplelogin.io

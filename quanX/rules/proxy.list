@@ -161,6 +161,28 @@ host-suffix, open.bot, proxy
 host-suffix, mausbot.com, proxy
 host-suffix, openbot.run, proxy
 
+# General
+host-suffix, battle.net, proxy
+host-suffix, blizzard.com, proxy
+host-suffix, curseforge.com, proxy
+host-suffix, ea.com, proxy
+host-suffix, epicgames.com, proxy
+host-suffix, gog.com, proxy
+host-suffix, itch.io, proxy
+host-suffix, leagueoflegends.com, proxy
+host-suffix, minecraft.net, proxy
+host-suffix, mojang.com, proxy
+host-suffix, nexusmods.com, proxy
+host-suffix, origin.com, proxy
+host-suffix, rbxcdn.com, proxy
+host-suffix, riotgames.com, proxy
+host-suffix, roblox.com, proxy
+host-suffix, royaleapi.com, proxy
+host-suffix, ubisoft.com, proxy
+host-suffix, unrealengine.com, proxy
+host-suffix, uplay.com, proxy
+host-suffix, vrchat.com, proxy
+
 # Nintendo
 host-suffix, nintendo-europe.com, proxy
 host-suffix, nintendo.com, proxy
@@ -449,7 +471,6 @@ host-suffix, twitteroauth.com, proxy
 host-suffix, twitterstat.us, proxy
 host-suffix, cms-twdigitalassets.com, proxy
 
-# General
 host-suffix, tritondigital.com, proxy
 
 # AbemaTV
@@ -676,10 +697,10 @@ host-suffix, news.apple.com, proxy
 
 # Cloudflare
 host-suffix, cf-ipfs.com, proxy
+host-suffix, cloudflare.com, proxy
 host-suffix, cloudflarestream.com, proxy
 host-suffix, cloudflareworkers.com, proxy
 host, one.one.one.one, proxy
-host-keyword, cloudflare, proxy
 host-suffix, pages.dev, proxy
 host-suffix, videodelivery.net, proxy
 host-suffix, warp.plus, proxy
@@ -718,6 +739,7 @@ host-suffix, codeberg.org, proxy
 host-suffix, codepen.io, proxy
 host-suffix, codesandbox.io, proxy
 host-suffix, contabo.com, proxy
+host-suffix, continue.dev, proxy
 host-suffix, convex.dev, proxy
 host-suffix, crates.io, proxy
 host-suffix, datadoghq.com, proxy
@@ -764,7 +786,6 @@ host-suffix, jsr.io, proxy
 host-suffix, k8s.io, proxy
 host-suffix, kaggle.com, proxy
 host-suffix, kernel.org, proxy
-host-keyword, vercel, proxy
 host-suffix, koyeb.com, proxy
 host-suffix, linear.app, proxy
 host-suffix, linode.com, proxy
@@ -908,6 +929,7 @@ host-suffix, investing.com, proxy
 host-suffix, jup.ag, proxy
 host-suffix, kraken.com, proxy
 host-suffix, kucoin.com, proxy
+host-suffix, lemonsqueezy.com, proxy
 host-suffix, mercari.com, proxy
 host-suffix, metamask.io, proxy
 host-suffix, mexc.com, proxy
@@ -915,7 +937,9 @@ host-suffix, monzo.com, proxy
 host-suffix, oklink.com, proxy
 host-suffix, okx.com, proxy
 host-suffix, onekey.so, proxy
+host-suffix, paddle.com, proxy
 host-suffix, phantom.app, proxy
+host-suffix, polar.sh, proxy
 host-suffix, pump.fun, proxy
 host-suffix, rabby.io, proxy
 host-suffix, rakuten.co.jp, proxy
@@ -928,28 +952,6 @@ host-suffix, stripe.network, proxy
 host-suffix, tradingview.com, proxy
 host-suffix, tronscan.org, proxy
 host-suffix, uniswap.org, proxy
-
-# Gaming
-host-suffix, battle.net, proxy
-host-suffix, blizzard.com, proxy
-host-suffix, curseforge.com, proxy
-host-suffix, ea.com, proxy
-host-suffix, epicgames.com, proxy
-host-suffix, gog.com, proxy
-host-suffix, itch.io, proxy
-host-suffix, leagueoflegends.com, proxy
-host-suffix, minecraft.net, proxy
-host-suffix, mojang.com, proxy
-host-suffix, nexusmods.com, proxy
-host-suffix, origin.com, proxy
-host-suffix, rbxcdn.com, proxy
-host-suffix, riotgames.com, proxy
-host-suffix, roblox.com, proxy
-host-suffix, royaleapi.com, proxy
-host-suffix, ubisoft.com, proxy
-host-suffix, unrealengine.com, proxy
-host-suffix, uplay.com, proxy
-host-suffix, vrchat.com, proxy
 
 # Google
 host-suffix, 1e100.net, proxy
@@ -1005,8 +1007,6 @@ host-suffix, browserleaks.com, proxy
 host-suffix, bunny.net, proxy
 host-suffix, cdn77.com, proxy
 host-suffix, cdn77.net, proxy
-host-suffix, cdnjs.cloudflare.com, proxy
-host-suffix, challenges.cloudflare.com, proxy
 host-suffix, cloudfront.net, proxy
 host-suffix, crisp.chat, proxy
 host-suffix, cutt.ly, proxy
@@ -1015,7 +1015,6 @@ host-suffix, dnsleaktest.com, proxy
 host-suffix, edgecastcdn.net, proxy
 host-suffix, fastly.net, proxy
 host-suffix, fastlylb.net, proxy
-host-suffix, fonts.googleapis.com, proxy
 host-suffix, giphy.com, proxy
 host-suffix, gofile.io, proxy
 host-suffix, grafana.com, proxy
@@ -1036,6 +1035,7 @@ host-suffix, is.gd, proxy
 host-suffix, jsdelivr.net, proxy
 host-suffix, link.com, proxy
 host-suffix, namesilo.com, proxy
+host-suffix, nsloon.com, proxy
 host-suffix, nxtrace.org, proxy
 host-suffix, ow.ly, proxy
 host-suffix, pastebin.com, proxy
@@ -1052,6 +1052,7 @@ host-suffix, sentry-cdn.com, proxy
 host-suffix, speedtest.net, proxy
 host-suffix, statically.io, proxy
 host-suffix, stripecdn.com, proxy
+host-suffix, surge.run, proxy
 host-suffix, tinyurl.com, proxy
 host-suffix, typekit.net, proxy
 host-suffix, unpkg.com, proxy
@@ -1116,7 +1117,6 @@ host-suffix, guardianapis.com, proxy
 host-suffix, guim.co.uk, proxy
 host-suffix, ieee.org, proxy
 host-suffix, jstor.org, proxy
-host-keyword, deutschewelle, proxy
 host-suffix, latimes.com, proxy
 host-suffix, libgen.is, proxy
 host-suffix, libgen.li, proxy
@@ -1245,7 +1245,6 @@ host-suffix, ecosia.org, proxy
 host-suffix, kagi.com, proxy
 host-suffix, naver.com, proxy
 host-suffix, qwant.com, proxy
-host-suffix, search.brave.com, proxy
 host-suffix, startpage.com, proxy
 host-suffix, wolfram.com, proxy
 host-suffix, wolframalpha.com, proxy
@@ -1276,8 +1275,8 @@ host-suffix, dashlane.com, proxy
 host-suffix, ente.io, proxy
 host-suffix, expressvpn.com, proxy
 host-suffix, haveibeenpwned.com, proxy
+host-suffix, hysteria.network, proxy
 host-suffix, keepassxc.org, proxy
-host-keyword, hysteria, proxy
 host-suffix, lastpass.com, proxy
 host-suffix, mailbox.org, proxy
 host-suffix, metacubex.one, proxy
@@ -1294,6 +1293,7 @@ host-suffix, quad9.net, proxy
 host-suffix, quantumult.app, proxy
 host-suffix, racknerd.com, proxy
 host-suffix, riseup.net, proxy
+host-suffix, sagernet.org, proxy
 host-suffix, shadowsocks.org, proxy
 host-suffix, shodan.io, proxy
 host-suffix, simplelogin.io, proxy

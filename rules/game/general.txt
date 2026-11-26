@@ -1,0 +1,21 @@
+# General
+battle.net
+blizzard.com
+curseforge.com
+ea.com
+epicgames.com
+gog.com
+itch.io
+leagueoflegends.com
+minecraft.net
+mojang.com
+nexusmods.com
+origin.com
+rbxcdn.com
+riotgames.com
+roblox.com
+royaleapi.com
+ubisoft.com
+unrealengine.com
+uplay.com
+vrchat.com
